@@ -5,6 +5,7 @@
 			<i class="zmdi zmdi-more"></i>
 		</li>
 		<?php
+		var_dump(selectDB("pages","`hidden` = '0' AND `status` = '0' ORDER BY `order` ASC"));
 		if ( $pages = selectDB("pages","`hidden` = '0' AND `status` = '0' ORDER BY `order` ASC") ){
 			foreach( $pages as $page ){
 				if( isset($_GET["p"]) && $_GET["p"] == $page["fileName"] ){

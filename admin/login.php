@@ -26,7 +26,7 @@ if ( isset ($_GET["error"]) )
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>Create - Store</title>
+    <title>Create - Booking System</title>
     <meta
       name="description"
       content="Droopy is a Dashboard & Admin Site Responsive Template by hencework."
@@ -84,7 +84,7 @@ if ( isset ($_GET["error"]) )
                       <h3 class="text-center txt-dark mb-10">
                         Sign in to
                         <b>
-                          Create Cpanel
+                          Create Booking Cpanel
                         </b>
                       </h3>
                       <h6 class="text-center nonecase-font txt-grey">

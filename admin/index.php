@@ -1,6 +1,6 @@
 <?php 
 require_once("template/header.php");
-$_GET["p"] = strtolower($_GET["p"]);
+
 // call actions on all pages
 if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || isset($_POST["update"]) || isset($_POST["order"]) ){
 	$table = strtolower($_GET["p"]);
@@ -46,6 +46,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 
 // get viewed page from pages folder \\
 if( isset($_GET["p"]) && searchFile("pages","{$_GET["p"]}.php") ){
+	$_GET["p"] = strtolower($_GET["p"]);
 	require_once("pages/".searchFile("pages","{$_GET["p"]}.php"));
 }else{
 	require_once("pages/home.php");

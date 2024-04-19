@@ -5,6 +5,6 @@ if ( isset($_COOKIE["createkuwaitAdmin"]) && $login = selectDB("employees","`kee
 	$username = $login[0]["fullName"];
 	$userType = $login[0]["empType"];
 }else{
-	header("Location: logout.php");
+	header("Location: logout.php");die();
 }
 ?>

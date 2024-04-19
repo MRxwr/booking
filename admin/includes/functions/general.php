@@ -24,7 +24,7 @@ function searchFile($path, $fileName) {
 	return false;
 }
 // set main language \\
-function setLanguage(){
+function setLanguage(){ 
 	GLOBAL $_GET;
 	if ( isset($_GET["lang"]) && $_GET["lang"] == "ar" ){
 		setcookie("createLang","ar",time() + (86400*30),"/");

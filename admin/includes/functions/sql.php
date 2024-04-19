@@ -1,10 +1,10 @@
 <?php
 //database connections
 function deleteDB($table, $where){
-    GLOBAL $dbconnect, $userID, $empUsername, $_GET;
+    GLOBAL $dbconnect, $userID, $empUsername, $_GET,$dbPrefix;
     $check = [';', '"'];
     $where = str_replace($check, "", $where);
-    $sql = "DELETE FROM `" . $table . "` WHERE " . $where;
+    $sql = "DELETE FROM `{$dbPrefix}{$table}` WHERE " . $where;
     if( !isset($_GET["v"]) ){
         $_GET["v"] = "RemoveCart";
     }
@@ -31,12 +31,12 @@ function deleteDB($table, $where){
 }
 
 function selectDB($table, $where){
-    GLOBAL $dbconnect;
+    GLOBAL $dbconnect,$dbPrefix;
     $check = [';', '"'];
     $where = str_replace($check, "", $where);
-    $sql = "SELECT * FROM `{$table}`";
+    $sql = "SELECT * FROM `{$dbPrefix}{$table}`";
     if (!empty($where)) {
-        echo $sql .= " WHERE {$where}";
+        $sql .= " WHERE {$where}";
     }
     if ($stmt = $dbconnect->prepare($sql)) {
         $stmt->execute();
@@ -57,10 +57,10 @@ function selectDB($table, $where){
 }
 
 function selectDB2($select, $table, $where){
-    GLOBAL $dbconnect;
+    GLOBAL $dbconnect,$dbPrefix;
     $check = [';', '"'];
     $where = str_replace($check, "", $where);
-    $sql = "SELECT {$select} FROM `{$table}`";
+    $sql = "SELECT {$select} FROM `{$dbPrefix}{$table}`";
     if (!empty($where)) {
         $sql .= " WHERE {$where}";
     }
@@ -83,7 +83,7 @@ function selectDB2($select, $table, $where){
 }
 
 function selectJoinDB($table, $joinData, $where){
-    global $dbconnect;
+    global $dbconnect,$dbPrefix;
     global $date;
     $check = [';', '"'];
     $where = str_replace($check,"",$where);
@@ -94,10 +94,10 @@ function selectJoinDB($table, $joinData, $where){
             $sql .= ", ";
         }
     }
-    $sql .=" FROM `$table` as t ";
+    $sql .=" FROM `{$dbPrefix}{$table}` as t ";
     for($i = 0 ; $i < sizeof($joinData["join"]) ; $i++ ){
         $counter = $i+1;
-        $sql .= " JOIN `".$joinData["join"][$i]."` as t{$counter} ";
+        $sql .= " JOIN `{$dbPrefix}{$joinData["join"][$i]}` as t{$counter} ";
         if( isset($joinData["on"][$i]) && !empty($joinData["on"][$i]) ){
             $sql .= " ON ".$joinData["on"][$i]." ";
         }
@@ -123,11 +123,11 @@ function selectJoinDB($table, $joinData, $where){
 }
 
 function insertDB($table, $data){
-    GLOBAL $dbconnect, $userID, $empUsername, $_GET;
+    GLOBAL $dbconnect, $userID, $empUsername, $_GET,$dbPrefix;
     $check = [';', '"'];
     //$data = escapeString($data);
     $keys = array_keys($data);
-    $sql = "INSERT INTO `{$table}`(";
+    $sql = "INSERT INTO `{$dbPrefix}{$table}`(";
     $placeholders = "";
     foreach ($keys as $key) {
         $sql .= "`{$key}`,";
@@ -159,12 +159,12 @@ function insertDB($table, $data){
 }
 
 function updateDB($table, $data, $where) {
-    GLOBAL $dbconnect, $userID, $empUsername, $_GET;
+    GLOBAL $dbconnect, $userID, $empUsername, $_GET,$dbPrefix;
     $check = [';', '"'];
     //$data = escapeString($data);
     $where = str_replace($check, "", $where);
     $keys = array_keys($data);
-    $sql = "UPDATE `" . $table . "` SET ";
+    $sql = "UPDATE `{$dbPrefix}{$table}` SET ";
     $params = "";
     for ($i = 0; $i < sizeof($data); $i++) {
         $sql .= "`" . $keys[$i] . "` = ?";
@@ -214,11 +214,11 @@ function escapeStringDirect($data){
 }
 
 function insertLogDB($table,$data){
-    GLOBAL $dbconnect;
+    GLOBAL $dbconnect,$dbPrefix;
     $check = [';', '"'];
     //$data = escapeString($data);
     $keys = array_keys($data);
-    $sql = "INSERT INTO `{$table}`(";
+    $sql = "INSERT INTO `{$dbPrefix}{$table}`(";
     $placeholders = "";
     foreach ($keys as $key) {
         $sql .= "`{$key}`,";
@@ -243,7 +243,7 @@ function LogsHistory($array){
 }
 
 function queryDB($sql){
-    GLOBAL $dbconnect;
+    GLOBAL $dbconnect,$dbPrefix;
     if ($stmt = $dbconnect->prepare($sql)) {
         $stmt->execute();
         $result = $stmt->get_result();

@@ -1,6 +1,6 @@
 <?php 
 require_once("template/header.php");
-
+$_GET["p"] = strtolower($_GET["p"]);
 // call actions on all pages
 if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || isset($_POST["update"]) || isset($_POST["order"]) ){
 	$table = strtolower($_GET["p"]);

@@ -55,7 +55,7 @@
 								</thead>
 								<tbody>
 									<?php 
-									if( $periods = selectDB("{$_GET["p"]}","`status` = '0' ORDER BY `id` DESC") ){
+									if( $periods = selectDB("{$table}","`status` = '0' ORDER BY `id` DESC") ){
 										for( $i = 0; $i < sizeof($periods); $i++ ){	
 									?>
 									<tr>

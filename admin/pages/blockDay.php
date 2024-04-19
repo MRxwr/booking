@@ -59,7 +59,7 @@
 								</thead>
 								<tbody>
 									<?php 
-									if( $blockedDays = selectDB("{$_GET["p"]}","`status` = '0'") ){
+									if( $blockedDays = selectDB("{$table}","`status` = '0'") ){
 										$enDaysArray = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 										$arDaysArray = ["الأحد","الأثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"];
 										for( $i = 0; $i < sizeof($blockedDays); $i++ ){

@@ -60,16 +60,13 @@
 								<tbody>
 									<?php 
 									if( $blockedDays = selectDB("{$_GET["p"]}","`status` = '0'") ){
+										$enDaysArray = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+										$arDaysArray = ["الأحد","الأثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"];
 										for( $i = 0; $i < sizeof($blockedDays); $i++ ){
-											$enDaysArray = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-											$arDaysArray = ["الأحد","الأثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"];
-											for( $y = 0; $y < sizeof($enDaysArray); $y++){
-												$day = direction($enDaysArray[$y],$arDaysArray[$y]);
-											}
 									?>
 									<tr>
 										<td id="day<?php echo $blockedDays[$i]["id"]?>" >
-											<?php echo $day ?>
+											<?php echo direction($enDaysArray[$blockedDays[$i]["day"]],$arDaysArray[$blockedDays[$i]["day"]]) ?>
 										</td>
 										<td class="text-nowrap">
 											<a href="<?php echo "?{$_SERVER["QUERY_STRING"]}" ?>&delId=<?php echo $blockedDays[$i]["id"] ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف") ?>">

@@ -1,5 +1,5 @@
 <?php
-if ( isset($_COOKIE["createkuwaitAdmin"]) && $login = selectDB("employees","`keepMeAlive` LIKE '%{$_COOKIE["createkuwaitAdmin"]}%'") ){
+if ( isset($_COOKIE["createkuwaitAdmin"]) && !empty($_COOKIE["createkuwaitAdmin"]) && $login = selectDB("employees","`keepMeAlive` LIKE '%{$_COOKIE["createkuwaitAdmin"]}%'") ){
 	$userID = $login[0]["id"];
 	$email = $login[0]["email"];
 	$username = $login[0]["fullName"];

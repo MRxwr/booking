@@ -7,11 +7,11 @@ if( isset($_POST["email"]) && !empty($_POST["email"]) ){
     $GenerateNewCC = md5(rand());
     if( updateDB("employees",array("keepMeAlive"=>$GenerateNewCC),"`id` = '{$login[0]["id"]}'") ){
       $_SESSION["createkuwaitAdmin"] = $email;
-      header("Location: ../index.php");
+      header("Location: index.php");
       setcookie("createkuwaitAdmin", $GenerateNewCC, time() + (86400*30 ), "/");die();
     }
   }else{
-    header("Location: ../login.php?error=p");die();
+    header("Location: login.php?error=p");die();
   }
 }
 

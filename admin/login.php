@@ -1,5 +1,6 @@
 <?php
 require ("includes/config.php");
+require ("includes/functions.php");
 
 if( isset($_POST["email"]) && !empty($_POST["email"]) ){
   if( $login = selectDB("employees","`email` LIKE '{$_POST["email"]}' AND `password` LIKE '".sha1($_POST["password"])."' AND `hidden` != '2' AND `status` = '0'") ){

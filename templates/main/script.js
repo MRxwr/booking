@@ -2,9 +2,9 @@
 $(window).ready(function() {
 	var width = $(window).width();
 	if (width < 768) {
-	  $("#leftSide").removeClass("col-6").addClass("col-12");
+	  $("#leftSide").removeClass("col-4").addClass("col-12");
 	} else {
-	  $("#leftSide").removeClass("col-12").addClass("col-6");
+	  $("#leftSide").removeClass("col-12").addClass("col-4");
 	}
 }); 
 
@@ -12,8 +12,8 @@ $(window).ready(function() {
 $(window).resize(function() {
 	var width = $(window).width();
 	if (width < 768) {
-	  $("#leftSide").removeClass("col-6").addClass("col-12");
+	  $("#leftSide").removeClass("col-4").addClass("col-12");
 	} else {
-	  $("#leftSide").removeClass("col-12").addClass("col-6");
+	  $("#leftSide").removeClass("col-12").addClass("col-4");
 	}
 });

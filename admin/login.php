@@ -1,19 +1,27 @@
 <?php
 require ("includes/config.php");
 
-if ( isset($_COOKIE["createkuwaitAdmin"]) )
-{
+if( isset($_POST["email"]) && !empty($_POST["email"]) ){
+  if( $login = selectDB("employees","`email` LIKE '{$_POST["email"]}' AND `password` LIKE '".sha1($_POST["password"])."' AND `hidden` != '2' AND `status` = '0'") ){
+    $GenerateNewCC = md5(rand());
+    if( updateDB("employees",array("keepMeAlive"=>$GenerateNewCC),"`id` = '{$login[0]["id"]}'") ){
+      $_SESSION["createkuwaitAdmin"] = $email;
+      header("Location: ../index.php");
+      setcookie("createkuwaitAdmin", $GenerateNewCC, time() + (86400*30 ), "/");die();
+    }
+  }else{
+    header("Location: ../login.php?error=p");die();
+  }
+}
+
+if ( isset($_COOKIE["createkuwaitAdmin"]) ){
 	header("Location: index");
 }
 
-if ( isset ($_GET["error"]) ) 
-{
-  if ( $_GET["error"] === "p" ) 
-  { 
+if ( isset ($_GET["error"]) ) {
+  if ( $_GET["error"] === "p" ) { 
     $errormsg = "Please enter details correctly.";
-  } 
-  elseif ($_GET["error"] === "e" ) 
-  { 
+  } elseif ($_GET["error"] === "e" ) { 
     $errormsg = "Please enter email correctly."; 
   } 
 } 
@@ -102,7 +110,7 @@ if ( isset ($_GET["error"]) )
 												?>
                     </div>
                     <div class="form-wrap">
-                      <form action="includes/logindb.php" method="post">
+                      <form action="" method="post">
                         <div class="form-group">
                           <label
                             class="control-label mb-10"

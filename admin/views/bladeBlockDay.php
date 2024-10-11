@@ -4,7 +4,7 @@
 		<div class="panel panel-default card-view">
 			<div class="panel-heading">
 				<div class="text-center">
-					<h6 class="panel-title txt-dark"><?php echo direction("Days Details","تفاصيل الأيام") ?></h6>
+					<h6 class="panel-title txt-dark"><?php echo direction("Blocked Day Details","تفاصيل اليوم المحظور") ?></h6>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -53,7 +53,7 @@
 		<div class="panel panel-default card-view">
 			<div class="panel-heading">
 				<div class="text-center">
-					<h6 class="panel-title txt-dark"><?php echo direction("List of Days","قائمة الأيام") ?></h6>
+					<h6 class="panel-title txt-dark"><?php echo direction("List of Blocked Days","قائمة الأيام المحظورة") ?></h6>
 				</div>
 				<div class="clearfix"></div>
 			</div>

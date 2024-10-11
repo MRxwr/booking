@@ -137,27 +137,31 @@
 
 	});
 
-	// Function to update the date picker based on the selected branch
 	function updateDatePicker(branchId) {
-		// Find the branch object with the matching ID
-		var branch = branches.find(function(branch) {
-			return branch.id === branchId;
-		});
-
-		// If no branch is found, return
-		if (!branch) return;
-
-		// Get the blocked and enabled dates for the branch
-		var blockedDates = branch.blockedDates.map(function(date) {
-			return date;
-		});
-		var enabledDates = branch.enabledDates.map(function(date) {
-			return date;
-		});
-
-		// Update the date picker with the new blocked and enabled dates
-		flatpickrInstance.set('disabled', blockedDates);
-		flatpickrInstance.set('enabled', enabledDates);
+	  // Find the allowed booking period for the selected branch
+	  var allowedPeriod = allowedBookingPeriod.find(function(period) {
+		return period.branchId === branchId;
+	  });
+	
+	  // Find the blocked days for the selected branch
+	  var blockedDaysForBranch = blockedDays.filter(function(day) {
+		return day.branchId === branchId;
+	  });
+	
+	  // Find the blocked periods for the selected branch
+	  var blockedPeriodsForBranch = blockedPeriods.filter(function(period) {
+		return period.branchId === branchId;
+	  });
+	
+	  // Update the date picker with the new allowed booking period, blocked days, and blocked periods
+	  flatpickrInstance.set('minDate', allowedPeriod.startDate);
+	  flatpickrInstance.set('maxDate', allowedPeriod.endDate);
+	  flatpickrInstance.set('disabled', blockedDaysForBranch.map(function(day) {
+		return day.day;
+	  }));
+	  flatpickrInstance.set('disabled', blockedPeriodsForBranch.map(function(period) {
+		return [period.startDate, period.endDate];
+	  }));
 	}
 
 </script>

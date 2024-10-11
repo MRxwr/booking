@@ -90,6 +90,7 @@ if( isset($_POST["time"]) ){
 
 							<div class="col-md-12" style="margin-top:10px">
 								<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
+								<input type="hidden" name="update" value="0">
 							</div>
 						</div>
 					</form>

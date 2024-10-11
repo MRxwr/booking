@@ -130,10 +130,10 @@
 												<i class="fa fa-close text-danger"></i>
 											</a>
 											<div style="display: none">
-												<label id="vendorId<?php echo $service[$i]["id"]?>"><?php echo $branch[$i]["vendorId"] ?></label>
-												<label id="day<?php echo $service[$i]["id"]?>"><?php echo $branch[$i]["day"] ?></label>
-												<label id="startTime<?php echo $service[$i]["id"]?>"><?php echo $branch[$i]["startTime"] ?></label>
-												<label id="closeTime<?php echo $service[$i]["id"]?>"><?php echo $branch[$i]["closeTime"] ?></label>
+												<label id="vendorId<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["vendorId"] ?></label>
+												<label id="day<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["day"] ?></label>
+												<label id="startTime<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["startTime"] ?></label>
+												<label id="closeTime<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["closeTime"] ?></label>
 											</div>
 										</td>
 										

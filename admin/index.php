@@ -11,7 +11,6 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 	}elseif( isset($_GET["delId"]) && !empty($_GET["delId"]) && updateDB("{$table}",array('status'=> '1'),"`id` = '{$_GET["delId"]}'") ){
 		
 	}elseif( isset($_POST["update"]) ){
-		var_dump($_POST);die();
 		$id = $_POST["update"];
 		unset($_POST["update"]);
 		if( isset($_FILES['logo']) && is_uploaded_file($_FILES['logo']['tmp_name']) ){

@@ -1,16 +1,13 @@
 RewriteEngine On
 
-# Direct root URL to default.php
-RewriteRule ^$ default.php [L]
-
 # Allow accessing PHP files without .php extension
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php [L,QSA]
 
-# Send URL path after /vendorURL as GET parameter
+# Send URL path after /vendorURL as GET parameter to index.php
 RewriteCond %{REQUEST_URI} ^/vendorURL/(.*)$
-RewriteRule ^ ?vendorURL=%1 [L,QSA]
+RewriteRule ^ index.php?vendorURL=%1 [L,QSA]
 
 # Direct all other requests to default.php
 RewriteCond %{REQUEST_FILENAME} !-f

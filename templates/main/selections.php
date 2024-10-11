@@ -32,17 +32,12 @@
 	<div class="col-md-6">
 		<label><?php echo direction("Date","التاريخ") ?></label>
 		<input type="date" name="date" data-disable-mobile="true" class="form-control">
+		<input type="hidden" name="serviceId" value="0" required>
 	</div>
 	<div class="col-md-6">
 		<label><?php echo direction("Time","الوقت") ?></label>
 		<select name="time" class="form-control" id="time-select">
 			<option selected disabled value="0"><?php echo direction("Please select a Time","الرجاء تحديد الوقت") ?></option>
-			<?php
-			$times = selectDB("cbt_times","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' GROUP BY `time` ORDER BY `time` ASC");
-			foreach($times as $time){
-				echo "<option value='{$time["time"]}'>{$time["time"]}</option>";
-			}
-			?>
 		</select>
 	</div>
 </div>
@@ -134,17 +129,53 @@
 	// Loop through the filtered services and add them to the container
 	filteredServices.forEach(function(service){
 	  var serviceHTML = '<div class="col-6 d-flex align-items-center justify-content-center p-2">';
-	  serviceHTML += '<div class="w-100 p-3 text-center serviceBLk" id="serv-'+service.id+'"><span>'+service.title+'</span><hr class="m-0"><label style="font-size: 8px;">Duration: '+service.period+' mins</label></div>';
+	  serviceHTML += '<div class="w-100 p-3 text-center serviceBLk" id="'+service.id+'"><span>'+service.title+'</span><hr class="m-0"><label style="font-size: 8px;">Duration: '+service.period+' mins</label></div>';
 	  serviceHTML += '</div>';
 	  servicesContainer.innerHTML += serviceHTML;
 	});
-
-
 	updateDatePicker(selectedBranchId);
-
-
   });
 
+  // on serviceBLk click update input name serviceId with attr id
+  $(document).on("click",".serviceBLk", function(){
+	var serviceId = $(this).attr("id");
+	$("input[name='serviceId']").val(serviceId);
+	// give it style active and remove the active from all other services 
+	$(".serviceBLk").removeClass("active");
+	$(this).addClass("active");
+  });
+
+  // now on date change get vendroId branchId and date and serviceId and make a ajax call to retieve the time slots
+  dateInput.addEventListener("change", function(){
+	var selectedDate = this.value;
+	var selectedBranchId = branchSelect.value;
+	var selectedServiceId = timeSelect.value;
+	var selectedService = services.find(function(service){
+	  return service.id == selectedServiceId;
+	});
+	var selectedBranch = branches.find(function(branch){
+	  return branch.id == selectedBranchId;
+	});
+	$.ajax({
+	  type: "POST",
+	  url: "ajax/getTimeSlots.php",
+	  data: {
+		date: selectedDate,
+		branchId: selectedBranchId,
+		serviceId: selectedServiceId,
+		vendorId: vendor["id"]
+	  }
+	}).done(function(data){
+	  var timeSlots = JSON.parse(data);
+	  var timeSlotHTML = "";
+	  timeSlots.forEach(function(timeSlot){
+		timeSlotHTML += '<option value="'+timeSlot.timeSlot+'">'+timeSlot.timeSlot+'</option>';
+	  });
+	  timeSelect.innerHTML = timeSlotHTML;
+	}).fail(function(){
+	  timeSelect.innerHTML = '<option value="0">No time slots available</option>';
+	});
+  });
 
   function updateDatePicker(branchId){
 	// Find the allowed booking period for the selected branch

@@ -33,6 +33,7 @@
 		<label><?php echo direction("Date","التاريخ") ?></label>
 		<input type="date" name="date" data-disable-mobile="true" class="form-control">
 		<input type="hidden" name="serviceId" value="0" required>
+		<input type="hidden" name="branchId" value="0" required>
 	</div>
 	<div class="col-md-6">
 		<label><?php echo direction("Time","الوقت") ?></label>
@@ -114,6 +115,8 @@
 
   // Add an event listener to the branch select element
   branchSelect.addEventListener("change", function(){
+	// on change update input name branchId with value
+	this.setAttribute("input[name='branchId']", this.value);
 	var selectedBranch = this.value;
 	var selectedBranchId = this.value;
 	var selectedBranchData = branches.find(function(branch){

@@ -127,7 +127,7 @@
 		var logo = $("#logo"+id).html();
 		$("input[name=arTitle]").val($.trim(arTitle.replace(/\n/g, "")));
 		$("input[name=enTitle]").val($.trim(enTitle.replace(/\n/g, ""))).focus();
-		$("input[name=icon]").val($.trim(icon.replace(/\n/g, "")));
+		$("input[name=icon]").val($.trim(logo.replace(/\n/g, "")));
 	})
 </script>
   

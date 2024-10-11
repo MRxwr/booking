@@ -155,7 +155,7 @@
 	  url: "requests/index.php?a=GetTimeSlots",
 	  data: {
 		date: $("input[name='date']").val(),
-		branchId: $("select[name='branchId']").val(),
+		branchId: $("input[name='branchId']").val(),
 		serviceId: $("input[name='serviceId']").val(),
 		vendorId: <?php echo $vendor["id"] ?>
 	  },

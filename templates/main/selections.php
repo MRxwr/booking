@@ -116,7 +116,7 @@
   // Add an event listener to the branch select element
   branchSelect.addEventListener("change", function(){
 	// on change update input name branchId with value
-	this.setAttribute("input[name='branchId']", this.value);
+	$("input[name=branchId]").val(this.value);
 	var selectedBranch = this.value;
 	var selectedBranchId = this.value;
 	var selectedBranchData = branches.find(function(branch){

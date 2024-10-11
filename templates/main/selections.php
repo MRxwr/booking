@@ -163,7 +163,7 @@
 		vendorId: <?php echo $vendor["id"] ?>
 	  }
 	}).done(function(result){
-	  var timeSlots = result;
+	  var timeSlots = JSON.parse(result);
 	  var timeSlotHTML = "";
 	  console.log(result);
 	  timeSlots.forEach(function(timeSlot){

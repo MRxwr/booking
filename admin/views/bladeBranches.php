@@ -35,6 +35,18 @@ if( isset($_GET["updateTimes"]) || isset($_GET["updateServices"]) ){
 				<div class="panel-body ">
 					<form class="mt-30 mb-30" method="POST" action="" enctype="multipart/form-data">
 						<div class="row m-0">
+
+							<div class="col-md-3">
+								<label><?php echo direction("Vendor","البائع") ?></label>
+								<select name="vendorId" class="form-control" required>
+									<?php 
+									$vendors = selectDB("vendors","`status` = '0' AND `hidden` = '0' ORDER BY `enTitle` ASC");
+									foreach( $vendors as $vendor ){
+										echo "<option value='{$vendor["id"]}'>{$vendor["enTitle"]}</option>";
+									}
+									?>
+								</select>
+							</div>
 						
 							<div class="col-md-3">
 								<label><?php echo direction("English Title","الإسم الإنجليزي") ?></label>

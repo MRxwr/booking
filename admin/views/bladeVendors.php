@@ -224,10 +224,8 @@
 		$("input[name=email]").val($.trim($("#email"+id).html().replace(/\n/g, "")));
 		$("input[name=url]").val($.trim($("#url"+id).html().replace(/\n/g, "")));
 		$("input[name=total]").val($.trim($("#total"+id).html().replace(/\n/g, "")));
-		$("input[name=logo]").val($.trim($("#logo"+id).html().replace(/\n/g, "")));
-		$("input[name=coverImg]").val($.trim($("#coverImg"+id).html().replace(/\n/g, "")));
-		$("#logo").attr("src","../logos/"+$("#logo"+id).html());
-		$("#coverImg").attr("src","../logos/"+$("#coverImg"+id).html());
+		$("img[name=logo]").attr("src","../logos/"+$("#logo"+id).html());
+		$("img[name=coverImg]").attr("src","../logos/"+$("#coverImg"+id).html());
 		$("#images").attr("style","margin-top:10px;display:block");
 	})
 </script>

@@ -1,6 +1,7 @@
 <?php
+require_once("admin/includes/config.php");
+require_once("admin/includes/functions.php");
 if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor = selectDBNew("vendors",$_REQUEST["vendorURL"],"`url` LIKE ? AND `hidden` = '0' AND `status` = '0'","") ){
-	//var_dump($_REQUEST);
 	$vendor = $vendor[0];
 }else{
 	header("Location: default");die();

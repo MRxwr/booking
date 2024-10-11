@@ -53,12 +53,13 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             }
             
             for( $i = $start; $i < $close; $i++ ){
+                $counter = (int)($start);
                 /*
                 if( $branchTotalSeats == count(array_intersect($bookedTimes,[$start])) ){
                     $blockedTimeBookings[] = $start;
                 }
                     */
-                (int)$start++;
+                $counter++;
             }
         }
 

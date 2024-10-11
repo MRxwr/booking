@@ -150,6 +150,11 @@
 	$(this).addClass("activeService");
   });
 
+  // on selecting select name time update input name selectedTime
+  timeSelect.addEventListener("change", function(){
+	$("input[name='selectedTime']").val(this.value);
+  });
+
   // now on date change get vendroId branchId and date and serviceId and make a ajax call to retieve the time slots
   $("input[name='date']").on("change", function(){
 	$("input[name=selectedDate]").val(this.value);

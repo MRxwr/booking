@@ -52,17 +52,6 @@ body {
     width: 100%;
 }
 
-.rightBg {
-    background-image: url(https://i.imgur.com/9oY50OR.jpg);
-    background-size: cover;
-    background-position: center;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
-
 .poweredByRight {
     position: absolute;
     bottom: 25px;
@@ -88,16 +77,6 @@ body {
     left: 50%;
     transform: translate(-50%, 50%);
     border-radius: 100%;
-}
-
-.heroBg {
-    -webkit-box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
-    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
-    background-image: url("https://i.imgur.com/9oY50OR.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    height: 250px;
 }
 
 .headerClass {

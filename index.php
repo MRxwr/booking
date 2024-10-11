@@ -19,6 +19,26 @@ if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor =
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 		<style>
 			<?php require_once("templates/main/style.css") ?>
+			.rightBg {
+				background-image: url("<?php echo $vendor["coverImg"] ?>");
+				background-size: cover;
+				background-position: center;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+			}
+
+			.heroBg {
+				-webkit-box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
+				box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
+				background-image: url("<?php echo $vendor["coverImg"] ?>");
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: cover;
+				height: 250px;
+			}
 		</style>
 	</head>
 	<body>

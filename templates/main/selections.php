@@ -69,6 +69,36 @@
 		?>
 	];
 
+	//calendar allowed booking period
+	var allowedBookingPeriod = [
+		<?php
+		$calendars = selectDB("calendar","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
+		foreach( $calendars as $calendar ){
+			echo "{ id: '".$calendar["id"]."', branchId: '".$calendar["branchId"]."', startDate: '".$calendar["startDate"]."', endDate: '".$calendar["endDate"]."'},";
+		}
+		?>
+	];
+
+	//blocked days in calendar
+	var blockedDays = [
+		<?php
+		$blockedDaysBranches = selectDB("blockday","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
+		foreach( $blockedDaysBranches as $blockedDaysBranche ){
+			echo "{ id: '".$blockedDaysBranche["id"]."', branchId: '".$blockedDaysBranche["branchId"]."', day: '".$blockedDaysBranche["day"]."'},";
+		}
+		?>
+	];
+
+	//blocked date periods in calendar
+	var blockedPeriods = [
+		<?php
+		$blockedPeriodsBranches = selectDB("blockdate","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
+		foreach( $blockedPeriodsBranches as $blockedPeriodsBranche ){
+			echo "{ id: '".$blockedPeriodsBranche["id"]."', branchId: '".$blockedPeriodsBranche["branchId"]."', startDate: '".$blockedPeriodsBranche["startDate"]."', endDate: '".$blockedPeriodsBranche["endDate"]."'},";
+		}
+		?>
+	];
+
 	// Get the branch select element, time select element and the services container
 	var branchSelect = document.getElementById("branch-select");
 	var timeSelect = document.getElementById("time-select");

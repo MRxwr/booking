@@ -12,13 +12,31 @@
 				<div class="panel-body ">
 					<form class="mt-30 mb-30" method="POST" action="" enctype="multipart/form-data">
 						<div class="row m-0">
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<label><?php echo direction("Vendor","البائع") ?></label>
 								<select name="vendorId" class="form-control" required>
 									<?php 
 									$vendors = selectDB("vendors","`status` = '0' AND `hidden` = '0' ORDER BY `enTitle` ASC");
+									$orderBy = direction("enTitle","arTitle");
 									foreach( $vendors as $vendor ){
-										echo "<option value='{$vendor["id"]}'>{$vendor["enTitle"]}</option>";
+										$vendorTitle = direction($vendor["enTitle"],$vendor["arTitle"]);
+										echo "<option value='{$vendor["id"]}'>{$vendorTitle}</option>";
+									}
+									?>
+								</select>
+							</div>
+							<div class="col-md-6">
+								<label><?php echo direction("Branch","الفرع") ?></label>
+								<select name="branchId" class="form-control" required>
+									<?php 
+									$vendorData = ( isset($vendorId) && !empty($vendorId) ) ? " AND `vendorId` = '{$vendorId}'" : " AND `vendorId` != '0'";
+									$orderBy = direction("enTitle","arTitle");
+									$branches = selectDB("branches","`status` = '0' AND `hidden` = '0' {$vendorData} ORDER BY `{$orderBy}` ASC");
+									foreach( $branches as $branch ){
+										$vendors = selectDB("vendors","`id` = '{$branch["vendorId"]}'");
+										$branchTitle = direction($branch["enTitle"],$branch["arTitle"]);
+										$vendorTitle = direction($vendors[0]["enTitle"],$vendors[0]["arTitle"]);
+										echo "<option value='{$branch["id"]}'>{$vendorTitle} - {$branchTitle}</option>";
 									}
 									?>
 								</select>
@@ -91,6 +109,7 @@
 									<tr>
 									<th>#</th>
 									<th><?php echo direction("Vendor","البائع") ?></th>
+									<th><?php echo direction("Branch","الفرع") ?></th>
 									<th><?php echo direction("Day","اليوم") ?></th>
 									<th><?php echo direction("Open Time","وقت البدء") ?></th>
 									<th><?php echo direction("Close Time","وقت الاغلاق") ?></th>
@@ -103,6 +122,8 @@
 										for( $i = 0; $i < sizeof($service); $i++ ){
 											$vendor = selectDB("vendors","`id` = '{$service[$i]["vendorId"]}'");
 											$vendor = direction($vendor[0]["enTitle"],$vendor[0]["arTitle"]);
+											$branch = selectDB("branches","`id` = '{$service[$i]["branchId"]}'");
+											$branch = direction($branch[0]["enTitle"],$branch[0]["arTitle"]);
 											if ( $service[$i]["hidden"] == 1 ){
 												$icon = "fa fa-unlock";
 												$link = "?{$_SERVER["QUERY_STRING"]}&show={$service[$i]["id"]}";
@@ -120,6 +141,7 @@
 									<tr>
 										<td ><?php echo str_pad(($counter = $i + 1),4,"0",STR_PAD_LEFT) ?></td>
 										<td ><?php echo $vendor ?></td>
+										<td ><?php echo $branch ?></td>
 										<td ><?php echo $day ?></td>
 										<td ><?php echo $service[$i]["startTime"] ?></td>
 										<td ><?php echo $service[$i]["closeTime"] ?></td>
@@ -135,6 +157,7 @@
 											</a>
 											<div style="display: none">
 												<label id="vendorId<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["vendorId"] ?></label>
+												<label id="branchId<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["branchId"] ?></label>
 												<label id="day<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["day"] ?></label>
 												<label id="startTime<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["startTime"] ?></label>
 												<label id="closeTime<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["closeTime"] ?></label>
@@ -164,6 +187,7 @@
 		$("select[name=startTime]").val($.trim($("#startTime"+id).html().replace(/\n/g, "")));
 		$("select[name=closeTime]").val($.trim($("#closeTime"+id).html().replace(/\n/g, "")));
 		$("select[name=vendorId]").val($.trim($("#vendorId"+id).html().replace(/\n/g, "")));
+		$("select[name=branchId]").val($.trim($("#branchId"+id).html().replace(/\n/g, "")));
 	})
 </script>
   

@@ -10,6 +10,18 @@
 <div class="panel-body">
 	<form class="" method="POST" action="?v=<?php echo $_GET["v"] ?>" enctype="multipart/form-data">
 		<div class="row m-0">
+			<div class="col-md-12">
+				<label><?php echo direction("Vendor","البائع") ?></label>
+				<select name="vendorId" class="form-control" required>
+					<?php 
+					$vendors = selectDB("vendors","`status` = '0' AND `hidden` = '0' ORDER BY `enTitle` ASC");
+					foreach( $vendors as $vendor ){
+						echo "<option value='{$vendor["id"]}'>{$vendor["enTitle"]}</option>";
+					}
+					?>
+				</select>
+			</div>
+
 			<div class="col-md-6">
 			<label><?php echo direction("Name","الإسم") ?></label>
 			<input type="text" name="fullName" class="form-control" required>
@@ -44,7 +56,7 @@
 			</select>
 			</div>
 			
-			<div class="col-md-6" style="margin-top:10px">
+			<div class="col-md-12" style="margin-top:10px">
 			<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
 			<input type="hidden" name="update" value="0">
 			</div>
@@ -69,6 +81,8 @@
 	<table class="table display responsive product-overview mb-30" id="myTable">
 		<thead>
 		<tr>
+		<th>#</th>
+		<th><?php echo direction("Vendor","البائع") ?></th>
 		<th><?php echo direction("Name","الإسم") ?></th>
 		<th><?php echo direction("Email","الإيميل") ?></th>
 		<th><?php echo direction("Mobile","الهاتف") ?></th>
@@ -82,6 +96,8 @@
 		<?php 
 		if( $employees = selectDB("{$table}","`status` = '0' AND `hidden` != '2'") ){
 			for( $i = 0; $i < sizeof($employees); $i++ ){
+				$vendor = selectDB("vendors","`id` = '{$employees[$i]["vendorId"]}'");
+				$vendor = direction($vendor[0]["enTitle"],$vendor[0]["arTitle"]);
 				$counter = $i + 1;
 				if ( $employees[$i]["hidden"] == 1 ){
 					$icon = "fa fa-unlock";
@@ -101,6 +117,8 @@
 				
 				?>
 				<tr>
+				<td ><?php echo str_pad(($counter = $i + 1),4,"0",STR_PAD_LEFT) ?></td>
+				<td ><?php echo $vendor ?></td>
 				<td id="name<?php echo $employees[$i]["id"]?>" ><?php echo $employees[$i]["fullName"] ?></td>
 				<td id="email<?php echo $employees[$i]["id"]?>" ><?php echo $employees[$i]["email"] ?></td>
 				<td id="mobile<?php echo $employees[$i]["id"]?>" ><?php echo $employees[$i]["phone"] ?></td>
@@ -116,6 +134,7 @@
 				</a>
 				<div style="display:none">
 					<label id="type<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["empType"] ?></label>
+					<label id="vendorId<?php echo $branch[$i]["id"]?>"><?php echo $branch[$i]["vendorId"] ?></label>
 				</td>
 				</tr>
 				<?php
@@ -149,6 +168,7 @@
 		$("input[name=fullName]").val(name);
 		$("input[name=fullName]").focus();
 		$("select[name=empType]").val(type);
+		$("select[name=vendorId]").val($.trim($("#vendorId"+id).html().replace(/\n/g, "")));
 	})
 </script>
 

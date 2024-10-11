@@ -27,7 +27,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         $timeSlots = [];
         $blockedTimeVendor = [];
         $blockedTimeBookings = [];
-
+        $bookedTimes = [];
         //vendor blocking time
         if( $blockTime = selectDB("blocktime","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}'") ){
             if( $blockTime[0]["startDate"] <= $date && $blockTime[0]["endDate"] >= $date ){
@@ -44,7 +44,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         //booking blocking number of seats per hour
         if( $booking = selectDB("bookings","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '{$serviceId}' AND `bookedDate` = '{$date}'") ){
             foreach( $booking as $book ){
-                $blockedTimeBookings[] = substr($book["bookedTime"],0,2);
+                $bookedTimes[] = substr($book["bookedTime"],0,2);
             }
             if( $branches = selectDB("branches","`id` = '{$branchId}'") ){
                 $branchTotalSeats = $branches[0]["seats"];
@@ -53,7 +53,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             }
             /*
             for( $i = $start; $i < $close; $i++ ){
-                if( $branchTotalSeats == count(array_intersect($blockedTimeBookings,[$start])) ){
+                if( $branchTotalSeats == count(array_intersect($bookedTimes,[$start])) ){
                     $blockedTimeBookings[] = $start;
                 }
                 (int)$start++;

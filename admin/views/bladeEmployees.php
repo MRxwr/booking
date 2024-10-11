@@ -80,7 +80,7 @@
 		
 		<tbody>
 		<?php 
-		if( $employees = selectDB("employees","`status` = '0' AND `hidden` != '2'") ){
+		if( $employees = selectDB("{$table}","`status` = '0' AND `hidden` != '2'") ){
 			for( $i = 0; $i < sizeof($employees); $i++ ){
 				$counter = $i + 1;
 				if ( $employees[$i]["hidden"] == 1 ){

@@ -61,7 +61,7 @@
 								</thead>
 								<tbody>
 									<?php 
-									if( $service = selectDB("{$_GET["p"]}","`status` = '0' ORDER BY `id` ASC") ){
+									if( $service = selectDB("{$table}","`status` = '0' ORDER BY `id` ASC") ){
 										for( $i = 0; $i < sizeof($service); $i++ ){
 											if ( $service[$i]["hidden"] == 1 ){
 												$icon = "fa fa-unlock";

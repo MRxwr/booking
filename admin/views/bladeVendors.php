@@ -145,7 +145,7 @@
 								</thead>
 								<tbody>
 									<?php 
-									if( $vendors = selectDB("{$_GET["p"]}","`status` = '0' ORDER BY `id` ASC") ){
+									if( $vendors = selectDB("{$table}","`status` = '0' ORDER BY `id` ASC") ){
 										for( $i = 0; $i < sizeof($vendors); $i++ ){
 											if ( $vendors[$i]["hidden"] == 0 ){
 												$icon = "fa fa-unlock";

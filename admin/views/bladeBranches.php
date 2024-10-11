@@ -85,7 +85,7 @@ if( isset($_GET["updateTimes"]) || isset($_GET["updateServices"]) ){
 								</thead>
 								<tbody>
 									<?php 
-									if( $branch = selectDB("{$_GET["p"]}","`status` = '0' ORDER BY `id` ASC") ){
+									if( $branch = selectDB("{$table}","`status` = '0' ORDER BY `id` ASC") ){
 										for( $i = 0; $i < sizeof($branch); $i++ ){
 											if ( $branch[$i]["hidden"] == 1 ){
 												$icon = "fa fa-unlock";

@@ -25,18 +25,23 @@
 								</select>
 							</div>
 						
-							<div class="col-md-3">
+							<div class="col-md-6">
 								<label><?php echo direction("English Title","الإسم الإنجليزي") ?></label>
 								<input type="text" name="enTitle" class="form-control" required>
 							</div>
 
-							<div class="col-md-3">
+							<div class="col-md-6">
 								<label><?php echo direction("Arabic Title","الإسم العربي") ?></label>
 								<input type="text" name="arTitle" class="form-control" required>
 							</div>
 
 							<div class="col-md-3">
-								<label><?php echo direction("Period in Mins","المدة بالدقيقة") ?></label>
+								<label><?php echo direction("Seats / Hour","المقاعد / ساعة") ?></label>
+								<input type="number" step="any" min="1" name="seats" class="form-control" required>
+							</div>
+
+							<div class="col-md-3">
+								<label><?php echo direction("Duration in Mins","المدة بالدقيقة") ?></label>
 								<input type="number" step="any" min="0"name="period" class="form-control" required>
 							</div>
 
@@ -75,6 +80,7 @@
 									<th><?php echo direction("Vendor","البائع") ?></th>
 									<th><?php echo direction("English Title","الإسم الإنجليزي") ?></th>
 									<th><?php echo direction("Arabic Title"," الإسم العربي") ?></th>
+									<th><?php echo direction("Seats","المقاعد") ?></th>
 									<th><?php echo direction("Period","المدة") ?></th>
 									<th><?php echo direction("Price","القيمة") ?></th>
 									<th class="text-nowrap"><?php echo direction("الخيارات","Actions") ?></th>
@@ -101,6 +107,7 @@
 										<td ><?php echo $vendor ?></td>
 										<td ><?php echo $service[$i]["enTitle"] ?></td>
 										<td ><?php echo $service[$i]["arTitle"] ?></td>
+										<td ><?php echo $service[$i]["seats"] ?></td>
 										<td ><?php echo $service[$i]["period"] ?> min</td>
 										<td ><?php echo $service[$i]["price"] ?> -/KD</td>
 										<td class="text-nowrap">
@@ -119,6 +126,7 @@
 												<label id="period<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["period"] ?></label>
 												<label id="enTitle<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["enTitle"] ?></label>
 												<label id="arTitle<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["arTitle"] ?></label>
+												<label id="seats<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["seats"] ?></label>
 											</div>
 										</td>
 									</tr>
@@ -144,6 +152,7 @@
 		$("input[name=arTitle]").val($.trim($("#arTitle"+id).html().replace(/\n/g, "")));
 		$("input[name=enTitle]").val($.trim($("#enTitle"+id).html().replace(/\n/g, ""))).focus();;
 		$("input[name=price]").val($.trim($("#price"+id).html().replace(/\n/g, "")));
+		$("input[name=seats]").val($.trim($("#seats"+id).html().replace(/\n/g, "")));
 		$("select[name=vendorId]").val($.trim($("#vendorId"+id).html().replace(/\n/g, "")));
 	})
 </script>

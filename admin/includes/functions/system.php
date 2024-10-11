@@ -120,7 +120,7 @@ function uploadImage($imageLocation){
 			// Open the file to get existing content
 			$data = file_get_contents($newFile);
 			// New file
-			$new = "../../../logos/{$imageSizes[$i]}".$fileTitle;
+			$new = "../logos/{$imageSizes[$i]}".$fileTitle;
 			// Write the contents back to a new file
 			file_put_contents($new, $data);
 		}

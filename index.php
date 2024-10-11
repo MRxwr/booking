@@ -1,6 +1,7 @@
 <?php
-if( isset($_GET["vendorURL"]) && !empty($_GET["vendorURL"]) && $vendor = selectDBNew("vendors",$_GET["vendorURL"],"`url` LIKE ? AND `hidden` = '0' AND `status` = '0'","") ){
-	$vendor = $vendor[0];
+if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) /*&& $vendor = selectDBNew("vendors",$_GET["vendorURL"],"`url` LIKE ? AND `hidden` = '0' AND `status` = '0'","")*/ ){
+	var_dump($_REQUEST);
+	//$vendor = $vendor[0];
 }else{
 	header("Location: default");die();
 }

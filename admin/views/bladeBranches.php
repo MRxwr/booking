@@ -59,7 +59,7 @@ if( isset($_GET["updateTimes"]) || isset($_GET["updateServices"]) ){
 							</div>
 
 							<div class="col-md-3">
-								<label><?php echo direction("Seats","المقاعد") ?></label>
+								<label><?php echo direction("Seats / Hour","المقاعد / ساعة") ?></label>
 								<input type="number" step="any" min="1" name="seats" class="form-control" required value="1">
 							</div>
 

@@ -43,7 +43,6 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
 
         //booking blocking number of seats per hour
         if( $booking = selectDB("bookings","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '{$serviceId}' AND `bookedDate` = '{$date}'") ){
-            /*
             foreach( $booking as $book ){
                 $blockedTimeBookings[] = substr($book["bookedTime"],0,2);
             }
@@ -52,15 +51,14 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             }else{
                 $branchTotalSeats = '1';
             }
-            //if timeslot repeated in booking = $branchTotalSeats then add it to blockedTimeBookings
             for( $i = $start; $i < $close; $i++ ){
                 if( $branchTotalSeats == count(array_intersect($blockedTimeBookings,[$start])) ){
                     $blockedTimeBookings[] = $start;
                 }
                 (int)$start++;
             }
-                */
         }
+        // removeing all blocked time from timeSlots
         for( $i = $start; $i < $close; $i++ ){
             if( !in_array((int)$start, $blockedTimeVendor) && !in_array((int)$start, $blockedTimeBookings) ){
                 $response["timeSlots"][] = ($start) . ":00 - " . ((int)($start)+1) . ":00";

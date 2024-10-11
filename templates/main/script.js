@@ -6,6 +6,11 @@ $(window).ready(function() {
 	} else {
 	  $("#leftSide").removeClass("col-12").addClass("col-4");
 	}
+
+	$("body").on("change", "select[name=branch]", function (e) {
+		var branch = $(this).val();
+		$("#serv-"+branch).removeClass("d-none").addClass("d-flex");
+	});
 }); 
 
 // on resize
@@ -17,3 +22,4 @@ $(window).resize(function() {
 	  $("#leftSide").removeClass("col-12").addClass("col-4");
 	}
 });
+

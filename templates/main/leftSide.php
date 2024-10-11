@@ -20,12 +20,6 @@
 		//call selections
 		require_once("templates/main/selections.php");
 		
-		// call services
-		require_once("templates/main/services.php");
-		
-		// call services
-		require_once("templates/main/times.php");
-		
 		//call info
 		require_once("templates/main/info.php");
 	}

@@ -64,7 +64,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 
 // get viewed page from pages folder \\
 if( isset($_GET["v"]) && searchFile("views","blade{$_GET["v"]}.php") ){
-	$table = strtolower($_GET["p"]);
+	$table = strtolower($_GET["v"]);
 	require_once("views/".searchFile("views","blade{$_GET["v"]}.php"));
 }else{
 	require_once("views/home.php");

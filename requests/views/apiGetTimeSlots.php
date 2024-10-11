@@ -31,7 +31,8 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         }
         echo outputData($response);die();
     }else{
-        echo outputError("time slots not found");die();
+        $response["timeSlots"][0] = "No time slots available";
+        echo outputError($response);die();
     }
 }
 ?>

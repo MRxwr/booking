@@ -89,6 +89,8 @@ if( isset($_GET["updateTimes"]) || isset($_GET["updateServices"]) ){
 							<table class="table display responsive product-overview mb-30" id="myTable">
 								<thead>
 									<tr>
+									<th>#</th>
+									<th><?php echo direction("Vendor","البائع") ?></th>
 									<th><?php echo direction("English Title","الإسم الإنجليزي") ?></th>
 									<th><?php echo direction("Arabic Title"," الإسم العربي") ?></th>
 									<th><?php echo direction("Location","الموقع") ?></th>
@@ -99,6 +101,8 @@ if( isset($_GET["updateTimes"]) || isset($_GET["updateServices"]) ){
 									<?php 
 									if( $branch = selectDB("{$table}","`status` = '0' ORDER BY `id` ASC") ){
 										for( $i = 0; $i < sizeof($branch); $i++ ){
+											$vendor = selectDB("vendors","`id` = '{$branch[$i]["vendorId"]}'");
+											$vendor = direction($vendor[0]["enTitle"],$vendor[0]["arTitle"]);
 											if ( $branch[$i]["hidden"] == 1 ){
 												$icon = "fa fa-unlock";
 												$link = "?{$_SERVER["QUERY_STRING"]}&show={$branch[$i]["id"]}";
@@ -110,15 +114,11 @@ if( isset($_GET["updateTimes"]) || isset($_GET["updateServices"]) ){
 											}			
 									?>
 									<tr>
-										<td id="enTitle<?php echo $branch[$i]["id"]?>" >
-											<?php echo $branch[$i]["enTitle"] ?>
-										</td>
-										<td id="arTitle<?php echo $branch[$i]["id"]?>" >
-											<?php echo $branch[$i]["arTitle"] ?>
-										</td>
-										<td id="location<?php echo $branch[$i]["id"]?>" >
-											<?php echo $branch[$i]["location"] ?>
-										</td>
+										<td ><?php echo str_pad(($counter = $i + 1),4,"0",STR_PAD_LEFT) ?></td>
+										<td ><?php echo $vendor ?></td>
+										<td id="enTitle<?php echo $branch[$i]["id"]?>" ><?php echo $branch[$i]["enTitle"] ?></td>
+										<td id="arTitle<?php echo $branch[$i]["id"]?>" ><?php echo $branch[$i]["arTitle"] ?></td>
+										<td id="location<?php echo $branch[$i]["id"]?>" ><?php echo $branch[$i]["location"] ?></td>
 										<td class="text-nowrap">
 											<a class="mr-25 timeBtn" id="<?php echo $branch[$i]["id"] ?>" title="<?php echo direction("Times","الأوقات") ?>" data-toggle="modal" data-target="#times">
 												<i class="fa fa-clock-o text-inverse m-r-10"></i>
@@ -138,6 +138,9 @@ if( isset($_GET["updateTimes"]) || isset($_GET["updateServices"]) ){
 												<i class="fa fa-close text-danger"></i>
 											</a>
 										</td>
+										<div style="display: none">
+											<label id="vendorId<?php echo $branch[$i]["id"]?>"><?php echo $branch[$i]["vendorId"] ?></label>
+										</div>
 									</tr>
 									<?php
 										}
@@ -163,6 +166,7 @@ if( isset($_GET["updateTimes"]) || isset($_GET["updateServices"]) ){
 		$("input[name=arTitle]").val($.trim(arTitle.replace(/\n/g, ""))).focus();
 		$("input[name=enTitle]").val($.trim(enTitle.replace(/\n/g, "")));
 		$("input[name=location]").val($.trim(location.replace(/\n/g, "")));
+		$("select[name=vendorId]").val($.trim($("#vendorId"+id).html().replace(/\n/g, "")));
 	})
 	
 	$(document).on("click",".timeBtn", function(){

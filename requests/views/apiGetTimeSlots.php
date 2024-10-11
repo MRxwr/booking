@@ -25,9 +25,20 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         $start = substr($timeSlots[0]["startTime"],0,2);
         $close = substr($timeSlots[0]["closeTime"],0,2);
         $timeSlots = [];
+        $blockTime = selectDB("blocktime","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}'");
+        if( $blockTime[0]["startDate"] <= $date && $blockTime[0]["endDate"] >= $date ){
+            $blockedTimeStart = substr($blockTime[0]["startTime"],0,2);
+            $blockedTimeClose = substr($blockTime[0]["closeTime"],0,2);
+            $blockedTimeArray = [];
+            for( $i = $blockedTimeStart; $i < $blockedTimeClose; $i++ ){
+                $blockedTimeArray[] = $blockedTimeStart;
+            }
+        }
         for( $i = $start; $i < $close; $i++ ){
-            $response["timeSlots"][] = ($start) . ":00 - " . ((int)($start)+1) . ":00";
-            (int)$start++;
+            if( !in_array($start, $blockedTimeArray) ){
+                $response["timeSlots"][] = ($start) . ":00 - " . ((int)($start)+1) . ":00";
+                (int)$start++;
+            }
         }
         echo outputData($response);die();
     }else{

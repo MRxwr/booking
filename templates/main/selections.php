@@ -155,20 +155,22 @@
 	$("input[name=selectedDate]").val(this.value);
 	$.ajax({
 	  type: "POST",
-	  url: "../requests/index.php?a=GetTimeSlots",
+	  url: "requests/index.php?a=GetTimeSlots",
 	  data: {
 		date: $("input[name='selectedDate']").val(),
 		branchId: $("input[name='branchId']").val(),
 		serviceId: $("input[name='serviceId']").val(),
 		vendorId: <?php echo $vendor["id"] ?>
 	  }
-	})
-	// force output no fail or error
-	.done(function( msg ) {
-	  $("#time-select").html(msg);
-	})
-	.fail(function( jqXHR, textStatus ) {
-	  console.log( "Request failed: " + textStatus );
+	}).done(function(data){
+	  var timeSlots = JSON.parse(data);
+	  var timeSlotHTML = "";
+	  timeSlots.forEach(function(timeSlot){
+		timeSlotHTML += '<option value="'+timeSlot.data.timeSlot+'">'+timeSlot.data.timeSlot+'</option>';
+	  });
+	  timeSelect.innerHTML = timeSlotHTML;
+	}).fail(function(){
+	  timeSelect.innerHTML = '<option value="0">No time slots available</option>';
 	});
   });
 

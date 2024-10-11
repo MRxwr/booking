@@ -1,5 +1,5 @@
 <?php
-var_dump($_POST);
+echo json_encode($_POST);
 if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
     echo outputError("branch is required");
 }elseif( !isset($_POST["date"]) || empty($_POST["date"]) ){

@@ -155,6 +155,9 @@
 		branchId: $("input[name='branchId']").val(),
 		serviceId: $("input[name='serviceId']").val(),
 		vendorId: <?php echo $vendor["id"] ?>
+	  },
+	  headers: {
+		  "Authorization": "Bearer " + "<?php echo $token ?>"
 	  }
 	}).done(function(data){
 		console.log(data);

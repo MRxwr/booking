@@ -1,9 +1,30 @@
 <?php
+SESSION_START();
 require_once("admin/includes/config.php");
 require_once("admin/includes/functions.php");
 
 if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor = selectDBNew("vendors",[$_REQUEST["vendorURL"]],"`url` LIKE ? AND `hidden` = '0' AND `status` = '0'","") ){
 	$vendor = $vendor[0];
+	if( $token = selectDBNew("tokens",[$_SESSION["deviceId"]],"`deviceId` = ?","") ){
+		$token = $token[0]["token"];
+	}else{
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => "{$_SERVER["HTTP_HOST"]}/requests/generateToken.php",
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'GET',
+		));
+		$response = curl_exec($curl);
+		curl_close($curl);
+		$token = json_decode($response, true);
+		echo $response;
+		$token = $token["data"]["token"];
+	}
 }else{
 	header("Location: default");die();
 }

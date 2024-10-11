@@ -147,22 +147,13 @@
 
   // now on date change get vendroId branchId and date and serviceId and make a ajax call to retieve the time slots
   dateInput.addEventListener("change", function(){
-	var selectedDate = this.value;
-	var selectedBranchId = branchSelect.value;
-	var selectedServiceId = timeSelect.value;
-	var selectedService = services.find(function(service){
-	  return service.id == selectedServiceId;
-	});
-	var selectedBranch = branches.find(function(branch){
-	  return branch.id == selectedBranchId;
-	});
 	$.ajax({
 	  type: "POST",
-	  url: "ajax/getTimeSlots.php",
+	  url: "requests/index.php?a=GetTimeSlots",
 	  data: {
-		date: selectedDate,
-		branchId: selectedBranchId,
-		serviceId: selectedServiceId,
+		date: $("input[name='date']").val(),
+		branchId: $("input[name='branchId']").val(),
+		serviceId: $("input[name='serviceId']").val(),
 		vendorId: vendor["id"]
 	  }
 	}).done(function(data){

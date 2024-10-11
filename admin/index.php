@@ -67,7 +67,7 @@ if( isset($_GET["v"]) && searchFile("views","blade{$_GET["v"]}.php") ){
 	$table = strtolower($_GET["v"]);
 	require_once("views/".searchFile("views","blade{$_GET["v"]}.php"));
 }else{
-	require_once("views/home.php");
+	require_once("views/bladeHome.php");
 }
 
 require("template/footer.php");

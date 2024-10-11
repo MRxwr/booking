@@ -1,6 +1,7 @@
 <?php
 require_once("admin/includes/config.php");
 require_once("admin/includes/functions.php");
+/*
 if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor = selectDBNew("vendors",$_REQUEST["vendorURL"],"`url` LIKE ? AND `hidden` = '0' AND `status` = '0'","") ){
 	$vendor = $vendor[0];
 }else{
@@ -33,3 +34,4 @@ if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor =
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 	</body> 
 </html>
+*/

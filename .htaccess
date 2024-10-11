@@ -7,4 +7,9 @@ RewriteRule ^(.*)$ $1.php [L,QSA]
 
 # Send URL path after /vendorURL as GET parameter
 RewriteCond %{REQUEST_URI} ^/vendorURL/(.*)$
-RewriteRule ^ index?vendorURL=%1 [L,QSA]
+RewriteRule ^ index.php?vendorURL=%1 [L,QSA]
+
+# Direct all other requests to default file
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ default.php [L]

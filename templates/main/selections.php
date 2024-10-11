@@ -1,7 +1,7 @@
 <div class="row m-0 w-100">
 	<div class="col-md-12">
 		<label>Branch</label>
-		<select name="branch" class="form-control">
+		<select name="branch" class="form-control" required>
 			<option selected disabled value="0">Please select a Branch</option>
 			<?php
 			$orderBy = direction("enTitle","arTitle");

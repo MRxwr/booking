@@ -13,7 +13,6 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 	}elseif( isset($_POST["update"]) ){
 		$id = $_POST["update"];
 		unset($_POST["update"]);
-		uploadImage($_FILES["logo"]["tmp_name"]);
 		if( isset($_FILES['logo']) && is_uploaded_file($_FILES['logo']['tmp_name']) ){
 			$_POST["logo"] = uploadImage($_FILES["logo"]["tmp_name"]);
 		}

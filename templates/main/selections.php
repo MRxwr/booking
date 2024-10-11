@@ -153,26 +153,22 @@
   // now on date change get vendroId branchId and date and serviceId and make a ajax call to retieve the time slots
   $("input[name='date']").on("change", function(){
 	$("input[name=selectedDate]").val(this.value);
-	console.log($("input[name='date']").val());
 	$.ajax({
 	  type: "POST",
-	  url: "requests/index.php?a=GetTimeSlots",
+	  url: "../requests/index.php?a=GetTimeSlots",
 	  data: {
 		date: $("input[name='selectedDate']").val(),
 		branchId: $("input[name='branchId']").val(),
 		serviceId: $("input[name='serviceId']").val(),
 		vendorId: <?php echo $vendor["id"] ?>
 	  }
-	}).done(function(data){
-		console.log(data);
-	  var timeSlots = data;//JSON.parse(data);
-	  var timeSlotHTML = "";
-	  timeSlots.forEach(function(timeSlot){
-		timeSlotHTML += '<option value="'+timeSlot.timeSlot+'">'+timeSlot.timeSlot+'</option>';
-	  });
-	  timeSelect.innerHTML = timeSlotHTML;
-	}).fail(function(){
-	  timeSelect.innerHTML = '<option value="0">No time slots available</option>';
+	})
+	// force output no fail or error
+	.done(function( msg ) {
+	  $("#time-select").html(msg);
+	})
+	.fail(function( jqXHR, textStatus ) {
+	  console.log( "Request failed: " + textStatus );
 	});
   });
 

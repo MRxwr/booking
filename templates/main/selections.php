@@ -149,7 +149,7 @@
   });
 
   // now on date change get vendroId branchId and date and serviceId and make a ajax call to retieve the time slots
-  dateInput.addEventListener("change", function(){
+  $("input[name='date']").on("change", function(){
 	$.ajax({
 	  type: "POST",
 	  url: "requests/index.php?a=GetTimeSlots",

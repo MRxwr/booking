@@ -1,3 +1,8 @@
+<?php
+if( !isset($_GET["vendorURL"]) || empty($_GET["vendorURL"]) ){
+	header("Location: default.php");die();
+}
+?>
 <!doctype html>
 <html lang="en">
 	<head>

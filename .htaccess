@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Allow accessing PHP files without .php extension
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [L,QSA]
+
+# Send URL path after /vendorURL as GET parameter
+RewriteCond %{REQUEST_URI} ^/vendorURL/(.*)$
+RewriteRule ^ ?vendorURL=%1 [L,QSA]

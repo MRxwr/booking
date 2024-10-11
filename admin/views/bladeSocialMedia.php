@@ -12,17 +12,17 @@
 				<div class="panel-body ">
 					<form class="mt-30 mb-30" method="POST" action="" enctype="multipart/form-data">
 						<div class="row m-0">
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<label><?php echo direction("English Title","الإسم الإنجليزي") ?></label>
 								<input type="text" name="enTitle" class="form-control" required>
 							</div>
 
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<label><?php echo direction("Arabic Title","الإسم العربي") ?></label>
 								<input type="text" name="arTitle" class="form-control" required>
 							</div>
 
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<label><?php echo direction("Icon","الأيقونه") ?></label>
 								<input type="text" name="logo" class="form-control" required>
 							</div>

@@ -58,6 +58,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                 (int)$start++;
             }
         }
+        
         // removeing all blocked time from timeSlots
         for( $i = $start; $i < $close; $i++ ){
             if( !in_array((int)$start, $blockedTimeVendor) && !in_array((int)$start, $blockedTimeBookings) ){

@@ -1,4 +1,5 @@
 <?php
+SESSION_START();
 header("Content-Type: application/json");
 require_once("../admin/includes/config.php");
 require_once("../admin/includes/functions.php");
@@ -15,17 +16,15 @@ if( isset($_GET["lang"]) && !empty($_GET["lang"]) ){
 	$requestLang = "en";
 }
 
-var_dump(getallheaders());die();
-
-if ( isset(getallheaders()["myacadheader"]) ){
-	$headerAPI =  getallheaders()["myacadheader"];
+if ( isset(getallheaders()["Authorization"]) && !empty(getallheaders()["Authorization"])){
+	if( $checkToken = selectDBNew("tokens",[getallheaders()["Authorization"]],"`token` LIKE ?","") ){
+		$token = $checkToken[0];
+	}else{
+		$error = array("msg"=>"Invalid Token");
+		echo outputError($error);die();
+	}
 }else{
-	$error = array("msg"=>"Please set headres");
-	echo outputError($error);die();
-}
-
-if ( $headerAPI != "myAcadAppCreate" ){
-	$error = array("msg"=>"headers value is wrong");
+	$error = array("msg"=>"Please Set Authorization Token");
 	echo outputError($error);die();
 }
 

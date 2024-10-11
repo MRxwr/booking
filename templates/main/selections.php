@@ -170,6 +170,8 @@
 		var disabledDates = blockedDays.concat(disabledRanges.map(function(range) {
 		  return [range.from, range.to];
 		}).flat());
+
+		console.log(disabledDates);
 		
 		flatpickrInstance.set('disable', disabledDates);
 	}

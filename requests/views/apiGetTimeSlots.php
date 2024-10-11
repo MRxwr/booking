@@ -51,14 +51,15 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             }else{
                 $branchTotalSeats = '1';
             }
-            /*
+            
             for( $i = $start; $i < $close; $i++ ){
+                /*
                 if( $branchTotalSeats == count(array_intersect($bookedTimes,[$start])) ){
                     $blockedTimeBookings[] = $start;
                 }
+                    */
                 (int)$start++;
             }
-                */
         }
 
         // removeing all blocked time from timeSlots

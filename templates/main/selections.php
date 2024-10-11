@@ -33,7 +33,15 @@
 	</div>
 	<div class="col-md-6">
 		<label>Time</label>
-		<input type="time" name="time" class="form-control">
+		<select name="time" class="form-control" id="time-select">
+			<option selected disabled value="0">Please select a Time</option>
+			<?php
+			$times = selectDB("cbt_times","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' GROUP BY `time` ORDER BY `time` ASC");
+			foreach($times as $time){
+				echo "<option value='{$time["time"]}'>{$time["time"]}</option>";
+			}
+			?>
+		</select>
 	</div>
 </div>
 
@@ -59,8 +67,19 @@
 		?>
 	];
 
-	// Get the branch select element and the services container
+	// Store times data in a JavaScript object
+	var times = [
+		<?php
+		$times = selectDB("cbt_times","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' GROUP BY `time` ORDER BY `time` ASC");
+		foreach($times as $time){
+			echo "{ time: '{$time["time"]}'},"; 
+		}
+		?>
+	];
+
+	// Get the branch select element, time select element and the services container
 	var branchSelect = document.getElementById("branch-select");
+	var timeSelect = document.getElementById("time-select");
 	var servicesContainer = document.getElementById("services-container");
 
 	// Add an event listener to the branch select element
@@ -71,6 +90,29 @@
 		});
 		var filteredServices = services.filter(function(service){
 			return selectedBranchData.services.includes(service.id) || selectedBranchData.services.length === 0;
+		});
+		
+		// Clear the services container
+		servicesContainer.innerHTML = "";
+		
+		// Loop through the filtered services and add them to the container
+		filteredServices.forEach(function(service){
+			var serviceHTML = '<div class="col d-flex align-items-center justify-content-center serviceBLk mx-2 mb-2 p-3" id="serv-'+service.id+'">';
+			serviceHTML += '<span>'+service.title+'</span>';
+			serviceHTML += '</div>';
+			servicesContainer.innerHTML += serviceHTML;
+		});
+	});
+
+	// Add an event listener to the time select element
+	timeSelect.addEventListener("change", function(){
+		var selectedTime = this.value;
+		var selectedTimeData = times.find(function(time){
+			return time.time == selectedTime;
+		});
+		var filteredServices = services.filter(function(service){
+			// Assuming you have a time field in your services data
+			return service.time == selectedTime;
 		});
 		
 		// Clear the services container

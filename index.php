@@ -20,7 +20,7 @@ if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor =
 		<style>
 			<?php require_once("templates/main/style.css") ?>
 			.rightBg {
-				background-image: url("<?php echo $vendor["coverImg"] ?>");
+				background-image: url("logos/<?php echo $vendor["coverImg"] ?>");
 				background-size: cover;
 				background-position: center;
 				height: 100%;
@@ -33,7 +33,7 @@ if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor =
 			.heroBg {
 				-webkit-box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
 				box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
-				background-image: url("<?php echo $vendor["coverImg"] ?>");
+				background-image: url("logos/<?php echo $vendor["coverImg"] ?>");
 				background-repeat: no-repeat;
 				background-position: center;
 				background-size: cover;

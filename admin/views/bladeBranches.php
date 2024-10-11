@@ -48,17 +48,22 @@ if( isset($_GET["updateTimes"]) || isset($_GET["updateServices"]) ){
 								</select>
 							</div>
 						
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<label><?php echo direction("English Title","الإسم الإنجليزي") ?></label>
 								<input type="text" name="enTitle" class="form-control" required>
 							</div>
 
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<label><?php echo direction("Arabic Title","الإسم العربي") ?></label>
 								<input type="text" name="arTitle" class="form-control" required>
 							</div>
 
-							<div class="col-md-4">
+							<div class="col-md-3">
+								<label><?php echo direction("Seats","المقاعد") ?></label>
+								<input type="number" step="any" min="1" name="seats" class="form-control" required value="1">
+							</div>
+
+							<div class="col-md-3">
 								<label><?php echo direction("Location","الموقع") ?></label>
 								<input type="text" name="location" class="form-control" required value="#">
 							</div>
@@ -93,6 +98,7 @@ if( isset($_GET["updateTimes"]) || isset($_GET["updateServices"]) ){
 									<th><?php echo direction("Vendor","البائع") ?></th>
 									<th><?php echo direction("English Title","الإسم الإنجليزي") ?></th>
 									<th><?php echo direction("Arabic Title"," الإسم العربي") ?></th>
+									<th><?php echo direction("Seats","المقاعد") ?></th>
 									<th><?php echo direction("Location","الموقع") ?></th>
 									<th class="text-nowrap"><?php echo direction("الخيارات","Actions") ?></th>
 									</tr>
@@ -116,13 +122,14 @@ if( isset($_GET["updateTimes"]) || isset($_GET["updateServices"]) ){
 									<tr>
 										<td ><?php echo str_pad(($counter = $i + 1),4,"0",STR_PAD_LEFT) ?></td>
 										<td ><?php echo $vendor ?></td>
-										<td id="enTitle<?php echo $branch[$i]["id"]?>" ><?php echo $branch[$i]["enTitle"] ?></td>
-										<td id="arTitle<?php echo $branch[$i]["id"]?>" ><?php echo $branch[$i]["arTitle"] ?></td>
-										<td id="location<?php echo $branch[$i]["id"]?>" ><?php echo $branch[$i]["location"] ?></td>
+										<td ><?php echo $branch[$i]["enTitle"] ?></td>
+										<td ><?php echo $branch[$i]["arTitle"] ?></td>
+										<td ><?php echo $branch[$i]["seats"] ?></td>
+										<td ><?php echo $branch[$i]["location"] ?></td>
 										<td class="text-nowrap">
-											<a class="mr-25 timeBtn" id="<?php echo $branch[$i]["id"] ?>" title="<?php echo direction("Times","الأوقات") ?>" data-toggle="modal" data-target="#times">
+											<?php /*<a class="mr-25 timeBtn" id="<?php echo $branch[$i]["id"] ?>" title="<?php echo direction("Times","الأوقات") ?>" data-toggle="modal" data-target="#times">
 												<i class="fa fa-clock-o text-inverse m-r-10"></i>
-											</a>
+											</a>*/ ?>
 											
 											<a class="mr-25 serviceBtn" id="<?php echo $branch[$i]["id"] ?>" title="<?php echo direction("Services","الخدمات") ?>" data-toggle="modal" data-target="#services">
 												<i class="fa fa-hand-paper-o text-inverse m-r-10"></i>
@@ -140,6 +147,10 @@ if( isset($_GET["updateTimes"]) || isset($_GET["updateServices"]) ){
 										</td>
 										<div style="display: none">
 											<label id="vendorId<?php echo $branch[$i]["id"]?>"><?php echo $branch[$i]["vendorId"] ?></label>
+											<label id="enTitle<?php echo $branch[$i]["id"]?>"><?php echo $branch[$i]["enTitle"] ?></label>
+											<label id="arTitle<?php echo $branch[$i]["id"]?>"><?php echo $branch[$i]["arTitle"] ?></label>
+											<label id="location<?php echo $branch[$i]["id"]?>"><?php echo $branch[$i]["location"] ?></label>
+											<label id="seats<?php echo $branch[$i]["id"]?>"><?php echo $branch[$i]["seats"] ?></label>
 										</div>
 									</tr>
 									<?php
@@ -160,13 +171,11 @@ if( isset($_GET["updateTimes"]) || isset($_GET["updateServices"]) ){
 	$(document).on("click",".edit", function(){
 		var id = $(this).attr("id");
 		$("input[name=update]").val(id);
-		var arTitle = $("#arTitle"+id).html();
-		var enTitle = $("#enTitle"+id).html();
-		var location = $("#location"+id).html();
-		$("input[name=arTitle]").val($.trim(arTitle.replace(/\n/g, ""))).focus();
-		$("input[name=enTitle]").val($.trim(enTitle.replace(/\n/g, "")));
-		$("input[name=location]").val($.trim(location.replace(/\n/g, "")));
+		$("input[name=arTitle]").val($.trim($("#arTitle"+id).html().replace(/\n/g, "")));
+		$("input[name=enTitle]").val($.trim($("#enTitle"+id).html().replace(/\n/g, ""))).focus();
+		$("input[name=location]").val($.trim($("#location"+id).html().replace(/\n/g, "")));
 		$("select[name=vendorId]").val($.trim($("#vendorId"+id).html().replace(/\n/g, "")));
+		$("input[name=seats]").val($.trim($("#seats"+id).html().replace(/\n/g, "")));
 	})
 	
 	$(document).on("click",".timeBtn", function(){

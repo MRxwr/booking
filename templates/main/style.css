@@ -120,7 +120,7 @@ button {
     color: white;
 }
 
-.serviceBLk:active {
+.activeService {
     background-color: #4e1c07;
     color: white;
 }

@@ -141,8 +141,8 @@
 	var serviceId = $(this).attr("id");
 	$("input[name='serviceId']").val(serviceId);
 	// give it style active and remove the active from all other services 
-	$(".serviceBLk").removeClass("active");
-	$(this).addClass("active");
+	$(".serviceBLk").removeClass("activeService");
+	$(this).addClass("activeService");
   });
 
   // now on date change get vendroId branchId and date and serviceId and make a ajax call to retieve the time slots

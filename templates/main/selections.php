@@ -157,6 +157,7 @@
 		vendorId: vendor["id"]
 	  }
 	}).done(function(data){
+		console.log(data);
 	  var timeSlots = JSON.parse(data);
 	  var timeSlotHTML = "";
 	  timeSlots.forEach(function(timeSlot){

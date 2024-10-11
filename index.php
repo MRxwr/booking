@@ -22,7 +22,6 @@ if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor =
 		$response = curl_exec($curl);
 		curl_close($curl);
 		$token = json_decode($response, true);
-		echo $response;
 		$token = $token["data"]["token"];
 	}
 }else{

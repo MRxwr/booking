@@ -162,7 +162,7 @@
 	  }
 	}).done(function(data){
 		console.log(data);
-	  var timeSlots = JSON.parse(data);
+	  var timeSlots = data;//JSON.parse(data);
 	  var timeSlotHTML = "";
 	  timeSlots.forEach(function(timeSlot){
 		timeSlotHTML += '<option value="'+timeSlot.timeSlot+'">'+timeSlot.timeSlot+'</option>';

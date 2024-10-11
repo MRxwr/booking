@@ -17,11 +17,10 @@ if( isset($_GET["lang"]) && !empty($_GET["lang"]) ){
 }
 
 if ( isset(getallheaders()["Authorization"]) && !empty(getallheaders()["Authorization"])){
-	var_dump(selectDBNew("tokens",[getallheaders()["Authorization"]],"`token` LIKE ?",""));
 	if( $checkToken = selectDBNew("tokens",[getallheaders()["Authorization"]],"`token` LIKE ?","") ){
-		$token = $checkToken[0];
+		$token = $checkToken[0]["token"];
 	}else{
-		outputError(array("msg"=>"Invalid Authorization Token"));die();
+		echo outputError(array("msg"=>"Invalid Authorization Token"));die();
 	}
 }else{
 	$error = array("msg"=>"Please Set Authorization Token");

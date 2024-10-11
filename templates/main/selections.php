@@ -165,6 +165,7 @@
 	}).done(function(data){
 	  var timeSlots = data;
 	  var timeSlotHTML = "";
+	  console.log(data);
 	  timeSlots.forEach(function(timeSlot){
 		timeSlotHTML += '<option value="'+timeSlot.data.timeSlot+'">'+timeSlot.data.timeSlot+'</option>';
 	  });

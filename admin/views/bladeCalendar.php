@@ -27,7 +27,7 @@
 							</div>
 							<div class="col-md-6">
 								<label><?php echo direction("Branch","الفرع") ?></label>
-								<select name="vendorId" class="form-control" required>
+								<select name="branchId" class="form-control" required>
 									<?php 
 									$vendorData = ( isset($vendorId) && !empty($vendorId) ) ? " AND `vendorId` = '{$vendorId}'" : " AND `vendorId` != '0'";
 									$orderBy = direction("enTitle","arTitle");

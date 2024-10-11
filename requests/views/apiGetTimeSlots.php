@@ -26,7 +26,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         $close = substr($timeSlots[0]["closeTime"],0,2);
         $timeSlots = [];
         for( $i = $start; $i < $close; $i++ ){
-            $response["timeSlots"][] = ($start) . ":00";
+            $response["timeSlots"][] = ($start) . ":00 - " . ((int)($start)+1) . ":00";
             (int)$start++;
         }
         echo outputData($response);die();

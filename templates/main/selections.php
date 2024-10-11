@@ -157,7 +157,7 @@
 	  flatpickrInstance.set('minDate', allowedPeriod.startDate);
 	  flatpickrInstance.set('maxDate', allowedPeriod.endDate);
 	  var disabledDates = blockedPeriodsForBranch.map(function(period) {
-		return [new Date(period.startDate), new Date(period.endDate)];
+		return [new Date(period.startDate).toISOString().split('T')[0], new Date(period.endDate).toISOString().split('T')[0]];
 	  }).flat();
 	  
 	  console.log(disabledDates);

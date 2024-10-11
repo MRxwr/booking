@@ -1,8 +1,10 @@
-# Redirect to default.php when there is nothing after the domain
-RewriteRule ^$ /default.php [L]
+RewriteEngine On
 
-# Rewrite any other requests with a parameter
-RewriteRule ^([^/]+)/?$ /?vendorURL=$1 [L,QSA]
+# Remove .php extension from URLs
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^([^/]+)/?$ $1.php [L,QSA]
 
-# Rewrite any other requests with a parameter
+# Rewrite any other requests with a parameter or redirect to default when there is nothing after the domain
+RewriteRule ^$ /default [L]
 RewriteRule ^([^/]+)/?$ /?vendorURL=$1 [L,QSA]

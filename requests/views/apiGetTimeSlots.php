@@ -27,10 +27,10 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         $close = substr($timeSlots[0]["closeTime"],0,2);
         $timeSlots = [];
         for( $i = $start; $i < $close; $i++ ){
-            $timeSlots["timeSlots"][] = ($start) . ":00";
+            $response["timeSlots"][] = ($start) . ":00";
             (int)$start++;
         }
-        echo json_encode($timeSlots);
+        echo outputData($response);
     }else{
         echo outputError("time slots not found");
     }

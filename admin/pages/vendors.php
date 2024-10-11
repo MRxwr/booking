@@ -37,7 +37,7 @@
 
 							<div class="col-md-6">
 								<label><?php echo direction("Password","كلمة المرور") ?></label>
-								<input type="password" name="password" class="form-control" required placeholder="123456">
+								<input type="password" name="password" class="form-control" placeholder="123456">
 							</div>
 
 							<div class="col-md-4">
@@ -87,12 +87,12 @@
 
 							<div class="col-md-6">
 								<label><?php echo direction("Logo","الشعار") ?></label>
-								<input type="file" name="logo" class="form-control" require>
+								<input type="file" name="logo" class="form-control">
 							</div>
 
 							<div class="col-md-6">
 								<label><?php echo direction("Cover","الغلاف" ) ?></label>
-								<input type="file" name="coverImg" class="form-control" required>
+								<input type="file" name="coverImg" class="form-control">
 							</div>
 
 							<div id="images" style="margin-top: 10px; display:none">
@@ -224,6 +224,9 @@
 		$("input[name=total]").val($.trim($("#total"+id).html().replace(/\n/g, "")));
 		$("input[name=logo]").val($.trim($("#logo"+id).html().replace(/\n/g, "")));
 		$("input[name=coverImg]").val($.trim($("#coverImg"+id).html().replace(/\n/g, "")));
+		$("#logo").attr("src","../logos/"+$("#logo"+id).html());
+		$("#coverImg").attr("src","../logos/"+$("#coverImg"+id).html());
+		$("#images").attr("style","margin-top:10px;display:block");
 	})
 </script>
   

@@ -98,6 +98,15 @@
 		}
 		?>
 	];
+	// intialze flatpicker
+	var dateInput = document.querySelector("input[name='date']");
+	flatpickr(dateInput, {
+		min: allowedBookingPeriod.startDate,
+		max: allowedBookingPeriod.endDate,
+		disabled: blockedDays.map(function(day){
+			return day.day;
+		})
+	});
 
 	// Get the branch select element, time select element and the services container
 	var branchSelect = document.getElementById("branch-select");

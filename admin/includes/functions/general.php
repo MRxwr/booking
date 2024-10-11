@@ -9,6 +9,13 @@ function check_file_exists($filename) {
   }
 }
 
+// get file extension \\
+function getFileExtension($filePath) { 
+    $dotPosition = strrpos($filePath, '.');
+    $extension = ( $dotPosition === false ? '' : substr($filePath, $dotPosition + 1) );
+    return $extension;
+}
+
 
 // search for file name inside a folder \\
 function searchFile($path, $fileName) {

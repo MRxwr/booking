@@ -3,7 +3,7 @@ require ("includes/config.php");
 require ("includes/functions.php");
 
 if( isset($_POST["email"]) && !empty($_POST["email"]) ){
-  if( $login = selectDB("employees","`email` LIKE '{$_POST["email"]}' AND `password` LIKE '".sha1($_POST["password"])."' AND `hidden` != '2' AND `status` = '0'") ){
+  if( $login = selectDBNew("employees",[$_POST["email"],sha1($_POST["password"])],"`email` LIKE ? AND `password` LIKE ? AND `hidden` != '2' AND `status` = '0'","") ){
     $GenerateNewCC = md5(rand());
     if( updateDB("employees",array("keepMeAlive"=>$GenerateNewCC),"`id` = '{$login[0]["id"]}'") ){
       $_SESSION["createkuwaitAdmin"] = $email;

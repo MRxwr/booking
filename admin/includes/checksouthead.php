@@ -5,6 +5,7 @@ if ( isset($_COOKIE["createkuwaitAdmin"]) && !empty($_COOKIE["createkuwaitAdmin"
 		$email = $user[0]["email"];
 		$username = $user[0]["fullName"];
 		$userType = $user[0]["empType"];
+		$vendorId = 0;
 	}else{
 		header("Location: logout.php");die();
 	}

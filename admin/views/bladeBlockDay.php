@@ -17,8 +17,26 @@
 								<select name="vendorId" class="form-control" required>
 									<?php 
 									$vendors = selectDB("vendors","`status` = '0' AND `hidden` = '0' ORDER BY `enTitle` ASC");
+									$orderBy = direction("enTitle","arTitle");
 									foreach( $vendors as $vendor ){
-										echo "<option value='{$vendor["id"]}'>{$vendor["enTitle"]}</option>";
+										$vendorTitle = direction($vendor["enTitle"],$vendor["arTitle"]);
+										echo "<option value='{$vendor["id"]}'>{$vendorTitle}</option>";
+									}
+									?>
+								</select>
+							</div>
+							<div class="col-md-6">
+								<label><?php echo direction("Branch","الفرع") ?></label>
+								<select name="branchId" class="form-control" required>
+									<?php 
+									$vendorData = ( isset($vendorId) && !empty($vendorId) ) ? " AND `vendorId` = '{$vendorId}'" : " AND `vendorId` != '0'";
+									$orderBy = direction("enTitle","arTitle");
+									$branches = selectDB("branches","`status` = '0' AND `hidden` = '0' {$vendorData} ORDER BY `{$orderBy}` ASC");
+									foreach( $branches as $branch ){
+										$vendors = selectDB("vendors","`id` = '{$branch["vendorId"]}'");
+										$branchTitle = direction($branch["enTitle"],$branch["arTitle"]);
+										$vendorTitle = direction($vendors[0]["enTitle"],$vendors[0]["arTitle"]);
+										echo "<option value='{$branch["id"]}'>{$vendorTitle} - {$branchTitle}</option>";
 									}
 									?>
 								</select>
@@ -66,6 +84,7 @@
 									<tr>
 									<th>#</th>
 									<th><?php echo direction("Vendor","البائع") ?></th>
+									<th><?php echo direction("Branch","الفرع") ?></th>
 									<th><?php echo direction("Day","اليوم") ?></th>
 									<th class="text-nowrap"><?php echo direction("الخيارات","Actions") ?></th>
 									</tr>
@@ -78,10 +97,13 @@
 										for( $i = 0; $i < sizeof($blockedDays); $i++ ){
 											$vendor = selectDB("vendors","`id` = '{$blockedDays[$i]["vendorId"]}'");
 											$vendor = direction($vendor[0]["enTitle"],$vendor[0]["arTitle"]);
+											$branch = selectDB("branches","`id` = '{$blockedDays[$i]["branchId"]}'");
+											$branch = direction($branch[0]["enTitle"],$branch[0]["arTitle"]);
 									?>
 									<tr>
 									<td ><?php echo str_pad(($counter = $i + 1),4,"0",STR_PAD_LEFT) ?></td>
 									<td ><?php echo $vendor ?></td>
+									<td ><?php echo $branch ?></td>
 										<td id="day<?php echo $blockedDays[$i]["id"]?>" >
 											<?php echo direction($enDaysArray[$blockedDays[$i]["day"]],$arDaysArray[$blockedDays[$i]["day"]]) ?>
 										</td>

@@ -24,28 +24,23 @@
 									?>
 								</select>
 							</div>
-
-							<div class="col-md-4">
-								<label><?php echo direction("Admin Slug","الإسم التعريفي") ?></label>
-								<input type="text" name="slug" class="form-control" required>
-							</div>
 						
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<label><?php echo direction("English Title","الإسم الإنجليزي") ?></label>
 								<input type="text" name="enTitle" class="form-control" required>
 							</div>
 
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<label><?php echo direction("Arabic Title","الإسم العربي") ?></label>
 								<input type="text" name="arTitle" class="form-control" required>
 							</div>
 
-							<div class="col-md-5">
-								<label><?php echo direction("Seats","المقاعد") ?></label>
-								<input type="number" name="seats" class="form-control" required>
+							<div class="col-md-3">
+								<label><?php echo direction("Period in Mins","المدة بالدقيقة") ?></label>
+								<input type="number" step="any" min="0"name="period" class="form-control" required>
 							</div>
 
-							<div class="col-md-5">
+							<div class="col-md-3">
 								<label><?php echo direction("Price","القيمة") ?></label>
 								<input type="float" name="price" class="form-control" required>
 							</div>
@@ -78,10 +73,9 @@
 									<tr>
 									<th>#</th>
 									<th><?php echo direction("Vendor","البائع") ?></th>
-									<th><?php echo direction("Admin Slug","الإسم التعريفي") ?></th>
 									<th><?php echo direction("English Title","الإسم الإنجليزي") ?></th>
 									<th><?php echo direction("Arabic Title"," الإسم العربي") ?></th>
-									<th><?php echo direction("Seats","المقاعد") ?></th>
+									<th><?php echo direction("Period","المدة") ?></th>
 									<th><?php echo direction("Price","القيمة") ?></th>
 									<th class="text-nowrap"><?php echo direction("الخيارات","Actions") ?></th>
 									</tr>
@@ -103,23 +97,12 @@
 											}			
 									?>
 									<tr>
-									<td ><?php echo str_pad(($counter = $i + 1),4,"0",STR_PAD_LEFT) ?></td>
-									<td ><?php echo $vendor ?></td>
-										<td id="slug<?php echo $service[$i]["id"]?>" >
-											<?php echo $service[$i]["slug"] ?>
-										</td>
-										<td id="enTitle<?php echo $service[$i]["id"]?>" >
-											<?php echo $service[$i]["enTitle"] ?>
-										</td>
-										<td id="arTitle<?php echo $service[$i]["id"]?>" >
-											<?php echo $service[$i]["arTitle"] ?>
-										</td>
-										<td id="seats<?php echo $service[$i]["id"]?>" >
-											<?php echo $service[$i]["seats"] ?>
-										</td>
-										<td id="price<?php echo $service[$i]["id"]?>" >
-											<?php echo $service[$i]["price"] ?>Kd
-										</td>
+										<td ><?php echo str_pad(($counter = $i + 1),4,"0",STR_PAD_LEFT) ?></td>
+										<td ><?php echo $vendor ?></td>
+										<td ><?php echo $service[$i]["enTitle"] ?></td>
+										<td ><?php echo $service[$i]["arTitle"] ?></td>
+										<td ><?php echo $service[$i]["period"] ?> min</td>
+										<td ><?php echo $service[$i]["price"] ?> -/KD</td>
 										<td class="text-nowrap">
 											<a id="<?php echo $service[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل") ?>">
 												<i class="fa fa-pencil text-inverse m-r-10"></i>
@@ -130,10 +113,14 @@
 											<a href="<?php echo "?{$_SERVER["QUERY_STRING"]}" ?>&delId=<?php echo $service[$i]["id"] ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف") ?>">
 												<i class="fa fa-close text-danger"></i>
 											</a>
+											<div style="display: none">
+												<label id="vendorId<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["vendorId"] ?></label>
+												<label id="price<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["price"] ?></label>
+												<label id="period<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["period"] ?></label>
+												<label id="enTitle<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["enTitle"] ?></label>
+												<label id="arTitle<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["arTitle"] ?></label>
+											</div>
 										</td>
-										<div style="display: none">
-											<label id="vendorId<?php echo $branch[$i]["id"]?>"><?php echo $branch[$i]["vendorId"] ?></label>
-										</div>
 									</tr>
 									<?php
 										}
@@ -153,16 +140,10 @@
 	$(document).on("click",".edit", function(){
 		var id = $(this).attr("id");
 		$("input[name=update]").val(id);
-		var arTitle = $("#arTitle"+id).html();
-		var enTitle = $("#enTitle"+id).html();
-		var seats = $("#seats"+id).html();
-		var price = $("#price"+id).html();
-		var slug = $("#slug"+id).html();
-		$("input[name=arTitle]").val($.trim(arTitle.replace(/\n/g, ""))).focus();
-		$("input[name=enTitle]").val($.trim(enTitle.replace(/\n/g, "")));
-		$("input[name=seats]").val($.trim(seats.replace(/\n/g, "")));
-		$("input[name=price]").val($.trim(price.replace(/\n/g, "")));
-		$("input[name=slug]").val($.trim(slug.replace(/\n/g, "")));
+		$("input[name=period]").val($.trim($("#period"+id).html().replace(/\n/g, "")));
+		$("input[name=arTitle]").val($.trim($("#arTitle"+id).html().replace(/\n/g, "")));
+		$("input[name=enTitle]").val($.trim($("#enTitle"+id).html().replace(/\n/g, ""))).focus();;
+		$("input[name=price]").val($.trim($("#price"+id).html().replace(/\n/g, "")));
 		$("select[name=vendorId]").val($.trim($("#vendorId"+id).html().replace(/\n/g, "")));
 	})
 </script>

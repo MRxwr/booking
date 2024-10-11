@@ -16,7 +16,7 @@ if( isset($_POST["time"]) ){
 		<div class="panel panel-default card-view">
 			<div class="panel-heading">
 				<div class="text-center">
-					<h6 class="panel-title txt-dark"><?php echo direction("Period Details","تفاصيل المدة") ?></h6>
+					<h6 class="panel-title txt-dark"><?php echo direction("Blocked Time Details","تفاصيل الوقت المحظور") ?></h6>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -45,22 +45,31 @@ if( isset($_POST["time"]) ){
 								<label><?php echo direction("End Date","تاريخ النهاية") ?></label>
 								<input type="date" name="endDate" class="form-control" required id="end_date">
 							</div>
-							<?php
-							$times = selectDB("times","`status` = '0' AND `hidden` = '0' ORDER BY `slug` ASC");
-							$slug = "";
-							foreach( $times as $time){
-								if( $slug != $time["slug"] ){
-									echo "<div class='col-md-12 pt-30'>{$time["slug"]}</div>";
-									$slug = $time["slug"];
-								}
-								?>
-								<div class="col-md-2">
-								<input class="form-check-input" name="time[]" type="checkbox" id="time<?php echo $time["id"]; ?>" value="<?php echo $time["id"]; ?>">
-								<label class="form-check-label" for="inlineCheckbox1"><?php echo $time["time"]; ?></label>
-								</div>
-								<?php
-							}
-							?>
+							
+							<div class="col-md-4">
+								<label><?php echo direction("From Time","من وقت") ?></label>
+								<select name="fromTime" class="form-control" required>
+									<?php
+									$values = ["00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00","24:00"];
+									for( $i = 0; $i < sizeof($values); $i++){
+										echo "<option value='{$values[$i]}'>{$values[$i]}</option>";
+									}
+									?>
+								</select>
+							</div>
+
+							<div class="col-md-4">
+								<label><?php echo direction("To Time","إلى وقت") ?></label>
+								<select name="toTime" class="form-control" required>
+									<?php
+									$values = ["00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00","24:00"];
+									for( $i = 0; $i < sizeof($values); $i++){
+										echo "<option value='{$values[$i]}'>{$values[$i]}</option>";
+									}
+									?>
+								</select>
+							</div>
+
 							<div class="col-md-12" style="margin-top:10px">
 								<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
 							</div>
@@ -90,7 +99,8 @@ if( isset($_POST["time"]) ){
 									<th><?php echo direction("Vendor","البائع") ?></th>
 									<th><?php echo direction("Start Date","تاريخ البداية") ?></th>
 									<th><?php echo direction("End Date","تاريخ النهاية") ?></th>
-									<th><?php echo direction("Time","الوقت") ?></th>
+									<th><?php echo direction("From Time","من الوقت") ?></th>
+									<th><?php echo direction("To Time","الي الوقت") ?></th>
 									<th class="text-nowrap"><?php echo direction("الخيارات","Actions") ?></th>
 									</tr>
 								</thead>
@@ -100,28 +110,19 @@ if( isset($_POST["time"]) ){
 										for( $i = 0; $i < sizeof($periods); $i++ ){
 											$vendor = selectDB("vendors","`id` = '{$periods[$i]["vendorId"]}'");
 											$vendor = direction($vendor[0]["enTitle"],$vendor[0]["arTitle"]);
-											$times = selectDB("times","`id` = '{$periods[$i]["time"]}'");
 									?>
 									<tr>
 									<td ><?php echo str_pad(($counter = $i + 1),4,"0",STR_PAD_LEFT) ?></td>
 									<td ><?php echo $vendor ?></td>
-										<td id="startDate<?php echo $periods[$i]["id"]?>" >
-											<?php echo $periods[$i]["startDate"] ?>
-										</td>
-										<td id="endDate<?php echo $periods[$i]["id"]?>" >
-											<?php echo $periods[$i]["endDate"] ?>
-										</td>
-										<td id="time<?php echo $periods[$i]["id"]?>" >
-											<?php echo $times[0]["time"] ?>
-										</td>
+										<td ><?php echo $periods[$i]["startDate"] ?></td>
+										<td ><?php echo $periods[$i]["endDate"] ?></td>
+										<td ><?php echo $periods[$i]["fromTime"] ?></td>
+										<td ><?php echo $periods[$i]["toTime"] ?></td>
 										<td class="text-nowrap">
 											<a href="<?php echo "?{$_SERVER["QUERY_STRING"]}" ?>&delId=<?php echo $periods[$i]["id"] ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف") ?>">
 												<i class="fa fa-close text-danger"></i>
 											</a>
 										</td>
-										<div style="display: none">
-											<label id="vendorId<?php echo $branch[$i]["id"]?>"><?php echo $branch[$i]["vendorId"] ?></label>
-										</div>
 									</tr>
 									<?php
 										}

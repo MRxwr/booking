@@ -70,7 +70,7 @@
 			return branch.id == selectedBranch;
 		});
 		var filteredServices = services.filter(function(service){
-			return selectedBranchData.services.includes(service.id);
+			return selectedBranchData.services.includes(service.id) || selectedBranchData.services.length === 0;
 		});
 		
 		// Clear the services container

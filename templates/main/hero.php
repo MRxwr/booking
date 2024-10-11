@@ -2,7 +2,7 @@
 	<div class="col-12 p-0 d-block d-md-none">
 		<div class="heroBg">
 			<div class="heroLogoBg">
-			<img src="https://i.imgur.com/mV7NHBf.gif" class="heroLogo">
+			<img src="<?php echo "logos/{$vendor["logo"]}" ?>" class="heroLogo">
 			</div>
 		</div>
 	</div>

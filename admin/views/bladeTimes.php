@@ -40,7 +40,7 @@
 							</div>
 	
 							<div class="col-md-4">
-								<label><?php echo direction("Start Time","وقت البدء") ?></label>
+								<label><?php echo direction("Open Time","وقت البدء") ?></label>
 								<select name="startTime" class="form-control" required>
 									<?php
 									$values = ["00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00","24:00"];
@@ -91,9 +91,9 @@
 									<tr>
 									<th>#</th>
 									<th><?php echo direction("Vendor","البائع") ?></th>
-									<th><?php echo direction("Admin Slug","الإسم التعريفي") ?></th>
-									<th><?php echo direction("Time","الوقت") ?></th>
-									<th><?php echo direction("Seats","المقاعد") ?></th>
+									<th><?php echo direction("Day","اليوم") ?></th>
+									<th><?php echo direction("Open Time","وقت البدء") ?></th>
+									<th><?php echo direction("Close Time","وقت الاغلاق") ?></th>
 									<th class="text-nowrap"><?php echo direction("الخيارات","Actions") ?></th>
 									</tr>
 								</thead>
@@ -111,12 +111,16 @@
 												$icon = "fa fa-lock";
 												$link = "?{$_SERVER["QUERY_STRING"]}&hide={$service[$i]["id"]}";
 												$hide = direction("Lock","قفل");
-											}			
+											}
+											$values = ["0","1","2","3","4","5","6"];
+											$enDaysArray = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+											$arDaysArray = ["الأحد","الأثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"];	
+											$day = direction($enDaysArray[$service[$i]["day"]],$arDaysArray[$service[$i]["day"]]);
 									?>
 									<tr>
 										<td ><?php echo str_pad(($counter = $i + 1),4,"0",STR_PAD_LEFT) ?></td>
 										<td ><?php echo $vendor ?></td>
-										<td ><?php echo $service[$i]["day"] ?></td>
+										<td ><?php echo $day ?></td>
 										<td ><?php echo $service[$i]["startTime"] ?></td>
 										<td ><?php echo $service[$i]["closeTime"] ?></td>
 										<td class="text-nowrap">

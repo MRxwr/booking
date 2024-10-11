@@ -154,7 +154,7 @@
 		date: $("input[name='date']").val(),
 		branchId: $("input[name='branchId']").val(),
 		serviceId: $("input[name='serviceId']").val(),
-		vendorId: vendor["id"]
+		vendorId: <?php echo $vendor["id"] ?>
 	  }
 	}).done(function(data){
 		console.log(data);

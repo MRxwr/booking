@@ -32,6 +32,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             $blockedTimeArray = [];
             for( $i = $blockedTimeStart; $i < $blockedTimeClose; $i++ ){
                 $blockedTimeArray[] = $blockedTimeStart;
+                (int)$blockedTimeStart++;
             }
         }
         for( $i = $start; $i < $close; $i++ ){

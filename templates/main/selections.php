@@ -161,7 +161,8 @@
 	  }).concat(blockedPeriodsForBranch.map(function(period) {
 		return [new Date(period.startDate), new Date(period.endDate)];
 	  }));
-	  
+	  console.log(disabledDates);
+
 	  flatpickrInstance.set('disabled', disabledDates);
 	}
 

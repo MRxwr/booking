@@ -69,8 +69,8 @@
 								</thead>
 								<tbody>
 									<?php 
-									var_dump(selectDB("{$_GET["v"]}","`status` = '0' ORDER BY `order` ASC"));
-									if( $pages = selectDB("{$_GET["v"]}","`status` = '0' ORDER BY `order` ASC") ){
+									var_dump(selectDB("{$table}","`status` = '0' ORDER BY `order` ASC"));
+									if( $pages = selectDB("{$table}","`status` = '0' ORDER BY `order` ASC") ){
 										for( $i = 0; $i < sizeof($pages); $i++ ){
 											if ( $pages[$i]["hidden"] == 1 ){
 												$icon = "fa fa-unlock";

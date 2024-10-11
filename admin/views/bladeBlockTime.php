@@ -37,16 +37,16 @@ if( isset($_POST["time"]) ){
 								</select>
 							</div>
 
-							<div class="col-md-6">
+							<div class="col-md-3">
 								<label><?php echo direction("Start Date","تاريخ البداية") ?></label>
 								<input type="date" name="startDate" class="form-control" required id="start_date">
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-3">
 								<label><?php echo direction("End Date","تاريخ النهاية") ?></label>
 								<input type="date" name="endDate" class="form-control" required id="end_date">
 							</div>
 							
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<label><?php echo direction("From Time","من وقت") ?></label>
 								<select name="fromTime" class="form-control" required>
 									<?php
@@ -58,7 +58,7 @@ if( isset($_POST["time"]) ){
 								</select>
 							</div>
 
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<label><?php echo direction("To Time","إلى وقت") ?></label>
 								<select name="toTime" class="form-control" required>
 									<?php

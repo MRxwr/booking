@@ -129,13 +129,14 @@
 											<a href="<?php echo "?{$_SERVER["QUERY_STRING"]}" ?>&delId=<?php echo $service[$i]["id"] ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف") ?>">
 												<i class="fa fa-close text-danger"></i>
 											</a>
+											<div style="display: none">
+												<label id="vendorId<?php echo $service[$i]["id"]?>"><?php echo $branch[$i]["vendorId"] ?></label>
+												<label id="day<?php echo $service[$i]["id"]?>"><?php echo $branch[$i]["day"] ?></label>
+												<label id="startTime<?php echo $service[$i]["id"]?>"><?php echo $branch[$i]["startTime"] ?></label>
+												<label id="closeTime<?php echo $service[$i]["id"]?>"><?php echo $branch[$i]["closeTime"] ?></label>
+											</div>
 										</td>
-										<div style="display: none">
-											<label id="vendorId<?php echo $service[$i]["id"]?>"><?php echo $branch[$i]["vendorId"] ?></label>
-											<label id="day<?php echo $service[$i]["id"]?>"><?php echo $branch[$i]["day"] ?></label>
-											<label id="startTime<?php echo $service[$i]["id"]?>"><?php echo $branch[$i]["startTime"] ?></label>
-											<label id="closeTime<?php echo $service[$i]["id"]?>"><?php echo $branch[$i]["closeTime"] ?></label>
-										</div>
+										
 									</tr>
 									<?php
 										}

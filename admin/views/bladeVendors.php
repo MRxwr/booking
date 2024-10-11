@@ -219,6 +219,7 @@
 		$("textarea[name=enTerms]").val($.trim($("#enTerms"+id).html().replace(/\n/g, "")));
 		$("textarea[name=arTerms]").val($.trim($("#arTerms"+id).html().replace(/\n/g, "")));
 		$("input[name=name]").val($.trim($("#name"+id).html().replace(/\n/g, "")));
+		$("input[name=username]").val($.trim($("#username"+id).html().replace(/\n/g, "")));
 		$("input[name=mobile]").val($.trim($("#mobile"+id).html().replace(/\n/g, "")));
 		$("input[name=email]").val($.trim($("#email"+id).html().replace(/\n/g, "")));
 		$("input[name=url]").val($.trim($("#url"+id).html().replace(/\n/g, "")));

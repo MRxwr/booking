@@ -1,5 +1,5 @@
 <?php
-if ( $services = selectDB("services","`status` = '0' AND `hidden` = '0' ORDER BY `slug` ASC") ){
+if ( $services = selectDB("services","`status` = '0' AND `hidden` = '0' ORDER BY `id` ASC") ){
 	$branch = selectDB("branches","`id` = '{$_POST["id"]}'");
 	?>
 	<div class="form-group">

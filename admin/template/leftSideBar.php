@@ -1,5 +1,5 @@
 <div class="fixed-sidebar-left">
-	<ul class="nav navbar-nav side-nav nicescroll-bar" style="">
+	<ul class="nav navbar-nav side-nav nicescroll-bar">
 		<li class="navigation-header">
 			<span><?php echo direction("Dashboard","لوحة التحكم")?></span> 
 			<i class="zmdi zmdi-more"></i>

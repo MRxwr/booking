@@ -39,7 +39,7 @@
 			</select>
 			</div>
 			
-			<div class="col-md-6" style="margin-top:10px">
+			<div class="col-md-12" style="margin-top:10px">
 			<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
 			<input type="hidden" name="update" value="0">
 			</div>

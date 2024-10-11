@@ -31,7 +31,7 @@
 <div class="row m-0 w-100">
 	<div class="col-md-6">
 		<label><?php echo direction("Date","التاريخ") ?></label>
-		<input type="date" name="date" class="form-control">
+		<input type="date" name="date" data-disable-mobile="true" class="form-control">
 	</div>
 	<div class="col-md-6">
 		<label><?php echo direction("Time","الوقت") ?></label>

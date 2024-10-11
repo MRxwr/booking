@@ -180,18 +180,19 @@
 												<i class="fa fa-close text-danger"></i>
 											</a>
 										</td>
+										<div style="display:none">
+											<label id="type<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["type"] ?></label>
+											<label id="username<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["username"] ?></label>
+											<label id="enTitle<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["enTitle"] ?></label>
+											<label id="arTitle<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["arTitle"] ?></label>
+											<label id="enDetails<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["enDetails"] ?></label>
+											<label id="arDetails<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["arDetails"] ?></label>
+											<label id="enTerms<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["enTerms"] ?></label>
+											<label id="arTerms<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["arTerms"] ?></label>
+											<label id="logo<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["logo"] ?></label>
+											<label id="coverImg<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["coverImg"] ?></label>
+										</div>
 									</tr>
-									<div style="display:none">
-										<label id="type<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["type"] ?></label>
-										<label id="enTitle<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["enTitle"] ?></label>
-										<label id="arTitle<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["arTitle"] ?></label>
-										<label id="enDetails<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["enDetails"] ?></label>
-										<label id="arDetails<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["arDetails"] ?></label>
-										<label id="enTerms<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["enTerms"] ?></label>
-										<label id="arTerms<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["arTerms"] ?></label>
-										<label id="logo<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["logo"] ?></label>
-										<label id="coverImg<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["coverImg"] ?></label>
-									</div>
 									<?php
 										}
 									}

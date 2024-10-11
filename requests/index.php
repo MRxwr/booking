@@ -17,7 +17,7 @@ if( isset($_GET["lang"]) && !empty($_GET["lang"]) ){
 }
 
 if ( isset(getallheaders()["Authorization"]) && !empty(getallheaders()["Authorization"])){
-	if( $checkToken = selectDBNew("tokens",[getallheaders()["Authorization"]],"`token` LIKE ?","") ){
+	if( $checkToken = selectDBNew("tokens",[getallheaders()["Authorization"],$_SESSION["deviceId"]],"`token` LIKE ? AND `deviceId` LIKE ?","") ){
 		$token = $checkToken[0]["token"];
 	}else{
 		echo outputError(array("msg"=>"Invalid Authorization Token"));die();

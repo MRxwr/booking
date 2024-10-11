@@ -31,10 +31,10 @@ function deleteDB($table, $where){
 }
 
 function selectDBNew($table, $placeHolders, $where, $order){
-    GLOBAL $dbconnect;
+    GLOBAL $dbconnect,$dbPrefix;
     $check = [';', '"'];
     $where = str_replace($check, "", $where);
-    $sql = "SELECT * FROM `{$table}`";
+    $sql = "SELECT * FROM `{$dbPrefix}{$table}`";
     if(!empty($where)) {
         $sql .= " WHERE {$where}";
     }

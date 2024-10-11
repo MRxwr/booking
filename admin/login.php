@@ -3,7 +3,7 @@ require ("includes/config.php");
 require ("includes/functions.php");
 
 if( isset($_POST["email"]) && !empty($_POST["email"]) ){
-  var_dump($_POST);die();
+  var_dump(selectDBNew("employees",[$_POST["email"],sha1($_POST["password"])],"`email` LIKE ? AND `password` LIKE ? AND `hidden` != '2' AND `status` = '0'",""));die();
   if( $login = selectDBNew("employees",[$_POST["email"],sha1($_POST["password"])],"`email` LIKE ? AND `password` LIKE ? AND `hidden` != '2' AND `status` = '0'","") ){
     $GenerateNewCC = md5(rand());
     if( updateDB("employees",array("keepMeAlive"=>$GenerateNewCC),"`id` = '{$login[0]["id"]}'") ){

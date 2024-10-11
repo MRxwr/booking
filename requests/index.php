@@ -15,7 +15,7 @@ if( isset($_GET["lang"]) && !empty($_GET["lang"]) ){
 }else{
 	$requestLang = "en";
 }
-
+/*
 if ( isset(getallheaders()["Authorization"]) && !empty(getallheaders()["Authorization"])){
 	if( $checkToken = selectDBNew("tokens",[str_replace("Bearer ","",getallheaders()["Authorization"]),$_SESSION["deviceId"]],"`token` LIKE ? AND `deviceId` LIKE ?","") ){
 		$token = $checkToken[0]["token"];
@@ -26,7 +26,7 @@ if ( isset(getallheaders()["Authorization"]) && !empty(getallheaders()["Authoriz
 	$error = array("msg"=>"Please Set Authorization Token");
 	echo outputError($error);die();
 }
-
+*/
 // get viewed page from pages folder \\
 if( isset($_GET["a"]) && searchFile("views","api{$_GET["a"]}.php") ){
 	require_once("views/".searchFile("views","api{$_GET["a"]}.php"));

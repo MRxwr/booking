@@ -138,42 +138,32 @@
 	});
 
 	function updateDatePicker(branchId) {
-		// Find the allowed booking period for the selected branch
-		var allowedPeriod = allowedBookingPeriod.find(function(period) {
-			return period.branchId === branchId;
-		});
-
-		// Find the blocked days for the selected branch
-		var blockedDaysForBranch = blockedDays.filter(function(day) {
-			return day.branchId === branchId;
-		});
-
-		// Find the blocked periods for the selected branch
-		var blockedPeriodsForBranch = blockedPeriods.filter(function(period) {
-			return period.branchId === branchId;
-		});
-
-		// Update the date picker with the new allowed booking period, blocked days, and blocked periods
-		flatpickrInstance.set('minDate', allowedPeriod.startDate);
-		flatpickrInstance.set('maxDate', allowedPeriod.endDate);
-		var disabledRanges = blockedPeriodsForBranch.map(function(period) {
-		  return {
-			from: new Date(period.startDate).toISOString().split('T')[0],
-			to: new Date(period.endDate).toISOString().split('T')[0]
-		  };
-		});
-		
-		var blockedDays = blockedDaysForBranch.map(function(day) {
-		  return new Date(day.day).toISOString().split('T')[0];
-		});
-		
-		var disabledDates = blockedDays.concat(disabledRanges.map(function(range) {
-		  return [range.from, range.to];
-		}).flat());
-
-		console.log(disabledDates);
-		
-		flatpickrInstance.set('disable', disabledDates);
+	  // Find the allowed booking period for the selected branch
+	  var allowedPeriod = allowedBookingPeriod.find(function(period) {
+		return period.branchId === branchId;
+	  });
+	
+	  // Find the blocked days for the selected branch
+	  var blockedDaysForBranch = blockedDays.filter(function(day) {
+		return day.branchId === branchId;
+	  });
+	
+	  // Find the blocked periods for the selected branch
+	  var blockedPeriodsForBranch = blockedPeriods.filter(function(period) {
+		return period.branchId === branchId;
+	  });
+	
+	  // Update the date picker with the new allowed booking period, blocked days, and blocked periods
+	  flatpickrInstance.set('minDate', allowedPeriod.startDate);
+	  flatpickrInstance.set('maxDate', allowedPeriod.endDate);
+	  var disabledRanges = blockedPeriodsForBranch.map(function(period) {
+		return {
+		  from: new Date(period.startDate).toISOString().split('T')[0],
+		  to: new Date(period.endDate).toISOString().split('T')[0]
+		};
+	  });
+	  
+	  flatpickrInstance.set('disable', disabledRanges);
 	}
 
 </script>

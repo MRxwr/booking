@@ -69,7 +69,6 @@
 								</thead>
 								<tbody>
 									<?php 
-									var_dump(selectDB("{$table}","`status` = '0' ORDER BY `order` ASC"));
 									if( $pages = selectDB("{$table}","`status` = '0' ORDER BY `order` ASC") ){
 										for( $i = 0; $i < sizeof($pages); $i++ ){
 											if ( $pages[$i]["hidden"] == 1 ){

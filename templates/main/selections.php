@@ -162,10 +162,10 @@
 		serviceId: $("input[name='serviceId']").val(),
 		vendorId: <?php echo $vendor["id"] ?>
 	  }
-	}).done(function(data){
-	  var timeSlots = data;
+	}).done(function(result){
+	  var timeSlots = result;
 	  var timeSlotHTML = "";
-	  console.log(data);
+	  console.log(result);
 	  timeSlots.forEach(function(timeSlot){
 		timeSlotHTML += '<option value="'+timeSlot.data.timeSlot+'">'+timeSlot.data.timeSlot+'</option>';
 	  });

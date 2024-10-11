@@ -89,6 +89,7 @@
 		
 		// Loop through the filtered services and add them to the container
 		filteredServices.forEach(function(service){
+			console.log(service);
 			var serviceHTML = '<div class="col-6 d-flex align-items-center justify-content-center p-2">';
 			serviceHTML += '<div class="w-100 p-3 text-center serviceBLk" id="serv-'+service.id+'"><span>'+service.title+'</span><hr class="m-0"><label style="font-size: 8px;">Duration: '+service.period+' mins</label></div>';
 			serviceHTML += '</div>';

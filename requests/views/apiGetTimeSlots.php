@@ -12,7 +12,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
     $serviceId = $_POST["serviceId"];
     $vendorId = $_POST["vendorId"];
     $date = $_POST["date"];
-    echo $day = date('l', strtotime($date));
+    echo $day = date('l', strtotime($date));die();
     $values = ["0","1","2","3","4","5","6"];
 	$enDaysArray = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     for( $i = 0; $i < sizeof($values); $i++){

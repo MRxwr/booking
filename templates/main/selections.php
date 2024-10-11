@@ -158,12 +158,16 @@
 	  flatpickrInstance.set('maxDate', allowedPeriod.endDate);
 	  var disabledRanges = blockedPeriodsForBranch.map(function(period) {
 		return {
-		  from: new Date(period.startDate).toISOString().split('T')[0],
-		  to: new Date(period.endDate).toISOString().split('T')[0]
+			from: new Date(period.startDate).toISOString().split('T')[0],
+			to: new Date(period.endDate).toISOString().split('T')[0]
 		};
-	  });
-	  
-	  flatpickrInstance.set('disable', disabledRanges);
+		});
+
+		var blockedDays = blockedDaysForBranch.map(function(day) {
+		return new Date(day.day).toISOString().split('T')[0];
+		});
+		console.log(blockedDays);
+		flatpickrInstance.set('disable', disabledRanges.concat(blockedDays));
 	}
 
 </script>

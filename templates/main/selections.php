@@ -100,12 +100,10 @@
 	];
 	// intialze flatpicker
 	var dateInput = document.querySelector("input[name='date']");
-	flatpickr(dateInput, {
-		min: allowedBookingPeriod.startDate,
-		max: allowedBookingPeriod.endDate,
-		disabled: blockedDays.map(function(day){
-			return day.day;
-		})
+	var flatpickrInstance = flatpickr(dateInput, {
+		// Initialize with no dates blocked or enabled
+		disabled: [],
+		enabled: []
 	});
 
 	// Get the branch select element, time select element and the services container
@@ -116,6 +114,7 @@
 	// Add an event listener to the branch select element
 	branchSelect.addEventListener("change", function(){
 		var selectedBranch = this.value;
+		var selectedBranchId = this.value;
 		var selectedBranchData = branches.find(function(branch){
 			return branch.id == selectedBranch;
 		});
@@ -134,45 +133,31 @@
 			servicesContainer.innerHTML += serviceHTML;
 		});
 
-		// Control the input type="date" field
-		var dateInput = document.querySelector("input[name='date']");
-		var allowedBookingPeriod = allowedBookingPeriod.find(function(period){
-			return period.branchId == selectedBranch;
-		});
-		if (allowedBookingPeriod) {
-			dateInput.min = allowedBookingPeriod.startDate;
-			dateInput.max = allowedBookingPeriod.endDate;
-		} else {
-			dateInput.min = '';
-			dateInput.max = '';
-		}
-		// Disable blocked days
-		var blockedDaysForBranch = blockedDays.filter(function(day){
-			return day.branchId == selectedBranch;
-		});
-		var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-		blockedDaysForBranch.forEach(function(day){
-			var dayOfWeek = daysOfWeek[new Date(day.day).getDay()];
-			dateInput.disabledDays = dateInput.disabledDays || [];
-			dateInput.disabledDays.push(dayOfWeek);
-		});
-
-		// Block specific periods
-		var blockedPeriodsForBranch = blockedPeriods.filter(function(period){
-			return period.branchId == selectedBranch;
-		});
-		blockedPeriodsForBranch.forEach(function(period){
-			var startDate = new Date(period.startDate);
-			var endDate = new Date(period.endDate);
-			var datesToBlock = [];
-			while (startDate <= endDate) {
-				datesToBlock.push(startDate.toISOString().split('T')[0]);
-				startDate.setDate(startDate.getDate() + 1);
-			}
-			dateInput.disabledDates = dateInput.disabledDates || [];
-			dateInput.disabledDates.push(...datesToBlock);
-		});
+		updateDatePicker(selectedBranchId);
 
 	});
+
+	// Function to update the date picker based on the selected branch
+	function updateDatePicker(branchId) {
+		// Find the branch object with the matching ID
+		var branch = branches.find(function(branch) {
+			return branch.id === branchId;
+		});
+
+		// If no branch is found, return
+		if (!branch) return;
+
+		// Get the blocked and enabled dates for the branch
+		var blockedDates = branch.blockedDates.map(function(date) {
+			return date;
+		});
+		var enabledDates = branch.enabledDates.map(function(date) {
+			return date;
+		});
+
+		// Update the date picker with the new blocked and enabled dates
+		flatpickrInstance.set('disabled', blockedDates);
+		flatpickrInstance.set('enabled', enabledDates);
+	}
 
 </script>

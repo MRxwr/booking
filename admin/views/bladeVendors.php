@@ -224,8 +224,8 @@
 		$("input[name=email]").val($.trim($("#email"+id).html().replace(/\n/g, "")));
 		$("input[name=url]").val($.trim($("#url"+id).html().replace(/\n/g, "")));
 		$("input[name=total]").val($.trim($("#total"+id).html().replace(/\n/g, "")));
-		$("img[name=logo]").attr("src","../logos/"+$("#logo"+id).html());
-		$("img[name=coverImg]").attr("src","../logos/"+$("#coverImg"+id).html());
+		$("img[id=logo]").attr("src","../logos/"+$("#logo"+id).html());
+		$("img[id=coverImg]").attr("src","../logos/"+$("#coverImg"+id).html());
 		$("#images").attr("style","margin-top:10px;display:block");
 	})
 </script>

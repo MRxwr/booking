@@ -16,7 +16,7 @@ if( isset($_GET["updateTimes"]) || isset($_GET["updateServices"]) ){
 	updateDB("branches",array("{$column}"=> json_encode($array)),"`id` = '{$id}'");
 	?>
 	<script>
-		window.location.replace("<?php echo "?p={$_GET["p"]}" ?>");
+		window.location.replace("<?php echo "?v={$_GET["v"]}" ?>");
 	</script>
 	<?php
 }

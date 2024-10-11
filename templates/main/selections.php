@@ -21,7 +21,7 @@
 	</div>
 	<div class="col-12 p-3">
 		<div class="row m-0" id="services-container">
-			<div class="col d-flex align-items-center justify-content-center serviceBLk mx-2 mb-2 p-3">;
+			<div class="col d-flex align-items-center justify-content-center serviceBLk mx-2 mb-2 p-3">
 				<span><?php echo direction("No Services	Available","لا يوجد خدمات متاحة"); ?></span>
 			</div>
 		</div>
@@ -89,8 +89,8 @@
 		
 		// Loop through the filtered services and add them to the container
 		filteredServices.forEach(function(service){
-			var serviceHTML = '<div class="col d-flex align-items-center justify-content-center serviceBLk mx-2 mb-2 p-3" id="serv-'+service.id+'">';
-			serviceHTML += '<span>'+service.title+'</span>';
+			var serviceHTML = '<div class="col-6 d-flex align-items-center justify-content-center p-2">';
+			serviceHTML += '<div class="serviceBLk" id="serv-'+service.id+'"><span>'+service.title+'</span></div>';
 			serviceHTML += '</div>';
 			servicesContainer.innerHTML += serviceHTML;
 		});

@@ -24,7 +24,7 @@
 								</select>
 							</div>
 
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<label><?php echo direction("Select a day","إختر يوم") ?></label>
 								<select name="day" class="form-control" required>
 								<?php 

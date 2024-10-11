@@ -36,8 +36,8 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             }
         }
         for( $i = $start; $i < $close; $i++ ){
-            if( !in_array($start, $blockedTimeArray) ){
-                $response["timeSlots"][] = $blockedTimeArray;//($start) . ":00 - " . ((int)($start)+1) . ":00";
+            if( !in_array((int)$start, $blockedTimeArray) ){
+                $response["timeSlots"][] = ($start) . ":00 - " . ((int)($start)+1) . ":00";
                 (int)$start++;
             }
         }

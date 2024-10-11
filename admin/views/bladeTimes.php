@@ -24,19 +24,43 @@
 								</select>
 							</div>
 
-							<div class="col-md-4">
-								<label><?php echo direction("Admin Slug","الإسم التعريفي") ?></label>
-								<input type="text" name="slug" class="form-control" required>
+							<div class="col-md-6">
+								<label><?php echo direction("Select a day","إختر يوم") ?></label>
+								<select name="day" class="form-control" required>
+								<?php 
+								$values = ["0","1","2","3","4","5","6"];
+								$enDaysArray = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+								$arDaysArray = ["الأحد","الأثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"];
+								for( $i = 0; $i < sizeof($values); $i++){
+									$day = direction($enDaysArray[$i],$arDaysArray[$i]);
+									echo "<option value='{$values[$i]}'>{$day}</option>";
+								}
+								?>
+								</select>
 							</div>
-						
+	
 							<div class="col-md-4">
-								<label><?php echo direction("Time","الوقت") ?></label>
-								<input type="time" name="time" class="form-control" required>
+								<label><?php echo direction("Start Time","وقت البدء") ?></label>
+								<select name="startTime" class="form-control" required>
+									<?php
+									$values = ["00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00","24:00"];
+									for( $i = 0; $i < sizeof($values); $i++){
+										echo "<option value='{$values[$i]}'>{$values[$i]}</option>";
+									}
+									?>
+								</select>
 							</div>
 
 							<div class="col-md-4">
-								<label><?php echo direction("Seats","المقاعد") ?></label>
-								<input type="number" name="seats" class="form-control" required>
+								<label><?php echo direction("Close Time","وقت الاغلاق") ?></label>
+								<select name="closeTime" class="form-control" required>
+									<?php
+									$values = ["00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00","24:00"];
+									for( $i = 0; $i < sizeof($values); $i++){
+										echo "<option value='{$values[$i]}'>{$values[$i]}</option>";
+									}
+									?>
+								</select>
 							</div>
 
 							<div class="col-md-12" style="margin-top:10px">
@@ -90,17 +114,11 @@
 											}			
 									?>
 									<tr>
-									<td ><?php echo str_pad(($counter = $i + 1),4,"0",STR_PAD_LEFT) ?></td>
-									<td ><?php echo $vendor ?></td>
-										<td id="slug<?php echo $service[$i]["id"]?>" >
-											<?php echo $service[$i]["slug"] ?>
-										</td>
-										<td id="time<?php echo $service[$i]["id"]?>" >
-											<?php echo $service[$i]["time"] ?>
-										</td>
-										<td id="seats<?php echo $service[$i]["id"]?>" >
-											<?php echo $service[$i]["seats"] ?>
-										</td>
+										<td ><?php echo str_pad(($counter = $i + 1),4,"0",STR_PAD_LEFT) ?></td>
+										<td ><?php echo $vendor ?></td>
+										<td ><?php echo $service[$i]["day"] ?></td>
+										<td ><?php echo $service[$i]["startTime"] ?></td>
+										<td ><?php echo $service[$i]["closeTime"] ?></td>
 										<td class="text-nowrap">
 											<a id="<?php echo $service[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل") ?>">
 												<i class="fa fa-pencil text-inverse m-r-10"></i>
@@ -114,6 +132,9 @@
 										</td>
 										<div style="display: none">
 											<label id="vendorId<?php echo $branch[$i]["id"]?>"><?php echo $branch[$i]["vendorId"] ?></label>
+											<label id="day<?php echo $branch[$i]["id"]?>"><?php echo $branch[$i]["day"] ?></label>
+											<label id="startTime<?php echo $branch[$i]["id"]?>"><?php echo $branch[$i]["startTime"] ?></label>
+											<label id="closeTime<?php echo $branch[$i]["id"]?>"><?php echo $branch[$i]["closeTime"] ?></label>
 										</div>
 									</tr>
 									<?php
@@ -134,12 +155,9 @@
 	$(document).on("click",".edit", function(){
 		var id = $(this).attr("id");
 		$("input[name=update]").val(id);
-		var time = $("#time"+id).html();
-		var seats = $("#seats"+id).html();
-		var slug = $("#slug"+id).html();
-		$("input[name=time]").val($.trim(time.replace(/\n/g, "")));
-		$("input[name=seats]").val($.trim(seats.replace(/\n/g, "")));
-		$("input[name=slug]").val($.trim(slug.replace(/\n/g, ""))).focus();
+		$("select[name=day]").val($.trim($("#day"+id).html().replace(/\n/g, "")));
+		$("select[name=startTime]").val($.trim($("#startTime"+id).html().replace(/\n/g, "")));
+		$("select[name=closeTime]").val($.trim($("#closeTime"+id).html().replace(/\n/g, "")));
 		$("select[name=vendorId]").val($.trim($("#vendorId"+id).html().replace(/\n/g, "")));
 	})
 </script>

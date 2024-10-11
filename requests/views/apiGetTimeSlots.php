@@ -54,10 +54,10 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                 $branchTotalSeats = '1';
             }
             
+            $counter = (int)($start);
             for( $i = $start; $i < $close; $i++ ){
-                $counter = (int)($start);
-                if( $branchTotalSeats == count(array_intersect($bookedTimes,[$start])) || $ServiceTotalSeats == count(array_intersect($bookedTimes,[$start])) ){
-                    $blockedTimeBookings[] = $start;
+                if( $branchTotalSeats == count(array_intersect($bookedTimes,[$counter])) ){
+                    $blockedTimeBookings[] = $counter;
                 }
                 $counter++;
             }
@@ -75,10 +75,10 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                 $ServiceTotalSeats = '1';
             }
             
+            $counter = (int)($start);
             for( $i = $start; $i < $close; $i++ ){
-                $counter = (int)($start);
-                if( $ServiceTotalSeats == count(array_intersect($bookedService,[$start])) ){
-                    $blockedTimeBookings[] = $start;
+                if( $ServiceTotalSeats == count(array_intersect($bookedService,[$counter])) ){
+                    $blockedTimeBookings[] = $counter;
                 }
                 $counter++;
             }

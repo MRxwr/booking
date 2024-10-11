@@ -40,7 +40,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                 }
             }
         }
-
+/*
         //booking blocking number of seats per hour
         if( $booking = selectDB("bookings","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '{$serviceId}' AND `bookedDate` = '{$date}'") ){
             foreach( $booking as $book ){
@@ -59,6 +59,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                 (int)$start++;
             }
         }
+            */
         for( $i = $start; $i < $close; $i++ ){
             if( !in_array((int)$start, $blockedTimeVendor) && !in_array((int)$start, $blockedTimeBookings) ){
                 $response["timeSlots"][] = ($start) . ":00 - " . ((int)($start)+1) . ":00";

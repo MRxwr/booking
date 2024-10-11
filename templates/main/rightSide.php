@@ -2,7 +2,7 @@
 	<div class="rightBg"></div>
 	<div class="bgOver"></div>
 	<div class="logoBg">
-	<img src="https://i.imgur.com/mV7NHBf.gif" class="logo">
+	<img src="logos/<?php echo $vendor["logo"] ?>" class="logo">
 	</div>
 	<img src="https://i.imgur.com/BW29zDw.jpg" class="poweredByRight">
 </div>

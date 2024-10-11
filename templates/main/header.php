@@ -4,7 +4,7 @@
 			Lang
 		</div>
 		<div class="col-10 d-flex align-items-center justify-content-center">
-			Dar ALmohamah
+			<?php echo direction($vendor["enTitle"],$vendor["arTitle"]) ?>
 		</div>
 	</div>
 </div>

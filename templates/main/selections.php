@@ -167,7 +167,7 @@
 	  var timeSlotHTML = "";
 	  console.log(result);
 	  timeSlots.forEach(function(timeSlot){
-		timeSlotHTML += '<option value="'+timeSlot.data.timeSlot+'">'+timeSlot.data.timeSlot+'</option>';
+		timeSlotHTML += '<option value="'+timeSlot+'">'+timeSlot+'</option>';
 	  });
 	  timeSelect.innerHTML = timeSlotHTML;
 	}).fail(function(){

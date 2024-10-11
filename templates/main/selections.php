@@ -48,126 +48,137 @@
 </div>
 
 <script>
-	// Store services data in a JavaScript object
-	var services = [
-		<?php
-		$services = selectDB("services","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
-		foreach($services as $service){
-			echo "{ id: '".$service["id"]."',period: '".$service["period"]."', title: '".direction($service["enTitle"],$service["arTitle"])."'},"; 
-		}
-		?>
-	];
-
-	// Store branches data in a JavaScript object
-	var branches = [
-		<?php
-		$branches = selectDB("branches","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
-		foreach( $branches as $branch ){
-			$branchServices = json_decode($branch["services"]);
-			echo "{ id: '".$branch["id"]."', services: ".json_encode($branchServices)."},";
-		}
-		?>
-	];
-
-	//calendar allowed booking period
-	var allowedBookingPeriod = [
-		<?php
-		$calendars = selectDB("calendar","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
-		foreach( $calendars as $calendar ){
-			echo "{ id: '".$calendar["id"]."', branchId: '".$calendar["branchId"]."', startDate: '".$calendar["startDate"]."', endDate: '".$calendar["endDate"]."'},";
-		}
-		?>
-	];
-
-	//blocked days in calendar
-	var blockedDays = [
-		<?php
-		$blockedDaysBranches = selectDB("blockday","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
-		foreach( $blockedDaysBranches as $blockedDaysBranche ){
-			echo "{ id: '".$blockedDaysBranche["id"]."', branchId: '".$blockedDaysBranche["branchId"]."', day: '".$blockedDaysBranche["day"]."'},";
-		}
-		?>
-	];
-
-	//blocked date periods in calendar
-	var blockedPeriods = [
-		<?php
-		$blockedPeriodsBranches = selectDB("blockdate","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
-		foreach( $blockedPeriodsBranches as $blockedPeriodsBranche ){
-			echo "{ id: '".$blockedPeriodsBranche["id"]."', branchId: '".$blockedPeriodsBranche["branchId"]."', startDate: '".$blockedPeriodsBranche["startDate"]."', endDate: '".$blockedPeriodsBranche["endDate"]."'},";
-		}
-		?>
-	];
-	// intialze flatpicker
-	var dateInput = document.querySelector("input[name='date']");
-	var flatpickrInstance = flatpickr(dateInput, {
-		// Initialize with no dates blocked or enabled
-		disabled: [],
-		enabled: []
-	});
-
-	// Get the branch select element, time select element and the services container
-	var branchSelect = document.getElementById("branch-select");
-	var timeSelect = document.getElementById("time-select");
-	var servicesContainer = document.getElementById("services-container");
-
-	// Add an event listener to the branch select element
-	branchSelect.addEventListener("change", function(){
-		var selectedBranch = this.value;
-		var selectedBranchId = this.value;
-		var selectedBranchData = branches.find(function(branch){
-			return branch.id == selectedBranch;
-		});
-		var filteredServices = services.filter(function(service){
-			return selectedBranchData.services.includes(service.id) || selectedBranchData.services.length === 0;
-		});
-		
-		// Clear the services container
-		servicesContainer.innerHTML = "";
-		
-		// Loop through the filtered services and add them to the container
-		filteredServices.forEach(function(service){
-			var serviceHTML = '<div class="col-6 d-flex align-items-center justify-content-center p-2">';
-			serviceHTML += '<div class="w-100 p-3 text-center serviceBLk" id="serv-'+service.id+'"><span>'+service.title+'</span><hr class="m-0"><label style="font-size: 8px;">Duration: '+service.period+' mins</label></div>';
-			serviceHTML += '</div>';
-			servicesContainer.innerHTML += serviceHTML;
-		});
-
-		updateDatePicker(selectedBranchId);
-
-	});
-
-	function updateDatePicker(branchId) {
-	  // Find the allowed booking period for the selected branch
-	  var allowedPeriod = allowedBookingPeriod.find(function(period) {
-		return period.branchId === branchId;
-	  });
-	
-	  // Find the blocked days for the selected branch
-	  var blockedDaysForBranch = blockedDays.filter(function(day) {
-		return day.branchId === branchId;
-	  });
-	
-	  // Find the blocked periods for the selected branch
-	  var blockedPeriodsForBranch = blockedPeriods.filter(function(period) {
-		return period.branchId === branchId;
-	  });
-	
-	  // Update the date picker with the new allowed booking period, blocked days, and blocked periods
-	  flatpickrInstance.set('minDate', allowedPeriod.startDate);
-	  flatpickrInstance.set('maxDate', allowedPeriod.endDate);
-	  var disabledRanges = blockedPeriodsForBranch.map(function(period) {
-		return {
-			from: new Date(period.startDate).toISOString().split('T')[0],
-			to: new Date(period.endDate).toISOString().split('T')[0]
-		};
-		});
-
-		var blockedDays = blockedDaysForBranch.map(function(day) {
-		return new Date(day.day).toISOString().split('T')[0];
-		});
-		console.log(blockedDays);
-		flatpickrInstance.set('disable', disabledRanges.concat(blockedDays));
+  // Store services data in a JavaScript object
+  var services = [
+	<?php
+	$services = selectDB("services","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
+	foreach($services as $service){
+	  echo "{ id: '".$service["id"]."',period: '".$service["period"]."', title: '".direction($service["enTitle"],$service["arTitle"])."'},"; 
 	}
+	?>
+  ];
 
+
+  // Store branches data in a JavaScript object
+  var branches = [
+	<?php
+	$branches = selectDB("branches","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
+	foreach( $branches as $branch ){
+	  $branchServices = json_decode($branch["services"]);
+	  echo "{ id: '".$branch["id"]."', services: ".json_encode($branchServices)."},";
+	}
+	?>
+  ];
+
+
+  //calendar allowed booking period
+  var allowedBookingPeriod = [
+	<?php
+	$calendars = selectDB("calendar","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
+	foreach( $calendars as $calendar ){
+	  echo "{ id: '".$calendar["id"]."', branchId: '".$calendar["branchId"]."', startDate: '".$calendar["startDate"]."', endDate: '".$calendar["endDate"]."'},";
+	}
+	?>
+  ];
+
+
+  //blocked days in calendar
+  var blockedDays = [
+	<?php
+	$blockedDaysBranches = selectDB("blockday","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
+	foreach( $blockedDaysBranches as $blockedDaysBranche ){
+	  echo "{ id: '".$blockedDaysBranche["id"]."', branchId: '".$blockedDaysBranche["branchId"]."', day: '".$blockedDaysBranche["day"]."'},";
+	}
+	?>
+  ];
+
+
+  //blocked date periods in calendar
+  var blockedPeriods = [
+	<?php
+	$blockedPeriodsBranches = selectDB("blockdate","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
+	foreach( $blockedPeriodsBranches as $blockedPeriodsBranche ){
+	  echo "{ id: '".$blockedPeriodsBranche["id"]."', branchId: '".$blockedPeriodsBranche["branchId"]."', startDate: '".$blockedPeriodsBranche["startDate"]."', endDate: '".$blockedPeriodsBranche["endDate"]."'},";
+	}
+	?>
+  ];
+  // intialze flatpicker
+  var dateInput = document.querySelector("input[name='date']");
+  var flatpickrInstance = flatpickr(dateInput, {
+	// Initialize with no dates blocked or enabled
+	disabled: [],
+	enabled: []
+  });
+
+
+  // Get the branch select element, time select element and the services container
+  var branchSelect = document.getElementById("branch-select");
+  var timeSelect = document.getElementById("time-select");
+  var servicesContainer = document.getElementById("services-container");
+
+
+  // Add an event listener to the branch select element
+  branchSelect.addEventListener("change", function(){
+	var selectedBranch = this.value;
+	var selectedBranchId = this.value;
+	var selectedBranchData = branches.find(function(branch){
+	  return branch.id == selectedBranch;
+	});
+	var filteredServices = services.filter(function(service){
+	  return selectedBranchData.services.includes(service.id) || selectedBranchData.services.length === 0;
+	});
+	
+	// Clear the services container
+	servicesContainer.innerHTML = "";
+	
+	// Loop through the filtered services and add them to the container
+	filteredServices.forEach(function(service){
+	  var serviceHTML = '<div class="col-6 d-flex align-items-center justify-content-center p-2">';
+	  serviceHTML += '<div class="w-100 p-3 text-center serviceBLk" id="serv-'+service.id+'"><span>'+service.title+'</span><hr class="m-0"><label style="font-size: 8px;">Duration: '+service.period+' mins</label></div>';
+	  serviceHTML += '</div>';
+	  servicesContainer.innerHTML += serviceHTML;
+	});
+
+
+	updateDatePicker(selectedBranchId);
+
+
+  });
+
+
+  function updateDatePicker(branchId){
+	// Find the allowed booking period for the selected branch
+	var allowedPeriod = allowedBookingPeriod.find(function(period) {
+	  return period.branchId === branchId;
+	});
+	
+	// Find the blocked days for the selected branch
+	var blockedDaysForBranch = blockedDays.filter(function(day) {
+	  return day.branchId === branchId;
+	});
+	
+	// Find the blocked periods for the selected branch
+	var blockedPeriodsForBranch = blockedPeriods.filter(function(period) {
+	  return period.branchId === branchId;
+	});
+	
+	// Update the date picker with the new allowed booking period, blocked days, and blocked periods
+	flatpickrInstance.set('minDate', allowedPeriod.startDate);
+	flatpickrInstance.set('maxDate', allowedPeriod.endDate);
+	var disabledRanges = blockedPeriodsForBranch.map(function(period) {
+	  return {
+		from: new Date(period.startDate).toISOString().split('T')[0],
+		to: new Date(period.endDate).toISOString().split('T')[0]
+	  };
+	});
+	
+	// Convert the blocked days to a format that flatpickr can understand
+	var blockedDaysForBranchFlatpickr = blockedDaysForBranch.map(function(day) {
+	  return function(date) {
+		return date.getDay() == day.day;
+	  };
+	});
+	
+	flatpickrInstance.set('disable', disabledRanges.concat(blockedDaysForBranchFlatpickr));
+  }
 </script>

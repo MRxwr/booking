@@ -124,7 +124,7 @@
 		$("input[name=update]").val(id);
 		var arTitle = $("#arTitle"+id).html();
 		var enTitle = $("#enTitle"+id).html();
-		var icon = $("#icon"+id).html();
+		var logo = $("#logo"+id).html();
 		$("input[name=arTitle]").val($.trim(arTitle.replace(/\n/g, "")));
 		$("input[name=enTitle]").val($.trim(enTitle.replace(/\n/g, ""))).focus();
 		$("input[name=icon]").val($.trim(icon.replace(/\n/g, "")));

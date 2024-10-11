@@ -6,7 +6,6 @@ if( isset($_POST["email"]) && !empty($_POST["email"]) ){
   if( $login = selectDBNew("employees",[$_POST["email"],sha1($_POST["password"])],"`email` LIKE ? AND `password` LIKE ? AND `hidden` != '1' AND `status` = '0'","") ){
     $GenerateNewCC = md5(rand());
     if( updateDB("employees",array("keepMeAlive"=>$GenerateNewCC),"`id` = '{$login[0]["id"]}'") ){
-      echo " 1 ";die();
       $_SESSION["createkuwaitAdmin"] = $email;
       header("Location: index.php");
       setcookie("createkuwaitAdmin", $GenerateNewCC, time() + (86400*30 ), "/");die();

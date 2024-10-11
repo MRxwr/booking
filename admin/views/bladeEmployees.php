@@ -34,8 +34,7 @@
 			<div class="col-md-6">
 			<label><?php echo direction("Type","النوع") ?></label>
 			<select name="empType" class="form-control">
-				<option value="0"><?php echo direction("Admin","مدير") ?></option>
-				<option value="1"><?php echo direction("Employee","موظف") ?></option>
+				
 			</select>
 			</div>
 			

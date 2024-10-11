@@ -34,6 +34,8 @@
 		<input type="date" name="date" data-disable-mobile="true" class="form-control">
 		<input type="hidden" name="serviceId" value="0" required>
 		<input type="hidden" name="branchId" value="0" required>
+		<input type="hidden" name="selectedDate" value="0" required>
+		<input type="hidden" name="selectedTime" value="0" required>
 	</div>
 	<div class="col-md-6">
 		<label><?php echo direction("Time","الوقت") ?></label>
@@ -150,6 +152,8 @@
 
   // now on date change get vendroId branchId and date and serviceId and make a ajax call to retieve the time slots
   $("input[name='date']").on("change", function(){
+	$("input[name=selectedDate]").val(this.value);
+	console.log($("input[name='date']").val());
 	$.ajax({
 	  type: "POST",
 	  url: "requests/index.php?a=GetTimeSlots",

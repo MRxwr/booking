@@ -19,8 +19,14 @@ if( isset($_SESSION["deviceId"]) && !empty($_SESSION["deviceId"]) ){
         goto jump;
     }else{
         insertDB("tokens",["deviceId"=>$_SESSION["deviceId"]]);
+        jump3:
+        $newToken = password_hash(uniqid(), PASSWORD_BCRYPT);
+        if( $token = selectDBNew("tokens",[$newToken],"`token` LIKE ?","") ){
+            goto jump3;
+        }else{
+            updateDB("tokens",["token"=>$newToken],"`deviceId` = '{$_SESSION["deviceId"]}'");
+            echo outputData(array("token"=>$newToken));die();
+        }
     }
 }
-
-
 ?>

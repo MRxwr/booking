@@ -156,13 +156,12 @@
 	  // Update the date picker with the new allowed booking period, blocked days, and blocked periods
 	  flatpickrInstance.set('minDate', allowedPeriod.startDate);
 	  flatpickrInstance.set('maxDate', allowedPeriod.endDate);
-	  var disabledDates = blockedDaysForBranch.map(function(day) {
-		return new Date(day.day);
-	  }).concat(blockedPeriodsForBranch.map(function(period) {
+	  var disabledDates = blockedPeriodsForBranch.map(function(period) {
 		return [new Date(period.startDate), new Date(period.endDate)];
-	  }));
+	  }).flat();
+	  
 	  console.log(disabledDates);
-
+	  
 	  flatpickrInstance.set('disabled', disabledDates);
 	}
 

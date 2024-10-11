@@ -163,14 +163,12 @@
 		vendorId: <?php echo $vendor["id"] ?>
 	  }
 	}).done(function(data){
-		console.log('Data:', data);
-		var timeSlots = Object.keys(data.timeSlots);
-	  	var timeSlotHTML = "";
-	  	console.log(timeSlots);
+		var timeSlots = data.data.timeSlots;
+		var timeSlotHTML = "";
 		timeSlots.forEach(function(timeSlot){
 			timeSlotHTML += '<option value="'+timeSlot+'">'+timeSlot+'</option>';
 		});
-	  timeSelect.innerHTML = timeSlotHTML;
+		timeSelect.innerHTML = timeSlotHTML;
 	}).fail(function(){
 	  timeSelect.innerHTML = '<option value="0">No time slots available</option>';
 	});

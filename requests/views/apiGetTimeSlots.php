@@ -44,7 +44,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         }
 
         //booking blocking number of seats per hour
-        if( $booking = selectDB("bookings","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '{$serviceId}' AND `bookedDate` = '{$date}' AND (`status` = '1' OR (`status` = '0' AND TIMESTAMPDIFF(MINUTE, `date`, NOW()) < 15))") ){
+        if( $booking = selectDB("bookings","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `bookedDate` = '{$date}' AND (`status` = '1' OR (`status` = '0' AND TIMESTAMPDIFF(MINUTE, `date`, NOW()) < 15))") ){
             foreach( $booking as $book ){
                 $bookedTimes[] = substr($book["bookedTime"],0,2);
             }
@@ -52,6 +52,21 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                 $branchTotalSeats = $branches[0]["seats"];
             }else{
                 $branchTotalSeats = '1';
+            }
+            
+            for( $i = $start; $i < $close; $i++ ){
+                $counter = (int)($start);
+                if( $branchTotalSeats == count(array_intersect($bookedTimes,[$start])) || $ServiceTotalSeats == count(array_intersect($bookedTimes,[$start])) ){
+                    $blockedTimeBookings[] = $start;
+                }
+                $counter++;
+            }
+        }
+
+        //booking blocking number of seats per hour
+        if( $booking = selectDB("bookings","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '{$serviceId}' AND `bookedDate` = '{$date}' AND (`status` = '1' OR (`status` = '0' AND TIMESTAMPDIFF(MINUTE, `date`, NOW()) < 15))") ){
+            foreach( $booking as $book ){
+                $bookedService[] = substr($book["bookedTime"],0,2);
             }
 
             if( $services = selectDB("services","`id` = '{$serviceId}'") ){
@@ -62,7 +77,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             
             for( $i = $start; $i < $close; $i++ ){
                 $counter = (int)($start);
-                if( $branchTotalSeats == count(array_intersect($bookedTimes,[$start])) || $ServiceTotalSeats == count(array_intersect($bookedTimes,[$start])) ){
+                if( $ServiceTotalSeats == count(array_intersect($bookedService,[$start])) ){
                     $blockedTimeBookings[] = $start;
                 }
                 $counter++;

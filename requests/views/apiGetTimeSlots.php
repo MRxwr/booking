@@ -30,10 +30,9 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             $response["timeSlots"][] = ($start) . ":00";
             (int)$start++;
         }
-        echo outputData($response);
+        echo outputData($response);die();
     }else{
-        echo outputError("time slots not found");
+        echo outputError("time slots not found");die();
     }
-    echo json_encode($timeSlots);
 }
 ?>

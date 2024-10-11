@@ -4,7 +4,7 @@ if ( $times = selectDB("times","`status` = '0' AND `hidden` = '0' ORDER BY `slug
 	?>
 	<div class="form-group">
 	<div class="row">
-	<form action="?p=branches&updateTimes=<?php echo $_POST["id"] ?>" method="post" enctype="multipart/form-data">
+	<form action="?v=Branches&updateTimes=<?php echo $_POST["id"] ?>" method="post" enctype="multipart/form-data">
 	<?php
 	$slug = "";
 	foreach( $times as $time){

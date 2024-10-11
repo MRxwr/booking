@@ -4,7 +4,7 @@ if ( $services = selectDB("services","`status` = '0' AND `hidden` = '0' ORDER BY
 	?>
 	<div class="form-group">
 	<div class="row">
-	<form action="?p=branches&updateServices=<?php echo $_POST["id"] ?>" method="post" enctype="multipart/form-data">
+	<form action="?v=Branches&updateServices=<?php echo $_POST["id"] ?>" method="post" enctype="multipart/form-data">
 	<?php
 	$slug = "";
 	foreach( $services as $service){

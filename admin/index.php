@@ -3,7 +3,7 @@ require_once("template/header.php");
 
 // call actions on all pages
 if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || isset($_POST["update"]) || isset($_POST["order"]) ){
-	$table = strtolower($_GET["p"]);
+	$table = strtolower($_GET["v"]);
 	if( isset($_GET["hide"]) && !empty($_GET["hide"]) && updateDB("{$table}",array('hidden'=> '1'),"`id` = '{$_GET["hide"]}'") ){
 		
 	}elseif( isset($_GET["show"]) && !empty($_GET["show"]) && updateDB("{$table}",array('hidden'=> '0'),"`id` = '{$_GET["show"]}'") ){
@@ -30,7 +30,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 		if( isset($_POST["password"]) && !empty($_POST["password"]) ){
 			$_POST["password"] = sha1($_POST["password"]);
 		}
-		
+
 		if ( $id == 0 ){
 			if( insertDB("{$table}", $_POST) ){
 			}else{
@@ -57,17 +57,17 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 	}
 	?>
 	<script>
-		window.location.replace("<?php echo "?p={$_GET["p"]}" ?>");
+		window.location.replace("<?php echo "?v={$_GET["v"]}" ?>");
 	</script>
 	<?php
 }
 
 // get viewed page from pages folder \\
-if( isset($_GET["p"]) && searchFile("pages","{$_GET["p"]}.php") ){
+if( isset($_GET["v"]) && searchFile("views","{$_GET["p"]}.php") ){
 	$table = strtolower($_GET["p"]);
-	require_once("pages/".searchFile("pages","{$_GET["p"]}.php"));
+	require_once("views/".searchFile("views","{$_GET["p"]}.php"));
 }else{
-	require_once("pages/home.php");
+	require_once("views/home.php");
 }
 
 require("template/footer.php");

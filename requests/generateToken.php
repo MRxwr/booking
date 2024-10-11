@@ -15,7 +15,7 @@ if( isset($_SESSION["deviceId"]) && !empty($_SESSION["deviceId"]) ){
             echo outputData(array("token"=>$newToken));die();
         }
     }else{
-        outputError(array("msg"=>"Invalid Device Id"));die();
+        echo outputError(array("msg"=>"Invalid Device Id"));die();
     }
 }else{
     jump:

@@ -1,4 +1,3 @@
-
 RewriteEngine On
 
 # Remove .php extension from URLs

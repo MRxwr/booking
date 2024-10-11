@@ -17,6 +17,7 @@ if( isset($_GET["lang"]) && !empty($_GET["lang"]) ){
 }
 
 if ( isset(getallheaders()["Authorization"]) && !empty(getallheaders()["Authorization"])){
+	var_dump(selectDBNew("tokens",[getallheaders()["Authorization"]],"`token` LIKE ?",""));
 	if( $checkToken = selectDBNew("tokens",[getallheaders()["Authorization"]],"`token` LIKE ?","") ){
 		$token = $checkToken[0];
 	}else{

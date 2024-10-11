@@ -1,6 +1,6 @@
 <?php
 if( !isset($_GET["vendorURL"]) || empty($_GET["vendorURL"]) ){
-	header("Location: default");die();
+	var_dump($_REQUST);//header("Location: default");die();
 }
 ?>
 <!doctype html>

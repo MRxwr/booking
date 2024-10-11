@@ -12,27 +12,40 @@
 				<div class="panel-body ">
 					<form class="mt-30 mb-30" method="POST" action="" enctype="multipart/form-data">
 						<div class="row m-0">
+
 							<div class="col-md-12">
+								<label><?php echo direction("Vendor","البائع") ?></label>
+								<select name="vendorId" class="form-control" required>
+									<?php 
+									$vendors = selectDB("vendors","`status` = '0' AND `hidden` = '0' ORDER BY `enTitle` ASC");
+									foreach( $vendors as $vendor ){
+										echo "<option value='{$vendor["id"]}'>{$vendor["enTitle"]}</option>";
+									}
+									?>
+								</select>
+							</div>
+
+							<div class="col-md-4">
 								<label><?php echo direction("Admin Slug","الإسم التعريفي") ?></label>
 								<input type="text" name="slug" class="form-control" required>
 							</div>
 						
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<label><?php echo direction("English Title","الإسم الإنجليزي") ?></label>
 								<input type="text" name="enTitle" class="form-control" required>
 							</div>
 
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<label><?php echo direction("Arabic Title","الإسم العربي") ?></label>
 								<input type="text" name="arTitle" class="form-control" required>
 							</div>
 
-							<div class="col-md-3">
+							<div class="col-md-5">
 								<label><?php echo direction("Seats","المقاعد") ?></label>
 								<input type="number" name="seats" class="form-control" required>
 							</div>
 
-							<div class="col-md-3">
+							<div class="col-md-5">
 								<label><?php echo direction("Price","القيمة") ?></label>
 								<input type="float" name="price" class="form-control" required>
 							</div>
@@ -63,6 +76,8 @@
 							<table class="table display responsive product-overview mb-30" id="myTable">
 								<thead>
 									<tr>
+									<th>#</th>
+									<th><?php echo direction("Vendor","البائع") ?></th>
 									<th><?php echo direction("Admin Slug","الإسم التعريفي") ?></th>
 									<th><?php echo direction("English Title","الإسم الإنجليزي") ?></th>
 									<th><?php echo direction("Arabic Title"," الإسم العربي") ?></th>
@@ -75,6 +90,8 @@
 									<?php 
 									if( $service = selectDB("{$table}","`status` = '0' ORDER BY `id` ASC") ){
 										for( $i = 0; $i < sizeof($service); $i++ ){
+											$vendor = selectDB("vendors","`id` = '{$service[$i]["vendorId"]}'");
+											$vendor = direction($vendor[0]["enTitle"],$vendor[0]["arTitle"]);
 											if ( $service[$i]["hidden"] == 1 ){
 												$icon = "fa fa-unlock";
 												$link = "?{$_SERVER["QUERY_STRING"]}&show={$service[$i]["id"]}";
@@ -86,6 +103,8 @@
 											}			
 									?>
 									<tr>
+									<td ><?php echo str_pad(($counter = $i + 1),4,"0",STR_PAD_LEFT) ?></td>
+									<td ><?php echo $vendor ?></td>
 										<td id="slug<?php echo $service[$i]["id"]?>" >
 											<?php echo $service[$i]["slug"] ?>
 										</td>
@@ -112,6 +131,9 @@
 												<i class="fa fa-close text-danger"></i>
 											</a>
 										</td>
+										<div style="display: none">
+											<label id="vendorId<?php echo $branch[$i]["id"]?>"><?php echo $branch[$i]["vendorId"] ?></label>
+										</div>
 									</tr>
 									<?php
 										}
@@ -141,6 +163,7 @@
 		$("input[name=seats]").val($.trim(seats.replace(/\n/g, "")));
 		$("input[name=price]").val($.trim(price.replace(/\n/g, "")));
 		$("input[name=slug]").val($.trim(slug.replace(/\n/g, "")));
+		$("select[name=vendorId]").val($.trim($("#vendorId"+id).html().replace(/\n/g, "")));
 	})
 </script>
   

@@ -12,7 +12,18 @@
 				<div class="panel-body ">
 					<form class="mt-30 mb-30" method="POST" action="" enctype="multipart/form-data">
 						<div class="row m-0">
-							<div class="col-md-3">
+							<div class="col-md-6">
+								<label><?php echo direction("Vendor","البائع") ?></label>
+								<select name="vendorId" class="form-control" required>
+									<?php 
+									$vendors = selectDB("vendors","`status` = '0' AND `hidden` = '0' ORDER BY `enTitle` ASC");
+									foreach( $vendors as $vendor ){
+										echo "<option value='{$vendor["id"]}'>{$vendor["enTitle"]}</option>";
+									}
+									?>
+								</select>
+							</div>
+							<div class="col-md-6">
 								<label><?php echo direction("Block a day","إقفل يوم") ?></label>
 								<select name="day" class="form-control" required>
 								<?php 
@@ -53,6 +64,8 @@
 							<table class="table display responsive product-overview mb-30" id="myTable">
 								<thead>
 									<tr>
+									<th>#</th>
+									<th><?php echo direction("Vendor","البائع") ?></th>
 									<th><?php echo direction("Day","اليوم") ?></th>
 									<th class="text-nowrap"><?php echo direction("الخيارات","Actions") ?></th>
 									</tr>
@@ -63,8 +76,12 @@
 										$enDaysArray = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 										$arDaysArray = ["الأحد","الأثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"];
 										for( $i = 0; $i < sizeof($blockedDays); $i++ ){
+											$vendor = selectDB("vendors","`id` = '{$blockedDays[$i]["vendorId"]}'");
+											$vendor = direction($vendor[0]["enTitle"],$vendor[0]["arTitle"]);
 									?>
 									<tr>
+									<td ><?php echo str_pad(($counter = $i + 1),4,"0",STR_PAD_LEFT) ?></td>
+									<td ><?php echo $vendor ?></td>
 										<td id="day<?php echo $blockedDays[$i]["id"]?>" >
 											<?php echo direction($enDaysArray[$blockedDays[$i]["day"]],$arDaysArray[$blockedDays[$i]["day"]]) ?>
 										</td>
@@ -73,6 +90,9 @@
 												<i class="fa fa-close text-danger"></i>
 											</a>
 										</td>
+										<div style="display: none">
+											<label id="vendorId<?php echo $branch[$i]["id"]?>"><?php echo $branch[$i]["vendorId"] ?></label>
+										</div>
 									</tr>
 									<?php
 										}

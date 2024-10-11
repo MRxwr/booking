@@ -36,7 +36,7 @@ if( isset($_GET["updateTimes"]) || isset($_GET["updateServices"]) ){
 					<form class="mt-30 mb-30" method="POST" action="" enctype="multipart/form-data">
 						<div class="row m-0">
 
-							<div class="col-md-3">
+							<div class="col-md-12">
 								<label><?php echo direction("Vendor","البائع") ?></label>
 								<select name="vendorId" class="form-control" required>
 									<?php 
@@ -48,17 +48,17 @@ if( isset($_GET["updateTimes"]) || isset($_GET["updateServices"]) ){
 								</select>
 							</div>
 						
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<label><?php echo direction("English Title","الإسم الإنجليزي") ?></label>
 								<input type="text" name="enTitle" class="form-control" required>
 							</div>
 
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<label><?php echo direction("Arabic Title","الإسم العربي") ?></label>
 								<input type="text" name="arTitle" class="form-control" required>
 							</div>
 
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<label><?php echo direction("Location","الموقع") ?></label>
 								<input type="text" name="location" class="form-control" required value="#">
 							</div>

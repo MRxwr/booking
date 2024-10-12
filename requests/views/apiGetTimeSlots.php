@@ -31,8 +31,10 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         //Get Service Details
         if( $services = selectDB("services","`id` = '{$serviceId}'") ){
             $ServiceTotalSeats = $services[0]["seats"];
+            $duration = $services[0]["period"];
         }else{
             $ServiceTotalSeats = '1';
+            $duration = '1';
         }
         $start = substr($timeSlots[0]["startTime"],0,2);
         $close = substr($timeSlots[0]["closeTime"],0,2);
@@ -86,10 +88,18 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         // removeing all blocked time from timeSlots
         for( $i = $start; $i < $close; $i++ ){
             if( !in_array((int)$start, $blockedTimeVendor) && !in_array((int)$start, $blockedTimeBookings) ){
+                $timeStart[] = ($start) . ":00";
                 $response["timeSlots"][] = ($start) . ":00 - " . ((int)($start)+1) . ":00";
             }
             (int)$start++;
         }
+        $nextTime = $timeStart[count($timeStart)-1];
+        while (true) {
+            $nextTime = date('H:i', strtotime('+'.$duration.' minutes', strtotime($nextTime)));
+            if ($nextTime >= $close.':00') break;
+            $timeStart[] = $nextTime;
+        }
+        $response["timeSlots"] = $timeStart;
         echo outputData($response);die();
     }else{
         $response["timeSlots"][0] = "No time slots available";

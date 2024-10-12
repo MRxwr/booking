@@ -93,8 +93,10 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                  $endTime = date('H:i', strtotime('+'.$duration.' minutes', strtotime($startTime)));
                  if( substr($endTime,0,2) >= $close ){
                     break;
+                 }else{
+                    $response["timeSlots"][] = $startTime . " - " . $endTime;
                  }
-                 $response["timeSlots"][] = $startTime . " - " . $endTime;
+                 
                  $startTime = $endTime;
             }else{
                 $startTime = ($start) . ":00";

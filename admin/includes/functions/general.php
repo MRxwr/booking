@@ -45,6 +45,19 @@ function setLanguage(){
 	}
 }
 
+function setLanguageFront(){ 
+	GLOBAL $_GET;
+	if ( isset($_GET["lang"]) && $_GET["lang"] == "ar" ){
+		setcookie("createLang","ar",time() + (86400*30),"/");
+	}else{
+		setcookie("createLang","en",time() + (86400*30),"/");
+	}
+	if( isset($_GET["vendorURL"]) && !empty($_GET["vendorURL"]) ){
+		header("LOCATION: /{$_GET["vendorURL"]}");
+	}else{
+		header("LOCATION: /{$_GET["vendorURL"]}");
+	}
+}
 // get file extension \\
 function get_file_extension($file_name) {
     return ".".pathinfo($file_name, PATHINFO_EXTENSION);

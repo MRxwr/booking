@@ -5,7 +5,7 @@
 				<img src="https://i.imgur.com/BW29zDw.jpg" class="poweredMobile" >
 			</div>
 			<div class="col-12 text-center">
-				<label>(c) createKuwat</label>
+				<label>2018 (c) createKuwait</label>
 			</div>
 		</div>		
 	</div>

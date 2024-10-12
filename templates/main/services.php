@@ -1,6 +1,6 @@
 <div class="row m-0 w-100">
 	<div class="col-12">
-		<span>Services</span>
+		<span><?php echo direction("Services","الخدمات") ?></span>
 	</div>
 	<div class="col-12 p-3">
 		<div class="row m-0">

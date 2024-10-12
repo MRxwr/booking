@@ -94,9 +94,8 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                  if( substr($endTime,0,2) >= $close ){
                     break;
                  }else{
-                    $response["timeSlots"][] = $startTime . " - " . $endTime;
+                    $response["timeSlots"][] = (int)$start . " - " . $endTime;
                  }
-                 
                  $startTime = $endTime;
             }else{
                 $startTime = ($start) . ":00";

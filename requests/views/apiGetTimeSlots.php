@@ -21,9 +21,23 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             break;
         }
     }
-    if($timeSlots = selectDB("times","`branchId` = '{$branchId}' AND `day` = '{$day}' AND `vendorId` = '{$vendorId}'") ){
-        $start = substr($timeSlots[0]["startTime"],0,2);
-        $close = substr($timeSlots[0]["closeTime"],0,2);
+    if( $timeSlots = selectDB("times","`branchId` = '{$branchId}' AND `day` = '{$day}' AND `vendorId` = '{$vendorId}'") ){
+        //Get Branch Details
+        if( $branches = selectDB("branches","`id` = '{$branchId}'") ){
+            $branchTotalSeats = $branches[0]["seats"];
+        }else{
+            $branchTotalSeats = '1';
+        }
+        //Get Service Details
+        if( $services = selectDB("services","`id` = '{$serviceId}'") ){
+            $ServiceTotalSeats = $services[0]["seats"];
+            $duration = $services[0]["period"];
+        }else{
+            $ServiceTotalSeats = '1';
+            $duration = "60";
+        }
+        $start = substr($timeSlots[0]["startTime"],0,5);
+        $close = substr($timeSlots[0]["closeTime"],0,5);
         $timeSlots = [];
         $blockedTimeVendor = [];
         $blockedTimeBookings = [];
@@ -33,8 +47,8 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         //vendor blocking time
         if( $blockTime = selectDB("blocktime","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}'") ){
             if( $blockTime[0]["startDate"] <= $date && $blockTime[0]["endDate"] >= $date ){
-                $blockedStart = substr($blockTime[0]["fromTime"],0,2);
-                $blockedClose = substr($blockTime[0]["toTime"],0,2);
+                $blockedStart = substr($blockTime[0]["fromTime"],0,5);
+                $blockedClose = substr($blockTime[0]["toTime"],0,5);
                 
                 for( $i = $blockedStart; $i < $blockedClose; $i++ ){
                     $blockedTimeVendor[] = $blockedStart;
@@ -46,14 +60,8 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         //booking blocking number of seats per hour
         if( $booking = selectDB("bookings","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `bookedDate` = '{$date}' AND (`status` = '1' OR (`status` = '0' AND TIMESTAMPDIFF(MINUTE, `date`, NOW()) < 15))") ){
             foreach( $booking as $book ){
-                $bookedTimes[] = substr($book["bookedTime"],0,2);
+                $bookedTimes[] = substr($book["bookedTime"],0,5);
             }
-            if( $branches = selectDB("branches","`id` = '{$branchId}'") ){
-                $branchTotalSeats = $branches[0]["seats"];
-            }else{
-                $branchTotalSeats = '1';
-            }
-            
             $counter = (int)($start);
             for( $i = $start; $i < $close; $i++ ){
                 if( $branchTotalSeats == count(array_intersect($bookedTimes,[$counter])) ){
@@ -66,15 +74,8 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         //booking blocking of services number of seats per hour
         if( $booking = selectDB("bookings","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '{$serviceId}' AND `bookedDate` = '{$date}' AND (`status` = '1' OR (`status` = '0' AND TIMESTAMPDIFF(MINUTE, `date`, NOW()) < 15))") ){
             foreach( $booking as $book ){
-                $bookedService[] = substr($book["bookedTime"],0,2);
+                $bookedService[] = substr($book["bookedTime"],0,5);
             }
-
-            if( $services = selectDB("services","`id` = '{$serviceId}'") ){
-                $ServiceTotalSeats = $services[0]["seats"];
-            }else{
-                $ServiceTotalSeats = '1';
-            }
-            
             $counter = (int)($start);
             for( $i = $start; $i < $close; $i++ ){
                 if( $ServiceTotalSeats == count(array_intersect($bookedService,[$counter])) ){
@@ -85,11 +86,11 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         }
 
         // removeing all blocked time from timeSlots
-        for( $i = $start; $i < $close; $i++ ){
-            if( !in_array((int)$start, $blockedTimeVendor) && !in_array((int)$start, $blockedTimeBookings) ){
-                $response["timeSlots"][] = ($start) . ":00 - " . ((int)($start)+1) . ":00";
+        for( $i = $start; $i < $close; $i = date('H:i', strtotime('+'.$duration.' minutes', strtotime($i))) ){
+            if( !in_array($i, $blockedTimeVendor) && !in_array($i, $blockedTimeBookings) ){
+                $endTime = date('H:i', strtotime('+'.$duration.' minutes', strtotime($i)));
+                $response["timeSlots"][] = ($i) . " - " . $endTime;
             }
-            (int)$start++;
         }
         echo outputData($response);die();
     }else{

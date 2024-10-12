@@ -98,4 +98,5 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         echo outputError($response);die();
     }
 }
+//$endTime = date('H:i', strtotime('+'.$duration.' minutes', strtotime($startTime)));
 ?>

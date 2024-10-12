@@ -87,11 +87,12 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
 
         // removeing all blocked time from timeSlots
         for( $i = $start; $i < $close; $i++ ){
+            $startTime = ($start) . ":00";
             if( !in_array((int)$start, $blockedTimeVendor) && !in_array((int)$start, $blockedTimeBookings) ){
                 $response["timeSlots"][] = ($start) . ":00 - " . ((int)($start)+1) . ":00";
                 $startTime = ($start) . ":00";
-                $endTime = ((int)($start)+1) . ":00";
-                $response["timeSlots"][] = date('H:i', strtotime('+'.$duration.' minutes', strtotime($startTime))) . " - " . date('H:i', strtotime('+'.$duration.' minutes', strtotime($endtime)));;
+                $endTime = date('H:i', strtotime('+'.$duration.' minutes', strtotime($startTime)));
+                $response["timeSlots"][] = $startTime . " - " . $endTime;
             }
             (int)$start++;
         }

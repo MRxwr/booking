@@ -2,7 +2,7 @@
 SESSION_START();
 require_once("admin/includes/config.php");
 require_once("admin/includes/functions.php");
-//setLanguageFront();
+setLanguageFront();
 
 if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor = selectDBNew("vendors",[$_REQUEST["vendorURL"]],"`url` LIKE ? AND `hidden` = '0' AND `status` = '0'","") ){
 	$vendor = $vendor[0];

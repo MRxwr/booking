@@ -54,8 +54,6 @@ function setLanguageFront(){
 	}
 	if( isset($_GET["vendorURL"]) && !empty($_GET["vendorURL"]) ){
 		header("LOCATION: /{$_GET["vendorURL"]}");
-	}else{
-		header("LOCATION: /{$_GET["vendorURL"]}");
 	}
 }
 // get file extension \\

@@ -1,4 +1,4 @@
-<div class="col-8 p-0 d-none d-md-block" id="rightSide">
+<div class="col-7 p-0 d-none d-md-block" id="rightSide">
 	<div class="rightBg"></div>
 	<div class="bgOver"></div>
 	<div class="logoBg" style="align-content: center;">

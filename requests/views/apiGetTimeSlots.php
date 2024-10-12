@@ -89,8 +89,8 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         for( $i = $start; $i < $close; $i++ ){
             if( !in_array((int)$start, $blockedTimeVendor) && !in_array((int)$start, $blockedTimeBookings) ){
                 $response["timeSlots"][] = ($start) . ":00 - " . ((int)($start)+1) . ":00";
-                $time = ($start) . ":00";
-                $startTime = ((int)($start)+1) . ":00";
+                $startTime = ($start) . ":00";
+                $endTime = ((int)($start)+1) . ":00";
                 $response["timeSlots"][] = date('H:i', strtotime('+'.$duration.' minutes', strtotime($startTime))) . " - " . date('H:i', strtotime('+'.$duration.' minutes', strtotime($endtime)));;
             }
             (int)$start++;

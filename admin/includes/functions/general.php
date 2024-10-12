@@ -50,7 +50,7 @@ function setLanguageFront(){
 	if ( isset($_GET["lang"]) && $_GET["lang"] == "ar" ){
 		setcookie("createLang","ar",time() + (86400*30),"/");
 		header("LOCATION: /{$_GET["vendorURL"]}");
-	}else{
+	}elseif(isset($_GET["lang"]) && $_GET["lang"] == "en") {
 		setcookie("createLang","en",time() + (86400*30),"/");
 		header("LOCATION: /{$_GET["vendorURL"]}");
 	}

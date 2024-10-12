@@ -90,12 +90,12 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         for( $i = $start; $i < $close; $i++ ){
             if( !in_array((int)$start, $blockedTimeVendor) && !in_array((int)$start, $blockedTimeBookings) ){
                  //$response["timeSlots"][] = ($start) . ":00 - " . ((int)($start)+1) . ":00";
-                 $endTime = date('H:i', strtotime('+'.$duration.' minutes', strtotime($startTime)));
-                 $response["timeSlots"][] = $startTime . " - " . $endTime;
-                 $startTime = $endTime;
                  if( substr($endTime,0,2) >= $close ){
                     break;
                  }
+                 $endTime = date('H:i', strtotime('+'.$duration.' minutes', strtotime($startTime)));
+                 $response["timeSlots"][] = $startTime . " - " . $endTime;
+                 $startTime = $endTime;
             }else{
                 $startTime = ($start) . ":00";
             }

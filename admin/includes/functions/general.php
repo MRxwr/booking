@@ -49,10 +49,9 @@ function setLanguageFront(){
 	GLOBAL $_GET;
 	if ( isset($_GET["lang"]) && $_GET["lang"] == "ar" ){
 		setcookie("createLang","ar",time() + (86400*30),"/");
+		header("LOCATION: /{$_GET["vendorURL"]}");
 	}else{
 		setcookie("createLang","en",time() + (86400*30),"/");
-	}
-	if( isset($_GET["vendorURL"]) && !empty($_GET["vendorURL"]) ){
 		header("LOCATION: /{$_GET["vendorURL"]}");
 	}
 }

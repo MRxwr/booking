@@ -86,11 +86,11 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         }
 
         // removeing all blocked time from timeSlots
-        for( $i = $start; $i < $close; $i = date('H:i', strtotime('+'.$duration.' minutes', strtotime($i))) ){
-            if( !in_array($i, $blockedTimeVendor) && !in_array($i, $blockedTimeBookings) ){
-                $endTime = date('H:i', strtotime('+'.$duration.' minutes', strtotime($i)));
-                $response["timeSlots"][] = ($i) . " - " . $endTime;
+        for( $i = $start; $i < $close; $i++ ){
+            if( !in_array((int)$start, $blockedTimeVendor) && !in_array((int)$start, $blockedTimeBookings) ){
+                $response["timeSlots"][] = ($start) . ":00 - " . ((int)($start)+1) . ":00";
             }
+            (int)$start++;
         }
         echo outputData($response);die();
     }else{

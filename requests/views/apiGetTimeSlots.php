@@ -31,13 +31,11 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         //Get Service Details
         if( $services = selectDB("services","`id` = '{$serviceId}'") ){
             $ServiceTotalSeats = $services[0]["seats"];
-            $duration = $services[0]["period"];
         }else{
             $ServiceTotalSeats = '1';
-            $duration = "60";
         }
-        $start = substr($timeSlots[0]["startTime"],0,5);
-        $close = substr($timeSlots[0]["closeTime"],0,5);
+        $start = substr($timeSlots[0]["startTime"],0,2);
+        $close = substr($timeSlots[0]["closeTime"],0,2);
         $timeSlots = [];
         $blockedTimeVendor = [];
         $blockedTimeBookings = [];
@@ -47,8 +45,8 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         //vendor blocking time
         if( $blockTime = selectDB("blocktime","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}'") ){
             if( $blockTime[0]["startDate"] <= $date && $blockTime[0]["endDate"] >= $date ){
-                $blockedStart = substr($blockTime[0]["fromTime"],0,5);
-                $blockedClose = substr($blockTime[0]["toTime"],0,5);
+                $blockedStart = substr($blockTime[0]["fromTime"],0,2);
+                $blockedClose = substr($blockTime[0]["toTime"],0,2);
                 
                 for( $i = $blockedStart; $i < $blockedClose; $i++ ){
                     $blockedTimeVendor[] = $blockedStart;
@@ -60,7 +58,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         //booking blocking number of seats per hour
         if( $booking = selectDB("bookings","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `bookedDate` = '{$date}' AND (`status` = '1' OR (`status` = '0' AND TIMESTAMPDIFF(MINUTE, `date`, NOW()) < 15))") ){
             foreach( $booking as $book ){
-                $bookedTimes[] = substr($book["bookedTime"],0,5);
+                $bookedTimes[] = substr($book["bookedTime"],0,2);
             }
             $counter = (int)($start);
             for( $i = $start; $i < $close; $i++ ){
@@ -74,7 +72,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         //booking blocking of services number of seats per hour
         if( $booking = selectDB("bookings","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '{$serviceId}' AND `bookedDate` = '{$date}' AND (`status` = '1' OR (`status` = '0' AND TIMESTAMPDIFF(MINUTE, `date`, NOW()) < 15))") ){
             foreach( $booking as $book ){
-                $bookedService[] = substr($book["bookedTime"],0,5);
+                $bookedService[] = substr($book["bookedTime"],0,2);
             }
             $counter = (int)($start);
             for( $i = $start; $i < $close; $i++ ){

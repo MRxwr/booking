@@ -97,7 +97,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         while (true) {
             $nextTime = date('H:i', strtotime('+'.$duration.' minutes', strtotime($nextTime)));
             if ($nextTime >= $close.':00') break;
-            $timeStart[] = $duration;
+            $timeStart[] = $nextTime;
         }
         $response["timeSlots"] = $timeStart;
         echo outputData($response);die();

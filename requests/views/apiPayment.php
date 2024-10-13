@@ -1,4 +1,5 @@
 <?php
+var_dump($_POST);
 if( isset($_POST["vendorId"]) && !empty($_POST["vendorId"]) && $vendor = selectDBNew("vendors",[$vendorId],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
 }else{
     echo outputError("Missing vendor");die();

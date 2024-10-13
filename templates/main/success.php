@@ -108,8 +108,7 @@
 				</div>
 			</div>
 			<div class="col-md-12 p-2 pt-4 text-center">
-				<img src="https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=" style="width:200px; height:200px">
-				<?php echo json_encode($_SERVER) ?>
+				<img src="https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=<?php echo urlencode("https://{$_SERVER[HTTP_HOST]}{$_SERVER[REQUEST_URI]}") ?>" style="width:200px; height:200px">
 			</div>
 		</div>
 	</div>

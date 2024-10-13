@@ -100,10 +100,16 @@ function numTo3Float($data){
 }
 
 // generating a random alphanumeric code of 8 characters \\
-function generateRandomString() {
+function generateRandomString($data) {
+	jump:
     $bytes = random_bytes(8);
     $hex   = bin2hex($bytes);
-    return substr($hex, 0, 8);
+	$hex   = substr($hex, 0, 8);
+	if( selectDB("bookings", "`code` LIKE '{$hex}' AND `vendorId` = '{$data}'")){
+		goto jump;
+	}else{
+		return $hex;
+	}
 }
 
 // make sure that phone numbers are in english \\

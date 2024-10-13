@@ -17,10 +17,10 @@
 			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
 					<div class="col-3">
-						<label><?php echo direction("Invoice#","رقم الحجز") ?></label>
+						<label><?php echo direction("Booking#","رقم الحجز") ?></label>
 					</div>
 					<div class="col-9">
-						<label><?php echo $order[0]["gatewayId"] ?></label>
+						<label><?php echo $order[0]["code"] ?></label>
 					</div>
 				</div>
 			</div>

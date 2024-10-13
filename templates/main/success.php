@@ -4,7 +4,7 @@
 			<div class="col-12 p-3 text-center">
 				<?php echo direction("Booking Information","معلومات الحجز") ?>
 			</div>
-			<div class="col-md-6 p-2">
+			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
 					<div class="col-3">
 						<label><?php echo direction("Status","الحالة") ?></label>
@@ -14,17 +14,17 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6 p-2">
+			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
 					<div class="col-3">
-						<label><?php echo direction("Booking ID","رقم الحجز") ?></label>
+						<label><?php echo direction("Invoice#","رقم الحجز") ?></label>
 					</div>
 					<div class="col-9">
 						<label><?php echo $order[0]["gatewayId"] ?></label>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6 p-2">
+			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
 					<div class="col-3">
 						<label><?php echo direction("Date","التاريخ") ?></label>
@@ -34,7 +34,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6 p-2">
+			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
 					<div class="col-3">
 						<label><?php echo direction("Branch","الفرع") ?></label>
@@ -44,7 +44,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6 p-2">
+			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
 					<div class="col-3">
 						<label><?php echo direction("Time","الوقت") ?></label>
@@ -54,7 +54,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6 p-2">
+			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
 					<div class="col-3">
 						<label><?php echo direction("Service","الخدمة") ?></label>
@@ -64,7 +64,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6 p-2">
+			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
 					<div class="col-3">
 						<label><?php echo direction("Customer","العميل") ?></label>
@@ -74,7 +74,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6 p-2">
+			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
 					<div class="col-3">
 						<label><?php echo direction("Mobile","الجوال") ?></label>

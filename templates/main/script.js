@@ -34,7 +34,7 @@ $(window).ready(function() {
 		}else if(date == 0 ){
 			alert("Please select a date");
 			return false;
-		}else ( time == 0) {
+		}else if ( time == 0 ) {
 			alert("Please select atime");
 			return false;
 		}

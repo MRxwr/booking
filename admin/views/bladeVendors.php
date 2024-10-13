@@ -190,6 +190,7 @@
 											<label id="username<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["username"] ?></label>
 											<label id="enTitle<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["enTitle"] ?></label>
 											<label id="arTitle<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["arTitle"] ?></label>
+											<label id="iban<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["iban"] ?></label>
 											<label id="enDetails<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["enDetails"] ?></label>
 											<label id="arDetails<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["arDetails"] ?></label>
 											<label id="enTerms<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["enTerms"] ?></label>
@@ -229,6 +230,7 @@
 		$("input[name=email]").val($.trim($("#email"+id).html().replace(/\n/g, "")));
 		$("input[name=url]").val($.trim($("#url"+id).html().replace(/\n/g, "")));
 		$("input[name=total]").val($.trim($("#total"+id).html().replace(/\n/g, "")));
+		$("input[name=iban]").val($.trim($("#iban"+id).html().replace(/\n/g, "")));
 		$("img[id=logo]").attr("src","../logos/"+$("#logo"+id).html());
 		$("img[id=coverImg]").attr("src","../logos/"+$("#coverImg"+id).html());
 		$("#images").attr("style","margin-top:10px;display:block");

@@ -63,6 +63,7 @@ $(window).ready(function() {
 			  email: email
 			}
 		  }).done(function(data){
+			  alert(data.ok )
 			  if( data.ok === true ){
 				  window.location.href = data.data.data.link;
 			  }else{

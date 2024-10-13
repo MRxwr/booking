@@ -67,6 +67,16 @@
 			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
 					<div class="col-3">
+						<label><?php echo direction("Total","الاجمالي") ?></label>
+					</div>
+					<div class="col-9">
+						<label><?php echo $order[0]["total"] ?></label>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12 p-2">
+				<div class="row m-0 p-2 successInfoSection">
+					<div class="col-3">
 						<label><?php echo direction("Customer","العميل") ?></label>
 					</div>
 					<div class="col-9">

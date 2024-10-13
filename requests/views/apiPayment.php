@@ -19,6 +19,7 @@ if( isset($_POST["time"]) && !empty($_POST["time"]) && $_POST["bookedTime"] = $_
 }else{
     echo outputError("Missing time");die();
 }
+/*
 $orderId = date("Ymd").rand(0000,9999).time();
 $paymentArray = array(
     'language' => 'en',
@@ -71,4 +72,6 @@ if (curl_errno($curl)) {
     }
     echo outputData(json_decode($response, true));die();
 }
+    */
+    echo "1";
 ?>

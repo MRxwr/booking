@@ -25,7 +25,7 @@
 		</div>
 	</div>
 	<div class="col-12 mt-3">
-		<button type="submit" class="btn btn-primary w-100">
+		<div type="submit" class="btn btn-primary w-100">
 		<div class="row m-0" id="submitBtn">
 			<div class="col-10 text-center">
 			<?php echo direction("Book Now","حجز الان") ?>
@@ -34,7 +34,7 @@
 			0 -/KD
 			</div>
 		</div>
-		</button>
+		</div>
 	</div>
 	</div>
 </form>

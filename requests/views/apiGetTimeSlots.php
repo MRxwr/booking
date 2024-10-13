@@ -12,30 +12,25 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
     $serviceId = $_POST["serviceId"];
     $vendorId = $_POST["vendorId"];
     $date = $_POST["date"];
-    $day = date('l', strtotime($date));
-    $values = ["0","1","2","3","4","5","6"];
-	$enDaysArray = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-    for( $i = 0; $i < sizeof($values); $i++){
-        if( strtolower($day) == strtolower($enDaysArray[$i]) ){
-            $day = $values[$i];
-            break;
-        }
-    }
-    if( $timeSlots = selectDB("times","`branchId` = '{$branchId}' AND `day` = '{$day}' AND `vendorId` = '{$vendorId}'") ){
+    $day = date('w', strtotime($date));
+    if( $timeSlots = selectDBNew("times",[$branchId,$day,$vendorId],"`branchId` = ? AND `day` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
         //Get Branch Details
-        if( $branches = selectDB("branches","`id` = '{$branchId}'") ){
+        if( $branches = selectDBNew("branches",[$branchId,$vendorId],"`id` = ? AND `status` = '0' AND `hidden` = '0' AND `vendorId` = ?","") ){
             $branchTotalSeats = $branches[0]["seats"];
         }else{
-            $branchTotalSeats = '1';
+            echo outputError("Branch not exists for this vendor");die();
         }
         //Get Service Details
-        if( $services = selectDB("services","`id` = '{$serviceId}'") ){
+        /*
+        if( $services = selectDBNew("branches",[$branchId,$vendorId,$serviceId],"`id` = ? AND `status` = '0' AND `hidden` = '0' AND `vendorId` = ? AND `services` LIKE CONCAT('%',?,'%')","") ){
             $ServiceTotalSeats = $services[0]["seats"];
             $duration = $services[0]["period"];
         }else{
-            $ServiceTotalSeats = '1';
-            $duration = '1';
+            echo outputError("Service not exists for this branch");die();
         }
+            */
+            $ServiceTotalSeats = 1;
+            $duration = 60;
         $start = substr($timeSlots[0]["startTime"],0,2);
         $close = substr($timeSlots[0]["closeTime"],0,2);
         $timeSlots = [];
@@ -58,7 +53,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         }
 
         //booking blocking number of seats per hour
-        if( $booking = selectDB("bookings","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `bookedDate` = '{$date}' AND (`status` = '1' OR (`status` = '0' AND TIMESTAMPDIFF(MINUTE, `date`, NOW()) < 15))") ){
+        if( $booking = selectDBNew("bookings",[$branchId,$vendorId,$date],"`branchId` = ? AND `vendorId` = ? AND `bookedDate` = ? AND (`status` = '1' OR (`status` = '0' AND TIMESTAMPDIFF(MINUTE, `date`, NOW()) < 15))","") ){
             foreach( $booking as $book ){
                 $bookedTimes[] = substr($book["bookedTime"],0,2);
             }

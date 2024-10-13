@@ -64,10 +64,10 @@ $(window).ready(function() {
 			  	email: email
 			  }
 			}
-		  }).done(function(data){
-			console.log(data);
-			  if( data.ok === true ){
-				console.log(data.data);
+		  }).done(function(result){
+			console.log(result);
+			  if( result.ok === true ){
+				console.log(result.data.data);
 				return false;
 				  //window.location.href = data.data.data.link;
 				  

@@ -22,8 +22,20 @@ $(window).ready(function() {
 		var mobile = $("#mobile").val();
 		var email = $("#email").val();
 		// check all above values if they are = to 0 or not and show seperate alert for each one
-		if (branchId == 0 || vendorId == 0 || serviceId == 0 || date == 0 || time == 0) {
-			alert("Please select branch, vendor, service, date and time");
+		if (branchId == 0 ){
+			alert("Please select a branch");
+			return false;
+		}else if(vendorId == 0){
+			alert("Please select a vendor");
+			return false;
+		}else if( serviceId == 0){
+			alert("Please select a service");
+			return false;
+		}else if(date == 0 ){
+			alert("Please select a date");
+			return false;
+		}else ( time == 0) {
+			alert("Please select atime");
 			return false;
 		}
 		$.ajax({

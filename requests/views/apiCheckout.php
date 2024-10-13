@@ -14,15 +14,39 @@ if( !isset($_POST["vendorId"]) || empty($_POST["vendorId"]) ){echo outputError(a
         if( $branch = selectDBNew("branches",[$branchId],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
             if( $service = selectDBNew("services",[$serviceId],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
                 if( $calendars = selectDBNew("calendar",[$vendorId,$branchId,$date,$date],"`status` = '0' AND `hidden` = '0' AND `vendorId` = ? AND `branchId` = ? AND `startDate` <= ? AND `endDate` >= ? ORDER BY `id` ASC","") ){
-                    if( $blockedPeriodsBranches = selectDBNew("blockdate",[$vendorId,$branchId,$date],"`status` = '0' AND `hidden` = '0' AND `vendorId` = ? AND `branchId` = ? AND ? NOT IN BETWEEN `startDate` AND `endDate` ORDER BY `id` ASC","")){
+                    if( $blockedPeriodsBranches = selectDBNew("blockdate",[$vendorId,$branchId,$date],"`status` = '0' AND `hidden` = '0' AND `vendorId` = ? AND `branchId` = ? AND ? NOT IN BETWEEN `startDate` AND `endDate` ORDER BY `id` ASC","") ){
+                        echo outputError(array("msg"=>"Date is blocked please select another date"));die();
+                    }else{
                         $day = date("w",strtotime($date));
                         if( $blockedDaysBranches = selectDBNew("blockday",[$vendorId,$branchId,$day],"`status` = '0' AND `hidden` = '0' AND `vendorId` = ? AND `branchId` = ? AND `day` = ? ORDER BY `id` ASC","") ){
-
+                            echo outputError(array("msg"=>"Date is blocked please select another date"));die();
                         }else{
-                            echo outputError(array("msg"=>"day is blocked please select another day"));die();
+                            $curl = curl_init();
+                            curl_setopt_array($curl, array(
+                                CURLOPT_URL => 'https://booking.createkuwait.com/requests/index.php?a=GetTimeSlots',
+                                CURLOPT_RETURNTRANSFER => true,
+                                CURLOPT_ENCODING => '',
+                                CURLOPT_MAXREDIRS => 10,
+                                CURLOPT_TIMEOUT => 0,
+                                CURLOPT_FOLLOWLOCATION => true,
+                                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                CURLOPT_CUSTOMREQUEST => 'POST',
+                                CURLOPT_POSTFIELDS => array(
+                                    'branchId' => "{$branchId}",
+                                    'vendorId' => "{$vendorId}",
+                                    'date' => "{$date}",
+                                    'serviceId' => "{$serviceId}",
+                                ),
+                            ));
+                            $response = curl_exec($curl);
+                            $response = json_decode($response, true);
+                            curl_close($curl);
+                            if( $response["ok"] == true && in_array($time, $response["data"]["timeSlots"]) ){
+                                echo outputData($response);die();
+                            }else{
+                                echo outputError(array("msg"=>"Time is fully booked please select another time"));die();
+                            }
                         }
-                    }else{
-                        echo outputError(array("msg"=>"Date is blocked please select another date"));die();
                     }
                 }else{
                     echo outputError(array("msg"=>"Date not in the allowed period"));die();

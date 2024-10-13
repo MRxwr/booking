@@ -63,12 +63,11 @@ $(window).ready(function() {
 			  email: email
 			}
 		  }).done(function(data){
-			  alert(data.ok )
 			  if( data.ok === true ){
 				  window.location.href = data.data.data.link;
 			  }else{
 				// show error message
-				alert('Something went wrong. Please try again.');
+				alert(data + ' Something went wrong. Please try again.');
 				return false;
 			  }
 		  }).fail(function(){

@@ -72,7 +72,7 @@
 					<div class="col-9">
 						<label><?php
 						$price = json_decode($order[0]["gatewayBody"],true);
-						echo $price["order[amount]"];
+						echo $price["order[amount]"] . " -/KD";
 						?></label>
 					</div>
 				</div>

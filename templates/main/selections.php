@@ -169,6 +169,11 @@
 		vendorId: <?php echo $vendor["id"] ?>
 	  }
 	}).done(function(data){
+		// check if data.ok = false
+		if( data.ok == false ){
+			alert(data.data.msg);
+			return false;
+		}
 		var timeSlots = data.data.timeSlots;
 		var timeSlotHTML = "";
 		timeSlots.forEach(function(timeSlot){

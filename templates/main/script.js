@@ -64,8 +64,6 @@ $(window).ready(function() {
 			}
 		  }).done(function(data){
 			console.log(data);
-			data = JSON.parse(data);
-			console.log(data);
 			  if( data.ok === true ){
 				  window.location.href = data.data.data.link;
 			  }else{

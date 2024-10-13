@@ -21,16 +21,12 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             echo outputError("Branch not exists for this vendor");die();
         }
         //Get Service Details
-        /*
         if( $services = selectDBNew("branches",[$branchId,$vendorId,$serviceId],"`id` = ? AND `status` = '0' AND `hidden` = '0' AND `vendorId` = ? AND `services` LIKE CONCAT('%',?,'%')","") ){
             $ServiceTotalSeats = $services[0]["seats"];
             $duration = $services[0]["period"];
         }else{
             echo outputError("Service not exists for this branch");die();
         }
-            */
-            $ServiceTotalSeats = 1;
-            $duration = 60;
         $start = substr($timeSlots[0]["startTime"],0,2);
         $close = substr($timeSlots[0]["closeTime"],0,2);
         $timeSlots = [];

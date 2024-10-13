@@ -1,14 +1,13 @@
 <?php
-var_dump($_POST);
-if( isset($_POST["vendorId"]) && !empty($_POST["vendorId"]) && $vendor = selectDBNew("vendors",[$vendorId],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
+if( isset($_POST["vendorId"]) && !empty($_POST["vendorId"]) && $vendor = selectDBNew("vendors",[$_POST["vendorId"]],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
 }else{
     echo outputError("Missing vendor");die();
 }
-if( isset($_POST["serviceId"]) && !empty($_POST["serviceId"]) && $service = selectDBNew("services",[$serviceId],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
+if( isset($_POST["serviceId"]) && !empty($_POST["serviceId"]) && $service = selectDBNew("services",[$_POST["serviceId"]],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
 }else{
     echo outputError("Missing service");die();
 }
-if( isset($_POST["branchId"]) && !empty($_POST["branchId"]) && $branch = selectDBNew("branches",[$branchId,$vendorId],"`id` = ? AND `status` = '0' AND `hidden` = '0' AND `vendorId` = ?","") ){
+if( isset($_POST["branchId"]) && !empty($_POST["branchId"]) && $branch = selectDBNew("branches",[$_POST["branchId"],$_POST["vendorId"]],"`id` = ? AND `status` = '0' AND `hidden` = '0' AND `vendorId` = ?","") ){
 }else{
     echo outputError("Missing branch");die();
 }

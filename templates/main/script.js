@@ -45,7 +45,7 @@ $(window).ready(function() {
 		}else if ( email == "" ){
 			alert("Please enter your email")
 			return false;
-		}else if ( $("input[type=checkbox"]).is(":checked") == false ){
+		}else if ( $("input[type=checkbox]").is(":checked") == false ){
 			alert("Please agree to terms and conditions")
 			return false;
 		}

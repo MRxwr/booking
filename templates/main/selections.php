@@ -1,3 +1,4 @@
+<form method="post" action="">
 <div class="row m-0 w-100">
 	<div class="col-md-12">
 		<label><?php echo direction("Branch","الفرع") ?></label>
@@ -31,7 +32,7 @@
 <div class="row m-0 w-100">
 	<div class="col-md-6">
 		<label><?php echo direction("Date","التاريخ") ?></label>
-		<input type="date" name="date" data-disable-mobile="true" class="form-control">
+		<input type="date" name="date" data-disable-mobile="true" class="form-control" required>
 		<input type="hidden" name="serviceId" value="0" required>
 		<input type="hidden" name="branchId" value="0" required>
 		<input type="hidden" name="selectedDate" value="0" required>
@@ -40,7 +41,7 @@
 	</div> 
 	<div class="col-md-6">
 		<label><?php echo direction("Time","الوقت") ?></label>
-		<select name="time" class="form-control" id="time-select">
+		<select name="time" class="form-control" id="time-select" required>
 			<option selected disabled value="0"><?php echo direction("Please select a Time","الرجاء تحديد الوقت") ?></option>
 		</select>
 	</div>

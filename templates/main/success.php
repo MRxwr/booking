@@ -70,7 +70,10 @@
 						<label><?php echo direction("Total","الاجمالي") ?></label>
 					</div>
 					<div class="col-9">
-						<label><?php echo $order[0]["total"] ?></label>
+						<label><?php
+						$price = json_decode($order[0]["gatewayBody"],true);
+						echo $price["order[amount]"];
+						?></label>
 					</div>
 				</div>
 			</div>

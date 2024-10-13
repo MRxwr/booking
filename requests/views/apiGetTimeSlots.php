@@ -21,7 +21,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             echo outputError("Branch not exists for this vendor");die();
         }
         //Get Service Details
-        if( $services = selectDBNew("services",[$serviceId,$vendorId,$branchId],"`id` = ? AND `status` = '0' AND `hidden` = '0' AND `vendorId` = ? AND `branchId` = ?","") ){
+        if( $services = selectDBNew("branches",[$branchId,$vendorId,$serviceId],"`id` = ? AND `status` = '0' AND `hidden` = '0' AND `vendorId` = ? AND `services` LIKE CONCAT('%',?,'%')","") ){
             $ServiceTotalSeats = $services[0]["seats"];
             $duration = $services[0]["period"];
         }else{

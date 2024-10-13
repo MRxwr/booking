@@ -16,6 +16,9 @@
 	if( isset($_GET["status"]) && $_GET["status"] == "success" ){
 		//cal success
 		require_once("templates/main/success.php");
+	}elseif( isset($_GET["status"]) && $_GET["status"] == "failure" ){
+		//call failure
+		require_once("templates/main/failure.php");
 	}else{
 		//call selections
 		require_once("templates/main/selections.php");

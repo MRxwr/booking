@@ -18,6 +18,9 @@ $(window).ready(function() {
 		var serviceId = $("input[name=serviceId]").val();
 		var date = $("input[name=selectedDate]").val();
 		var time = $("select[name=selectedTime]").val();
+		var name = $("#name").val();
+		var mobile = $("#mobile").val();
+		var email = $("#email").val();
 		// check all above values if they are = to 0 or not and show seperate alert for each one
 		if (branchId == 0 || vendorId == 0 || serviceId == 0 || date == 0 || time == 0) {
 			alert("Please select branch, vendor, service, date and time");
@@ -31,13 +34,21 @@ $(window).ready(function() {
 			  branchId: branchId,
 			  serviceId: serviceId,
 			  vendorId: vendorId,
-			  time: time
+			  time: time,
+			  name: name,
+			  mobile: mobile,
+			  email: email
 			}
 		  }).done(function(data){
-			  
+			  if( data.ok === true ){
+				  window.location.href = data.data.data.link;
+			  }else{
+				// show error message
+				alert('Something went wrong. Please try again.');
+			  }
 		  }).fail(function(){
 			// show error message
-			alert('Something went wrong. Please try again.');
+			alert('could not make server connection to payment gateway, please try again.');
 		  });
 	});
 }); 

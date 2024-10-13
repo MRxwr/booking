@@ -9,7 +9,7 @@
 	<div class="col-6">
 		<div class="form-group">
 			<label for="mobile"><?php echo direction("Mobile","الجوال") ?></label>
-			<input type="tel" class="form-control" id="mobile" placeholder="Enter your mobile number">
+			<input type="number" step="any" maxlength="11" class="form-control" id="mobile" placeholder="96512345678">
 		</div>
 	</div>
 	<div class="col-6">

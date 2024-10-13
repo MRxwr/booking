@@ -23,7 +23,7 @@
 	<div class="col-12 p-3">
 		<div class="row m-0" id="services-container">
 			<div class="col d-flex align-items-center justify-content-center serviceBLk mx-2 mb-2 p-3">
-				<span><?php echo direction("No Services	Available","لا يوجد خدمات متاحة"); ?></span>
+				<span><?php echo direction("Please select branch first","الرجاء تحديد فرع"); ?></span>
 			</div>
 		</div>
 	</div>

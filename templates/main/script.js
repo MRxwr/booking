@@ -58,9 +58,11 @@ $(window).ready(function() {
 			  serviceId: serviceId,
 			  vendorId: vendorId,
 			  time: time,
-			  name: name,
-			  mobile: mobile,
-			  email: email
+			  customer: {
+				name: name,
+			  	mobile: mobile,
+			  	email: email
+			  }
 			}
 		  }).done(function(data){
 			console.log(data);

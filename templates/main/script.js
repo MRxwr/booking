@@ -67,7 +67,7 @@ $(window).ready(function() {
 		  }).done(function(result){
 			console.log(result);
 			  if( result.ok === true ){
-				console.log(result.data.data);
+				console.log(result.data.data.data.link);
 				return false;
 				  //window.location.href = data.data.data.link;
 				  

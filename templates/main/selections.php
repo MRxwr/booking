@@ -171,7 +171,7 @@
 	}).done(function(data){
 		// check if data.ok = false
 		if( data.ok == false ){
-			alert(data.data.msg);
+			alert(data.data);
 			return false;
 		}
 		var timeSlots = data.data.timeSlots;

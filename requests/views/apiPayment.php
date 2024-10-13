@@ -61,7 +61,7 @@ $response = json_decode($response, true);
 curl_close($curl);
 echo outputData($response);die();
 if ( $response["status"] === false ) {
-    $response = outputError(json_decode(curl_error($curl),true));die();
+    $response = outputError($response);die();
 }else{
     $_POST["gatewayId"] = $orderId;
     $_POST["gatewayBody"] = json_encode($paymentArray);

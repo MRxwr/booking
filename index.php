@@ -6,18 +6,17 @@ setLanguageFront();
 
 if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor = selectDBNew("vendors",[$_REQUEST["vendorURL"]],"`url` LIKE ? AND `hidden` = '0' AND `status` = '0'","") ){
 	$vendor = $vendor[0];
-	echo json_encode($_GET["result"]);
 	if( isset($_GET["result"]) && !empty($_GET["result"]) && $_GET["result"] == "CAPTURED"){
-		if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) && $order = selectDBNew("orders",[$_GET["requested_order_id"]],"`gatewayId` LIKE ?","") ){
-			updateDB("orders",array("status"=>"1","paymentResponse"=>json_encode($_GET)),"`id` = '{$order[0]["id"]}'");
+		if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) && $order = selectDBNew("bookings",[$_GET["requested_order_id"]],"`gatewayId` LIKE ?","") ){
+			updateDB("bookings",array("status"=>"1","paymentResponse"=>json_encode($_GET)),"`id` = '{$order[0]["id"]}'");
 			$_GET["status"] = "success";
 			$customer = json_decode($order[0]["customerDetails"],true);
 			$service = selectDB("services","`id` = '{$order[0]["serviceId"]}'");
 			$branch = selectDB("branches","`id` = '{$order[0]["branchId"]}'");
 		}
 	}elseif( isset($_GET["result"]) && !empty($_GET["result"]) && $_GET["result"] != "CAPTURED" ){
-		if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) && $order = selectDBNew("orders",[$_GET["requested_order_id"]],"`gatewayId` LIKE ?","") ){
-			updateDB("orders",array("status"=>"2","paymentResponse"=>json_encode($_GET)),"`id` = '{$order[0]["id"]}'");
+		if( isset($_GET["requested_order_id"]) && !empty($_GET["requested_order_id"]) && $order = selectDBNew("bookings",[$_GET["requested_order_id"]],"`gatewayId` LIKE ?","") ){
+			updateDB("bookings",array("status"=>"2","paymentResponse"=>json_encode($_GET)),"`id` = '{$order[0]["id"]}'");
 			$_GET["status"] = "failure";
 		}
 	}

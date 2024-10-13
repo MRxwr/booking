@@ -67,10 +67,7 @@ $(window).ready(function() {
 		  }).done(function(result){
 			console.log(result);
 			  if( result.ok === true ){
-				console.log(result.data.data.data.link);
-				return false;
-				  //window.location.href = data.data.data.link;
-				  
+				window.location.href = result.data.data.data.link;
 			  }else{
 				// show error message
 				alert('Something went wrong. Please try again.');

@@ -40,7 +40,6 @@ $paymentArray = array(
     'extraMerchantData[0][ccChargeType]' => 'percentage',
     'extraMerchantData[0][ibanNumber]' => "{$vendor[0]["iban"]}"
     );
-    /*
 $curl = curl_init();
 curl_setopt_array($curl, array(
     CURLOPT_URL => 'https://sandboxapi.upayments.com/api/v1/charge',
@@ -60,6 +59,7 @@ curl_setopt_array($curl, array(
 $response = curl_exec($curl);
 $response = json_decode($response, true);
 curl_close($curl);
+/*
 if (curl_errno($curl)) {
     $response = outputError(json_decode(curl_error($curl),true));die();
 }else{

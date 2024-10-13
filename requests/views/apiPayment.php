@@ -57,10 +57,9 @@ curl_setopt_array($curl, array(
     )
 );
 $response = curl_exec($curl);
-//$response = json_decode($response, true);
+$response = json_decode($response, true);
 curl_close($curl);
-echo outputData($response);die();
-/*
+
 if ( $response["status"] === false ) {
     $response = outputError(json_decode(curl_error($curl),true));die();
 }else{
@@ -76,5 +75,4 @@ if ( $response["status"] === false ) {
     }
     echo outputData(json_decode($response, true));die();
 }
-    */
 ?>

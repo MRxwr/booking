@@ -68,8 +68,9 @@ $(window).ready(function() {
 			console.log(data);
 			  if( data.ok === true ){
 				console.log(data.data.data.link);
-				  window.location.href = data.data.data.link;
-				  return true;
+				return false;
+				  //window.location.href = data.data.data.link;
+				  
 			  }else{
 				// show error message
 				alert('Something went wrong. Please try again.');

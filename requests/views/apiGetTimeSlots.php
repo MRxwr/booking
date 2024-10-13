@@ -17,7 +17,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         //Get Branch Details
         if( $branches = selectDBNew("branches",[$branchId,$vendorId],"`id` = ? AND `status` = '0' AND `hidden` = '0' AND `vendorId` = ?","") ){
             $branchTotalSeats = $branches[0]["seats"];
-            var_dump($branches[0]["services"]);
+            var_dump(is_array($branches[0]["services"]));
             // get services for branch
             if ( in_array($serviceId,$branches[0]["services"]) ){
                 if( $services = selectDBNew("services",[$serviceId,$vendorId],"`id` = ? AND `status` = '0' AND `hidden` = '0' AND `vendorId` = ?","") ){

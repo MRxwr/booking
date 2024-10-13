@@ -66,9 +66,11 @@ curl_close($curl);
     $_POST["gatewayURL"] = $response["data"]["link"];
     $_POST["customerDetails"] = json_encode($_POST["customer"]);
     unset($_POST["customer"]);
+    /*
     if( insertDB("bookings",$_POST)){
     }else{
         $response = outputError("Failed to add booking");die();
     }
+        */
     echo outputData($response);die();
 ?>

@@ -59,7 +59,6 @@ curl_setopt_array($curl, array(
 $response = curl_exec($curl);
 $response = json_decode($response, true);
 curl_close($curl);
-echo outputData($response);die();
 if ( $response["status"] === false ) {
     $response = outputError($response);die();
 }else{

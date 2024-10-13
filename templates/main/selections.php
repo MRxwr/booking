@@ -36,7 +36,7 @@
 		<input type="hidden" name="branchId" value="0" required>
 		<input type="hidden" name="selectedDate" value="0" required>
 		<input type="hidden" name="selectedTime" value="0" required>
-		<input type="hidden" name="vendorId" value="0" required>
+		<input type="hidden" name="vendorId" value="<?php echo $vendor["id"] ?>" required>
 	</div> 
 	<div class="col-md-6">
 		<label><?php echo direction("Time","الوقت") ?></label>

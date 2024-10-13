@@ -2,100 +2,100 @@
 	<div class="col-12 p-3">
 		<div class="row m-0 p-3 successBody">
 			<div class="col-12 p-3 text-center">
-				Booking Information
+				<?php echo direction("Booking Information","معلومات الحجز") ?>
 			</div>
 			<div class="col-md-6 p-2">
 				<div class="row m-0 p-2 successInfoSection">
 					<div class="col-3">
-						<label>Status</label>
+						<label><?php echo direction("Status","الحالة") ?></label>
 					</div>
 					<div class="col-9">
-						<label>Successfull</label>
+						<label><?php echo direction("Success","ناجح") ?></label>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6 p-2">
 				<div class="row m-0 p-2 successInfoSection">
 					<div class="col-3">
-						<label>Code</label>
+						<label><?php echo direction("Booking ID","رقم الحجز") ?></label>
 					</div>
 					<div class="col-9">
-						<label>0123asdf</label>
+						<label><?php echo $order[0]["gatewayId"] ?></label>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6 p-2">
 				<div class="row m-0 p-2 successInfoSection">
 					<div class="col-3">
-						<label>Date</label>
+						<label><?php echo direction("Date","التاريخ") ?></label>
 					</div>
 					<div class="col-9">
-						<label>12/02/2023</label>
+						<label><?php echo $order[0]["bookedDate"] ?></label>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6 p-2">
 				<div class="row m-0 p-2 successInfoSection">
 					<div class="col-3">
-						<label>Branch</label>
+						<label><?php echo direction("Branch","الفرع") ?></label>
 					</div>
 					<div class="col-9">
-						<label>Gate Mall</label>
+						<label><?php echo direction($branch[0]["enTitle"],$branch[0]["arTitle"]) ?></label>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6 p-2">
 				<div class="row m-0 p-2 successInfoSection">
 					<div class="col-3">
-						<label>Time</label>
+						<label><?php echo direction("Time","الوقت") ?></label>
 					</div>
 					<div class="col-9">
-						<label>16:30pm</label>
+						<label><?php echo $order[0]["bookedTime"] ?></label>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6 p-2">
 				<div class="row m-0 p-2 successInfoSection">
 					<div class="col-3">
-						<label>Service</label>
+						<label><?php echo direction("Service","الخدمة") ?></label>
 					</div>
 					<div class="col-9">
-						<label>Hair</label>
+						<label><?php echo direction($service[0]["enTitle"],$service[0]["arTitle"]) ?></label>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6 p-2">
 				<div class="row m-0 p-2 successInfoSection">
 					<div class="col-3">
-						<label>Name</label>
+						<label><?php echo direction("Customer","العميل") ?></label>
 					</div>
 					<div class="col-9">
-						<label>Naser Hatab</label>
+						<label><?php echo $customer["name"] ?></label>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6 p-2">
 				<div class="row m-0 p-2 successInfoSection">
 					<div class="col-3">
-						<label>Mobile</label>
+						<label><?php echo direction("Mobile","الجوال") ?></label>
 					</div>
 					<div class="col-9">
-						<label>96590949089</label>
+						<label><?php echo $customer["mobile"] ?></label>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
 					<div class="col-3">
-						<label>E-mail</label>
+						<label><?php echo direction("Email","البريد الالكتروني") ?></label>
 					</div>
 					<div class="col-9">
-						<label>nasserhatab@gmail.com</label>
+						<label><?php echo $customer["email"] ?></label>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-12 p-2 pt-4 text-center">
-				<img src="https://i.imgur.com/GPTcUl3.png" style="width:200px; height:200px">
+				<img src="https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=<?php echo $order[0]["gatewayId"] ?>" style="width:200px; height:200px">
 			</div>
 		</div>
 	</div>

@@ -68,6 +68,8 @@ if ( $response["status"] == false ) {
     $_POST["gatewayURL"] = $response["data"]["link"];
     $_POST["customerDetails"] = json_encode($_POST["customer"]);
     unset($_POST["customer"]);
+    unset($_POST["time"]);
+    unset($_POST["date"]);
     if( insertDB("bookings",$_POST)){
     }else{
         $response = outputError("Failed to add booking");die();

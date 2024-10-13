@@ -23,7 +23,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                     $ServiceTotalSeats = $services[0]["seats"];
                     $duration = $services[0]["period"];
                 }else{
-                    echo outputError("Service not exists for this branch");die();
+                    echo outputError("Service not exists for this vendor");die();
                 }
             }else{
                 echo outputError("Service not exists for this branch");die();

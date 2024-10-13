@@ -37,6 +37,17 @@ $(window).ready(function() {
 		}else if ( time == 0 ) {
 			alert("Please select atime");
 			return false;
+		}else if( name == "" ){
+			alert("Please enter your name");
+		}else if ( mobile == "" ){
+			alert("Please enter your mobile with country code")
+			return false;
+		}else if ( email == "" ){
+			alert("Please enter your email")
+			return false;
+		}else if ( $("input[type=checkbox"]).is(":checked") == false ){
+			alert("Please agree to terms and conditions")
+			return false;
 		}
 		$.ajax({
 			type: "POST",

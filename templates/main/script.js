@@ -68,10 +68,12 @@ $(window).ready(function() {
 			  }else{
 				// show error message
 				alert('Something went wrong. Please try again.');
+				return false;
 			  }
 		  }).fail(function(){
 			// show error message
 			alert('could not make server connection to payment gateway, please try again.');
+			return false;
 		  });
 	});
 }); 

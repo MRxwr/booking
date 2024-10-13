@@ -72,6 +72,6 @@ if ( $response["status"] === false ) {
     }else{
         $response = outputError("Failed to add booking");die();
     }
-    echo outputData(json_decode($response, true));die();
+    echo outputData($response);die();
 }
 ?>

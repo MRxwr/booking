@@ -12,7 +12,7 @@
 				<div class="panel-body ">
 					<form class="mt-30 mb-30" method="POST" action="" enctype="multipart/form-data">
 						<div class="row m-0">
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<label><?php echo direction("Type","النوع") ?></label>
 								<select name="type" class="form-control" required>
 									<option value="1"><?php echo direction("Salon","صالون") ?></option>
@@ -20,14 +20,19 @@
 								</select>
 							</div>
 
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<label><?php echo direction("Website URL","الرابط الويب") ?></label>
 								<input type="text" name="url" class="form-control" required>
 							</div>
 
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<label><?php echo direction("Subnscription","الاشتراك") ?></label>
 								<input type="float" name="total" class="form-control" required>
+							</div>
+
+							<div class="col-md-3">
+								<label><?php echo direction("IBAN","IBAN") ?></label>
+								<input type="text" name="iban" class="form-control" required>
 							</div>
 
 							<div class="col-md-6">

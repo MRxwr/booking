@@ -108,7 +108,7 @@
 				</div>
 			</div>
 			<div class="col-md-12 p-2 pt-4 text-center">
-				<img src="https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=<?php echo urlencode("https://booking.createkuwait.com/{$order[0]["url"]}") ?>" style="width:200px; height:200px">
+				<img src="https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=<?php echo urlencode($_SERVER["HTTP_HOST"]) ?>" style="width:200px; height:200px">
 			</div>
 		</div>
 	</div>

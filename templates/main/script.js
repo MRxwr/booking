@@ -17,7 +17,7 @@ $(window).ready(function() {
 		var vendorId = $("input[name=vendorId]").val();
 		var serviceId = $("input[name=serviceId]").val();
 		var date = $("input[name=selectedDate]").val();
-		var time = $("select[name=selectedTime]").val();
+		var time = $("input[name=selectedTime]").val();
 		var name = $("#name").val();
 		var mobile = $("#mobile").val();
 		var email = $("#email").val();

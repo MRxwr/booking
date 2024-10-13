@@ -11,11 +11,13 @@ if( isset($_POST["branchId"]) && !empty($_POST["branchId"]) && $branch = selectD
 }else{
     echo outputError("Missing branch");die();
 }
-if( isset($_POST["date"]) && !empty($_POST["date"]) && $_POST["bookedDate"] = $_POST["date"] ){
+if( isset($_POST["date"]) && !empty($_POST["date"]) ){
+    $_POST["bookedDate"] = $_POST["date"];
 }else{
     echo outputError("Missing date");die();
 }
-if( isset($_POST["time"]) && !empty($_POST["time"]) && $_POST["bookedTime"] = $_POST["time"]){
+if( isset($_POST["time"]) && !empty($_POST["time"]) ){
+    $_POST["bookedTime"] = $_POST["time"];
 }else{
     echo outputError("Missing time");die();
 }

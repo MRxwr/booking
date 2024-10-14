@@ -251,13 +251,13 @@
 		console.log(sm);
 		if(sm != ""){
 			var sm = JSON.parse(sm);
-			$("input[name=sm[whatsapp]]").val(sm["whatsapp"]);
-			$("input[name=sm[instagram]]").val(sm["instagram"]);
-			$("input[name=sm[twitter]]").val(sm["twitter"]);
-			$("input[name=sm[phone]]").val(sm["phone"]);
-			$("input[name=sm[facebook]]").val(sm["facebook"]);
-			$("input[name=sm[location]]").val(sm["location"]);
-			$("input[name=sm[snapchat]]").val(sm["snapchat"]);
+			$("input[name='sm[whatsapp]']").val(sm["whatsapp"]);
+			$("input[name='sm[instagram]']").val(sm["instagram"]);
+			$("input[name='sm[twitter]']").val(sm["twitter"]);
+			$("input[name='sm[phone]']").val(sm["phone"]);
+			$("input[name='sm[facebook]']").val(sm["facebook"]);
+			$("input[name='sm[location]']").val(sm["location"]);
+			$("input[name='sm[snapchat]']").val(sm["snapchat"]);
 		}
 	})
 </script>

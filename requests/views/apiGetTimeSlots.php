@@ -105,10 +105,10 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                  }else{
                     $response["timeSlots"][] = $startTime . " - " . $endTime;
                  }
+                 $start++;
                  $startTime = $endTime;
-                 //(int)$start++;
             }else{
-                (int)$start++;
+                $start++;
                 $startTime = ($start) . ":00";
             }
         }

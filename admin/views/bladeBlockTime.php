@@ -61,9 +61,8 @@ if( isset($_POST["time"]) ){
 								<option value='0' selected><?php echo direction("All Services","كل الخدمات") ?></option>
 									<?php 
 									$vendorData = ( isset($vendorId) && !empty($vendorId) ) ? " AND `vendorId` = '{$vendorId}'" : " AND `vendorId` != '0'";
-									$branchData = ( isset($branchId) && !empty($branchId) ) ? " AND `branchId` = '{$branchId}'" : " AND `branchId` != '0'";
 									$orderBy = direction("enTitle","arTitle");
-									$services = selectDB("services","`status` = '0' AND `hidden` = '0' {$vendorData} {$branchData} ORDER BY `{$orderBy}` ASC");
+									$services = selectDB("services","`status` = '0' AND `hidden` = '0' {$vendorData} ORDER BY `{$orderBy}` ASC");
 									foreach( $services as $service ){
 										$vendors = selectDB("vendors","`id` = '{$service["vendorId"]}'");
 										$serviceTitle = direction($service["enTitle"],$service["arTitle"]);

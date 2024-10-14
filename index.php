@@ -33,7 +33,7 @@ if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor =
 }
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="en" style="direction:<?php echo direction("lrt","rtl") ?>">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">

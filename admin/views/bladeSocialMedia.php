@@ -62,8 +62,8 @@
 									<th>#</th>
 									<th><?php echo direction("English Title","لإسم الإنجليزي") ?></th>
 									<th><?php echo direction("Arabic Title"," الإسم العربي") ?></th>
-									<th><?php echo direction("Icon","الأيقونه") ?></th>
 									<th><?php echo direction("Link","الرابط") ?></th>
+									<th><?php echo direction("Icon","الأيقونه") ?></th>
 									<th class="text-nowrap"><?php echo direction("الخيارات","Actions") ?></th>
 									</tr>
 								</thead>

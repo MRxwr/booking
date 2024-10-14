@@ -254,7 +254,7 @@
 		  <?php
 		for( $i = 0; $i < sizeof($socialMedia); $i++ ){
 			$name = direction($socialMedia[$i]["enTitle"],$socialMedia[$i]["arTitle"]);
-			echo "$('input[name=sm[".'"'."{$socialMedia[$i]["enTitle"]}]".'"'."]').val(sm['{$socialMedia[$i]["enTitle"]}'])";
+			echo "$('input[name=sm[".'"'."{$socialMedia[$i]["enTitle"]}]".'"'."]').val(sm['{$socialMedia[$i]["enTitle"]}']);";
 		}
 		  ?>
 		}

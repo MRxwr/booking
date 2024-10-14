@@ -49,15 +49,15 @@ $(window).ready(function() {
 			var serverError = "could not make server connection to payment gateway, please try again.";
 		}
 		// check all above values if they are = to 0 or not and show seperate alert for each one
-		if 		( branchId == 0 ){	alert(branchError);	return false;
-		}else if( vendorId == 0	){	alert(vendorError);	return false;
-		}else if( serviceId == 0){	alert(serviceError);return false;
-		}else if( date == 0 	){	alert(dateError);	return false;
-		}else if( time == 0 	){	alert(timeError);	return false;
-		}else if( name == "" 	){	alert(nameError);	return false;
-		}else if( mobile == "" 	){	alert(mobileError);	return false;
-		}else if( email == "" 	){	alert(emailError);	return false;
-		}else if( $("input[type=checkbox]").is(":checked") == false ){alert(termsError);return false;
+		if 		( branchId == 0 ){	alert(branchError);	$("#loading-screen").hide();return false;
+		}else if( vendorId == 0	){	alert(vendorError);	$("#loading-screen").hide();return false;
+		}else if( serviceId == 0){	alert(serviceError);$("#loading-screen").hide();return false;
+		}else if( date == 0 	){	alert(dateError);	$("#loading-screen").hide();return false;
+		}else if( time == 0 	){	alert(timeError);	$("#loading-screen").hide();return false;
+		}else if( name == "" 	){	alert(nameError);	$("#loading-screen").hide();return false;
+		}else if( mobile == "" 	){	alert(mobileError);	$("#loading-screen").hide();return false;
+		}else if( email == "" 	){	alert(emailError);	$("#loading-screen").hide();return false;
+		}else if( $("input[type=checkbox]").is(":checked") == false ){alert(termsError);$("#loading-screen").hide();return false;
 		}
 		$.ajax({
 			type: "POST",
@@ -75,7 +75,6 @@ $(window).ready(function() {
 			  }
 			}
 		  }).done(function(result){
-			
 			  if( result.ok === true ){
 				window.location.href = result.data.data.data.link;
 			  }else{

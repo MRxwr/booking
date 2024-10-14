@@ -52,7 +52,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                 }
             }
         }
-/*
+
         //vendor blocking time for a certain service
         if( $blockTime = selectDB("blocktime","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '{$serviceId}' AND `hidden` = '0' AND `status` = '0' ORDER BY `id` DESC LIMIT 1") ){
             if( $blockTime[0]["startDate"] <= $date && $blockTime[0]["endDate"] >= $date ){

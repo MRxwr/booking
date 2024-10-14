@@ -150,9 +150,10 @@
 	$("input[name='selectedTime']").val(0);
 	$("input[name='selectedDate']").val(0);
 	//reset and remove all option from select name time
-	$("#time-select").html('<option selected disabled value="0><?php echo direction("Please select a Time","الرجاء تحديد الوقت") ?></option>');
+	$("#time-select").html('');
+	$("#time-select").append('<option selected disabled value="0><?php echo direction("Please select a Time","الرجاء تحديد الوقت") ?></option>');
 	//reset and remove all option from input name date
-	$("input[name='date']").val(0);
+	$("input[name='date']").val("Please select a date");
 	// give it style active and remove the active from all other services 
 	$(".serviceBLk").removeClass("activeService");
 	$(this).addClass("activeService");

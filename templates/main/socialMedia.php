@@ -2,13 +2,16 @@
 	<div class="col-md-12 d-flex justify-content-center align-items-center">
 		<div class="row p-3 socialMediaBar">
 		<?php
-		$socialIcon = ["facebook","instagram","snapchat","twitter","globe","whatsapp"];
-		for( $i = 0; $i < sizeof($socialIcon) ; $i++){
-			?>
-			<div class="col-2 d-flex align-items-center justify-content-center socialIconDiv">
-				<span class="socialMediaSpan"><i class="fa fa-<?php echo $socialIcon[$i] ?>" aria-hidden="true"></i></span>
-			</div>
-			<?php
+		if( !empty($vendor["socialMedia"]) ){
+			$socialMedia = json_decode($vendor["socialMedia"],true);
+			$socialMediaKeys = array_keys($socialMedia);
+			for( $i = 0; $i < sizeof($socialMedia) ; $i++){
+				?>
+				<a href="#" target="_blank"><div class="col-2 d-flex align-items-center justify-content-center socialIconDiv">
+					<span class="socialMediaSpan"><i class="fa fa-<?php echo strtolower($socialMediaKeys[$i]) ?>" aria-hidden="true"></i></span>
+				</div></a>
+				<?php
+			}
 		}
 		?>
 		</div>

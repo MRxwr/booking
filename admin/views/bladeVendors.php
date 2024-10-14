@@ -261,8 +261,8 @@
 		$("input[name=url]").val($.trim($("#url"+id).html().replace(/\n/g, "")));
 		$("input[name=total]").val($.trim($("#total"+id).html().replace(/\n/g, "")));
 		$("input[name=iban]").val($.trim($("#iban"+id).html().replace(/\n/g, "")));
-		$("input[name=chargeType]").val($.trim($("#chargeType"+id).html().replace(/\n/g, "")));
-		$("select[name=chargeTypeAmount]").val($.trim($("#chargeTypeAmount"+id).html().replace(/\n/g, "")));
+		$("select[name=chargeType]").val($.trim($("#chargeType"+id).html().replace(/\n/g, "")));
+		$("input[name=chargeTypeAmount]").val($.trim($("#chargeTypeAmount"+id).html().replace(/\n/g, "")));
 		$("img[id=logo]").attr("src","../logos/"+$("#logo"+id).html());
 		$("img[id=coverImg]").attr("src","../logos/"+$("#coverImg"+id).html());
 		$("#images").attr("style","margin-top:10px;display:block");

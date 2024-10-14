@@ -172,7 +172,8 @@
 	}).done(function(data){
 		// check if data.ok = false
 		if( data.ok === false ){
-			alert(data.data);
+			alert("<?php echo direction("No time slots available, Please select another date","لا يوجد وقت متاح، الرجاء تحديد تاريخ اخر") ?>");
+			timeSelect.innerHTML = '<option value="0">No time slots available</option>';
 			return false;
 		}
 		var timeSlots = data.data.timeSlots;

@@ -1,25 +1,25 @@
 <?php
 if( isset($_POST["vendorId"]) && !empty($_POST["vendorId"]) && $vendor = selectDBNew("vendors",[$_POST["vendorId"]],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
 }else{
-    echo outputError("Missing vendor");die();
+    echo outputError(direction("Missing vendor","المتجر مطلوب"));die();
 }
 if( isset($_POST["serviceId"]) && !empty($_POST["serviceId"]) && $service = selectDBNew("services",[$_POST["serviceId"]],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
 }else{
-    echo outputError("Missing service");die();
+    echo outputError(direction("Missing service","الخدمة مطلوبة"));die();
 }
 if( isset($_POST["branchId"]) && !empty($_POST["branchId"]) && $branch = selectDBNew("branches",[$_POST["branchId"],$_POST["vendorId"]],"`id` = ? AND `status` = '0' AND `hidden` = '0' AND `vendorId` = ?","") ){
 }else{
-    echo outputError("Missing branch");die();
+    echo outputError(direction("Missing branch","الفرع مطلوب"));die();
 }
 if( isset($_POST["date"]) && !empty($_POST["date"]) ){
     $_POST["bookedDate"] = $_POST["date"];
 }else{
-    echo outputError("Missing date");die();
+    echo outputError(direction("Missing date","التاريخ مطلوب"));die();
 }
 if( isset($_POST["time"]) && !empty($_POST["time"]) ){
     $_POST["bookedTime"] = $_POST["time"];
 }else{
-    echo outputError("Missing time");die();
+    echo outputError(direction("Missing time","الوقت مطلوب"));die();
 }
 
 $orderId = date("Ymd").rand(0000,9999).time();
@@ -72,7 +72,7 @@ if ( $response["status"] == false ) {
     unset($_POST["date"]);
     if( insertDB("bookings",$_POST)){
     }else{
-        $response = outputError("Failed to add booking");die();
+        $response = outputError(direction("Failed to add booking","فشل في اضافة الحجز"));die();
     }
     echo outputData($response);die();
 }

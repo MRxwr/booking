@@ -12,7 +12,7 @@
 				<div class="panel-body ">
 					<form class="mt-30 mb-30" method="POST" action="" enctype="multipart/form-data">
 						<div class="row m-0">
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<label><?php echo direction("Type","النوع") ?></label>
 								<select name="type" class="form-control" required>
 									<option value="1"><?php echo direction("Salon","صالون") ?></option>
@@ -21,13 +21,18 @@
 								</select>
 							</div>
 
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<label><?php echo direction("Charge Type","نوع الرسوم") ?></label>
 								<select name="chargeType" class="form-control" required>
 									<option value="1"><?php echo direction("Full Payment","سداد كامل") ?></option>
 									<option value="2"><?php echo direction("Partial Payment","سداد جزئي") ?></option>
 									<option value="2"><?php echo direction("Free","مجاني") ?></option>
 								</select>
+							</div>
+
+							<div class="col-md-4">
+								<label><?php echo direction("Partial Charge","الرسوم الجزئية") ?></label>
+								<input type="number" step="any" min="1" name="chargeTypeAmount" class="form-control" required>
 							</div>
 
 							<div class="col-md-4">
@@ -256,7 +261,8 @@
 		$("input[name=url]").val($.trim($("#url"+id).html().replace(/\n/g, "")));
 		$("input[name=total]").val($.trim($("#total"+id).html().replace(/\n/g, "")));
 		$("input[name=iban]").val($.trim($("#iban"+id).html().replace(/\n/g, "")));
-		$("select[name=paymentType]").val($.trim($("#paymentType"+id).html().replace(/\n/g, "")));
+		$("input[name=chargeType]").val($.trim($("#chargeType"+id).html().replace(/\n/g, "")));
+		$("select[name=chargeTypeAmount]").val($.trim($("#chargeTypeAmount"+id).html().replace(/\n/g, "")));
 		$("img[id=logo]").attr("src","../logos/"+$("#logo"+id).html());
 		$("img[id=coverImg]").attr("src","../logos/"+$("#coverImg"+id).html());
 		$("#images").attr("style","margin-top:10px;display:block");

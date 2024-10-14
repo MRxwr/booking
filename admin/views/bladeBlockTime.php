@@ -25,7 +25,7 @@ if( isset($_POST["time"]) ){
 					<form class="mt-30 mb-30" method="POST" action="" enctype="multipart/form-data">
 						<div class="row m-0">
 
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<label><?php echo direction("Vendor","البائع") ?></label>
 								<select name="vendorId" class="form-control" required>
 									<?php 
@@ -38,7 +38,7 @@ if( isset($_POST["time"]) ){
 									?>
 								</select>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<label><?php echo direction("Branch","الفرع") ?></label>
 								<select name="branchId" class="form-control" required>
 									<?php 
@@ -50,6 +50,24 @@ if( isset($_POST["time"]) ){
 										$branchTitle = direction($branch["enTitle"],$branch["arTitle"]);
 										$vendorTitle = direction($vendors[0]["enTitle"],$vendors[0]["arTitle"]);
 										echo "<option value='{$branch["id"]}'>{$vendorTitle} - {$branchTitle}</option>";
+									}
+									?>
+								</select>
+							</div>
+
+							<div class="col-md-4">
+								<label><?php echo direction("Service","الخدمة") ?></label>
+								<select name="serviceId" class="form-control" required>
+									<?php 
+									$vendorData = ( isset($vendorId) && !empty($vendorId) ) ? " AND `vendorId` = '{$vendorId}'" : " AND `vendorId` != '0'";
+									$branchData = ( isset($branchId) && !empty($branchId) ) ? " AND `branchId` = '{$branchId}'" : " AND `branchId` != '0'";
+									$orderBy = direction("enTitle","arTitle");
+									$services = selectDB("services","`status` = '0' AND `hidden` = '0' {$vendorData} {$branchData} ORDER BY `{$orderBy}` ASC");
+									foreach( $services as $service ){
+										$vendors = selectDB("vendors","`id` = '{$service["vendorId"]}'");
+										$serviceTitle = direction($service["enTitle"],$service["arTitle"]);
+										$vendorTitle = direction($vendors[0]["enTitle"],$vendors[0]["arTitle"]);
+										echo "<option value='{$service["id"]}'>{$vendorTitle} - {$serviceTitle}</option>";
 									}
 									?>
 								</select>

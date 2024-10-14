@@ -4,7 +4,7 @@
 			<a href="?lang=<?php echo direction("ar","en") ?>" style="text-decoration: none;color: black;"><?php echo direction("العربية","English") ?></a>
 		</div>
 		<div class="col-8 d-flex align-items-center justify-content-center">
-			<?php echo direction($vendor["enTitle"],$vendor["arTitle"]) ?>
+			<a href="<?php echo $_SERVER["REQUEST_URI"] . "/" . $_GET["vendorURL"] ?>" style="text-decoration: none;color: black;"><?php echo direction($vendor["enTitle"],$vendor["arTitle"]) ?></a>
 		</div>
 		<div class="col-2 d-flex align-items-center justify-content-center">
 		</div>

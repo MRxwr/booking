@@ -14,7 +14,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 		$id = $_POST["update"];
 		unset($_POST["update"]);
 		if ( isset($_POST["sm"]) && !empty($_POST["sm"]) ){
-			$_POST["sm"] = json_encode($_POST["sm"]);
+			$_POST["socialMedia"] = json_encode($_POST["sm"]);
 		}
 		if( isset($_FILES['logo']) && is_uploaded_file($_FILES['logo']['tmp_name']) ){
 			$_POST["logo"] = uploadImage($_FILES["logo"]["tmp_name"]);

@@ -51,7 +51,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                 }
             }
         }
-/*
+
         //vendor blocking time
         if( $blockTime = selectDB("blocktime","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '{$serviceId}' AND `hidden` = '0' AND `status` = '0' ORDER BY `id` DESC LIMIT 1") ){
             if( $blockTime[0]["startDate"] <= $date && $blockTime[0]["endDate"] >= $date ){
@@ -64,7 +64,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                 }
             }
         }
-*/
+
         //booking blocking number of seats per hour
         if( $booking = selectDBNew("bookings",[$branchId,$vendorId,$date],"`branchId` = ? AND `vendorId` = ? AND `bookedDate` = ? AND (`status` = '1' OR (`status` = '0' AND TIMESTAMPDIFF(MINUTE, `date`, NOW()) < 15))","") ){
             foreach( $booking as $book ){

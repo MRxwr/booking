@@ -46,7 +46,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                 $blockedClose = substr($blockTime[0]["toTime"],0,2);
                 
                 for( $i = $blockedStart; $i < $blockedClose; $i++ ){
-                    $blockedTimeVendor[] = $blockedStart;
+                    $blockedTimeVendor[] = (string)$blockedStart;
                     (int)$blockedStart++;
                 }
             }

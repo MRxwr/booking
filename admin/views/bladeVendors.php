@@ -90,6 +90,18 @@
 								<textarea name="arTerms" class="form-control" required ></textarea>
 							</div>
 
+							<?php 
+							 if ( $socialMedia = selectDB("socialmedia","`status` = '0' ORDER BY `order` ASC") ){
+								 for( $i = 0; $i < sizeof($socialMedia); $i++ ){
+									 $name = direction($socialMedia[$i]["enTitle"],$socialMedia[$i]["arTitle"]);
+									 echo '<div class="col-md-6">
+									 <label>'.$name.'</label>
+									 <input type="text" name="sm['.$socialMedia[$i]["enTitle"].']" class="form-control" value="">
+									 </div>';
+								 }
+							 }
+							?>
+
 							<div class="col-md-6">
 								<label><?php echo direction("Logo","الشعار") ?></label>
 								<input type="file" name="logo" class="form-control">
@@ -197,6 +209,7 @@
 											<label id="arTerms<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["arTerms"] ?></label>
 											<label id="logo<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["logo"] ?></label>
 											<label id="coverImg<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["coverImg"] ?></label>
+											<label id="sm<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["socialMedia"] ?></label>
 										</div>
 									</tr>
 									<?php
@@ -234,6 +247,17 @@
 		$("img[id=logo]").attr("src","../logos/"+$("#logo"+id).html());
 		$("img[id=coverImg]").attr("src","../logos/"+$("#coverImg"+id).html());
 		$("#images").attr("style","margin-top:10px;display:block");
+		var sm = $.trim($("#sm"+id).html().replace(/\n/g, ""));
+		if(sm != ""){
+			var sm = JSON.parse(sm);
+			$("input[name=sm[whatsapp]]").val(sm["whatsapp"]);
+			$("input[name=sm[instagram]]").val(sm["instagram"]);
+			$("input[name=sm[twitter]]").val(sm["twitter"]);
+			$("input[name=sm[phone]]").val(sm["phone"]);
+			$("input[name=sm[facebook]]").val(sm["facebook"]);
+			$("input[name=sm[location]]").val(sm["location"]);
+			$("input[name=sm[snapchat]]").val(sm["snapchat"]);
+		}
 	})
 </script>
   

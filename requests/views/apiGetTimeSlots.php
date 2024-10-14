@@ -78,7 +78,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                 $counter++;
             }
         }
-*/
+
         //booking blocking of services number of seats per hour
         if( $booking = selectDB("bookings","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '{$serviceId}' AND `bookedDate` = '{$date}' AND (`status` = '1' OR (`status` = '0' AND TIMESTAMPDIFF(MINUTE, `date`, NOW()) < 15))") ){
             foreach( $booking as $book ){
@@ -92,7 +92,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                 $counter++;
             }
         }
-
+*/
         // removeing all blocked time from timeSlots
         $startTime = ($start) . ":00";
         while( true ){

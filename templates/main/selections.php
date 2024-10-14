@@ -119,6 +119,7 @@
 
   // Add an event listener to the branch select element
   branchSelect.addEventListener("change", function(){
+	$("#loading-screen").show();
 	// on change update input name branchId with value
 	$("input[name=branchId]").val(this.value);
 	$("input[name='serviceId']").val(0);
@@ -159,6 +160,7 @@
 	});
 	updateDatePicker(selectedBranchId);
 	$("input[name='date']").val("Please select a date");
+	$("#loading-screen").hide();
   });
 
   // on serviceBLk click update input name serviceId with attr id

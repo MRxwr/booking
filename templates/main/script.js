@@ -21,7 +21,7 @@ $(window).ready(function() {
 		var name = $("#name").val();
 		var mobile = $("#mobile").val();
 		var email = $("#email").val();
-
+		$("#loading-screen").show();
 		// check cookie[createLang] if is set to ar then show alert else show alrt in english
 		if (getCookie("createLang") == "ar") {
 			var branchError = "يرجى تحديد الفرع";
@@ -75,6 +75,7 @@ $(window).ready(function() {
 			  }
 			}
 		  }).done(function(result){
+			$("#loading-screen").hide();
 			  if( result.ok === true ){
 				window.location.href = result.data.data.data.link;
 			  }else{
@@ -83,6 +84,7 @@ $(window).ready(function() {
 				return false;
 			  }
 		  }).fail(function(){
+			$("#loading-screen").hide();
 			// show error message
 			alert(serverError);
 			return false;

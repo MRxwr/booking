@@ -58,6 +58,7 @@ if( isset($_POST["time"]) ){
 							<div class="col-md-4">
 								<label><?php echo direction("Service","الخدمة") ?></label>
 								<select name="serviceId" class="form-control" required>
+								<option value='0' selected><?php echo direction("All Services","كل الخدمات") ?></option>
 									<?php 
 									$vendorData = ( isset($vendorId) && !empty($vendorId) ) ? " AND `vendorId` = '{$vendorId}'" : " AND `vendorId` != '0'";
 									$branchData = ( isset($branchId) && !empty($branchId) ) ? " AND `branchId` = '{$branchId}'" : " AND `branchId` != '0'";

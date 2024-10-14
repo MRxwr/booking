@@ -121,6 +121,14 @@
   branchSelect.addEventListener("change", function(){
 	// on change update input name branchId with value
 	$("input[name=branchId]").val(this.value);
+	$("input[name='serviceId']").val(0);
+	$("input[name='selectedTime']").val(0);
+	$("input[name='selectedDate']").val(0);
+	//reset and remove all option from select name time
+	timeSelect.innerHTML = '';
+	timeSelect.innerHTML = '<option value="0">Please select a time</option>';
+	//reset and remove all option from input name date
+	$("input[name='date']").val("Please select a date");
 	var selectedBranch = this.value;
 	var selectedBranchId = this.value;
 	var selectedBranchData = branches.find(function(branch){

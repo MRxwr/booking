@@ -251,14 +251,12 @@
 		console.log(sm);
 		if(sm != ""){
 		  var sm = JSON.parse(sm);
-		  $("input[name='sm[Whatsapp]']").val(sm["Whatsapp"]);
-		  $("input[name='sm[Instagram]']").val(sm["Instagram"]);
-		  $("input[name='sm[twitter]']").val(sm["twitter"]);
-		  $("input[name='sm[Phone]']").val(sm["Phone"]);
-		  $("input[name='sm[facebook]']").val(sm["facebook"]);
-		  $("input[name='sm[Location]']").val(sm["Location"]);
-		  $("input[name='sm[Snapchat]']").val(sm["Snapchat"]);
-		  $("input[name='sm[YouTube]']").val(sm["YouTube"]);
+		  <?php
+		for( $i = 0; $i < sizeof($socialMedia); $i++ ){
+			$name = direction($socialMedia[$i]["enTitle"],$socialMedia[$i]["arTitle"]);
+			echo "$('input[name=sm['{$socialMedia[$i]["enTitle"]}]']').val(sm['{$socialMedia[$i]["enTitle"]}'])";
+		}
+		  ?>
 		}
 	})
 </script>

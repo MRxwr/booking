@@ -21,7 +21,13 @@ if( isset($_POST["time"]) && !empty($_POST["time"]) ){
 }else{
     echo outputError(direction("Missing time","الوقت مطلوب"));die();
 }
-$price = ( $vendor[0]["chargeType"] == 1 ) ? $service[0]["price"] : ( ($vendor[0]["chargeType"] == 2) ? $vendor[0]["chargeTypeAmount"] : $service[0]["price"] );
+if( $vendor[0]["chargeType"] == 1 ){
+    $price = $service[0]["price"];
+}elseif( $vendor[0]["chargeType"] == 2 ){
+    $price = $vendor[0]["chargeTypeAmount"];
+}else{
+    $price = $service[0]["price"];
+}
 $orderId = date("Ymd").rand(0000,9999).time();
 $paymentArray = array(
     'language' => 'en',

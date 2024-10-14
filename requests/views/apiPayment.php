@@ -21,19 +21,19 @@ if( isset($_POST["time"]) && !empty($_POST["time"]) ){
 }else{
     echo outputError(direction("Missing time","الوقت مطلوب"));die();
 }
-
+$price = ( $vendor[0]["chargeType"] == 1 ) ? $service[0]["price"] : ( ($vendor[0]["chargeType"] == 2) ? $vendor[0]["chargeTypeAmount"] : $service[0]["price"] );
 $orderId = date("Ymd").rand(0000,9999).time();
 $paymentArray = array(
     'language' => 'en',
     'order[id]' => "{$orderId}",
     'order[currency]' => 'KWD',
-    'order[amount]' => "{$service[0]["price"]}",
+    'order[amount]' => "{$price}",
     'reference[id]' => "{$orderId}",
     'returnUrl' => "https://booking.createkuwait.com/{$vendor[0]["url"]}",
     'cancelUrl' => "https://booking.createkuwait.com/{$vendor[0]["url"]}",
     'notificationUrl' => "https://booking.createkuwait.com/{$vendor[0]["url"]}",
     'paymentGateway[src]' => 'knet',
-    'extraMerchantData[0][amount]' => "{$service[0]["price"]}",
+    'extraMerchantData[0][amount]' => "{$price}",
     'extraMerchantData[0][knetCharge]' => '0.15',
     'extraMerchantData[0][knetChargeType]' => 'fixed',
     'extraMerchantData[0][ccCharge]' => '3',
@@ -66,6 +66,7 @@ if ( $response["status"] == false ) {
     $_POST["gatewayBody"] = json_encode($paymentArray);
     $_POST["gatewayResponse"] = json_encode($response);
     $_POST["gatewayURL"] = $response["data"]["link"];
+    $_POST["chargeType"] = $vendor[0]["chargeType"];
     $_POST["customerDetails"] = json_encode($_POST["customer"]);
     unset($_POST["customer"]);
     unset($_POST["time"]);
@@ -73,6 +74,9 @@ if ( $response["status"] == false ) {
     if( insertDB("bookings",$_POST)){
     }else{
         $response = outputError(direction("Failed to add booking","فشل في اضافة الحجز"));die();
+    }
+    if( $vendor[0]["chargeType"] == 3 ){
+        $response["data"]["link"] = "https://booking.createkuwait.com/{$vendor[0]["url"]}?result=CAPTURED&requested_order_id={$orderId}";
     }
     echo outputData($response);die();
 }

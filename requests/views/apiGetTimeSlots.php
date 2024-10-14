@@ -40,7 +40,20 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         $bookedService = [];
         $bookedTimeService = [];
         //vendor blocking time
-        if( $blockTime = selectDB("blocktime","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' ORDER BY `id` DESC LIMIT 1") ){
+        if( $blockTime = selectDB("blocktime","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `hidden` = '0' AND `status` = '0'  ORDER BY `id` DESC LIMIT 1") ){
+            if( $blockTime[0]["startDate"] <= $date && $blockTime[0]["endDate"] >= $date ){
+                $blockedStart = substr($blockTime[0]["fromTime"],0,2);
+                $blockedClose = substr($blockTime[0]["toTime"],0,2);
+                
+                for( $i = $blockedStart; $i < $blockedClose; $i++ ){
+                    $blockedTimeVendor[] = (string)$blockedStart;
+                    (int)$blockedStart++;
+                }
+            }
+        }
+
+        //vendor blocking time
+        if( $blockTime = selectDB("blocktime","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '{$serviceId}' AND `hidden` = '0' AND `status` = '0' ORDER BY `id` DESC LIMIT 1") ){
             if( $blockTime[0]["startDate"] <= $date && $blockTime[0]["endDate"] >= $date ){
                 $blockedStart = substr($blockTime[0]["fromTime"],0,2);
                 $blockedClose = substr($blockTime[0]["toTime"],0,2);
@@ -83,7 +96,6 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         // removeing all blocked time from timeSlots
         $startTime = ($start) . ":00";
         while( true ){
-            var_dump(!in_array((int)$start, $blockedTimeVendor) . " {$start}");
             if( !in_array((int)$start, $blockedTimeVendor) && !in_array((int)$start, $blockedTimeBookings) ){
                  //$response["timeSlots"][] = ($start) . ":00 - " . ((int)($start)+1) . ":00";
                  $endTime = date('H:i', strtotime('+'.$duration.' minutes', strtotime($startTime)));

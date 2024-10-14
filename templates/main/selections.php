@@ -178,6 +178,7 @@
 		}
 		var timeSlots = data.data.timeSlots;
 		var timeSlotHTML = "";
+		timeSelect.innerHTML = '<option value="0">Please select a time</option>';
 		timeSlots.forEach(function(timeSlot){
 			timeSlotHTML += '<option value="'+timeSlot+'">'+timeSlot+'</option>';
 		});

@@ -40,7 +40,7 @@ $(window).ready(function() {
 			var vendorError = "Please select a vendor";
 			var serviceError = "Please select a service";
 			var dateError = "Please select a date";
-			var timeError = "Please select atime";
+			var timeError = "Please select a time";
 			var nameError = "Please enter your name";
 			var mobileError = "Please enter your mobile with country code";
 			var emailError = "Please enter your email";

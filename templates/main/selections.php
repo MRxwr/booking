@@ -194,6 +194,7 @@
 		alert("<?php echo direction("Please select a service","الرجاء تحديد خدمة") ?>");
 		return false;
 	}
+	$("#loading-screen").show();
 	$.ajax({
 	  type: "POST",
 	  url: "requests/index.php?a=GetTimeSlots",
@@ -204,6 +205,7 @@
 		vendorId: <?php echo $vendor["id"] ?>
 	  }
 	}).done(function(data){
+		$("#loading-screen").hide();
 		// check if data.ok = false
 		if( data.ok === false ){
 			alert("<?php echo direction("No time slots available, Please select another date","لا يوجد وقت متاح، الرجاء تحديد تاريخ اخر") ?>");

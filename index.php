@@ -66,11 +66,43 @@ if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor =
 				background-size: cover;
 				height: 250px;
 			}
+			#loading-screen {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(255, 255, 255, 0.7);
+				z-index: 1000;
+				display: none;
+			}
+
+			#loading-screen img {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 50px;
+				height: 50px;
+				animation: spin 2s linear infinite;
+			}
+
+			@keyframes spin {
+				0% {
+					transform: translate(-50%, -50%) rotate(0deg);
+				}
+				100% {
+					transform: translate(-50%, -50%) rotate(360deg);
+				}
+			}
 		</style>
 	</head>
 	<body>
 		<div class="container-fluid p-0">
 			<div class="row w-100 m-0">
+			<div id="loading-screen" style="display: none;">
+				<img src="img/loading.png" alt="Loading...">
+			</div>
 			<?php require_once("templates/main/leftSide.php") ?>
 			<?php require_once("templates/main/rightSide.php") ?>
 			</div>

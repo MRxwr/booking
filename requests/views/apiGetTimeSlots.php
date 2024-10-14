@@ -13,7 +13,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
     $vendorId = $_POST["vendorId"];
     $date = $_POST["date"];
     $day = date('w', strtotime($date));
-    if( $timeSlots = selectDBNew("times",[$branchId,$day,$vendorId],"`branchId` = ? AND `day` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
+    if( $timeSlots = selectDBNew("times",[$branchId,$day,$vendorId],"`branchId` = ? AND `day` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0' ORDER BY `id` DESC","") ){
         //Get Branch Details
         if( $branches = selectDBNew("branches",[$branchId,$vendorId],"`id` = ? AND `status` = '0' AND `hidden` = '0' AND `vendorId` = ?","") ){
             $branchTotalSeats = $branches[0]["seats"];

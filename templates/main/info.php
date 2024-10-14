@@ -21,7 +21,7 @@
 	<div class="col-12">
 		<div class="form-group form-check">
 			<input type="checkbox" class="form-check-input" id="exampleCheck1" required>
-			<label class="form-check-label" for="exampleCheck1"><?php echo direction("I agree to terms and conditions","اوافق على الشروط والاحكام") ?></label>
+			<label class="form-check-label" for="exampleCheck1" data-toggle="modal" data-target="#terms"><?php echo direction("I agree to terms and conditions","اوافق على الشروط والاحكام") ?></label>
 		</div>
 	</div>
 	<div class="col-12 mt-3">

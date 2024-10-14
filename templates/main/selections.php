@@ -124,7 +124,7 @@
 	$("input[name='serviceId']").val(0);
 	$("input[name='selectedTime']").val(0);
 	$("input[name='selectedDate']").val(0);
-	$("#btnPrice").html("0 -/KD");
+	$(".btnPrice").html("0 -/KD");
 	//reset and remove all option from select name time
 	timeSelect.innerHTML = '';
 	timeSelect.innerHTML = '<option value="0">Please select a time</option>';
@@ -153,7 +153,7 @@
 			var durationText = "Duration";
 		}
 	  var serviceHTML = '<div class="col-6 d-flex align-items-center justify-content-center p-2">';
-	  serviceHTML += '<div class="w-100 p-3 text-center serviceBLk" id="'+service.id+'"><span>'+service.title+' </span><label style="font-size: 8px;"> (<div id="priceValue">'+service.price+' -/KD</div>)</label><hr class="m-0"><label style="font-size: 8px;">'+durationText+': '+service.period+' '+mins+' </label></div>';
+	  serviceHTML += '<div class="w-100 p-3 text-center serviceBLk" id="'+service.id+'"><span>'+service.title+' </span><label style="font-size: 8px;"> <div id="priceValue">'+service.price+' -/KD</div></label><hr class="m-0"><label style="font-size: 8px;">'+durationText+': '+service.period+' '+mins+' </label></div>';
 	  serviceHTML += '</div>';
 	  servicesContainer.innerHTML += serviceHTML;
 	});
@@ -167,7 +167,7 @@
 	$("input[name='serviceId']").val(serviceId);
 	$("input[name='selectedTime']").val(0);
 	$("input[name='selectedDate']").val(0);
-	$("#btnPrice").html($(this).find("#priceValue").text());
+	$(".btnPrice").html($(this).find("#priceValue").text());
 	//reset and remove all option from select name time
 	timeSelect.innerHTML = '';
 	timeSelect.innerHTML = '<option value="0">Please select a time</option>';

@@ -152,7 +152,7 @@
 									<?php 
 									if( $vendors = selectDB("{$table}","`status` = '0' ORDER BY `id` ASC") ){
 										for( $i = 0; $i < sizeof($vendors); $i++ ){
-											if ( $vendors[$i]["hidden"] == 0 ){
+											if ( $vendors[$i]["hidden"] == 1 ){
 												$icon = "fa fa-unlock";
 												$link = "?{$_SERVER["QUERY_STRING"]}&show={$vendors[$i]["id"]}";
 												$hide = direction("Unlock","فتح");

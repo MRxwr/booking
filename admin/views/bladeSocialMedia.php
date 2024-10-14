@@ -73,7 +73,7 @@
 												$icon = "fa fa-lock";
 												$link = "?{$_SERVER["QUERY_STRING"]}&hide={$socialMedia[$i]["id"]}";
 												$hide = direction("Lock","قفل الحساب");
-											}			
+											}
 									?>
 									<tr>
 										<td>

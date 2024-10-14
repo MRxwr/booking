@@ -13,7 +13,7 @@
 		</div>
 	</div>
 	<div class="col-6">
-		<div class="form-group" data-toggle="modal" data-target="#terms">
+		<div class="form-group">
 			<label for="email"><?php echo direction("Email","البريد الالكتروني") ?></label>
 			<input type="email" class="form-control" id="email" placeholder="Enter your email" required>
 		</div>

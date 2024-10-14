@@ -250,14 +250,14 @@
 		var sm = $.trim($("#sm"+id).html().replace(/\n/g, ""));
 		console.log(sm);
 		if(sm != ""){
-			var sm = JSON.parse(sm);
-			$("input[name='sm[whatsapp]']").val(sm["whatsapp"]);
-			$("input[name='sm[instagram]']").val(sm["instagram"]);
-			$("input[name='sm[twitter]']").val(sm["twitter"]);
-			$("input[name='sm[phone]']").val(sm["phone"]);
-			$("input[name='sm[facebook]']").val(sm["facebook"]);
-			$("input[name='sm[location]']").val(sm["location"]);
-			$("input[name='sm[snapchat]']").val(sm["snapchat"]);
+		  var sm = JSON.parse(sm);
+		  $("input[name='sm[Whatsapp]']").val(sm["Whatsapp"]);
+		  $("input[name='sm[Instagram]']").val(sm["Instagram"]);
+		  $("input[name='sm[twitter]']").val(sm["twitter"]);
+		  $("input[name='sm[Phone]']").val(sm["Phone"]);
+		  $("input[name='sm[facebook]']").val(sm["facebook"]);
+		  $("input[name='sm[Location]']").val(sm["Location"]);
+		  $("input[name='sm[Snapchat]']").val(sm["Snapchat"]);
 		}
 	})
 </script>

@@ -175,6 +175,14 @@
   // now on date change get vendroId branchId and date and serviceId and make a ajax call to retieve the time slots
   $("input[name='date']").on("change", function(){
 	$("input[name=selectedDate]").val(this.value);
+	if ( $("input[name='branchId']").val() == 0 ){
+		alert("<?php echo direction("Please select a branch","الرجاء تحديد فرع") ?>");
+		return false;
+	}
+	if( $("input[name='serviceId']").val() == 0 ){
+		alert("<?php echo direction("Please select a service","الرجاء تحديد خدمة") ?>");
+		return false;
+	}
 	$.ajax({
 	  type: "POST",
 	  url: "requests/index.php?a=GetTimeSlots",

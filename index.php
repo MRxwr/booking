@@ -11,6 +11,7 @@ if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor =
 			if ( $order[0]["status"] == "0" ){
 				$bookingCode = generateRandomString($vendor["id"]);
 				updateDB("bookings",array("status"=>"1","paymentResponse"=>json_encode($_GET),"code"=>$bookingCode),"`id` = '{$order[0]["id"]}'");
+				$order = selectDBNew("bookings",[$_GET["requested_order_id"]],"`gatewayId` LIKE ?","");
 			}
 			$_GET["status"] = "success";
 			$customer = json_decode($order[0]["customerDetails"],true);

@@ -258,6 +258,7 @@
 		  $("input[name='sm[facebook]']").val(sm["facebook"]);
 		  $("input[name='sm[Location]']").val(sm["Location"]);
 		  $("input[name='sm[Snapchat]']").val(sm["Snapchat"]);
+		  $("input[name='sm[YouTube]']").val(sm["YouTube"]);
 		}
 	})
 </script>

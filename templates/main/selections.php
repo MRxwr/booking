@@ -152,7 +152,7 @@
 			var durationText = "Duration";
 		}
 	  var serviceHTML = '<div class="col-6 d-flex align-items-center justify-content-center p-2">';
-	  serviceHTML += '<div class="w-100 p-3 text-center serviceBLk" id="'+service.id+'"><span>'+service.title+'</span><hr class="m-0"><label style="font-size: 8px;">'+durationText+': '+service.period+' '+mins+' </label><p><label style="font-size: 8px;">'+priceText+': '+service.price+' -/KD</label></div>';
+	  serviceHTML += '<div class="w-100 p-3 text-center serviceBLk" id="'+service.id+'"><span>'+service.title+'</span><label style="font-size: 8px;"> ('+service.price+' -/KD)</label><hr class="m-0"><label style="font-size: 8px;">'+durationText+': '+service.period+' '+mins+' </label></div>';
 	  serviceHTML += '</div>';
 	  servicesContainer.innerHTML += serviceHTML;
 	});

@@ -41,7 +41,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         $bookedTimeService = [];
 
         //vendor blocking time for a branch
-        if( $blockTime = selectDB("blocktime","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '0' AND `hidden` = '0' AND `status` = '0'  ORDER BY `id` DESC LIMIT 1") ){
+        if( $blockTime = selectDB2("`fromTime`,`toTime`","blocktime","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '0' AND `hidden` = '0' AND `status` = '0'  ORDER BY `id` DESC LIMIT 1") ){
             if( $blockTime[0]["startDate"] <= $date && $blockTime[0]["endDate"] >= $date ){
                 $blockedStart = substr($blockTime[0]["fromTime"],0,2);
                 $blockedClose = substr($blockTime[0]["toTime"],0,2);
@@ -54,7 +54,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         }
 
         //vendor blocking time for a certain service
-        if( $blockTime = selectDB("blocktime","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '{$serviceId}' AND `hidden` = '0' AND `status` = '0' ORDER BY `id` DESC LIMIT 1") ){
+        if( $blockTime = selectDB2("`fromTime`,`toTime`","blocktime","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '{$serviceId}' AND `hidden` = '0' AND `status` = '0' ORDER BY `id` DESC LIMIT 1") ){
             if( $blockTime[0]["startDate"] <= $date && $blockTime[0]["endDate"] >= $date ){
                 $blockedStart = substr($blockTime[0]["fromTime"],0,2);
                 $blockedClose = substr($blockTime[0]["toTime"],0,2);
@@ -79,9 +79,9 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                 $counter++;
             }
         }
-
+*/
         //booking blocking of services number of seats per hour
-        if( $booking = selectDB("bookings","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '{$serviceId}' AND `bookedDate` = '{$date}' AND (`status` = '1' OR (`status` = '0' AND TIMESTAMPDIFF(MINUTE, `date`, NOW()) < 15))") ){
+        if( $booking = selectDB2("`bookedTime`","bookings","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '{$serviceId}' AND `bookedDate` = '{$date}' AND (`status` = '1' OR (`status` = '0' AND TIMESTAMPDIFF(MINUTE, `date`, NOW()) < 15))") ){
             foreach( $booking as $book ){
                 $bookedService[] = substr($book["bookedTime"],0,2);
             }
@@ -93,7 +93,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                 $counter++;
             }
         }
-*/
+
         // removeing all blocked time from timeSlots
         $startTime = ($start) . ":00";
         while( true ){

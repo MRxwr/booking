@@ -6,8 +6,9 @@
 			$socialMedia = json_decode($vendor["socialMedia"],true);
 			$socialMediaKeys = array_keys($socialMedia);
 			for( $i = 0; $i < sizeof($socialMedia) ; $i++){
+				$socialMediaLink = selectDB("socialmedia","`enTitle` = '{$socialMediaKeys[$i]}'");
 				?>
-				<div class="col d-flex align-items-center justify-content-center socialIconDiv"><a href="#" target="_blank">
+				<div class="col d-flex align-items-center justify-content-center socialIconDiv"><a href="<?php echo $socialMediaLink[0]["link"] . $socialMedia[$socialMediaKeys[$i]] ?>" target="_blank">
 					<span class="socialMediaSpan"><i class="fa fa-<?php echo strtolower($socialMediaKeys[$i]) ?>" aria-hidden="true"></i></span></a>
 				</div>
 				<?php

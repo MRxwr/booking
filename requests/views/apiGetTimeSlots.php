@@ -41,8 +41,6 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         $bookedTimeService = [];
         //vendor blocking time
         if( $blockTime = selectDB("blocktime","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' ORDER BY `id` DESC LIMIT 1") ){
-            var_dump($blockTime[0]["startDate"] <= $date);
-            var_dump($blockTime[0]["endDate"] >= $date);
             if( $blockTime[0]["startDate"] <= $date && $blockTime[0]["endDate"] >= $date ){
                 $blockedStart = substr($blockTime[0]["fromTime"],0,2);
                 $blockedClose = substr($blockTime[0]["toTime"],0,2);
@@ -52,6 +50,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                     (int)$blockedStart++;
                 }
             }
+            var_dump($blockedTimeVendor);
         }
 
         //booking blocking number of seats per hour

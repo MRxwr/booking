@@ -1,6 +1,4 @@
 
-<fieldset>
-<legend>Personal Information:</legend>
 	<div class="row m-0">
 	<div class="col-12">
 		<div class="form-group">
@@ -39,7 +37,6 @@
 		</div>
 	</div>
 	</div>
-</fieldset>
 </form>
 
 <div class="modal fade" id="terms" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

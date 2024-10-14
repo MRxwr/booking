@@ -12,19 +12,24 @@
 				<div class="panel-body ">
 					<form class="mt-30 mb-30" method="POST" action="" enctype="multipart/form-data">
 						<div class="row m-0">
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<label><?php echo direction("English Title","الإسم الإنجليزي") ?></label>
 								<input type="text" name="enTitle" class="form-control" required>
 							</div>
 
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<label><?php echo direction("Arabic Title","الإسم العربي") ?></label>
 								<input type="text" name="arTitle" class="form-control" required>
 							</div>
 
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<label><?php echo direction("Icon","الأيقونه") ?></label>
 								<input type="text" name="logo" class="form-control" required>
+							</div>
+
+							<div class="col-md-3">
+								<label><?php echo direction("Link","الرابط") ?></label>
+								<input type="text" name="link" class="form-control" required>
 							</div>
 
 							<div class="col-md-12" style="margin-top:10px">
@@ -58,6 +63,7 @@
 									<th><?php echo direction("English Title","لإسم الإنجليزي") ?></th>
 									<th><?php echo direction("Arabic Title"," الإسم العربي") ?></th>
 									<th><?php echo direction("Icon","الأيقونه") ?></th>
+									<th><?php echo direction("Link","الرابط") ?></th>
 									<th class="text-nowrap"><?php echo direction("الخيارات","Actions") ?></th>
 									</tr>
 								</thead>
@@ -85,6 +91,9 @@
 										</td>
 										<td id="arTitle<?php echo $socialMedia[$i]["id"]?>" >
 											<?php echo $socialMedia[$i]["arTitle"] ?>
+										</td>
+										<td id="link<?php echo $socialMedia[$i]["id"]?>" >
+											<?php echo $socialMedia[$i]["link"] ?>
 										</td>
 										<td>
 											<div id="logo<?php echo $socialMedia[$i]["id"]?>" style="display:none"><?php echo $socialMedia[$i]["logo"] ?></div>
@@ -125,9 +134,11 @@
 		var arTitle = $("#arTitle"+id).html();
 		var enTitle = $("#enTitle"+id).html();
 		var logo = $("#logo"+id).html();
+		var link = $("#link"+id).html();
 		$("input[name=arTitle]").val($.trim(arTitle.replace(/\n/g, "")));
 		$("input[name=enTitle]").val($.trim(enTitle.replace(/\n/g, ""))).focus();
 		$("input[name=logo]").val($.trim(logo.replace(/\n/g, "")));
+		$("input[name=link]").val($.trim(link.replace(/\n/g, "")));
 	})
 </script>
   

@@ -26,7 +26,7 @@
 								<select name="chargeType" class="form-control" required>
 									<option value="1"><?php echo direction("Full Payment","سداد كامل") ?></option>
 									<option value="2"><?php echo direction("Partial Payment","سداد جزئي") ?></option>
-									<option value="2"><?php echo direction("Free","مجاني") ?></option>
+									<option value="3"><?php echo direction("Free","مجاني") ?></option>
 								</select>
 							</div>
 

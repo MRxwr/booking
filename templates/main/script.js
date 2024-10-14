@@ -75,18 +75,19 @@ $(window).ready(function() {
 			  }
 			}
 		  }).done(function(result){
-			$("#loading-screen").hide();
+			
 			  if( result.ok === true ){
 				window.location.href = result.data.data.data.link;
 			  }else{
 				// show error message
 				alert(paymentError);
+				$("#loading-screen").hide();
 				return false;
 			  }
 		  }).fail(function(){
-			$("#loading-screen").hide();
 			// show error message
 			alert(serverError);
+			$("#loading-screen").hide();
 			return false;
 		  });
 	});

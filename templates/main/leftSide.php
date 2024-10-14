@@ -10,9 +10,7 @@
 	<!-- social Media Bar -->
 	<?php require_once("templates/main/socialMedia.php") ?>
 	<!-- end of social media bar -->
-	<div id="loading-screen" style="display: none;">
-		<img src="img/loading.png" alt="Loading...">
-	</div>
+	 
 	<!-- rest of page -->
 	<?php
 	if( isset($_GET["status"]) && $_GET["status"] == "success" ){

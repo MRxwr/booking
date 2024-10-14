@@ -150,8 +150,8 @@
 	$("input[name='selectedTime']").val(0);
 	$("input[name='selectedDate']").val(0);
 	//reset and remove all option from select name time
-	$("#time-select").html('');
-	$("#time-select").append('<option selected disabled value="0><?php echo direction("Please select a Time","الرجاء تحديد الوقت") ?></option>');
+	timeSelect.innerHTML = '';
+	timeSelect.innerHTML = '<option value="0">Please select a time</option>';
 	//reset and remove all option from input name date
 	$("input[name='date']").val("Please select a date");
 	// give it style active and remove the active from all other services 

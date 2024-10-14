@@ -142,7 +142,7 @@
 	
 	// Loop through the filtered services and add them to the container
 	filteredServices.forEach(function(service){
-		if( getCookie("language") == "ar" ){
+		if( getCookie("createLang") == "ar" ){
 			var mins = "دقيقه";
 			var priceText = "السعر";
 			var durationText = "المدة";

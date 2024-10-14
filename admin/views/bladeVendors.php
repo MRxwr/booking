@@ -248,6 +248,7 @@
 		$("img[id=coverImg]").attr("src","../logos/"+$("#coverImg"+id).html());
 		$("#images").attr("style","margin-top:10px;display:block");
 		var sm = $.trim($("#sm"+id).html().replace(/\n/g, ""));
+		console.log(sm);
 		if(sm != ""){
 			var sm = JSON.parse(sm);
 			$("input[name=sm[whatsapp]]").val(sm["whatsapp"]);

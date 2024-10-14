@@ -219,6 +219,7 @@
 											<label id="arTerms<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["arTerms"] ?></label>
 											<label id="logo<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["logo"] ?></label>
 											<label id="chargeType<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["chargeType"] ?></label>
+											<label id="chargeTypeAmount<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["chargeTypeAmount"] ?></label>
 											<label id="coverImg<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["coverImg"] ?></label>
 											<label id="sm<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["socialMedia"] ?></label>
 										</div>

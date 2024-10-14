@@ -128,7 +128,6 @@
 	timeSelect.innerHTML = '';
 	timeSelect.innerHTML = '<option value="0">Please select a time</option>';
 	//reset and remove all option from input name date
-	$("input[name='date']").val("Please select a date");
 	var selectedBranch = this.value;
 	var selectedBranchId = this.value;
 	var selectedBranchData = branches.find(function(branch){
@@ -149,6 +148,7 @@
 	  servicesContainer.innerHTML += serviceHTML;
 	});
 	updateDatePicker(selectedBranchId);
+	$("input[name='date']").val("Please select a date");
   });
 
   // on serviceBLk click update input name serviceId with attr id

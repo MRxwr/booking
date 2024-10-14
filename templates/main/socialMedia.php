@@ -7,7 +7,7 @@
 			$socialMediaKeys = array_keys($socialMedia);
 			for( $i = 0; $i < sizeof($socialMedia) ; $i++){
 				?>
-				<div class="col-2 d-flex align-items-center justify-content-center socialIconDiv"><a href="#" target="_blank">
+				<div class="col d-flex align-items-center justify-content-center socialIconDiv"><a href="#" target="_blank">
 					<span class="socialMediaSpan"><i class="fa fa-<?php echo strtolower($socialMediaKeys[$i]) ?>" aria-hidden="true"></i></span></a>
 				</div>
 				<?php

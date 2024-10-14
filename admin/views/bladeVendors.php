@@ -12,25 +12,35 @@
 				<div class="panel-body ">
 					<form class="mt-30 mb-30" method="POST" action="" enctype="multipart/form-data">
 						<div class="row m-0">
-							<div class="col-md-3">
+							<div class="col-md-6">
 								<label><?php echo direction("Type","النوع") ?></label>
 								<select name="type" class="form-control" required>
 									<option value="1"><?php echo direction("Salon","صالون") ?></option>
 									<option value="2"><?php echo direction("Clinic","عيادة") ?></option>
+									<option value="3"><?php echo direction("Studio","إستوديو") ?></option>
 								</select>
 							</div>
 
-							<div class="col-md-3">
+							<div class="col-md-6">
+								<label><?php echo direction("Charge Type","نوع الرسوم") ?></label>
+								<select name="chargeType" class="form-control" required>
+									<option value="1"><?php echo direction("Full Payment","سداد كامل") ?></option>
+									<option value="2"><?php echo direction("Partial Payment","سداد جزئي") ?></option>
+									<option value="2"><?php echo direction("Free","مجاني") ?></option>
+								</select>
+							</div>
+
+							<div class="col-md-4">
 								<label><?php echo direction("Website URL","الرابط الويب") ?></label>
 								<input type="text" name="url" class="form-control" required>
 							</div>
 
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<label><?php echo direction("Subnscription","الاشتراك") ?></label>
 								<input type="float" name="total" class="form-control" required>
 							</div>
 
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<label><?php echo direction("IBAN","IBAN") ?></label>
 								<input type="text" name="iban" class="form-control" required>
 							</div>
@@ -208,6 +218,7 @@
 											<label id="enTerms<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["enTerms"] ?></label>
 											<label id="arTerms<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["arTerms"] ?></label>
 											<label id="logo<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["logo"] ?></label>
+											<label id="chargeType<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["chargeType"] ?></label>
 											<label id="coverImg<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["coverImg"] ?></label>
 											<label id="sm<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["socialMedia"] ?></label>
 										</div>
@@ -244,6 +255,7 @@
 		$("input[name=url]").val($.trim($("#url"+id).html().replace(/\n/g, "")));
 		$("input[name=total]").val($.trim($("#total"+id).html().replace(/\n/g, "")));
 		$("input[name=iban]").val($.trim($("#iban"+id).html().replace(/\n/g, "")));
+		$("select[name=paymentType]").val($.trim($("#paymentType"+id).html().replace(/\n/g, "")));
 		$("img[id=logo]").attr("src","../logos/"+$("#logo"+id).html());
 		$("img[id=coverImg]").attr("src","../logos/"+$("#coverImg"+id).html());
 		$("#images").attr("style","margin-top:10px;display:block");

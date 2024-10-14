@@ -40,7 +40,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         $bookedService = [];
         $bookedTimeService = [];
         //vendor blocking time
-        if( $blockTime = selectDB("blocktime","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}'") ){
+        if( $blockTime = selectDB("blocktime","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' ORDER BY `id` DESC LIMIT 1") ){
             var_Dump($blockTime);
             if( $blockTime[0]["startDate"] <= $date && $blockTime[0]["endDate"] >= $date ){
                 $blockedStart = substr($blockTime[0]["fromTime"],0,2);

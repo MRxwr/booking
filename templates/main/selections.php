@@ -242,8 +242,9 @@
 	  return period.branchId === branchId;
 	});
 
-	// block all dates before todays date
-	flatpickrInstance.set('minDate', new Date().toISOString().split('T')[0]);
+	// block all dates before todays date use disabled
+	var today = new Date();
+	flatpickrInstance.set('minDate', today);
 	
 	// Update the date picker with the new allowed booking period, blocked days, and blocked periods
 	flatpickrInstance.set('minDate', allowedPeriod.startDate);

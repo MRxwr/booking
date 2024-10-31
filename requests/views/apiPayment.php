@@ -12,6 +12,9 @@ if( isset($_POST["branchId"]) && !empty($_POST["branchId"]) && $branch = selectD
     echo outputError(direction("Missing branch","الفرع مطلوب"));die();
 }
 if( isset($_POST["date"]) && !empty($_POST["date"]) ){
+    if ( $_POST["date"] < date("Y-m-d") ) {
+        echo outputError(direction("Invalid date","التاريخ غير صالح"));die();
+    }
     $_POST["bookedDate"] = $_POST["date"];
 }else{
     echo outputError(direction("Missing date","التاريخ مطلوب"));die();

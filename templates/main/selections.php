@@ -219,6 +219,8 @@
 		timeSelect.innerHTML = '<option value="0">Please select a time</option>';
 		var currentTime = new Date(); // Get the current device time
 
+		var currentTime = new Date();
+
 timeSlots.forEach(function(timeSlot) {
     // Split the timeslot string, e.g., "14:00 - 15:30" into ["14:00", "15:30"]
     var [startTime, endTime] = timeSlot.split(' - ');
@@ -227,8 +229,8 @@ timeSlots.forEach(function(timeSlot) {
     var start = new Date(currentTime);
     start.setHours(...startTime.split(':').map(Number));
 
-    // Check if the current time has passed the start time
-    if (currentTime >= start) {
+    // Only add timeslot if current time is before the start time
+    if (currentTime <= start) {
         timeSlotHTML += '<option value="' + timeSlot + '">' + timeSlot + '</option>';
     }
 });

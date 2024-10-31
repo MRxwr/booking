@@ -24,7 +24,7 @@ if( !isset($_POST["vendorId"]) || empty($_POST["vendorId"]) ){
     if( $vendor = selectDBNew("vendors",[$vendorId],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
         if( $branch = selectDBNew("branches",[$branchId],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
             if( $service = selectDBNew("services",[$serviceId],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
-                if( $calendars = selectDBNew("calendar",[$vendorId,$branchId,$date,$date],"`status` = '0' AND `hidden` = '0' AND `vendorId` = ? AND `branchId` = ? AND `startDate` <= ? AND `endDate` >= ? ORDER BY `id` ASC","") ){
+                if( $calendars = selectDBNew("calendar",[$vendorId,$branchId,$date,$date],"`status` = '0' AND `hidden` = '0' AND `vendorId` = ? AND `branchId` = ? AND `startDate` <= ? AND `endDate` >= ? ORDER BY `id` ASC","") && $date >= date("Y-m-d") ){
                     if( $blockedPeriodsBranches = selectDBNew("blockdate",[$vendorId,$branchId,$date],"`status` = '0' AND `hidden` = '0' AND `vendorId` = ? AND `branchId` = ? AND ? NOT IN BETWEEN `startDate` AND `endDate` ORDER BY `id` ASC","") ){
                         echo outputError(array("msg"=>direction("Date is blocked please select another date","تم حظر التاريخ يرجى تحديد تاريخ اخر")));die();
                     }else{

@@ -258,6 +258,9 @@
 		return date.getDay() == day.day;
 	  };
 	});
+
+	// block all dates before todays date
+	flatpickrInstance.set('minDate', new Date().toISOString().split('T')[0]);
 	
 	flatpickrInstance.set('disable', disabledRanges.concat(blockedDaysForBranchFlatpickr));
   }

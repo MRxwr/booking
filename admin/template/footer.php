@@ -83,6 +83,18 @@
             }
         });
     });
+	$(document).ready(function() {
+    $('#calendar').fullCalendar({
+        dayClick: function(date, jsEvent, view) {
+            if (typeof tooltip !== 'undefined') {
+                tooltip.show(); // Adjust based on your tooltip implementation
+            } else {
+                console.log('Tooltip library is not loaded.');
+            }
+        }
+    });
+});
+
 </script>
 
 </body>

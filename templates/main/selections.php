@@ -248,8 +248,8 @@
 	console.log(today);
 	console.log(allowedPeriod.startDate);
 	// convertt today into this from 2024-01-01
-	var today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-	console.log(today);
+	var today1 = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+	console.log(today1);
 	if( today > allowedPeriod.startDate ){
 		flatpickrInstance.set('minDate', today);
 	}else{

@@ -25,6 +25,12 @@
 	<!-- Data table JavaScript -->
 	<script src="../vendors/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
 	<script src="dist/js/productorders-data.js"></script>
+	<!-- Calender JavaScripts -->
+	<script src="../vendors/bower_components/moment/min/moment.min.js"></script>
+	<script src="../vendors/jquery-ui.min.js"></script>
+	<script src="../vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+	<script src="dist/js/fullcalendar-data.js"></script>
+
 	<!-- Slimscroll JavaScript -->
 	<script src="dist/js/jquery.slimscroll.js"></script>
 	

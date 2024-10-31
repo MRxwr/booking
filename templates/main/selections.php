@@ -246,8 +246,12 @@
 	// check if todays date > allowedPeriod.startDate then set minDate to todays date
 	var today = new Date();
 	if( today > allowedPeriod.startDate ){
+		console.log(allowedPeriod.startDate);
+		console.log(today);
 		flatpickrInstance.set('minDate', today);
 	}else{
+		console.log(today);
+		console.log(allowedPeriod.startDate);
 		flatpickrInstance.set('minDate', allowedPeriod.startDate);
 	}
 	flatpickrInstance.set('maxDate', allowedPeriod.endDate);

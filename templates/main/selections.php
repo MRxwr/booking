@@ -217,9 +217,21 @@
 		var timeSlots = data.data.timeSlots;
 		var timeSlotHTML = "";
 		timeSelect.innerHTML = '<option value="0">Please select a time</option>';
-		timeSlots.forEach(function(timeSlot){
-			timeSlotHTML += '<option value="'+timeSlot+'">'+timeSlot+'</option>';
-		});
+		var currentTime = new Date(); // Get the current device time
+
+timeSlots.forEach(function(timeSlot) {
+    // Split the timeslot string, e.g., "14:00 - 15:30" into ["14:00", "15:30"]
+    var [startTime, endTime] = timeSlot.split(' - ');
+
+    // Create a date object for the start time today
+    var start = new Date(currentTime);
+    start.setHours(...startTime.split(':').map(Number));
+
+    // Check if the current time has passed the start time
+    if (currentTime >= start) {
+        timeSlotHTML += '<option value="' + timeSlot + '">' + timeSlot + '</option>';
+    }
+});
 		timeSelect.innerHTML = timeSlotHTML;
 	}).fail(function(){
 	  timeSelect.innerHTML = '<option value="0">No time slots available</option>';
@@ -245,7 +257,6 @@
 	// Update the date picker with the new allowed booking period, blocked days, and blocked periods
 	// check if todays date > allowedPeriod.startDate then set minDate to todays date
 	var today = new Date().toISOString().slice(0, 10);
-	console.log(today);
 	if( today > allowedPeriod.startDate ){
 		flatpickrInstance.set('minDate', today);
 	}else{

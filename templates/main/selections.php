@@ -241,13 +241,15 @@
 	var blockedPeriodsForBranch = blockedPeriods.filter(function(period) {
 	  return period.branchId === branchId;
 	});
-
-	// block all dates before todays date use disabled
-	var today = new Date();
-	flatpickrInstance.set('minDate', today);
 	
 	// Update the date picker with the new allowed booking period, blocked days, and blocked periods
-	flatpickrInstance.set('minDate', allowedPeriod.startDate);
+	// check if todays date > allowedPeriod.startDate then set minDate to todays date
+	var today = new Date();
+	if( today > allowedPeriod.startDate ){
+		flatpickrInstance.set('minDate', today);
+	}else{
+		flatpickrInstance.set('minDate', allowedPeriod.startDate);
+	}
 	flatpickrInstance.set('maxDate', allowedPeriod.endDate);
 	var disabledRanges = blockedPeriodsForBranch.map(function(period) {
 	  return {
@@ -262,7 +264,7 @@
 		return date.getDay() == day.day;
 	  };
 	});
-
+	
 	flatpickrInstance.set('disable', disabledRanges.concat(blockedDaysForBranchFlatpickr));
   }
 </script>

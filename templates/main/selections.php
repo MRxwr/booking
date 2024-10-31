@@ -244,12 +244,8 @@
 	
 	// Update the date picker with the new allowed booking period, blocked days, and blocked periods
 	// check if todays date > allowedPeriod.startDate then set minDate to todays date
-	var today = new Date();
+	var today = new Date().toISOString().slice(0, 10);
 	console.log(today);
-	console.log(allowedPeriod.startDate);
-	// convertt today into this from 2024-01-01
-	var today1 = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-	console.log(today1);
 	if( today > allowedPeriod.startDate ){
 		flatpickrInstance.set('minDate', today);
 	}else{

@@ -17,7 +17,16 @@
 			for( $j = 0; $j < sizeof($customer); $j++ ){
 				//echo $arrayKeys[$j]." : ".$customer[$arrayKeys[$j]]."<br>";
 			}
-
+			$data[] = array(
+				'id'   => $booking['id'],
+				'title'   =>$booking['code'].'<br>'.$booking['vendorTitle'].'<br>'.$booking['branchTitle'].'['.$booking['bookedDate'].' '.$booking['bookedTime'].']'.$booking['serviceTitle'].'-'.$status,
+				'start'   =>date('Y-m-d', strtotime($booking['bookedDate'])) ,
+				'description'   =>'',
+				'textColor'=> '#FFF',
+				'color'=>  $btnColor,
+				'className'=> 'event-full',
+				'url'=> ''
+			   );
 			
 		}
 		echo json_encode($data);

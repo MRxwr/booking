@@ -18,16 +18,7 @@
 				//echo $arrayKeys[$j]." : ".$customer[$arrayKeys[$j]]."<br>";
 			}
 
-			$data[] = array(
-				'id'   => $booking['id'],
-				'title'   =>$booking['code'].'<br>'.$booking['vendorTitle'].'<br>'.$booking['branchTitle'].'['.$booking['bookedDate'].' '.$booking['bookedTime'].']'.$booking['serviceTitle'].'-'.$status,
-				'start'   =>date('Y-m-d', strtotime($booking['bookedDate'])) ,
-				'description'   =>'',
-				'textColor'=> '#FFF',
-				'color'=>  $btnColor,
-				'className'=> 'event-full',
-				'url'=> route('admin.bookings.view', [$booking['id']])
-			   );
+			
 		}
 		echo json_encode($data);
         exit;

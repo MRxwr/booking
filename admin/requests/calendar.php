@@ -18,12 +18,13 @@
 				//echo $arrayKeys[$j]." : ".$customer[$arrayKeys[$j]]."<br>";
 			}
 			$times =explode("-",$booking['bookedTime']);
-			var_dump($booking['bookedTime']);
+			//var_dump($booking['bookedTime']);
 			$data[] = array(
 				'id'   => $booking['id'],
 				'title'   =>$booking['code'].'<br>'.$booking['vendorTitle'].'<br>'.$booking['branchTitle'].'['.$booking['bookedDate'].' '.$booking['bookedTime'].']'.$booking['serviceTitle'].'-'.$status,
 				'start' => date('Y-m-d\TH:i:s', strtotime("{$booking['bookedDate']} {$times[0]}")),
 				'end'   => date('Y-m-d\TH:i:s', strtotime("{$booking['bookedDate']} {$times[1]}")),
+				'allDay'      => false,
 				'description'   =>'',
 				'textColor'=> '#FFF',
 				'color'=>  '#2196f3;',

@@ -20,8 +20,8 @@
 			$data[] = array(
 				'id'          => $booking['id'],
 				'title'       => $booking['code'].'<br>'.$booking['vendorTitle'].'<br>'.$booking['branchTitle'].'['.$booking['bookedDate'].' '.$booking['bookedTime'].']'.$booking['serviceTitle'].'-'.$status,
-				'start'       => date('Y-m-d', strtotime($booking['bookedDate'].' '.$booking['bookedTime'])),
-				'end'         => date('Y-m-d', strtotime($booking['bookedDate'].' '.$booking['bookedTime'])),
+				'start' => date('Y-m-d\TH:i:s', strtotime($booking['bookedDate'].' '.$booking['bookedTime'])),
+				'end'   => date('Y-m-d\TH:i:s', strtotime($booking['bookedDate'].' '.$booking['bookedTime'])),
 				'allDay'      => false,
 				'description' => '',
 				'textColor'   => '#FFF',

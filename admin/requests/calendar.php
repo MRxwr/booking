@@ -23,7 +23,7 @@
 				'start'   =>date('Y-m-d', strtotime($booking['bookedDate'])) ,
 				'description'   =>'',
 				'textColor'=> '#FFF',
-				'color'=>  $btnColor,
+				'color'=>  '#2196f3',
 				'className'=> 'event-full',
 				'url'=> ''
 			   );

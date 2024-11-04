@@ -17,8 +17,8 @@
 			for( $j = 0; $j < sizeof($customer); $j++ ){
 				//echo $arrayKeys[$j]." : ".$customer[$arrayKeys[$j]]."<br>";
 			}
-			$times =explode("-",$booking["times"]);
-			var_dump($booking["times"]);
+			$times =explode("-",$booking['bookedTime']);
+			var_dump($booking['bookedTime']);
 			$data[] = array(
 				'id'   => $booking['id'],
 				'title'   =>$booking['code'].'<br>'.$booking['vendorTitle'].'<br>'.$booking['branchTitle'].'['.$booking['bookedDate'].' '.$booking['bookedTime'].']'.$booking['serviceTitle'].'-'.$status,

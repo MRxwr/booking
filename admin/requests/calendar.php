@@ -17,10 +17,12 @@
 			for( $j = 0; $j < sizeof($customer); $j++ ){
 				//echo $arrayKeys[$j]." : ".$customer[$arrayKeys[$j]]."<br>";
 			}
+			$times =explode("-",$booking["times"]);
 			$data[] = array(
 				'id'   => $booking['id'],
 				'title'   =>$booking['code'].'<br>'.$booking['vendorTitle'].'<br>'.$booking['branchTitle'].'['.$booking['bookedDate'].' '.$booking['bookedTime'].']'.$booking['serviceTitle'].'-'.$status,
-				'start'   =>date('Y-m-d', strtotime($booking['bookedDate'])) ,
+				'start' => date('Y-m-d\TH:i:s', strtotime("{$booking['bookedDate']} {$times[0]}")),
+				'end'   => date('Y-m-d\TH:i:s', strtotime("{$booking['bookedDate']} {$times[1]}")),
 				'description'   =>'',
 				'textColor'=> '#FFF',
 				'color'=>  '#2196f3;',

@@ -11,7 +11,7 @@
 		$data = array();
 		foreach( $bookings as $i => $booking ){
 			$status = ($booking["status"] == 0) ? direction("Pending","قيد الانتظار") : (($bookings[$i]["status"] == 1) ? direction("Confirmed","تم التأكيد") : direction("Cancelled","تم الالغاء"));
-			$btnColor = ($booking["status"] == 0) ? "btn-primary" : (($bookings[$i]["status"] == 1) ? "btn-success" : "btn-danger");
+			$btnColor = ($booking["status"] == 0) ? "#2196f3" : (($bookings[$i]["status"] == 1) ? "#518614" : "#f33923");
 			$customer = json_decode($booking["customerDetails"],true);
 			$arrayKeys = array_keys($customer);
 			$customer_data ='';
@@ -28,7 +28,7 @@
 				'allDay'      => false,
 				'description'   =>$booking['code'].'<br>'.$booking['vendorTitle'].'<br>'.$booking['branchTitle'].'['.$booking['bookedDate'].' '.$booking['bookedTime'].']'.$booking['serviceTitle'].'<br>'.$customer_data.'-'.$status,
 				'textColor'=> '#FFF',
-				'color'=>  '#2196f3;',
+				'color'=>  $btnColor,
 				'className'=> 'event-full',
 				'url'=> ''
 			   );

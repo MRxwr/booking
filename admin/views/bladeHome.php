@@ -47,25 +47,24 @@
                 $('.tooltiptopicevent').css('left', e.pageX + 20);
             });
         },
+		eventMouseout: function(data, jsEvent, view) {
+			$(this).data('tooltip').remove();
+		},
        eventRender: function( event, element, view ) {
-        var title = element.find('.fc-title, .fc-list-item-title');          
-        title.html(title.text());
+        	var title = element.find('.fc-title, .fc-list-item-title');          
+        	title.html(title.text());
         },
-     events: '/admin/request.php?r=calendar',
-     selectable:true,
-     selectHelper:true,
-     select: function(start, end, allDay)
-     {
-       var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
-       $('#start_date').val(start)
-       var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
-       $('#end_date').val(end)
-
-      
-     },
-     editable:true,
+     	events: '/admin/request.php?r=calendar',
+     	selectable:true,
+     	selectHelper:true,
+     	select: function(start, end, allDay)
+		{
+			var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
+			$('#start_date').val(start)
+			var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
+			$('#end_date').val(end)
+		},
     
- 
      eventDrop:function(event)
      {
       var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");

@@ -36,7 +36,7 @@
 		right:'month,agendaWeek,agendaDay'
 		},
 		eventMouseover: function (data, event, view) {
-			var tooltip = '<div class="tooltiptopicevent tooltip tooltip-inner" style="width:auto;height:auto;position:absolute;z-index:10001;">' + data.title + '</div>';
+			var tooltip = '<div class="tooltiptopicevent tooltip tooltip-inner" style="width:auto;height:auto;position:absolute;z-index:10001;">' + data.description + '</div>';
 			$("body").append(tooltip);
             $(this).mouseover(function (e) {
                 $(this).css('z-index', 10000);
@@ -92,9 +92,6 @@
      },
  
     });
-
-
-
    });
     
 

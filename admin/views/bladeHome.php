@@ -48,7 +48,7 @@
             });
         },
 		eventMouseout: function(data, jsEvent, view) {
-			$(this).data('tooltip').remove();
+			$('.tooltiptopicevent').fadeOut('500');
 		},
        eventRender: function( event, element, view ) {
         	var title = element.find('.fc-title, .fc-list-item-title');          

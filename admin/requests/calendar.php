@@ -14,8 +14,9 @@
 			$btnColor = ($booking["status"] == 0) ? "btn-primary" : (($bookings[$i]["status"] == 1) ? "btn-success" : "btn-danger");
 			$customer = json_decode($booking["customerDetails"],true);
 			$arrayKeys = array_keys($customer);
+			$customer_data ='';
 			for( $j = 0; $j < sizeof($customer); $j++ ){
-				//echo $arrayKeys[$j]." : ".$customer[$arrayKeys[$j]]."<br>";
+				$customer_data .=$arrayKeys[$j]." : ".$customer[$arrayKeys[$j]]."<br>";
 			}
 			$times =explode("-",$booking['bookedTime']);
 			//var_dump($booking['bookedTime']);
@@ -25,7 +26,7 @@
 				'start' => date('Y-m-d\TH:i:s', strtotime("{$booking['bookedDate']} {$times[0]}")),
 				'end'   => date('Y-m-d\TH:i:s', strtotime("{$booking['bookedDate']} {$times[1]}")),
 				'allDay'      => false,
-				'description'   =>$booking['code'].'<br>'.$booking['vendorTitle'].'<br>'.$booking['branchTitle'].'['.$booking['bookedDate'].' '.$booking['bookedTime'].']'.$booking['serviceTitle'].'-'.$status,
+				'description'   =>$booking['code'].'<br>'.$booking['vendorTitle'].'<br>'.$booking['branchTitle'].'['.$booking['bookedDate'].' '.$booking['bookedTime'].']'.$booking['serviceTitle'].'<br>'.$customer_data.'-'.$status,
 				'textColor'=> '#FFF',
 				'color'=>  '#2196f3;',
 				'className'=> 'event-full',

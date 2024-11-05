@@ -22,7 +22,7 @@
 			//var_dump($booking['bookedTime']);
 			$data[] = array(
 				'id'   => $booking['id'],
-				'title'   =>$booking['code'].'<br>'.$booking['serviceTitle'].'['.$booking['bookedDate'].' '.$booking['bookedTime'].']-'.$status,
+				'title'   =>$booking['code'].'-'.'['.$booking['bookedDate'].' '.$booking['bookedTime'].']-'.$status,
 				'start' => date('Y-m-d\TH:i:s', strtotime("{$booking['bookedDate']} {$times[0]}")),
 				'end'   => date('Y-m-d\TH:i:s', strtotime("{$booking['bookedDate']} {$times[1]}")),
 				'allDay'      => false,

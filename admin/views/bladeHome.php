@@ -48,7 +48,7 @@
             });
         },
 		eventMouseout: function(data, jsEvent, view) {
-			alert('ok');
+			//alert('ok');
 			$('.tooltiptopicevent').remove();
 		},
        eventRender: function( event, element, view ) {

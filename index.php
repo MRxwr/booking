@@ -87,6 +87,14 @@ if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor =
 				height: 50px;
 				animation: spin 2s linear infinite;
 			}
+			.activeService {
+				background-color: <?php echo $vendor["websiteColor"] ?> !important;
+				color: white;
+			}
+			.serviceBLk {
+				border: 1px solid <?php echo $vendor["websiteColor"] ?> !important;
+				border-radius: 0px !important;
+			}
 
 			@keyframes spin {
 				0% {

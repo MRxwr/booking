@@ -118,6 +118,11 @@
 							?>
 
 							<div class="col-md-6">
+								<label><?php echo direction("Website Color","لون الموقع") ?></label>
+								<input type="color" name="websiteColor" class="form-control">
+							</div>
+
+							<div class="col-md-6">
 								<label><?php echo direction("Logo","الشعار") ?></label>
 								<input type="file" name="logo" class="form-control">
 							</div>
@@ -227,6 +232,7 @@
 											<label id="chargeTypeAmount<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["chargeTypeAmount"] ?></label>
 											<label id="coverImg<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["coverImg"] ?></label>
 											<label id="sm<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["socialMedia"] ?></label>
+											<label id="websiteColor<?php echo $vendors[$i]["websiteColor"]?>" ><?php echo $vendors[$i]["websiteColor"] ?></label>
 										</div>
 									</tr>
 									<?php
@@ -250,6 +256,7 @@
 		$("select[name=type]").val($.trim($("#type"+id).html().replace(/\n/g, ""))).focus();;
 		$("input[name=enTitle]").val($.trim($("#enTitle"+id).html().replace(/\n/g, "")));
 		$("input[name=arTitle]").val($.trim($("#arTitle"+id).html().replace(/\n/g, "")));
+		$("input[name=websiteColor]").val($.trim($("#websiteColor"+id).html().replace(/\n/g, "")));
 		$("textarea[name=enDetails]").val($.trim($("#enDetails"+id).html().replace(/\n/g, "")));
 		$("textarea[name=arDetails]").val($.trim($("#arDetails"+id).html().replace(/\n/g, "")));
 		$("textarea[name=enTerms]").val($.trim($("#enTerms"+id).html().replace(/\n/g, "")));

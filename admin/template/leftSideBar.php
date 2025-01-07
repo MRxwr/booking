@@ -26,6 +26,7 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 	for( $i = 0; $i < sizeof($pages); $i++ ){
 		$active = ( isset($_GET["v"]) && strtolower($pages[$i]["enTitle"]) == strtolower(str_replace("_"," ",$_GET["v"])) ) ? "active" : "";
 		if ( $userType == '0' || in_array($pages[$i]["id"],$list) ){
+			/*
 			if( $sections = selectDB("pages","`section` = '{$pages[$i]["id"]}' AND `status` != '1'") ){
 				$anchor = "href='javascript:void(0);' data-toggle='collapse' data-target='#".str_replace(" ","_",$pages[$i]["enTitle"])."' class='collapsed {$active}' aria-expanded='false'";
 				$arrowDown = "<i class='zmdi zmdi-caret-down'></i>";
@@ -47,7 +48,6 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 				</a>
 			<?php
 			if ( $subSections = selectDB("pages","`section` = '{$pages[$i]["id"]}' AND `status` != '1' ORDER BY `order` ASC") ){
-				/*
 				?>
 				<ul id="<?php echo str_replace(" ","_",$pages[$i]["enTitle"]) ?>" class="collapse-level-1 collapse" aria-expanded="true">
 				<?php
@@ -69,8 +69,8 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 				?>
 				</ul>
 				<?php
-				*/
 			}
+			*/
 		}
 		?>
 		</li>

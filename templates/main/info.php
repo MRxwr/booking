@@ -25,7 +25,7 @@
 		</div>
 	</div>
 	<div class="col-12 mt-3 mb-3">
-		<div type="submit" class="btn btn-primary w-100" style="border-radius: 0px;background-color: <?php echo $vendor["websiteColor"] ?> !important;border: 1px solid <?php echo $vendor["websiteColor"] ?> !important">
+		<div type="submit" class="btn btn-primary w-100" style="border-radius: 0px;">
 		<div class="row m-0" id="submitBtn">
 			<div class="col-9 text-center">
 			<?php echo direction("Book Now","حجز الان") ?>

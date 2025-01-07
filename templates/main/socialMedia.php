@@ -9,7 +9,7 @@
 				$socialMediaLink = selectDB("socialmedia","`enTitle` = '{$socialMediaKeys[$i]}'");
 				?>
 				<div class="col d-flex align-items-center justify-content-center socialIconDiv"><a href="<?php echo $socialMediaLink[0]["link"] . $socialMedia[$socialMediaKeys[$i]] ?>" target="_blank">
-					<span class="socialMediaSpan" style="border: 2px solid <?php echo $vendor["websiteColor"] ?> !important ;color: <?php echo $vendor["websiteColor"] ?> !important ;"><i class="fa fa-<?php echo strtolower($socialMediaKeys[$i]) ?>" aria-hidden="true"></i></span></a>
+					<span class="socialMediaSpan"><i class="fa fa-<?php echo strtolower($socialMediaKeys[$i]) ?>" aria-hidden="true"></i></span></a>
 				</div>
 				<?php
 			}

@@ -109,10 +109,9 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             $startHour = (int) date('H', $startTimestamp);
             if (!in_array($startHour, $blockedTimeVendor) && !in_array($currentTime, $blockedTimeBookings)) {
                 $response["timeSlots"][] = $currentSlotStart . " - " . $currentSlotEnd;
-                $startTimestamp = $duration * 60;
-            }else{
-                $startTimestamp = $endTimestamp;
+                $endTimestamp = $startTimestamp + ($duration * 60);
             }
+            $startTimestamp = $endTimestamp;
         }
         echo outputData($response);die();
     }else{

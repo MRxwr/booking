@@ -15,13 +15,11 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 				$listOfAllowedPages .= ",";
 			}
 		}
-		$_GET["v"] = ( !isset($_GET["v"]) || empty($_GET["v"]) ) ? "Home" : $_GET["v"];
-		/*
-		if( selectDB("pages","`enTitle` LIKE '{$_GET["v"]}' AND `id` IN ({$listOfAllowedPages})") ){
+		//$_GET["v"] = ( !isset($_GET["v"]) || empty($_GET["v"]) ) ? "Home" : $_GET["v"];
+		if( selectDB("pages","`id` IN ({$listOfAllowedPages})") ){
 		}else{
 			header("LOCATION: ?v=Home");die();
 		}
-			*/
 	}else{
 		$list = array();
 	}

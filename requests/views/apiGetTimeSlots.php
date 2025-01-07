@@ -94,15 +94,15 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         }
 
         $response["timeSlots"] = [];
-$current = $start;
-while ($current < $close) {
-    $startTime = sprintf("%02d:00", $current);
-    $endTime = date('H:i', strtotime('+' . $duration . ' minutes', strtotime($startTime)));
-    
-    $response["timeSlots"][] = $startTime . " - " . $endTime;
-    
-    $current += $duration;
-}
+        $current = $start;
+        while ($current < $close) {
+            $startTime = sprintf("%02d:00", $current);
+            $endTime = date('H:i', strtotime('+' . $duration . ' minutes', strtotime($startTime)));
+            
+            $response["timeSlots"][] = $startTime . " - " . $endTime;
+            
+            $current = (int)substr($endTime, 0, 2);
+        }
         echo outputData($response);die();
     }else{
         $response["timeSlots"][0] = "No time slots available";

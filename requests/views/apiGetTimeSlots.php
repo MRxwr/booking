@@ -95,78 +95,23 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             }
         }
 
-        $openTimestamp   = strtotime($start . ":00");       // e.g. 10:00
-$closeTimestamp  = strtotime($close . ":00");       // e.g. 20:00
-$durationSeconds = $duration * 60;                  // e.g. 240 min => 240*60=14400
-
-// We'll allow a start time up to (close - duration).
-$latestStart     = $closeTimestamp - $durationSeconds;
-
-// Step could be 15m, 30m, or 60m increments depending on your needs:
-$stepSeconds = 60 * 60; // 1 hour steps, or 30*60 for 30 min, etc.
-
-$response = ["timeSlots" => []];
-
-for ($candidateStart = $openTimestamp; $candidateStart <= $latestStart; $candidateStart += $stepSeconds) {
-    
-    $candidateEnd = $candidateStart + $durationSeconds; // 4 hours later if duration=240 min
-    
-    // 1) Check if candidateEnd goes beyond closing
-    if ($candidateEnd > $closeTimestamp) {
-        // not enough time to fit the entire service, skip
-        continue;
-    }
-
-    // 2) Check overlap with blocked intervals/hours
-    // For example, if we have $blockedTimeVendor as a set of intervals, or
-    // a function that says "14:00 - 16:00 is blocked," we do an overlap check:
-
-    if (isOverlappingBlocked($candidateStart, $candidateEnd, $blockedTimeVendor)) {
-        // If ANY overlap, skip this slot
-        continue;
-    }
-
-    // 3) If we also have seat-based checks, handle those here (like “fully booked”).
-    //    If it fails the seat check, continue to the next candidate.
-
-    // 4) If we pass all checks, add to $response.
-    $startStr = date('H:i', $candidateStart);
-    $endStr   = date('H:i', $candidateEnd);
-    $response["timeSlots"][] = $startStr . " - " . $endStr;
-}
-
-// Then echo out the $response
-if (count($response["timeSlots"]) === 0) {
-    // Maybe "No available slots"
-} else {
-    // Return your successful data
-}
-
-// Utility function (pseudo-code) to check overlapping:
-function isOverlappingBlocked($startTime, $endTime, $blockedTimeVendor) {
-    // $blockedTimeVendor might be an array of intervals, e.g.,
-    // [
-    //   [ 'start' => '14:00', 'end' => '16:00' ],
-    //   [ 'start' => '18:00', 'end' => '19:00' ],
-    // ]
-    // Convert those strings to timestamps and do standard overlap logic:
-    // Overlap occurs if (startTime < blockedEnd) && (endTime > blockedStart)
-
-    // If you only store hours in an array, you'd need a more manual check.
-    // Or if you store intervals as [14, 16], similarly handle them.
-    
-    foreach ($blockedTimeVendor as $block) {
-        $blockStart = strtotime($block['start']); // e.g. '14:00'
-        $blockEnd   = strtotime($block['end']);   // e.g. '16:00'
-        
-        // Check overlap
-        if ($startTime < $blockEnd && $endTime > $blockStart) {
-            return true; // Overlaps => blocked
+        $startTimestamp = strtotime($start . ":00"); 
+        $closeTimestamp = strtotime($close . ":00"); 
+        $durationInSeconds = 60 * 60; // convert minutes to seconds
+        while ($startTimestamp < $closeTimestamp) {
+            $endTimestamp = $startTimestamp + $durationInSeconds;
+            if ($endTimestamp > $closeTimestamp) {
+                break;
+            }
+            $currentSlotStart = date('H:i', $startTimestamp);
+            $currentSlotEnd   = date('H:i', $endTimestamp);
+            $currentTime = $currentSlotStart . " - " . $currentSlotEnd;
+            $startHour = (int) date('H', $startTimestamp);
+            if (!in_array($startHour, $blockedTimeVendor) && !in_array($currentTime, $blockedTimeBookings)) {
+                $response["timeSlots"][] = $currentSlotStart . " - " . $currentSlotEnd;
+            }
+            $startTimestamp = $endTimestamp;
         }
-    }
-    return false; // no overlap
-}
-
         echo outputData($response);die();
     }else{
         $response["timeSlots"][0] = "No time slots available";

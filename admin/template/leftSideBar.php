@@ -8,6 +8,7 @@
 if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` = '0' ORDER BY `order` ASC") ){
 	$listOfAllowedPages = "";
 	if( $roles = selectDB("roles","`id` = '{$userType}'") ){
+		var_dump($roles[0]["pages"]);
 		$list = json_decode($roles[0]["pages"],true);
 		$listOfAllowedPages = implode(",", $list);
 		if( selectDB("pages","`enTitle` LIKE '{$_GET["v"]}' AND `id` IN ({$listOfAllowedPages})") ){

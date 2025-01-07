@@ -93,15 +93,19 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             }
         }
 
-        // removeing all blocked time from timeSlots
-        $startTime = ($start) . ":00";
-        $endTime = date('H:i', strtotime('+' . $duration . ' minutes', strtotime($startTime)));
-        while ($endTime <= $close . ":00") {
+        $start = (int)substr($timeSlots[0]["startTime"], 0, 2);
+        $close = (int)substr($timeSlots[0]["closeTime"], 0, 2);
+        $duration = (int)$timeSlots[0]["period"];
+        
+        $response["timeSlots"] = [];
+        for ($i = $start; $i < $close; $i++) {
+            $startTime = sprintf("%02d:00", $i);
+            $endTime = date('H:i', strtotime('+' . $duration . ' minutes', strtotime($startTime)));
+            
+            // Check if the time slot is not blocked
             if (!in_array((int)substr($startTime, 0, 2), $blockedTimeVendor) && !in_array((int)substr($startTime, 0, 2), $blockedTimeBookings)) {
                 $response["timeSlots"][] = $startTime . " - " . $endTime;
             }
-            $startTime = $endTime;
-            $endTime = date('H:i', strtotime('+' . $duration . ' minutes', strtotime($startTime)));
         }
         echo outputData($response);die();
     }else{

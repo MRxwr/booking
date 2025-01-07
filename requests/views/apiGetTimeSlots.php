@@ -84,7 +84,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         $bookedService = array();
         if( $booking = selectDB("bookings","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '{$serviceId}' AND `bookedDate` = '{$date}' AND (`status` = '1' OR (`status` = '0' AND TIMESTAMPDIFF(MINUTE, `date`, NOW()) < 15))") ){
             foreach( $booking as $book ){
-                echo $bookedService[] = $book["bookedTime"];
+                $bookedService[] = $book["bookedTime"];
             }
             for( $i = 0; $i < count($bookedService); $i++ ){
                 if( $ServiceTotalSeats == count($bookedService) ){

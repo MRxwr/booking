@@ -193,7 +193,7 @@ if( isset($_GET["updateTimes"]) || isset($_GET["updateServices"]) ){
 	$(document).on("click",".serviceBtn", function(){
 		var branchId = $(this).attr("id");
 		$.ajax({
-			url: "request.php?r=services",
+			url: "/admin/request?r=services",
 			type: "POST",
 			data: { id : branchId },
 			success: function(response) {

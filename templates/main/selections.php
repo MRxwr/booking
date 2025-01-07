@@ -234,7 +234,7 @@ timeSlots.forEach(function(timeSlot) {
 	// check if input[name='selectedDate'] == todays date
 	// if yes then check if current time is before start time
 	var today = new Date().toISOString().slice(0, 10);
-	if ( input[name='selectedDate'] == today ){
+	if ( $("input[name='selectedDate']").val() == today ){
 		if (currentTime <= start) {
         	timeSlotHTML += '<option value="' + timeSlot + '">' + timeSlot + '</option>';
     	}

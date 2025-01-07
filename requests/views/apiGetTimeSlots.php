@@ -67,6 +67,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
 
         //booking blocking number of seats per hour
         if( $booking = selectDBNew("bookings",[$branchId,$vendorId,$date],"`branchId` = ? AND `vendorId` = ? AND `bookedDate` = ? AND (`status` = '1' OR (`status` = '0' AND TIMESTAMPDIFF(MINUTE, `date`, NOW()) < 15))","") ){
+            var_dump($booking);
             foreach( $booking as $book ){
                 $bookedTimes[] = substr($book["bookedTime"],0,2);
             }

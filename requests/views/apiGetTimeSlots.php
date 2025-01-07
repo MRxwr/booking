@@ -94,37 +94,21 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         }
 
         $startTimestamp = strtotime($start . ":00"); 
-$closeTimestamp = strtotime($close . ":00"); 
-$durationInSeconds = $duration * 60; // convert minutes to seconds
-
-while ($startTimestamp < $closeTimestamp) {
-    // Calculate the next slot end time
-    $endTimestamp = $startTimestamp + $durationInSeconds;
-
-    // If $endTimestamp goes beyond $closeTimestamp, you can decide whether to break, or slice the time.
-    if ($endTimestamp > $closeTimestamp) {
-        break;
-    }
-
-    // Format time slot strings
-    $currentSlotStart = date('H:i', $startTimestamp);
-    $currentSlotEnd   = date('H:i', $endTimestamp);
-
-    // Check if this slot is blocked or not
-    // 1. Convert $currentSlotStart hour to int
-    // 2. If blocked, skip
-    // 3. Otherwise, add to $response["timeSlots"]
-    
-    $startHour = (int) date('H', $startTimestamp);
-    // If not blocked
-    if (!in_array($startHour, $blockedTimeVendor) && !in_array($startHour, $blockedTimeBookings)) {
-        $response["timeSlots"][] = $currentSlotStart . " - " . $currentSlotEnd;
-    }
-    
-    // Advance to the next slot
-    $startTimestamp = $endTimestamp;
-}
-
+        $closeTimestamp = strtotime($close . ":00"); 
+        $durationInSeconds = $duration * 60; // convert minutes to seconds
+        while ($startTimestamp < $closeTimestamp) {
+            $endTimestamp = $startTimestamp + $durationInSeconds;
+            if ($endTimestamp > $closeTimestamp) {
+                break;
+            }
+            $currentSlotStart = date('H:i', $startTimestamp);
+            $currentSlotEnd   = date('H:i', $endTimestamp);
+            $startHour = (int) date('H', $startTimestamp);
+            if (!in_array($startHour, $blockedTimeVendor) && !in_array($startHour, $blockedTimeBookings)) {
+                $response["timeSlots"][] = $currentSlotStart . " - " . $currentSlotEnd;
+            }
+            $startTimestamp = $endTimestamp;
+        }
         echo outputData($response);die();
     }else{
         $response["timeSlots"][0] = "No time slots available";

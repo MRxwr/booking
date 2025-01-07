@@ -101,7 +101,10 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             
             $response["timeSlots"][] = $startTime . " - " . $endTime;
             
-            $current = substr($endTime, 0, 2);
+            $current += (int)($duration / 60);
+            if ($current >= 24) {
+                break;
+            }
         }
         echo outputData($response);die();
     }else{

@@ -134,7 +134,6 @@
 
 							<div id="images" style="margin-top: 10px; display:none">
 								<div class="col-md-4">
-									<img id="logo" src="" style="width:250px;height:250px">
 								</div>
 
 								<div class="col-md-4">

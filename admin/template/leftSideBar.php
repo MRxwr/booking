@@ -9,14 +9,10 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 	$listOfAllowedPages = "";
 	if( $roles = selectDB("roles","`id` = '{$userType}'") ){
 		$list = json_decode($roles[0]["pages"],true);
-		for( $i = 0; $i < sizeof($list); $i++ ){
-			/*
-			$listOfAllowedPages .= "'{$list[$i]}'";
-			if( isset($list[$i+1]) && !empty($list[$i+1]) ){
-				$listOfAllowedPages .= ",";
-			}
-				*/
+		if( empty($list) ){
+			$list = array();
 		}
+		$listOfAllowedPages = implode(",", $list);
 		if( selectDB("pages","`enTitle` LIKE '{$_GET["v"]}' AND `id` IN ({$listOfAllowedPages})") ){
 		}else{
 			header("LOCATION: ?v=Home");die();

@@ -104,7 +104,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             
             $response["timeSlots"][] = $startTime . " - " . $endTime;
         }
-        
+        echo outputData($response);die();
         // Remove blocked time slots
         foreach ($response["timeSlots"] as $key => $timeSlot) {
             $timeSlotStart = (int)substr($timeSlot, 0, 2);
@@ -112,7 +112,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                 unset($response["timeSlots"][$key]);
             }
         }
-        echo outputData($response);die();
+        
     }else{
         $response["timeSlots"][0] = "No time slots available";
         echo outputError($response);die();

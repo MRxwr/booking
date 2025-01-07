@@ -102,9 +102,14 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             $startTime = sprintf("%02d:00", $i);
             $endTime = date('H:i', strtotime('+' . $duration . ' minutes', strtotime($startTime)));
             
-            // Check if the time slot is not blocked
-            if (!in_array((int)substr($startTime, 0, 2), $blockedTimeVendor) && !in_array((int)substr($startTime, 0, 2), $blockedTimeBookings)) {
-                $response["timeSlots"][] = $startTime . " - " . $endTime;
+            $response["timeSlots"][] = $startTime . " - " . $endTime;
+        }
+        
+        // Remove blocked time slots
+        foreach ($response["timeSlots"] as $key => $timeSlot) {
+            $timeSlotStart = (int)substr($timeSlot, 0, 2);
+            if (in_array($timeSlotStart, $blockedTimeVendor) || in_array($timeSlotStart, $blockedTimeBookings)) {
+                unset($response["timeSlots"][$key]);
             }
         }
         echo outputData($response);die();

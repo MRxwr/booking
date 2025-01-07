@@ -117,28 +117,32 @@
 							 }
 							?>
 
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<label><?php echo direction("Website Color","لون الموقع") ?></label>
 								<input type="color" name="websiteColor" class="form-control">
 							</div>
 
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<label><?php echo direction("Logo","الشعار") ?></label>
 								<input type="file" name="logo" class="form-control">
 							</div>
 
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<label><?php echo direction("Cover","الغلاف" ) ?></label>
 								<input type="file" name="coverImg" class="form-control">
 							</div>
 
 							<div id="images" style="margin-top: 10px; display:none">
-								<div class="col-md-6">
-								<img id="logo" src="" style="width:250px;height:250px">
+								<div class="col-md-4">
+									<img id="logo" src="" style="width:250px;height:250px">
 								</div>
 
-								<div class="col-md-6">
-								<img id="coverImg" src="" style="width:250px;height:250px">
+								<div class="col-md-4">
+									<img id="logo" src="" style="width:250px;height:250px">
+								</div>
+
+								<div class="col-md-4">
+									<img id="coverImg" src="" style="width:250px;height:250px">
 								</div>
 							</div>
 

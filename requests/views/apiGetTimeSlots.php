@@ -93,26 +93,22 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             }
         }
 
-        $start = substr($timeSlots[0]["startTime"], 0, 2);
-        $close = substr($timeSlots[0]["closeTime"], 0, 2);
-        $duration = $timeSlots[0]["period"];
-        echo "Start: $start\n";
-echo "Close: $close\n";
-echo "Duration: $duration\n";
-        
-        $response["timeSlots"] = [];
-        for ($i = $start; $i < $close; $i++) {
-            $startTime = sprintf("%02d:00", $i);
-            $endTime = date('H:i', strtotime('+' . $duration . ' minutes', strtotime($startTime)));
-            
-            $response["timeSlots"][] = $startTime . " - " . $endTime;
-        }
-        
-        // Remove blocked time slots
-        foreach ($response["timeSlots"] as $key => $timeSlot) {
-            $timeSlotStart = (int)substr($timeSlot, 0, 2);
-            if (in_array($timeSlotStart, $blockedTimeVendor) || in_array($timeSlotStart, $blockedTimeBookings)) {
-                unset($response["timeSlots"][$key]);
+        // removeing all blocked time from timeSlots
+        $startTime = ($start) . ":00";
+        for( $i = $start; $i < $close; $i++ ){
+            if( !in_array((int)$start, $blockedTimeVendor) && !in_array((int)$start, $blockedTimeBookings) ){
+                 $endTime = date('H:i', strtotime('+'.$duration.' minutes', strtotime($startTime)));
+                 if( substr($endTime,0,2) >= $close && substr($endTime,3,2) == "00" ){
+                    $response["timeSlots"][] = $startTime . " - " . $endTime;
+                    break;
+                 }else{
+                    $response["timeSlots"][] = $startTime . " - " . $endTime;
+                 }
+                 $start++;
+                 $startTime = $endTime;
+            }else{
+                $start++;
+                $startTime = ($start) . ":00";
             }
         }
         echo outputData($response);die();

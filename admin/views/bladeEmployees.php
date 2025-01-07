@@ -14,7 +14,7 @@
 				<label><?php echo direction("Vendor","البائع") ?></label>
 				<select name="vendorId" class="form-control" required>
 					<?php 
-					$vendors = selectDB("vendors","`status` = '0' AND `hidden` = '0' ORDER BY `enTitle` ASC");
+					$vendors = selectDB("vendors","`status` = '0' $vendorDb AND `hidden` = '0' ORDER BY `enTitle` ASC");
 					foreach( $vendors as $vendor ){
 						echo "<option value='{$vendor["id"]}'>{$vendor["enTitle"]}</option>";
 					}

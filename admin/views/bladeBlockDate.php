@@ -16,7 +16,7 @@
 								<label><?php echo direction("Vendor","البائع") ?></label>
 								<select name="vendorId" class="form-control" required>
 									<?php 
-									$vendors = selectDB("vendors","`status` = '0' AND `hidden` = '0' ORDER BY `enTitle` ASC");
+									$vendors = selectDB("vendors","`status` = '0' $vendorDb AND `hidden` = '0' ORDER BY `enTitle` ASC");
 									$orderBy = direction("enTitle","arTitle");
 									foreach( $vendors as $vendor ){
 										$vendorTitle = direction($vendor["enTitle"],$vendor["arTitle"]);

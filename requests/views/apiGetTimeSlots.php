@@ -31,8 +31,8 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         }else{
             echo outputError("Branch not exists for this vendor");die();
         }
-        $start = substr($timeSlots[0]["startTime"],0,2);
-        $close = substr($timeSlots[0]["closeTime"],0,2);
+        echo $start = substr($timeSlots[0]["startTime"],0,2);
+        echo $close = substr($timeSlots[0]["closeTime"],0,2);
         $timeSlots = [];
         $blockedTimeVendor = [];
         $blockedTimeBookings = [];

@@ -46,7 +46,7 @@
 			<label><?php echo direction("Type","النوع") ?></label>
 			<select name="empType" class="form-control">
 				<?php 
-				if( $roles = selectDB("roles","`status` = '0' AND `hidden` = '0'") ){
+				if( $roles = selectDB("roles","`status` = '0' $vendorIdDb AND `hidden` = '0'") ){
 					for( $i = 0; $i < sizeof($roles); $i++ ){
 						$title = direction($roles[$i]["enTitle"],$roles[$i]["arTitle"]);
 						echo "<option value='{$roles[$i]["id"]}'>{$title}</option>";

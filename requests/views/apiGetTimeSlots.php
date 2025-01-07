@@ -92,10 +92,6 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                 $counter++;
             }
         }
-
-        $start = (int)substr($timeSlots[0]["startTime"], 0, 2);
-        $close = (int)substr($timeSlots[0]["closeTime"], 0, 2);
-        $duration = (int)$timeSlots[0]["period"];
         
         $response["timeSlots"] = [];
         while ($start < $close) {

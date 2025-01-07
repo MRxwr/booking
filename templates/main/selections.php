@@ -215,6 +215,7 @@
 			return false;
 		}
 		var timeSlots = data.data.timeSlots;
+		alert(timeSlots);
 		var timeSlotHTML = "";
 		timeSelect.innerHTML = '<option value="0">Please select a time</option>';
 		var currentTime = new Date(); // Get the current device time

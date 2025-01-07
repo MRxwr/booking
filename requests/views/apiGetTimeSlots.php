@@ -94,7 +94,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         }
 
         // removeing all blocked time from timeSlots
-        echo $startTime = ($start) . ":00";
+        $startTime = ($start) . ":00";
         for( $i = $start; $i < $close; $i++ ){
             if( !in_array((int)$start, $blockedTimeVendor) && !in_array((int)$start, $blockedTimeBookings) ){
                  $endTime = date('H:i', strtotime('+'.$duration.' minutes', strtotime($startTime)));

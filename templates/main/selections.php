@@ -234,6 +234,7 @@ timeSlots.forEach(function(timeSlot) {
     if (currentTime <= start) {
         timeSlotHTML += '<option value="' + timeSlot + '">' + timeSlot + '</option>';
     }
+	console.log(timeSlotHTML);
 });
 		timeSelect.innerHTML = timeSlotHTML;
 	}).fail(function(){

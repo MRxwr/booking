@@ -6,6 +6,7 @@
 		</li>
 <?php 
 if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` = '0' ORDER BY `order` ASC") ){
+	/*
 	$listOfAllowedPages = "";
 	if( $roles = selectDB("roles","`id` = '{$userType}'") ){
 		$list = json_decode($roles[0]["pages"],true);
@@ -73,6 +74,7 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 		</li>
 		<?php
 	}
+	*/
 }
 ?>
 	</ul>

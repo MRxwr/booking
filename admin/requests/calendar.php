@@ -7,7 +7,7 @@
 		"join" => ["vendors","branches","services"],
 		"on" => ["t.vendorId = t1.id","t.branchId = t2.id","t.serviceId = t3.id"]
 	);
-	if( $bookings = selectJoinDB("{$table}",$joinedTables,"t.id != '0' $vendorIdDb ORDER BY t.id DESC") ){
+	if( $bookings = selectJoinDB("{$table}",$joinedTables,"t.id != '0' $vendorBookingTable ORDER BY t.id DESC") ){
 		$data = array();
 		foreach( $bookings as $i => $booking ){
 			$status = ($booking["status"] == 0) ? direction("Pending","قيد الانتظار") : (($bookings[$i]["status"] == 1) ? direction("Confirmed","تم التأكيد") : direction("Cancelled","تم الالغاء"));

@@ -228,9 +228,9 @@ timeSlots.forEach(function(timeSlot) {
 
     // Create a date object for the start time today
     var start = new Date(currentTime);
-	console.log(start);
+	
     start.setHours(...startTime.split(':').map(Number));
-
+	console.log(start);
     // Only add timeslot if current time is before the start time
 	// check if input[name='selectedDate'] == todays date
 	// if yes then check if current time is before start time

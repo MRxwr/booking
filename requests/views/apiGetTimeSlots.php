@@ -96,15 +96,14 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         // removeing all blocked time from timeSlots
         $startTime = ($start) . ":00";
         while ($startTime < $close . ":00") {
-            if (!in_array((int)$start, $blockedTimeVendor) && !in_array((int)$start, $blockedTimeBookings)) {
+            if (!in_array((int)substr($startTime, 0, 2), $blockedTimeVendor) && !in_array((int)substr($startTime, 0, 2), $blockedTimeBookings)) {
                 $endTime = date('H:i', strtotime('+' . $duration . ' minutes', strtotime($startTime)));
                 if ($endTime > $close . ":00") {
                     $endTime = $close . ":00";
                 }
                 $response["timeSlots"][] = $startTime . " - " . $endTime;
             }
-            $start++;
-            $startTime = ($start) . ":00";
+            $startTime = $endTime;
         }
         echo outputData($response);die();
     }else{

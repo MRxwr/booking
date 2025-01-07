@@ -99,7 +99,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         
         $response["timeSlots"] = [];
         for ($i = $start; $i < $close; $i++) {
-            $startTime = sprintf("%02d:00", $i);
+            echo $startTime = sprintf("%02d:00", $i);
             $endTime = date('H:i', strtotime('+' . $duration . ' minutes', strtotime($startTime)));
             
             $response["timeSlots"][] = $startTime . " - " . $endTime;

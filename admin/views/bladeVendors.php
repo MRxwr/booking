@@ -237,7 +237,7 @@
 											<label id="chargeTypeAmount<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["chargeTypeAmount"] ?></label>
 											<label id="coverImg<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["coverImg"] ?></label>
 											<label id="sm<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["socialMedia"] ?></label>
-											<label id="websiteColor<?php echo $vendors[$i]["websiteColor"]?>" ><?php echo $vendors[$i]["websiteColor"] ?></label>
+											<label id="websiteColor<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["websiteColor"] ?></label>
 										</div>
 									</tr>
 									<?php

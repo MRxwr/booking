@@ -88,7 +88,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             }
             for( $i = 0; $i < count($bookedService); $i++ ){
                 if( $ServiceTotalSeats == count($bookedService) ){
-                    $blockedTimeBookings[] = $counter;
+                    $blockedTimeBookings[] = $bookedService[$i];
                 }
             }
         }

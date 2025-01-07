@@ -94,7 +94,7 @@
 		
 		<tbody>
 		<?php 
-		if( $employees = selectDB("{$table}","`status` = '0' AND `hidden` != '2'") ){
+		if( $employees = selectDB("{$table}","`status` = '0' $vendorIdDb AND `hidden` != '2'") ){
 			for( $i = 0; $i < sizeof($employees); $i++ ){
 				$vendor = selectDB("vendors","`id` = '{$employees[$i]["vendorId"]}'");
 				$vendor = direction($vendor[0]["enTitle"],$vendor[0]["arTitle"]);

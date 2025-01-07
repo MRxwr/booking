@@ -39,7 +39,7 @@
                                     "join" => ["vendors","branches","services"],
                                     "on" => ["t.vendorId = t1.id","t.branchId = t2.id","t.serviceId = t3.id"]
                                 );
-                                if( $bookings = selectJoinDB("{$table}",$joinedTables,"t.id != '0' ORDER BY t.id DESC") ){
+                                if( $bookings = selectJoinDB("{$table}",$joinedTables,"t.id != '0' $vendorIdDb ORDER BY t.id DESC") ){
                                     for( $i = 0; $i < sizeof($bookings); $i++ ){
                                         $status = ($bookings[$i]["status"] == 0) ? direction("Pending","قيد الانتظار") : (($bookings[$i]["status"] == 1) ? direction("Confirmed","تم التأكيد") : direction("Cancelled","تم الالغاء"));
                                         $btnColor = ($bookings[$i]["status"] == 0) ? "btn-primary" : (($bookings[$i]["status"] == 1) ? "btn-success" : "btn-danger");

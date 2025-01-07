@@ -55,7 +55,7 @@
 		
 		<tbody>
 		<?php 
-		if( $roles = selectDB("{$table}","`status` = '0' ORDER BY `id` ASC") ){
+		if( $roles = selectDB("{$table}","`status` = '0' $vendorIdDb ORDER BY `id` ASC") ){
 		for( $i = 0; $i < sizeof($roles); $i++ ){
             if ( $roles[$i]["hidden"] == 1 ){
                 $icon = "fa fa-eye";

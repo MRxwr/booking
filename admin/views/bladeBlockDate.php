@@ -87,7 +87,7 @@
 								</thead>
 								<tbody>
 									<?php 
-									if( $periods = selectDB("{$table}","`status` = '0' ORDER BY `id` DESC") ){
+									if( $periods = selectDB("{$table}","`status` = '0' $vendorIdDb ORDER BY `id` DESC") ){
 										for( $i = 0; $i < sizeof($periods); $i++ ){	
 											$vendor = selectDB("vendors","`id` = '{$periods[$i]["vendorId"]}'");
 											$vendor = direction($vendor[0]["enTitle"],$vendor[0]["arTitle"]);

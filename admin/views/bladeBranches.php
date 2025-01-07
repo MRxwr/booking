@@ -105,7 +105,7 @@ if( isset($_GET["updateTimes"]) || isset($_GET["updateServices"]) ){
 								</thead>
 								<tbody>
 									<?php 
-									if( $branch = selectDB("{$table}","`status` = '0' ORDER BY `id` ASC") ){
+									if( $branch = selectDB("{$table}","`status` = '0' $vendorIdDb ORDER BY `id` ASC") ){
 										for( $i = 0; $i < sizeof($branch); $i++ ){
 											$vendor = selectDB("vendors","`id` = '{$branch[$i]["vendorId"]}'");
 											$vendor = direction($vendor[0]["enTitle"],$vendor[0]["arTitle"]);

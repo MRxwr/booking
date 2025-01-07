@@ -96,15 +96,18 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         $start = (int)substr($timeSlots[0]["startTime"], 0, 2);
         $close = (int)substr($timeSlots[0]["closeTime"], 0, 2);
         $duration = (int)$timeSlots[0]["period"];
+        echo "Start: $start\n";
+echo "Close: $close\n";
+echo "Duration: $duration\n";
         
         $response["timeSlots"] = [];
         for ($i = $start; $i < $close; $i++) {
-            echo $startTime = sprintf("%02d:00", $i);
+            $startTime = sprintf("%02d:00", $i);
             $endTime = date('H:i', strtotime('+' . $duration . ' minutes', strtotime($startTime)));
             
             $response["timeSlots"][] = $startTime . " - " . $endTime;
         }
-        echo outputData($response);die();
+        
         // Remove blocked time slots
         foreach ($response["timeSlots"] as $key => $timeSlot) {
             $timeSlotStart = (int)substr($timeSlot, 0, 2);
@@ -112,7 +115,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                 unset($response["timeSlots"][$key]);
             }
         }
-        
+        echo outputData($response);die();
     }else{
         $response["timeSlots"][0] = "No time slots available";
         echo outputError($response);die();

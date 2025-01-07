@@ -96,7 +96,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         $startTimestamp = strtotime($start . ":00"); 
         $closeTimestamp = strtotime($close . ":00"); 
         $durationInSeconds = $duration * 60; // convert minutes to seconds
-        var_dump($blockedTimeVendor);
+        var_dump($blockedTimeBookings);
         while ($startTimestamp < $closeTimestamp) {
             $endTimestamp = $startTimestamp + $durationInSeconds;
             if ($endTimestamp > $closeTimestamp) {

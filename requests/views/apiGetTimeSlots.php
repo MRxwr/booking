@@ -104,14 +104,14 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                  }else{
                     $response["timeSlots"][] = $startTime . " - " . $endTime;
                  }
-                 echo $start++;
+                 $start++;
                  $startTime = $endTime;
             }else{
                 $start++;
                 $startTime = ($start) . ":00";
             }
         }
-        //echo outputData($response);die();
+        echo outputData($response);die();
     }else{
         $response["timeSlots"][0] = "No time slots available";
         echo outputError($response);die();

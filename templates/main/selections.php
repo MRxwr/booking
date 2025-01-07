@@ -214,7 +214,7 @@
 			timeSelect.innerHTML = '<option value="0">No time slots available</option>';
 			return false;
 		}
-		var timeSlots = data;//data.data.timeSlots;
+		var timeSlots = data.data.timeSlots;
 		console.log(timeSlots);
 		var timeSlotHTML = "";
 		timeSelect.innerHTML = '<option value="0">Please select a time</option>';

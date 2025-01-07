@@ -1,5 +1,6 @@
 <?php
 require_once("../admin/includes/config.php");
+require_once("../admin/includes/checksouthead.php");
 require_once("../admin/includes/functions.php");
 
 // check if a file with that name exist or not

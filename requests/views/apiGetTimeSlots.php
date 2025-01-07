@@ -13,6 +13,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
     $vendorId = $_POST["vendorId"];
     $date = $_POST["date"];
     $day = date('w', strtotime($date));
+    $date = date('Y-m-d', strtotime($date));
     if( $timeSlots = selectDBNew("times",[$branchId,$day,$vendorId],"`branchId` = ? AND `day` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0' ORDER BY `id` DESC","") ){
         //Get Branch Details
         if( $branches = selectDBNew("branches",[$branchId,$vendorId],"`id` = ? AND `status` = '0' AND `hidden` = '0' AND `vendorId` = ?","") ){
@@ -41,7 +42,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         $bookedTimeService = [];
         //vendor blocking time
         if( $blockTime = selectDB("blocktime","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '0' AND `hidden` = '0' AND `status` = '0'  ORDER BY `id` DESC LIMIT 1") ){
-            if( $blockTime[0]["startDate"] <= $date && $blockTime[0]["endDate"] >= $date ){
+            if( strtotime($blockTime[0]["startDate"]) <= strtotime($date) && strtotime($blockTime[0]["endDate"]) >= strtotime($date) ){
                 $blockedStart = substr($blockTime[0]["fromTime"],0,2);
                 $blockedClose = substr($blockTime[0]["toTime"],0,2);
                 

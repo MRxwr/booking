@@ -8,6 +8,7 @@ if ( isset($_COOKIE["createkuwaitAdmin"]) && !empty($_COOKIE["createkuwaitAdmin"
 		$vendorId = $user[0]["vendorId"];
 		$vendorIdDb = ( !empty($vendorId) ) ? " AND `vendorId` = '{$vendorId}'" : "";
 		$vendorDb = ( !empty($vendorId) ) ? " AND `id` = '{$vendorId}'" : "";
+		$vendorBookingTable = ( !empty($vendorId) ) ? " AND t.vendorId = '{$vendorId}'" : "";
 	}else{
 		header("Location: logout.php");die();
 	}

@@ -12,7 +12,7 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 		if( is_array($list) ){
 			$listOfAllowedPages = implode(",", $list);
 		}else{
-			$listOfAllowedPages = array();
+			$listOfAllowedPages = [1];
 		}
 		if( selectDB("pages","`enTitle` LIKE '{$_GET["v"]}' AND `id` IN ({$listOfAllowedPages})") ){
 		}else{

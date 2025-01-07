@@ -101,7 +101,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             
             $response["timeSlots"][] = $startTime . " - " . $endTime;
             
-            $current = (int)substr($endTime, 0, 2);
+            $current = substr($endTime, 0, 2);
         }
         echo outputData($response);die();
     }else{

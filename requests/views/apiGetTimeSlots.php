@@ -93,7 +93,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             }
         }
 
-        // Removing all blocked time from timeSlots
+// Removing all blocked time from timeSlots
 $startTime = ($start) . ":00";
 $currentTime = $start;
 
@@ -106,18 +106,18 @@ while ($currentTime < $close) {
         // Ensure the end time does not exceed the closing time
         if (substr($endTime, 0, 2) >= $close && substr($endTime, 3, 2) == "00") {
             $response["timeSlots"][] = $startTime . " - " . $endTime;
-            break;
+            break; // Exit the loop if we've reached the closing time
         } else {
             $response["timeSlots"][] = $startTime . " - " . $endTime;
         }
 
-        // Update the start time for the next iteration
+        // Update the start time and current time for the next iteration
         $startTime = $endTime;
         $currentTime = (int)substr($endTime, 0, 2); // Update current time based on the new end time
     } else {
         // If the current time is blocked, skip to the next hour
         $currentTime++;
-        $startTime = ($currentTime) . ":00";
+        $startTime = sprintf("%02d:00", $currentTime); // Format as HH:00
     }
 }
         echo outputData($response);die();

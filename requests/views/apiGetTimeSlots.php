@@ -54,11 +54,9 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
 
         //vendor blocking time
         if( $blockTime = selectDB("blocktime","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '{$serviceId}' AND `hidden` = '0' AND `status` = '0' ORDER BY `id` DESC LIMIT 1") ){
-            echo strtotime($date) . " \n";
-            echo strtotime($blockTime[0]["startDate"]);
-            if( $blockTime[0]["startDate"] <= $date && $blockTime[0]["endDate"] >= $date ){
-                echo $blockedStart = substr($blockTime[0]["fromTime"],0,2);
-                echo $blockedClose = substr($blockTime[0]["toTime"],0,2);
+            if( strtotime($blockTime[0]["startDate"]) <= strtotime($date) && strtotime($blockTime[0]["endDate"]) >= strtotime($date) ){
+                $blockedStart = substr($blockTime[0]["fromTime"],0,2);
+                $blockedClose = substr($blockTime[0]["toTime"],0,2);
                 
                 for( $i = $blockedStart; $i < $blockedClose; $i++ ){
                     $blockedTimeVendor[] = (string)$blockedStart;

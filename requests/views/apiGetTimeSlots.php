@@ -21,7 +21,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             if ( in_array($serviceId,json_decode($branches[0]["services"],true)) ){
                 if( $services = selectDBNew("services",[$serviceId],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
                     $ServiceTotalSeats = $services[0]["seats"];
-                    echo $duration = $services[0]["period"];
+                    $duration = $services[0]["period"];
                 }else{
                     echo outputError("Service has been removed by vendor");die();
                 }
@@ -31,8 +31,8 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         }else{
             echo outputError("Branch not exists for this vendor");die();
         }
-        echo $start = substr($timeSlots[0]["startTime"],0,2);
-        echo $close = substr($timeSlots[0]["closeTime"],0,2);
+        $start = substr($timeSlots[0]["startTime"],0,2);
+        $close = substr($timeSlots[0]["closeTime"],0,2);
         $timeSlots = [];
         $blockedTimeVendor = [];
         $blockedTimeBookings = [];
@@ -93,22 +93,20 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             }
         }
 
-        // removeing all blocked time from timeSlots
-        $startTime = ($start) . ":00";
-        for( $i = $start; $i < $close; $i++ ){
-            if( !in_array((int)$start, $blockedTimeVendor) && !in_array((int)$start, $blockedTimeBookings) ){
-                 $endTime = date('H:i', strtotime('+'.$duration.' minutes', strtotime($startTime)));
-                 if( substr($endTime,0,2) >= $close && substr($endTime,3,2) == "00" ){
-                    $response["timeSlots"][] = $startTime . " - " . $endTime;
-                    break;
-                 }else{
-                    $response["timeSlots"][] = $startTime . " - " . $endTime;
-                 }
-                 $start++;
-                 $startTime = $endTime;
-            }else{
-                $start++;
-                $startTime = ($start) . ":00";
+        $start = (int)substr($timeSlots[0]["startTime"], 0, 2);
+        $close = (int)substr($timeSlots[0]["closeTime"], 0, 2);
+        $duration = (int)$timeSlots[0]["period"];
+        
+        $response["timeSlots"] = [];
+        while ($start < $close) {
+            $startTime = sprintf("%02d:00", $start);
+            $endTime = date('H:i', strtotime('+' . $duration . ' minutes', strtotime($startTime)));
+            
+            $response["timeSlots"][] = $startTime . " - " . $endTime;
+            
+            $start = (int)substr($endTime, 0, 2);
+            if ($start >= 24) {
+                break;
             }
         }
         echo outputData($response);die();

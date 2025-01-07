@@ -93,24 +93,33 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             }
         }
 
-        // removeing all blocked time from timeSlots
-        $startTime = ($start) . ":00";
-        for( $i = $start; $i < $close; $i++ ){
-            if( !in_array((int)$start, $blockedTimeVendor) && !in_array((int)$start, $blockedTimeBookings) ){
-                 $endTime = date('H:i', strtotime('+'.$duration.' minutes', strtotime($startTime)));
-                 if( substr($endTime,0,2) >= $close && substr($endTime,3,2) == "00" ){
-                    $response["timeSlots"][] = $startTime . " - " . $endTime;
-                    break;
-                 }else{
-                    $response["timeSlots"][] = $startTime . " - " . $endTime;
-                 }
-                 $start++;
-                 $startTime = $endTime;
-            }else{
-                $start++;
-                $startTime = ($start) . ":00";
-            }
+        // Removing all blocked time from timeSlots
+$startTime = ($start) . ":00";
+$currentTime = $start;
+
+while ($currentTime < $close) {
+    // Check if the current time is blocked
+    if (!in_array((int)$currentTime, $blockedTimeVendor) && !in_array((int)$currentTime, $blockedTimeBookings)) {
+        // Calculate the end time based on the duration
+        $endTime = date('H:i', strtotime('+' . $duration . ' minutes', strtotime($startTime)));
+
+        // Ensure the end time does not exceed the closing time
+        if (substr($endTime, 0, 2) >= $close && substr($endTime, 3, 2) == "00") {
+            $response["timeSlots"][] = $startTime . " - " . $endTime;
+            break;
+        } else {
+            $response["timeSlots"][] = $startTime . " - " . $endTime;
         }
+
+        // Update the start time for the next iteration
+        $startTime = $endTime;
+        $currentTime = (int)substr($endTime, 0, 2); // Update current time based on the new end time
+    } else {
+        // If the current time is blocked, skip to the next hour
+        $currentTime++;
+        $startTime = ($currentTime) . ":00";
+    }
+}
         echo outputData($response);die();
     }else{
         $response["timeSlots"][0] = "No time slots available";

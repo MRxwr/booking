@@ -88,7 +88,7 @@
 								</thead>
 								<tbody>
 									<?php 
-									if( $service = selectDB("{$table}","`status` = '0' ORDER BY `id` ASC") ){
+									if( $service = selectDB("{$table}","`status` = '0' $vendorIdDb ORDER BY `id` ASC") ){
 										for( $i = 0; $i < sizeof($service); $i++ ){
 											$vendor = selectDB("vendors","`id` = '{$service[$i]["vendorId"]}'");
 											$vendor = direction($vendor[0]["enTitle"],$vendor[0]["arTitle"]);

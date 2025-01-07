@@ -98,7 +98,7 @@ if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor =
 			}
 		</style>
 	</head>
-	<body>
+	<body style="color: <?php echo $vendor["websiteColor"] ?> !important;">
 		<div class="container-fluid p-0">
 			<div class="row w-100 m-0">
 			<div id="loading-screen" style="display: none;">

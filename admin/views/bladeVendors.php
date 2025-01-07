@@ -181,7 +181,7 @@
 									<th><?php echo direction("Subscription","الاشتراك") ?></th>
 									<th><?php echo direction("Payment Status","حالة الدفع") ?></th>
 									<th><?php echo direction("Live Status","حالة العمل") ?></th>
-									<th class="text-nowrap"><?php echo direction("الخيارات","Actions") ?></th>
+									<th class="text-nowrap"><?php echo direction("Actions","الخيارات") ?></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -202,6 +202,7 @@
 											$type = ( $vendors[$i]["type"] == 1) ? direction("Salon","صالون") : direction("Clinic","عيادة");
 									?>
 									<tr>
+										<td ><?php echo str_pad(($counter = $i + 1),4,"0",STR_PAD_LEFT) ?></td>
 										<td ><?php echo $type ?></td>
 										<td id="name<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["name"] ?></td>
 										<td id="mobile<?php echo $vendors[$i]["id"]?>" ><?php echo $vendors[$i]["mobile"] ?></td>

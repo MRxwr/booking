@@ -42,12 +42,14 @@ $paymentArray = array(
     'cancelUrl' => "https://booking.createkuwait.com/{$vendor[0]["url"]}",
     'notificationUrl' => "https://booking.createkuwait.com/{$vendor[0]["url"]}",
     'paymentGateway[src]' => 'knet',
+    /*
     'extraMerchantData[0][amount]' => "{$price}",
     'extraMerchantData[0][knetCharge]' => '0.15',
     'extraMerchantData[0][knetChargeType]' => 'fixed',
     'extraMerchantData[0][ccCharge]' => '3',
     'extraMerchantData[0][ccChargeType]' => 'percentage',
     'extraMerchantData[0][ibanNumber]' => "{$vendor[0]["iban"]}"
+    */
     );
 $curl = curl_init();
 curl_setopt_array($curl, array(

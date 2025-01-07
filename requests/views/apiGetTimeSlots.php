@@ -69,7 +69,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         //booking blocking number of seats per hour
         if( $booking = selectDBNew("bookings",[$branchId,$vendorId,$date],"`branchId` = ? AND `vendorId` = ? AND `bookedDate` = ? AND (`status` = '1' OR (`status` = '0' AND TIMESTAMPDIFF(MINUTE, `date`, NOW()) < 15))","") ){
             foreach( $booking as $book ){
-                $bookedTimes[] = substr($book["bookedTime"],0,2);
+                $bookedTimes[] = $book["bookedTime"];
             }
             $counter = (int)($start);
             for( $i = $start; $i < $close; $i++ ){
@@ -83,7 +83,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         //booking blocking of services number of seats per hour
         if( $booking = selectDB("bookings","`branchId` = '{$branchId}' AND `vendorId` = '{$vendorId}' AND `serviceId` = '{$serviceId}' AND `bookedDate` = '{$date}' AND (`status` = '1' OR (`status` = '0' AND TIMESTAMPDIFF(MINUTE, `date`, NOW()) < 15))") ){
             foreach( $booking as $book ){
-                $bookedService[] = substr($book["bookedTime"],0,2);
+                $bookedService[] = $book["bookedTime"];
             }
             $counter = (int)($start);
             for( $i = $start; $i < $close; $i++ ){
@@ -105,9 +105,10 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             }
             $currentSlotStart = date('H:i', $startTimestamp);
             $currentSlotEnd   = date('H:i', $endTimestamp);
+            $currentTime = $currentSlotStart . " - " . $currentSlotEnd;
             $startHour = (int) date('H', $startTimestamp);
             
-            if (!in_array($startHour, $blockedTimeVendor) && !in_array($startHour, $blockedTimeBookings)) {
+            if (!in_array($startHour, $blockedTimeVendor) && !in_array($currentTime, $blockedTimeBookings)) {
                 $response["timeSlots"][] = $currentSlotStart . " - " . $currentSlotEnd;
             }
             $startTimestamp = $endTimestamp;

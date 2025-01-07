@@ -1,6 +1,7 @@
+<style>
 body {
     margin: auto;
-    color: #4e1c07;
+    color: <?php echo $vendor["websiteColor"] ?>;
     font-weight: 700;
 }
 
@@ -11,7 +12,7 @@ body {
 
 ::-webkit-scrollbar-thumb {
     border-radius: 5px;
-    background-color: #4e1c07;
+    background-color: <?php echo $vendor["websiteColor"] ?>;
 }
 
 #leftSide {
@@ -111,41 +112,41 @@ button {
 }
 
 .serviceBLk {
-    border: 1px solid #4e1c07;
+    border: 1px solid <?php echo $vendor["websiteColor"] ?>;
     border-radius: 0px !important;
 }
 
 .serviceBLk:hover {
-    background-color: #4e1c07;
+    background-color: <?php echo $vendor["websiteColor"] ?>;
     color: white;
 }
 
 .activeService {
-    background-color: #4e1c07;
+    background-color: <?php echo $vendor["websiteColor"] ?>;
     color: white;
 }
 
 .socialMediaSpan {
-    border: 2px #4e1c07 solid;
+    border: 2px <?php echo $vendor["websiteColor"] ?> solid;
     padding-right: 8px;
     padding-left: 8px;
-    color: #4e1c07;
+    color: <?php echo $vendor["websiteColor"] ?>;
 }
 
 .btn {
-    background-color: #4e1c07;
-    border: 1px solid #4e1c07;
+    background-color: <?php echo $vendor["websiteColor"] ?>;
+    border: 1px solid <?php echo $vendor["websiteColor"] ?>;
 }
 
 .btn:hover {
     -webkit-box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
     box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
-    background-color: #4e1c07;
-    border: 1px solid #4e1c07;
+    background-color: <?php echo $vendor["websiteColor"] ?>;
+    border: 1px solid <?php echo $vendor["websiteColor"] ?>;
 }
 
 .socialMediaSpan:hover {
-    background-color: #4e1c07;
+    background-color: <?php echo $vendor["websiteColor"] ?>;
     color: white;
 }
 
@@ -161,6 +162,56 @@ button {
 }
 
 .successInfoSection {
-    border: 2px solid #4e1c07;
-    color: #4e1c07;
+    border: 2px solid <?php echo $vendor["websiteColor"] ?>;
+    color: <?php echo $vendor["websiteColor"] ?>;
 }
+.rightBg {
+    background-image: url("logos/<?php echo $vendor["coverImg"] ?>");
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.heroBg {
+    -webkit-box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
+    background-image: url("logos/<?php echo $vendor["coverImg"] ?>");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 250px;
+}
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 1000;
+    display: none;
+}
+
+#loading-screen img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+</style>

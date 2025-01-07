@@ -45,58 +45,7 @@ if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor =
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 		<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-		<style>
-			<?php require_once("templates/main/style.css") ?>
-			.rightBg {
-				background-image: url("logos/<?php echo $vendor["coverImg"] ?>");
-				background-size: cover;
-				background-position: center;
-				height: 100%;
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-			}
-
-			.heroBg {
-				-webkit-box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
-				box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
-				background-image: url("logos/<?php echo $vendor["coverImg"] ?>");
-				background-repeat: no-repeat;
-				background-position: center;
-				background-size: cover;
-				height: 250px;
-			}
-			#loading-screen {
-				position: fixed;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				background-color: rgba(255, 255, 255, 0.7);
-				z-index: 1000;
-				display: none;
-			}
-
-			#loading-screen img {
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-				width: 50px;
-				height: 50px;
-				animation: spin 2s linear infinite;
-			}
-
-			@keyframes spin {
-				0% {
-					transform: translate(-50%, -50%) rotate(0deg);
-				}
-				100% {
-					transform: translate(-50%, -50%) rotate(360deg);
-				}
-			}
-		</style>
+		<?php require_once("templates/main/style.php") ?>
 	</head>
 	<body>
 		<div class="container-fluid p-0">

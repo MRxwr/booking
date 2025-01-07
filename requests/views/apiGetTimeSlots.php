@@ -21,7 +21,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             if ( in_array($serviceId,json_decode($branches[0]["services"],true)) ){
                 if( $services = selectDBNew("services",[$serviceId],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
                     $ServiceTotalSeats = $services[0]["seats"];
-                    $duration = $services[0]["period"];
+                    echo $duration = $services[0]["period"];
                 }else{
                     echo outputError("Service has been removed by vendor");die();
                 }
@@ -31,8 +31,8 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         }else{
             echo outputError("Branch not exists for this vendor");die();
         }
-        $start = substr($timeSlots[0]["startTime"],0,2);
-        $close = substr($timeSlots[0]["closeTime"],0,2);
+        echo $start = substr($timeSlots[0]["startTime"],0,2);
+        echo $close = substr($timeSlots[0]["closeTime"],0,2);
         $timeSlots = [];
         $blockedTimeVendor = [];
         $blockedTimeBookings = [];

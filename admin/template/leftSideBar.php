@@ -6,9 +6,9 @@
 		</li>
 <?php 
 if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` = '0' ORDER BY `order` ASC") ){
-	/*
 	$listOfAllowedPages = "";
 	if( $roles = selectDB("roles","`id` = '{$userType}'") ){
+		/*
 		$list = json_decode($roles[0]["pages"],true);
 		for( $i = 0; $i < sizeof($list); $i++ ){
 			$listOfAllowedPages .= "'{$list[$i]}'";
@@ -20,6 +20,8 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 		}else{
 			header("LOCATION: ?v=Home");die();
 		}
+			*/
+		$list = json_decode($roles[0]["pages"],true);
 	}else{
 		$list = array();
 	}
@@ -74,7 +76,6 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 		</li>
 		<?php
 	}
-	*/
 }
 ?>
 	</ul>

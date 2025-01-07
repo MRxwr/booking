@@ -261,7 +261,7 @@
 		$("select[name=type]").val($.trim($("#type"+id).html().replace(/\n/g, ""))).focus();;
 		$("input[name=enTitle]").val($.trim($("#enTitle"+id).html().replace(/\n/g, "")));
 		$("input[name=arTitle]").val($.trim($("#arTitle"+id).html().replace(/\n/g, "")));
-		$("input[name=websiteColor]").val($("#websiteColor"+id).html());
+		$("input[name=websiteColor]").val($.trim($("#websiteColor"+id).html().replace(/\n/g, "")));
 		$("textarea[name=enDetails]").val($.trim($("#enDetails"+id).html().replace(/\n/g, "")));
 		$("textarea[name=arDetails]").val($.trim($("#arDetails"+id).html().replace(/\n/g, "")));
 		$("textarea[name=enTerms]").val($.trim($("#enTerms"+id).html().replace(/\n/g, "")));

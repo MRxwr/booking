@@ -231,9 +231,17 @@ timeSlots.forEach(function(timeSlot) {
     start.setHours(...startTime.split(':').map(Number));
 
     // Only add timeslot if current time is before the start time
-    if (currentTime <= start) {
-        timeSlotHTML += '<option value="' + timeSlot + '">' + timeSlot + '</option>';
-    }
+	// check if input[name='selectedDate'] == todays date
+	// if yes then check if current time is before start time
+	var today = new Date().toISOString().slice(0, 10);
+	if ( input[name='selectedDate'] == today ){
+		if (currentTime <= start) {
+        	timeSlotHTML += '<option value="' + timeSlot + '">' + timeSlot + '</option>';
+    	}
+	}else{
+		timeSlotHTML += '<option value="' + timeSlot + '">' + timeSlot + '</option>';
+	}
+    
 	console.log(timeSlotHTML);
 });
 		timeSelect.innerHTML = timeSlotHTML;

@@ -10,8 +10,9 @@ if( $pages = selectDB("pages","`status` = '0' AND `hidden` = '0' AND `section` =
 	if( $roles = selectDB("roles","`id` = '{$userType}'") ){
 		
 		$list = json_decode($roles[0]["pages"],true);
-		var_dump($list);
+		
 		$listOfAllowedPages = implode(",", $list);
+		var_dump($listOfAllowedPages);
 		if( selectDB("pages","`enTitle` LIKE '{$_GET["v"]}' AND `id` IN ({$listOfAllowedPages})") ){
 		}else{
 			header("LOCATION: ?v=Home");die();

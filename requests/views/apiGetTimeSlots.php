@@ -112,6 +112,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             $startTimestamp = $endTimestamp;
         }
         if( count($blockedTimeVendor) > 0 ){
+            var_dump($blockedTimeVendor);
             foreach( $response["timeSlots"] as $key => $timeSlot ){
                 echo $response["timeSlots"][$key];
                 if( in_array(substr($timeSlot,0,2),$blockedTimeVendor) ){

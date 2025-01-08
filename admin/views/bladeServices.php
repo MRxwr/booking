@@ -213,7 +213,7 @@
 	$(document).on("click",".listTypes", function(){
 		var id = $(this).attr("id");
 		var listTypes = $("#listTypes"+id).html();
-		$("#pictureTypeDiv").style("display","block");
+		$("#pictureTypeDiv").attr("style","display: block");
 		$("#pictureType").html(listTypes);
 	})
 </script>

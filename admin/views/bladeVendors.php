@@ -199,7 +199,17 @@
 											}		
 											$hidden = ( $vendors[$i]["hidden"] == 1) ? direction("Active","مفعل") : direction("Inactive","غير مفعل");	
 											$paymentStatus = ( $vendors[$i]["paymentStatus"] == 1) ? direction("Paid","مدفوع") : direction("Unpaid","غير مدفوع");
-											$type = ( $vendors[$i]["type"] == 1) ? direction("Salon","صالون") : direction("Clinic","عيادة");
+											if( $vendors[$i]["type"] == 1){
+												$type = direction("Salon","صالون");
+											}elseif( $vendors[$i]["type"] == 2){
+												$type = direction("Clinic","عيادة");
+											}elseif( $vendors[$i]["type"] == 3){
+												$type = direction("Studio","تصوير");
+											}elseif( $vendors[$i]["type"] == 4){
+												$type = direction("Course","دورة");
+											}else{
+												$type = direction("Other","غير محدد");
+											}
 									?>
 									<tr>
 										<td ><?php echo str_pad(($counter = $i + 1),4,"0",STR_PAD_LEFT) ?></td>

@@ -12,6 +12,25 @@
 				<div class="panel-body ">
 					<form class="mt-30 mb-30" method="POST" action="" enctype="multipart/form-data">
 						<div class="row m-0">
+							<?php
+							if( empty($vendorId) ){
+								?>
+								<div class="col-md-12">
+									<label><?php echo direction("Vendor","البائع") ?></label>
+									<select name="vendorId" class="form-control" required>
+										<?php 
+										$vendors = selectDB("vendors","`status` = '0' $vendorDb AND `hidden` = '0' ORDER BY `enTitle` ASC");
+										foreach( $vendors as $vendor ){
+											echo "<option value='{$vendor["id"]}'>{$vendor["enTitle"]}</option>";
+										}
+										?>
+									</select>
+								</div>
+							<?php
+							}else{
+								echo "<input type='hidden' name='vendorId' value='{$vendorId}'>";
+							}
+							?>
 							<div class="col-md-4">
 								<label><?php echo direction("English Title","الإسم الإنجليزي") ?></label>
 								<input type="text" name="enTitle" class="form-control" required>
@@ -30,7 +49,6 @@
 							<div class="col-md-12" style="margin-top:10px">
 								<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
 								<input type="hidden" name="update" value="0">
-								<input type="hidden" name="vendorId" value="<?php echo $vendorId ?>">
 							</div>
 						</div>
 					</form>

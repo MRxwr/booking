@@ -58,15 +58,13 @@
 									<th><?php echo direction("English Title","الإسم الإنجليزي") ?></th>
 									<th><?php echo direction("Arabic Title"," الإسم العربي") ?></th>
 									<th><?php echo direction("Price","القيمة") ?></th>
-									<th class="text-nowrap"><?php echo direction("الخيارات","Actions") ?></th>
+									<th class="text-nowrap"><?php echo direction("Actions","الخيارات") ?></th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php 
 									if( $pictureType = selectDB("{$table}","`status` = '0' $vendorIdDb ORDER BY `id` ASC") ){
 										for( $i = 0; $i < sizeof($pictureType); $i++ ){
-											$vendorData = selectDB("vendors","`id` = '{$pictureType[$i]["vendorId"]}'");
-											$vendor = direction($vendorData[0]["enTitle"],$vendorData[0]["arTitle"]);
 											if ( $pictureType[$i]["hidden"] == 1 ){
 												$icon = "fa fa-unlock";
 												$link = "?{$_SERVER["QUERY_STRING"]}&show={$pictureType[$i]["id"]}";
@@ -79,7 +77,6 @@
 									?>
 									<tr>
 										<td ><?php echo str_pad(($counter = $i + 1),4,"0",STR_PAD_LEFT) ?></td>
-										<td ><?php echo $vendor ?></td>
 										<td ><?php echo $pictureType[$i]["enTitle"] ?></td>
 										<td ><?php echo $pictureType[$i]["arTitle"] ?></td>
 										<td ><?php echo $pictureType[$i]["price"] ?> -/KD</td>

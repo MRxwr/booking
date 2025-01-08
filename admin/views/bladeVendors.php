@@ -18,7 +18,7 @@
 									<option value="1"><?php echo direction("Salon","صالون") ?></option>
 									<option value="2"><?php echo direction("Clinic","عيادة") ?></option>
 									<option value="3"><?php echo direction("Studio","إستوديو") ?></option>
-									<option value="4"><?php echo direction("Cours","دورة") ?></option>
+									<option value="4"><?php echo direction("Course","دورة") ?></option>
 								</select>
 							</div>
 

@@ -166,8 +166,8 @@
 												<label id="seats<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["seats"] ?></label>
 												<span  id="listTypes<?php echo $service[$i]["id"]?>">
 													<?php
-													if( $vendorData[0]["type"] == 3 && !is_null($service[$i]["listTypes"]) ){
-														$listTypes = json_decode($service[$i]["listTypes"],true);
+													if( $vendorData[0]["type"] == 3 ){
+														$listTypes = ( is_null($service[$i]["listTypes"]) ) ? [] : json_decode($service[$i]["listTypes"],true) ;
 														if( $allTypes = selectDB("picturetype","`vendorId` = '{$vendorData[0]["id"]}' AND `hidden` = '0' AND `status` = '0' ORDER BY `id` ASC") ){
 															var_dump($allTypes);
 															for( $j = 0; $j < sizeof($allTypes); $j++ ){

@@ -168,7 +168,7 @@
 													<?php
 													if( $vendorData[0]["type"] == 3 && !is_null($service[$i]["listTypes"]) ){
 														$listTypes = json_decode($service[$i]["listTypes"],true);
-														if( $allTypes = selectDB("picturetype","`vendorId` = '{$service[$i]["vendorId"]}' AND `hidden` = '0' AND `status` = '0' ORDER BY `id` ASC") ){
+														if( $allTypes = selectDB("picturetype","`vendorId` = '{$vendorData[0]["id"]}' AND `hidden` = '0' AND `status` = '0' ORDER BY `id` ASC") ){
 															for( $j = 0; $j < sizeof($allTypes); $j++ ){
 																$title = direction($allTypes[$j]["enTitle"],$allTypes[$j]["arTitle"]);
 																if( in_array($allTypes[$j]["id"],$listTypes) ){

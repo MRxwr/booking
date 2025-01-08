@@ -101,7 +101,7 @@
 												$link = "?{$_SERVER["QUERY_STRING"]}&hide={$service[$i]["id"]}";
 												$hide = direction("Lock","قفل");
 											}
-											echo $vendor[0]["type"];
+											echo json_encode($vendor);
 											if( $vendor[0]["type"] == 3 ){
 												$pictureType = "
 												<a href='index.php?v=PictureType&id={$service[$i]["id"]}' data-toggle='tooltip' data-original-title='" . direction("Picture Types","نوع الصور") . "'>

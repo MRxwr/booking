@@ -41,7 +41,7 @@
 								<input type="text" name="arTitle" class="form-control" required>
 							</div>
 
-							<div class="col-md-132">
+							<div class="col-md-3">
                                 <label><?php echo direction("is Required ?","إلزامي ؟") ?></label>
                                 <select name="isRequired" class="form-control" required>
                                     <option value='0'><?php echo direction("Yes","نعم") ?></option>

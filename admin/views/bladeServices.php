@@ -168,7 +168,6 @@
 													<?php
 													if( $vendorData[0]["type"] == 3 ){
 														$listTypes = ( is_null($service[$i]["listTypes"]) ) ? [] : json_decode($service[$i]["listTypes"],true) ;
-														var_dump($listTypes);
 														if( $allTypes = selectDB("picturetype","`vendorId` = '{$vendorData[0]["id"]}' AND `hidden` = '0' AND `status` = '0' ORDER BY `id` ASC") ){
 															for( $j = 0; $j < sizeof($allTypes); $j++ ){
 																$title = direction($allTypes[$j]["enTitle"],$allTypes[$j]["arTitle"]);

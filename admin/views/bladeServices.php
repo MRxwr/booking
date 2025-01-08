@@ -103,7 +103,7 @@
 											}
 											if( $vendorData[0]["type"] == 3 ){
 												$pictureType = "
-												<a href='index.php?v=PictureType&id={$service[$i]["id"]}' data-toggle='tooltip' data-original-title='" . direction("Picture Types","نوع الصور") . "'>
+												<a href='index.php?v=PictureType&id={$service[$i]["id"]}' class='mr-25' data-toggle='tooltip' data-original-title='" . direction("Picture Types","نوع الصور") . "'>
 												<i class='fa fa-image text-inverse'></i>
 												</a>";
 											}else{

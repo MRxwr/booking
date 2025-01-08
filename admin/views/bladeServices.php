@@ -100,7 +100,15 @@
 												$icon = "fa fa-lock";
 												$link = "?{$_SERVER["QUERY_STRING"]}&hide={$service[$i]["id"]}";
 												$hide = direction("Lock","قفل");
-											}			
+											}
+											if( $vendor[0]["type"] == 3 ){
+												$pictureType = "
+												<a href='index.php?v=PictureType&id={$service[$i]["id"]}' data-toggle='tooltip' data-original-title='" . direction("Picture Types","نوع الصور") . "'>
+												<i class='fa fa-image text-inverse'></i>
+												</a>";
+											}else{
+												$pictureType = "";
+											}	
 									?>
 									<tr>
 										<td ><?php echo str_pad(($counter = $i + 1),4,"0",STR_PAD_LEFT) ?></td>
@@ -111,6 +119,7 @@
 										<td ><?php echo $service[$i]["period"] ?> min</td>
 										<td ><?php echo $service[$i]["price"] ?> -/KD</td>
 										<td class="text-nowrap">
+											<?php echo $pictureType ?>
 											<a id="<?php echo $service[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل") ?>">
 												<i class="fa fa-pencil text-inverse m-r-10"></i>
 											</a>

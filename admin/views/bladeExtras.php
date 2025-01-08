@@ -43,7 +43,7 @@
 		<div class="panel panel-default card-view">
 			<div class="panel-heading">
 				<div class="text-center">
-					<h6 class="panel-title txt-dark"><?php echo direction("List of Picture Types","قائمة نوع الصور") ?></h6>
+					<h6 class="panel-title txt-dark"><?php echo direction("List of Extras","قائمة الخدمات") ?></h6>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -63,38 +63,38 @@
 								</thead>
 								<tbody>
 									<?php 
-									if( $pictureType = selectDB("{$table}","`status` = '0' $vendorIdDb ORDER BY `id` ASC") ){
-										for( $i = 0; $i < sizeof($pictureType); $i++ ){
-											if ( $pictureType[$i]["hidden"] == 1 ){
+									if( $extras = selectDB("{$table}","`status` = '0' $vendorIdDb ORDER BY `id` ASC") ){
+										for( $i = 0; $i < sizeof($extras); $i++ ){
+											if ( $extras[$i]["hidden"] == 1 ){
 												$icon = "fa fa-unlock";
-												$link = "?{$_SERVER["QUERY_STRING"]}&show={$pictureType[$i]["id"]}";
+												$link = "?{$_SERVER["QUERY_STRING"]}&show={$extras[$i]["id"]}";
 												$hide = direction("Unlock","فتح");
 											}else{
 												$icon = "fa fa-lock";
-												$link = "?{$_SERVER["QUERY_STRING"]}&hide={$pictureType[$i]["id"]}";
+												$link = "?{$_SERVER["QUERY_STRING"]}&hide={$extras[$i]["id"]}";
 												$hide = direction("Lock","قفل");
 											}
 									?>
 									<tr>
 										<td ><?php echo str_pad(($counter = $i + 1),4,"0",STR_PAD_LEFT) ?></td>
-										<td ><?php echo $pictureType[$i]["enTitle"] ?></td>
-										<td ><?php echo $pictureType[$i]["arTitle"] ?></td>
-										<td ><?php echo $pictureType[$i]["price"] ?> -/KD</td>
+										<td ><?php echo $extras[$i]["enTitle"] ?></td>
+										<td ><?php echo $extras[$i]["arTitle"] ?></td>
+										<td ><?php echo $extras[$i]["price"] ?> -/KD</td>
 										<td class="text-nowrap">
-											<a id="<?php echo $pictureType[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل") ?>">
+											<a id="<?php echo $extras[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل") ?>">
 												<i class="fa fa-pencil text-inverse m-r-10"></i>
 											</a>
 											<a href="<?php echo $link ?>" class="mr-25" data-toggle="tooltip" data-original-title="<?php echo $hide ?>">
 												<i class="<?php echo $icon ?> text-inverse m-r-10"></i>
 											</a>
-											<a href="<?php echo "?{$_SERVER["QUERY_STRING"]}" ?>&delId=<?php echo $pictureType[$i]["id"] ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف") ?>">
+											<a href="<?php echo "?{$_SERVER["QUERY_STRING"]}" ?>&delId=<?php echo $extras[$i]["id"] ?>" data-toggle="tooltip" data-original-title="<?php echo direction("Delete","حذف") ?>">
 												<i class="fa fa-close text-danger"></i>
 											</a>
 											<div style="display: none">
-												<label id="vendorId<?php echo $pictureType[$i]["id"]?>"><?php echo $pictureType[$i]["vendorId"] ?></label>
-												<label id="price<?php echo $pictureType[$i]["id"]?>"><?php echo $pictureType[$i]["price"] ?></label>
-												<label id="enTitle<?php echo $pictureType[$i]["id"]?>"><?php echo $pictureType[$i]["enTitle"] ?></label>
-												<label id="arTitle<?php echo $pictureType[$i]["id"]?>"><?php echo $pictureType[$i]["arTitle"] ?></label>
+												<label id="vendorId<?php echo $extras[$i]["id"]?>"><?php echo $extras[$i]["vendorId"] ?></label>
+												<label id="price<?php echo $extras[$i]["id"]?>"><?php echo $extras[$i]["price"] ?></label>
+												<label id="enTitle<?php echo $extras[$i]["id"]?>"><?php echo $extras[$i]["enTitle"] ?></label>
+												<label id="arTitle<?php echo $extras[$i]["id"]?>"><?php echo $extras[$i]["arTitle"] ?></label>
 											</div>
 										</td>
 									</tr>

@@ -112,10 +112,10 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                 if ( !in_array($currentTime, $blockedTimeBookings) ) {
                     $response["timeSlots"][] = $currentSlotStart . " - " . $currentSlotEnd;
                 }else{
-                    $durationInSeconds = 60 * 60;
+                    $durationInSeconds = 60 * 15;
                 }
             }else{
-                $durationInSeconds = 60 * 60;
+                $durationInSeconds = 60 * 15;
             }
             $startTimestamp = $endTimestamp;
         }

@@ -18,6 +18,7 @@
 									<option value="1"><?php echo direction("Salon","صالون") ?></option>
 									<option value="2"><?php echo direction("Clinic","عيادة") ?></option>
 									<option value="3"><?php echo direction("Studio","إستوديو") ?></option>
+									<option value="4"><?php echo direction("Cours","دورة") ?></option>
 								</select>
 							</div>
 
@@ -32,7 +33,7 @@
 
 							<div class="col-md-4">
 								<label><?php echo direction("Partial Charge","الرسوم الجزئية") ?></label>
-								<input type="number" step="any" min="1" name="chargeTypeAmount" class="form-control" required>
+								<input type="number" step="any" min="0" name="chargeTypeAmount" class="form-control" required>
 							</div>
 
 							<div class="col-md-4">
@@ -47,7 +48,7 @@
 
 							<div class="col-md-4">
 								<label><?php echo direction("IBAN","IBAN") ?></label>
-								<input type="text" name="iban" class="form-control" required>
+								<input type="text" name="iban" class="form-control" >
 							</div>
 
 							<div class="col-md-6">

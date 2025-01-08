@@ -61,6 +61,34 @@
 		</div>
 	</div>
 
+	<div class="col-sm-12 mb-30">
+		<div class="panel panel-default card-view">
+			<div class="panel-heading">
+				<div class="text-center">
+					<h6 class="panel-title txt-dark"><?php echo direction("Select Picture Types","حدد نوع الصور") ?></h6>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-wrapper collapse in">
+				<div class="panel-body ">
+					<form class="mt-30 mb-30" method="POST" action="" enctype="multipart/form-data">
+						<div class="row m-0">
+
+							<div id="pictureType" class="col-md-12" style="display: none;">
+
+							</div>
+
+							<div class="col-md-12" style="margin-top:10px">
+								<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
+								<input type="hidden" name="update" value="1">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="col-sm-12">
 		<div class="panel panel-default card-view">
 			<div class="panel-heading">
@@ -103,7 +131,7 @@
 											}
 											if( $vendorData[0]["type"] == 3 ){
 												$pictureType = "
-												<a href='index.php?v=PictureType&id={$service[$i]["id"]}' class='mr-25' data-toggle='tooltip' data-original-title='" . direction("Picture Types","نوع الصور") . "'>
+												<a class='mr-25 listTypes' data-toggle='tooltip' data-original-title='" . direction("Picture Types","نوع الصور") . "'>
 												<i class='fa fa-image text-inverse'></i>
 												</a>";
 											}else{
@@ -136,6 +164,23 @@
 												<label id="enTitle<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["enTitle"] ?></label>
 												<label id="arTitle<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["arTitle"] ?></label>
 												<label id="seats<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["seats"] ?></label>
+												<span id="listTypes<?php echo $service[$i]["id"]?>">
+													<?php
+													if( $vendorData[0]["type"] == 3 && !is_null($service[$i]["listTypes"]) ){
+														$listTypes = json_decode($service[$i]["listTypes"],true);
+														if( $allTypes = selectDB("picturetype","`vendorId` = '{$service[$i]["vendorId"]}' AND `hidden` = '0' AND `status` = '0' ORDER BY `id` ASC") ){
+															for( $j = 0; $j < sizeof($allTypes); $j++ ){
+																$title = direction($allTypes[$j]["enTitle"],$allTypes[$j]["arTitle"]);
+																if( in_array($allTypes[$j]["id"],$listTypes) ){
+																	echo "<input type='checkbox' name='listTypes[]' value='{$allTypes[$j]["id"]}' checked> {$title}<br>";
+																}else{
+																	echo "<input type='checkbox' name='listTypes[]' value='{$allTypes[$j]["id"]}'> {$title}<br>";
+																}
+															}
+														}
+													}
+													?>
+												</span>
 											</div>
 										</td>
 									</tr>

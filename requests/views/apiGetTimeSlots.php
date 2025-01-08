@@ -103,13 +103,17 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             if ($endTimestamp > $closeTimestamp) {
                 break;
             }
-            $currentSlotStart = date('H:i', $startTimestamp);
-            $currentSlotEnd   = date('H:i', $endTimestamp);
-            $currentTime = $currentSlotStart . " - " . $currentSlotEnd;
             $startHour = (int) date('H', $startTimestamp);
-            if (!in_array($startHour, $blockedTimeVendor) && !in_array($currentTime, $blockedTimeBookings)) {
-                $response["timeSlots"][] = $currentSlotStart . " - " . $currentSlotEnd;
+            if (!in_array($startHour, $blockedTimeVendor) ) {
                 $durationInSeconds = $duration * 60;
+                $currentSlotStart = date('H:i', $startTimestamp);
+                $currentSlotEnd   = date('H:i', $startTimestamp + $durationInSeconds);
+                $currentTime = $currentSlotStart . " - " . $currentSlotEnd;
+                if ( !in_array($currentTime, $blockedTimeBookings) ) {
+                    $response["timeSlots"][] = $currentSlotStart . " - " . $currentSlotEnd;
+                }else{
+                    $durationInSeconds = 60 * 60;
+                }
             }else{
                 $durationInSeconds = 60 * 60;
             }

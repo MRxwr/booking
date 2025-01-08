@@ -169,13 +169,11 @@
 													if( $vendorData[0]["type"] == 3 && !is_null($service[$i]["listTypes"]) ){
 														$listTypes = json_decode($service[$i]["listTypes"],true);
 														if( $allTypes = selectDB("picturetype","`vendorId` = '{$vendorData[0]["id"]}' AND `hidden` = '0' AND `status` = '0' ORDER BY `id` ASC") ){
+															var_dump($allTypes);
 															for( $j = 0; $j < sizeof($allTypes); $j++ ){
 																$title = direction($allTypes[$j]["enTitle"],$allTypes[$j]["arTitle"]);
-																if( in_array($allTypes[$j]["id"],$listTypes) ){
-																	echo "<input type='checkbox' name='listTypes[]' value='{$allTypes[$j]["id"]}' checked> {$title}<br>";
-																}else{
-																	echo "<input type='checkbox' name='listTypes[]' value='{$allTypes[$j]["id"]}'> {$title}<br>";
-																}
+																$checked = ( in_array($allTypes[$j]["id"],$listTypes) ) ? "checked" : "";
+																echo "<label><input type='checkbox' name='listTypes[]' value='{$allTypes[$j]["id"]}' $checked>$title</label>";
 															}
 														}
 													}

@@ -99,6 +99,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
         $closeTimestamp = strtotime($close . ":00"); 
         $durationInSeconds = $duration * 60; // convert minutes to seconds
         while ($startTimestamp < $closeTimestamp) {
+            $endTimestamp = $startTimestamp + $durationInSeconds;
             if ($endTimestamp > $closeTimestamp) {
                 break;
             }
@@ -108,9 +109,9 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             $startHour = (int) date('H', $startTimestamp);
             if (!in_array($startHour, $blockedTimeVendor) && !in_array($currentTime, $blockedTimeBookings)) {
                 $response["timeSlots"][] = $currentSlotStart . " - " . $currentSlotEnd;
-                $endTimestamp = $startTimestamp + $durationInSeconds;
+                $durationInSeconds = $duration * 60;
             }else{
-                $endTimestamp = $startTimestamp + (60*60);
+                $durationInSeconds = 60 * 60;
             }
             $startTimestamp = $endTimestamp;
         }

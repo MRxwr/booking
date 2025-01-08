@@ -97,7 +97,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
 
         $startTimestamp = strtotime($start . ":00"); 
         $closeTimestamp = strtotime($close . ":00"); 
-        $durationInSeconds = 15 * 60; // convert minutes to seconds
+        $durationInSeconds = $duration * 60; // convert minutes to seconds
         while ($startTimestamp < $closeTimestamp) {
             $endTimestamp = $startTimestamp + $durationInSeconds;
             if ($endTimestamp > $closeTimestamp) {
@@ -106,19 +106,11 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             $currentSlotStart = date('H:i', $startTimestamp);
             $currentSlotEnd   = date('H:i', $endTimestamp);
             $currentTime = $currentSlotStart . " - " . $currentSlotEnd;
-            if (!in_array($currentTime, $blockedTimeBookings)) {
+            $startHour = (int) date('H', $startTimestamp);
+            if (!in_array($startHour, $blockedTimeVendor) && !in_array($currentTime, $blockedTimeBookings)) {
                 $response["timeSlots"][] = $currentSlotStart . " - " . $currentSlotEnd;
             }
             $startTimestamp = $endTimestamp;
-        }
-        if( count($blockedTimeVendor) > 0 ){
-            var_dump($blockedTimeVendor);
-            foreach( $response["timeSlots"] as $key => $timeSlot ){
-                echo $response["timeSlots"][$key];
-                if( in_array(substr($timeSlot,0,2),$blockedTimeVendor) ){
-                    unset($response["timeSlots"][$key]);
-                }
-            }
         }
         echo outputData($response);die();
     }else{

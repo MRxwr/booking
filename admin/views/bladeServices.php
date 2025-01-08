@@ -61,7 +61,7 @@
 		</div>
 	</div>
 
-	<div class="col-sm-12 mb-30">
+	<div class="col-sm-12 mb-30" style="display: none;" id="pictureTypeDiv">
 		<div class="panel panel-default card-view">
 			<div class="panel-heading">
 				<div class="text-center">
@@ -74,7 +74,7 @@
 					<form class="mt-30 mb-30" method="POST" action="" enctype="multipart/form-data">
 						<div class="row m-0">
 
-							<div id="pictureType" class="col-md-12" style="display: none;">
+							<div id="pictureType" class="col-md-12">
 
 							</div>
 
@@ -131,7 +131,7 @@
 											}
 											if( $vendorData[0]["type"] == 3 ){
 												$pictureType = "
-												<a class='mr-25 listTypes' data-toggle='tooltip' data-original-title='" . direction("Picture Types","نوع الصور") . "'>
+												<a class='mr-25 listTypes' id='{$service[$i]["id"]}' data-toggle='tooltip' data-original-title='" . direction("Picture Types","نوع الصور") . "'>
 												<i class='fa fa-image text-inverse'></i>
 												</a>";
 											}else{
@@ -164,7 +164,7 @@
 												<label id="enTitle<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["enTitle"] ?></label>
 												<label id="arTitle<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["arTitle"] ?></label>
 												<label id="seats<?php echo $service[$i]["id"]?>"><?php echo $service[$i]["seats"] ?></label>
-												<span id="listTypes<?php echo $service[$i]["id"]?>">
+												<span  id="listTypes<?php echo $service[$i]["id"]?>">
 													<?php
 													if( $vendorData[0]["type"] == 3 && !is_null($service[$i]["listTypes"]) ){
 														$listTypes = json_decode($service[$i]["listTypes"],true);
@@ -208,6 +208,15 @@
 		$("input[name=price]").val($.trim($("#price"+id).html().replace(/\n/g, "")));
 		$("input[name=seats]").val($.trim($("#seats"+id).html().replace(/\n/g, "")));
 		$("select[name=vendorId]").val($.trim($("#vendorId"+id).html().replace(/\n/g, "")));
+		
+	})
+	$(document).on("click",".listTypes", function(){
+		var id = $(this).attr("id");
+		var listTypes = $("#listTypes"+id).html();
+		//var listTypes = listTypes.replace(/<input type="checkbox" name="listTypes\[\]" value="(\d+)" checked>/g, "<input type='checkbox' name='listTypes[]' value='$1' checked>");
+		//listTypes = listTypes.replace(/<input type="checkbox" name="listTypes\[\]" value="(\d+)">/g, "<input type='checkbox' name='listTypes[]' value='$1'>");
+		$("#pictureType").html(listTypes);
+		$("#pictureTypeDiv").style("display","block");
 	})
 </script>
   

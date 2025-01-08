@@ -111,6 +111,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             }
             $startTimestamp = $endTimestamp;
         }
+        /*
         if( count($blockedTimeVendor) > 0 ){
             foreach( $response["timeSlots"] as $key => $timeSlot ){
                 if( in_array(substr($timeSlot,0,2),$blockedTimeVendor) ){
@@ -118,6 +119,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
                 }
             }
         }
+            */
         echo outputData($response);die();
     }else{
         $response["timeSlots"][0] = "No time slots available";

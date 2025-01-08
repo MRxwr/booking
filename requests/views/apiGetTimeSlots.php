@@ -111,15 +111,14 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             }
             $startTimestamp = $endTimestamp;
         }
-        /*
         if( count($blockedTimeVendor) > 0 ){
             foreach( $response["timeSlots"] as $key => $timeSlot ){
+                echo $response["timeSlots"][$key];
                 if( in_array(substr($timeSlot,0,2),$blockedTimeVendor) ){
                     unset($response["timeSlots"][$key]);
                 }
             }
         }
-            */
         echo outputData($response);die();
     }else{
         $response["timeSlots"][0] = "No time slots available";

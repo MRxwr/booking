@@ -97,6 +97,7 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
 
         $startTimestamp = strtotime($start . ":00"); 
         $closeTimestamp = strtotime($close . ":00"); 
+        $duration = ( $duration > 60 ) ? 60 : $duration;
         $durationInSeconds = $duration * 60; // convert minutes to seconds
         while ($startTimestamp < $closeTimestamp) {
             $endTimestamp = $startTimestamp + $durationInSeconds;

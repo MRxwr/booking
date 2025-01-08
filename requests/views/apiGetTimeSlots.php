@@ -104,7 +104,6 @@ if( !isset($_POST["branchId"]) || empty($_POST["branchId"]) ){
             if ($endTimestamp > $closeTimestamp) {
                 break;
             }
-            
             $startHour = (int) date('H', $startTimestamp);
             if (!in_array($startHour, $blockedTimeVendor) ) {
                 $currentSlotStart = date('H:i', $startTimestamp);

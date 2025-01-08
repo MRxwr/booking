@@ -213,10 +213,8 @@
 	$(document).on("click",".listTypes", function(){
 		var id = $(this).attr("id");
 		var listTypes = $("#listTypes"+id).html();
-		//var listTypes = listTypes.replace(/<input type="checkbox" name="listTypes\[\]" value="(\d+)" checked>/g, "<input type='checkbox' name='listTypes[]' value='$1' checked>");
-		//listTypes = listTypes.replace(/<input type="checkbox" name="listTypes\[\]" value="(\d+)">/g, "<input type='checkbox' name='listTypes[]' value='$1'>");
-		$("#pictureType").html(listTypes);
 		$("#pictureTypeDiv").style("display","block");
+		$("#pictureType").html(listTypes);
 	})
 </script>
   

@@ -138,6 +138,7 @@
 		$("input[name=enTitle]").val($.trim($("#enTitle"+id).html().replace(/\n/g, ""))).focus();;
 		$("input[name=price]").val($.trim($("#price"+id).html().replace(/\n/g, "")));
 		$("input[name=vendorId]").val($.trim($("#vendorId"+id).html().replace(/\n/g, "")));
+		$("select[name=vendorId]").val($.trim($("#vendorId"+id).html().replace(/\n/g, "")));
 	})
 </script>
   

@@ -11,6 +11,9 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 	}elseif( isset($_GET["delId"]) && !empty($_GET["delId"]) && updateDB("{$table}",array('status'=> '1'),"`id` = '{$_GET["delId"]}'") ){
 		
 	}elseif( isset($_POST["update"]) ){
+		if( isset($_POST["listTypes"]) && !empty($_POST["listTypes"]) ){
+			$_POST["listTypes"] = json_encode($_POST["listTypes"]);
+		}
 		$id = $_POST["update"];
 		unset($_POST["update"]);
 		if ( isset($_POST["sm"]) && !empty($_POST["sm"]) ){

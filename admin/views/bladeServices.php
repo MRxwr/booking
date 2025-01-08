@@ -90,8 +90,8 @@
 									<?php 
 									if( $service = selectDB("{$table}","`status` = '0' $vendorIdDb ORDER BY `id` ASC") ){
 										for( $i = 0; $i < sizeof($service); $i++ ){
-											$vendor = selectDB("vendors","`id` = '{$service[$i]["vendorId"]}'");
-											$vendor = direction($vendor[0]["enTitle"],$vendor[0]["arTitle"]);
+											$vendorData = selectDB("vendors","`id` = '{$service[$i]["vendorId"]}'");
+											$vendor = direction($vendorData[0]["enTitle"],$vendorData[0]["arTitle"]);
 											if ( $service[$i]["hidden"] == 1 ){
 												$icon = "fa fa-unlock";
 												$link = "?{$_SERVER["QUERY_STRING"]}&show={$service[$i]["id"]}";
@@ -101,8 +101,7 @@
 												$link = "?{$_SERVER["QUERY_STRING"]}&hide={$service[$i]["id"]}";
 												$hide = direction("Lock","قفل");
 											}
-											echo json_encode($vendor);
-											if( $vendor[0]["type"] == 3 ){
+											if( $vendorData[0]["type"] == 3 ){
 												$pictureType = "
 												<a href='index.php?v=PictureType&id={$service[$i]["id"]}' data-toggle='tooltip' data-original-title='" . direction("Picture Types","نوع الصور") . "'>
 												<i class='fa fa-image text-inverse'></i>

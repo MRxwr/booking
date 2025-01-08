@@ -212,7 +212,7 @@
 		$("input[name=update]").val(id);
 		var listTypes = $("#listTypes"+id).html();
 		$("#pictureTypeDiv").attr("style","display: block");
-		$("#pictureType").html(listTypes);
+		$("#pictureType").html(listTypes).focus();
 	})
 </script>
   

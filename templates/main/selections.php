@@ -79,11 +79,11 @@
 		for ( $i = 0; $i < sizeof($services); $i++ ) {
 			$themesList = ( is_null($services[$i]["themes"]) ) ? [] : json_decode($services[$i]["themes"],true);
 			foreach($themesList as $theme){
-				$theme = selectDB("themes","`id` = '{$theme}'");
-				$images = ( is_null($theme[0]["themes"]) ) ? [] : json_decode($theme[0]["themes"],true);
+				$themes = selectDB("themes","`id` = '{$theme}'");
+				$images = ( is_null($themes[0]["themes"]) ) ? [] : json_decode($themes[0]["themes"],true);
 				if( count($images) ){
 					for( $j = 0; $j < sizeof($images); $j++ ){
-						echo "{ id: '{$theme}', serviceId: '{$services[$i]["id"]}' ,image: '{$images[$j]}'},"; 
+						echo "{ id: '{$themes[0]["id"]}', serviceId: '{$services[$i]["id"]}' ,image: '{$images[$j]}'},"; 
 					}
 				}
 			}

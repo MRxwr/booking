@@ -286,7 +286,7 @@ $.each(filteredThemes, function(key, value) {
     name: "theme",
     value: key
   }).prop("checked", value.default);
-  var image = value.img;
+  var image = value.image;
   var themes = "<div class'col-2'><input type='radio' name='themeId' value='" + key + "'></div><div class='col-4'><img src='logos/'"+image+" style='width:150px; height:150px'></div>";
   var label = $("<label>").append(
     $("<img>").attr("src", "logos/"+value.image),

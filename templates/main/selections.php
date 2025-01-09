@@ -29,6 +29,37 @@
 	</div>
 </div>
 
+<?php 
+if( $vendor["type"] == "3" ){
+?>
+<div class="row m-0 w-100">
+	<div class="col-12">
+		<span><?php echo direction("Types","النوع") ?></span>
+	</div>
+	<div class="col-12 p-3">
+		<div class="row m-0" id="types-container">
+			<div class="col d-flex align-items-center justify-content-center serviceBLk mx-2 mb-2 p-3">
+				<span><?php echo direction("Please select service first","الرجاء تحديد فرع"); ?></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row m-0 w-100">
+	<div class="col-12">
+		<span><?php echo direction("Themes","التصاميم") ?></span>
+	</div>
+	<div class="col-12 p-3">
+		<div class="row m-0" id="themes-container">
+			<div class="col d-flex align-items-center justify-content-center serviceBLk mx-2 mb-2 p-3">
+				<span><?php echo direction("Please select service first","الرجاء تحديد فرع"); ?></span>
+			</div>
+		</div>
+	</div>
+</div>
+<?php
+}
+?>
 <div class="row m-0 w-100">
 	<div class="col-md-6">
 		<label><?php echo direction("Date","التاريخ") ?></label>
@@ -36,6 +67,7 @@
 		<input type="hidden" name="serviceId" value="0" required>
 		<input type="hidden" name="branchId" value="0" required>
 		<input type="hidden" name="pictureTypeId" value="0" required>
+		<input type="hidden" name="theme" value="0" required>
 		<input type="hidden" name="selectedDate" value="0" required>
 		<input type="hidden" name="selectedTime" value="0" required>
 		<input type="hidden" name="vendorId" value="<?php echo $vendor["id"] ?>" required>

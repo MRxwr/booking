@@ -151,8 +151,8 @@
                                                             echo "<div class='row m-0'>";
                                                             foreach( $themesList as $theme ){
                                                                 // add the images ../logos/ to the div col and add a delete button foreach image
-                                                                echo "<div class='col-md-3'>";
-                                                                echo "<a onclick='deleteImage({$theme})' class='deleteImage'><img src='../logos/{$theme}' class='img-responsive' style='width:100%'></a>";
+                                                                echo "<div class='col-md-2'>";
+                                                                echo "<a onclick='deleteImage({$theme})' class='deleteImage'><img src='../logos/{$theme}' class='img-responsive' style='width:150px;height:150px'></a>";
                                                                 echo "</div>";
                                                             }
                                                             echo "</div>";

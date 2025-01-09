@@ -152,7 +152,7 @@
                                                             foreach( $themesList as $theme ){
                                                                 // add the images ../logos/ to the div col and add a delete button foreach image
                                                                 echo "<div class='col-md-2'>";
-                                                                echo "<a onclick='deleteImage({$theme})' class='deleteImage'><img src='../logos/{$theme}' class='img-responsive' style='width:150px;height:150px'></a>";
+                                                                echo "<a class='deleteImage' id='{$theme}'><img src='../logos/{$theme}' class='img-responsive' style='width:150px;height:150px'></a>";
                                                                 echo "</div>";
                                                             }
                                                             echo "</div>";
@@ -199,10 +199,19 @@
 	})
 	$(document).on("click",".deleteImage", function(){
 		var id = $(this).attr("id");
-		$.get("<?php echo $link ?>?delImage="+id, function(data){
-			if(data == "success"){
-				$("#"+id).remove();
-			}
+		confrim("<?php echo direction("Are you sure you want to delete this image?","هل انت متاكد من حذف هذا الصورة؟") ?>",function(){
+			$.ajax({
+				type: "POST",
+				url: "<?php echo $link ?>",
+				data: {
+					delImage: id,
+					themeId: $("input[name=update]").val()
+				},
+				success: function(data){
+					alert(data);
+					location.reload();
+				}
+			});
 		})
     })
 </script>

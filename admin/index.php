@@ -24,7 +24,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 			$_POST["logo"] = uploadImage($_FILES["logo"]["tmp_name"]);
 		}
 		
-		if( isset($_FILES['coverImg']) && is_uploaded_file($_FILES['coverImg']['tmp_name']) ){
+		if( isset($_FILES['coverImg']) && is_uploaded_file($_FILES['coverImg']['tmp_name'][0]) ){
 			$_POST["coverImg"] = uploadImage($_FILES["coverImg"]["tmp_name"]);
 		}
 

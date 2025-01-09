@@ -34,8 +34,8 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 				for( $i = 0; $i < sizeof($_FILES['theme']['tmp_name']); $i++ ){
 					$newTheme = uploadImage($_FILES["theme"]["tmp_name"][$i]);
 					array_push($themes, $newTheme);
-					$_POST["themes"][] = json_encode($themes);
 				}
+				$_POST["themes"] = json_encode($themes);
 			}
 		}
 		

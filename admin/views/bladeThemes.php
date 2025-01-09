@@ -67,7 +67,7 @@
 
                             <div class="col-md-12">
 								<label><?php echo direction("Upload New Theme","تحميل تصميم جديد") ?></label>
-								<input type="file" name="theme" class="form-control" required>
+								<input type="file" name="theme" class="form-control" multiple required>
 							</div>
 
 							<div class="col-md-12" style="margin-top:10px">

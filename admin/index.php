@@ -28,12 +28,15 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 			$_POST["coverImg"] = uploadImage($_FILES["coverImg"]["tmp_name"]);
 		}
 
-		if( isset($_FILES['theme']) && is_uploaded_file($_FILES['theme']['tmp_name']) ){
-			$newTheme = uploadImage($_FILES["theme"]["tmp_name"]);
+		if( isset($_FILES['theme']) && is_uploaded_file($_FILES['theme']['tmp_name'][$i]) ){
+			//loop through all files
 			if ( $themeGroup = selectDB("themes","`id` = '{$id}'") ){
 				$themes = ( is_null($themeGroup[0]["themes"]) ) ? array() : json_decode($themeGroup[0]["themes"],true);
-				array_push($themes, $newTheme);
-				$_POST["themes"] = json_encode($themes);
+				for( $i = 0; $i < sizeof($_FILES['theme']['tmp_name']); $i++ ){
+					$newTheme = uploadImage($_FILES["theme"]["tmp_name"][$i]);
+					array_push($themes, $newTheme);
+					$_POST["themes"][] = json_encode($themes);
+				}
 			}
 		}
 		

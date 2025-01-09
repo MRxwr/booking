@@ -18,6 +18,33 @@
 			<input type="email" class="form-control" id="email" placeholder="Enter your email" required>
 		</div>
 	</div>
+<?php
+if( $extraInfo = selectDB("extrainfo","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC") ){
+	foreach( $extraInfo as $info ){
+		$title = direction($info["enTitle"],$info["arTitle"]);
+		$required = ($info["required"] == "1") ? "required" : "";
+		if( $info["type"] == "0" ){
+		?>
+		<div class="col-6">
+			<div class="form-group">
+				<label for="name"><?php echo $title ?></label>
+				<input type="text" class="form-control" name="extraInfo[]" placeholder="" <?php echo $required ?>>
+			</div>	
+		</div>
+		<?php
+		}elseif( $info["type"] == "1" ){
+		?>
+		<div class="col-6">
+			<div class="form-group">
+				<label for="name"><?php echo $title ?></label>
+				<teaxtarea name="extraInfo[]" class="form-control" <?php echo $required ?>></teaxtarea>
+			</div>	
+		</div>
+		<?php
+		}
+	}
+}
+?>
 	<div class="col-12 mt-3">
 		<div class="form-group form-check">
 			<input type="checkbox" class="form-check-input" id="exampleCheck1" required>

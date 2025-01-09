@@ -78,6 +78,7 @@
 	<?php
 		for ( $i = 0; $i < sizeof($services); $i++ ) {
 			$themesList = ( is_null($services[$i]["themes"]) ) ? [] : json_decode($services[$i]["themes"],true);
+			var_dump($themesList);
 			foreach($themesList as $theme){
 				$theme = selectDB("themes","`id` = '{$theme}'");
 				$images = ( is_null($theme[0]["images"]) ) ? [] : json_decode($theme[0]["images"],true);

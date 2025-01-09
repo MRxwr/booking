@@ -76,20 +76,18 @@
     // Store themes data in a JavaScript object
 	var themes = [
 	<?php
-	if ( $service = selectDB("services","`themes` LIKE '%{$theme["id"]}%' AND `status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC") ){
-		for ( $i = 0; $i < sizeof($service); $i++ ) {
-			$themesList = ( is_null($service[$i]["themes"]) ) ? [] : json_decode($service[$i]["themes"],true);
+		for ( $i = 0; $i < sizeof($services); $i++ ) {
+			$themesList = ( is_null($services[$i]["themes"]) ) ? [] : json_decode($services[$i]["themes"],true);
 			foreach($themesList as $theme){
 				$theme = selectDB("themes","`id` = '{$theme}'");
 				$images = ( is_null($theme[0]["images"]) ) ? [] : json_decode($theme[0]["images"],true);
 				if( count($images) ){
 					for( $j = 0; $j < sizeof($images); $j++ ){
-						echo "{ id: '".$theme["id"]."', serviceId: '".$service[$i]["id"]."' ,image: '".$images[$j]."'},"; 
+						echo "{ id: '".$theme["id"]."', serviceId: '".$services[$i]["id"]."' ,image: '".$images[$j]."'},"; 
 					}
 				}
 			}
 		}
-	}
 	?>
   ];
 

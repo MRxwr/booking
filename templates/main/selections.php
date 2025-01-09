@@ -280,11 +280,13 @@ $.each(themes, function(key, value) {
 
 // Fill themesBLK with radio inputs and images based on filtered themes
 $(".themesBLK").empty();
+$(".themesBLK").append("<div class='row'>");
 $.each(filteredThemes, function(key, value) {
   var image = value.image;
   var themes = "<div class='col-2'><input type='radio' name='themeId' value='" + key + "'></div><div class='col-4'><img src='logos/"+image+"' style='width:150px; height:150px'></div>";
   $(".themesBLK").append(themes);
 });
+$(".themesBLK").append("</div>");
   });
 
   // on selecting select name time update input name selectedTime

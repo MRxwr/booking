@@ -38,7 +38,7 @@ if( $vendor["type"] == "3" ){
 	</div>
 	<div class="col-12 p-3">
 		<div class="row m-0" id="types-container">
-			<div class="col d-flex align-items-center justify-content-center  mx-2 mb-2 p-3" id="typesBLK">
+			<div class="col d-flex align-items-center justify-content-center typesBLK mx-2 mb-2 p-3">
 				<span><?php echo direction("Please select service first","الرجاء تحديد فرع"); ?></span>
 			</div>
 		</div>
@@ -255,8 +255,8 @@ if( $vendor["type"] == "3" ){
 	});
 
 	// Fill typesBlk with radio inputs based on filtered pictureTypes
-	$("#typesBlk").empty();
-	console.log(filteredPictureTypes);
+	$(".typesBLK").empty();
+	console.log(filteredPictureTypes)
 	$.each(filteredPictureTypes, function(key, value) {
 	var radioInput = $("<input>").attr({
 		type: "radio",
@@ -268,7 +268,7 @@ if( $vendor["type"] == "3" ){
 
 	var radioDiv = $("<div>").addClass("radio").append(radioInput, label);
 
-	$("#typesBlk").append(radioDiv);
+	$(".typesBLK").append(radioDiv);
 	});
 
 	// Filter themes based on serviceId

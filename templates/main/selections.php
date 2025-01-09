@@ -65,7 +65,7 @@
 		for ( $i = 0; $i < sizeof($services); $i++ ) {
 			$pictureTypes = ( is_null($services[$i]["listTypes"]) ) ? [] : json_decode($services[$i]["listTypes"],true);
 			foreach($pictureTypes as $type){
-				$types = selectDB("picturetypes","`id` = '{$type}'");
+				$types = selectDB("picturetype","`id` = '{$type}'");
 				echo "{ id: '{$types[0]["id"]}', serviceId: '{$services[$i]["id"]}' , price: '{$types[0]["price"]}' ,title: '".direction($types[0]["enTitle"],$types[0]["arTitle"])."'},"; 
 			}
 		}

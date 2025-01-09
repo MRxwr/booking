@@ -256,19 +256,9 @@ if( $vendor["type"] == "3" ){
 
 	// Fill typesBlk with radio inputs based on filtered pictureTypes
 	$(".typesBLK").empty();
-	console.log(filteredPictureTypes)
 	$.each(filteredPictureTypes, function(key, value) {
-	var radioInput = $("<input>").attr({
-		type: "radio",
-		name: "pictureType",
-		value: key
-	}).prop("checked", value.default);
-
-	var label = $("<label>").text(value.title);
-
-	var radioDiv = $("<div>").addClass("radio").append(radioInput, label);
-
-	$(".typesBLK").append(radioDiv);
+		$types = "<input type='radio' name='pictureType' value='"+value.id+"'><label>'"+value.title+"'</label> <br>";
+		$(".typesBLK").append($types);
 	});
 
 	// Filter themes based on serviceId

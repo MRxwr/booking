@@ -60,7 +60,7 @@
   ];
 
   // Store pictureTypes data in a JavaScript object
-  var services = [
+  var pictureTypes = [
 	<?php
 	$pictureTypes = selectDB("picturetypes","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
 	foreach($pictureTypes as $pictureType){

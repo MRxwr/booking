@@ -64,7 +64,7 @@
 	<?php
 	$pictureTypes = selectDB("picturetype","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
 	foreach($pictureTypes as $pictureType){
-		$service = selectDB("services","`listTypes` LIKE '%{$pictureType["serviceId"]}%' AND `status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
+		$service = selectDB("services","`listTypes` LIKE %'{$pictureType["serviceId"]}'% AND `status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
 	  echo "{ id: '".$pictureType["id"]."', serviceId: '".$service[0]["id"]."' ,price: '".$pictureType["price"]."', title: '".direction($pictureType["enTitle"],$pictureType["arTitle"])."'},"; 
 	}
 	?>

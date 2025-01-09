@@ -73,6 +73,7 @@
 							<div class="col-md-12" style="margin-top:10px">
 								<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
 								<input type="hidden" name="update" value="1">
+								<input type="hidden" name="vendorId" value="1">
 							</div>
 
                             <div id="listOfThemes" class="col-md-12">
@@ -191,6 +192,7 @@
 		var id = $(this).attr("id");
 		$("input[name=update]").val(id);
 		var themes = $("#theme"+id).html();
+        $("#uploadTheme").attr("style","display:block");
         $("#listOfThemes").html(themes);
 		$("input[name=vendorId]").val($.trim($("#vendorId"+id).html().replace(/\n/g, "")));
 		$("select[name=vendorId]").val($.trim($("#vendorId"+id).html().replace(/\n/g, "")));

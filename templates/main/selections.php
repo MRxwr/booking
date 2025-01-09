@@ -236,7 +236,7 @@ if( $vendor["type"] == "3" ){
 
   // get picture type id
   $(document).on("click","#pictureType", function(){
-	var selectedType = $(this).attr("id");
+	var selectedType = $(this).attr("value");
 	$("input[name=pictureTypeId]").val(selectedType);
   });
 

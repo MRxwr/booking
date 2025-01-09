@@ -59,17 +59,16 @@
 	?>
   ];
 
-  // Store pictureTypes data in a JavaScript object
+  // Store picturetypes data in a JavaScript object
   var pictureTypes = [
 	<?php
-	$pictureTypes = selectDB("picturetype","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
-	foreach($pictureTypes as $pictureType){
-		if ( $service = selectDB("services","`listTypes` LIKE '%{$pictureType["id"]}%' AND `status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC") ){
-			for ( $i = 0; $i < sizeof($service); $i++ ) {
-				echo "{ id: '".$pictureType["id"]."', serviceId: '".$service[$i]["id"]."' ,price: '".$pictureType["price"]."', title: '".direction($pictureType["enTitle"],$pictureType["arTitle"])."'},"; 
+		for ( $i = 0; $i < sizeof($services); $i++ ) {
+			$pictureTypes = ( is_null($services[$i]["listTypes"]) ) ? [] : json_decode($services[$i]["listTypes"],true);
+			foreach($pictureTypes as $type){
+				$types = selectDB("pictureType","`id` = '{$type}'");
+				echo "{ id: '{$themes[0]["id"]}', serviceId: '{$services[$i]["id"]}' , price: '{$types[0]["price"]}' ,title: '".direction($types[0]["enTitle"],$types[0]["arTitle"])."'},"; 
 			}
 		}
-	}
 	?>
   ];
 

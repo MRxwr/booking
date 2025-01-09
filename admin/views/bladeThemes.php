@@ -199,7 +199,7 @@
 	})
 	$(document).on("click",".deleteImage", function(){
 		var id = $(this).attr("id");
-		confrim("<?php echo direction("Are you sure you want to delete this image?","هل انت متاكد من حذف هذا الصورة؟") ?>",function(){
+		confrim("<?php echo direction("Are you sure you want to delete this image?","هل انت متاكد من حذف هذه الصورة؟") ?>",function(){
 			$.ajax({
 				type: "POST",
 				url: "<?php echo $link ?>",

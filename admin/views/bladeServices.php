@@ -223,7 +223,7 @@
 															for( $j = 0; $j < sizeof($allThemes); $j++ ){
 																$title = direction($allThemes[$j]["enTitle"],$allThemes[$j]["arTitle"]);
 																$checked = ( in_array($allThemes[$j]["id"],$ThemesList) ) ? "checked" : "";
-																echo "<label><input type='checkbox' name='themes[]' value='{$allThemes[$j]["id"]}' $checked>$title</label> <img src='../logos/{$allThemes[$j]["image"]}' width='100px' height='100px'><br>";
+																echo "<label><input type='checkbox' name='themes[]' value='{$allThemes[$j]["id"]}' $checked>$title</label><br>";
 															}
 														}
 													}

@@ -127,7 +127,7 @@
 										<td ><?php echo $themes[$i]["arTitle"] ?></td>
 										<td class="text-nowrap">
                                             <a id="<?php echo $themes[$i]["id"] ?>" class="mr-25 theme" data-toggle="tooltip" data-original-title="<?php echo direction("Themes","تصاميم") ?>">
-												<i class="fa fa-pencil text-inverse m-r-10"></i>
+												<i class="fa fa-image text-inverse m-r-10"></i>
 											</a>
 
 											<a id="<?php echo $themes[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل") ?>">

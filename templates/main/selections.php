@@ -282,7 +282,7 @@ $.each(themes, function(key, value) {
 $(".themesBLK").empty();
 $.each(filteredThemes, function(key, value) {
   var image = value.image;
-  var themes = "<div class'col-2'><input type='radio' name='themeId' value='" + key + "'></div><div class='col-4'><img src='logos/"+image+"' style='width:150px; height:150px'></div>";
+  var themes = "<div class='col-2'><input type='radio' name='themeId' value='" + key + "'></div><div class='col-4'><img src='logos/"+image+"' style='width:150px; height:150px'></div>";
   $(".themesBLK").append(themes);
 });
   });

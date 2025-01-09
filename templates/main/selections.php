@@ -281,20 +281,8 @@ $.each(themes, function(key, value) {
 // Fill themesBLK with radio inputs and images based on filtered themes
 $(".themesBLK").empty();
 $.each(filteredThemes, function(key, value) {
-  var radioInput = $("<input>").attr({
-    type: "radio",
-    name: "theme",
-    value: key
-  }).prop("checked", value.default);
   var image = value.image;
-  var themes = "<div class'col-2'><input type='radio' name='themeId' value='" + key + "'></div><div class='col-4'><img src='logos/'"+image+" style='width:150px; height:150px'></div>";
-  var label = $("<label>").append(
-    $("<img>").attr("src", "logos/"+value.image),
-    $("<img>").attr("style", "width:100px;height:100px"),
-  );
-
-  var radioDiv = $("<div>").addClass("radio col-6").append(radioInput, label);
-
+  var themes = "<div class'col-2'><input type='radio' name='themeId' value='" + key + "'></div><div class='col-4'><img src='logos/"+image+"' style='width:150px; height:150px'></div>";
   $(".themesBLK").append(themes);
 });
   });

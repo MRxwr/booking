@@ -67,7 +67,7 @@ if( $vendor["type"] == "3" ){
 		<input type="hidden" name="serviceId" value="0" required>
 		<input type="hidden" name="branchId" value="0" required>
 		<input type="hidden" name="pictureTypeId" value="0" required>
-		<input type="hidden" name="theme" value="0" required>
+		<input type="hidden" name="themeId" value="0" required>
 		<input type="hidden" name="selectedDate" value="0" required>
 		<input type="hidden" name="selectedTime" value="0" required>
 		<input type="hidden" name="vendorId" value="<?php echo $vendor["id"] ?>" required>
@@ -81,6 +81,7 @@ if( $vendor["type"] == "3" ){
 </div>
 
 <script>
+
   // Store services data in a JavaScript object
   var services = [
 	<?php
@@ -227,6 +228,17 @@ if( $vendor["type"] == "3" ){
 	$("input[name='date']").val("Please select a date");
 	$("#loading-screen").hide();
   });
+  // get theme id
+  $(document).on("click",".themeInput", function(){
+	var selectedTheme = $(this).attr("id");
+	$("input[name=themeId]").val(selectedTheme);
+  });
+
+  // get picture type id
+  $(document).on("click","#pictureType", function(){
+	var selectedType = $(this).attr("id");
+	$("input[name=pictureTypeId]").val(selectedType);
+  });
 
   // on serviceBLk click update input name serviceId with attr id
   $(document).on("click",".serviceBLk", function(){
@@ -257,7 +269,7 @@ if( $vendor["type"] == "3" ){
 	// Fill typesBlk with radio inputs based on filtered pictureTypes
 	$(".typesBLK").empty();
 	$.each(filteredPictureTypes, function(key, value) {
-		$types = "<div class='col-10 pb-1'><input type='radio' name='pictureType' value='"+value.id+"'> <label>"+value.title+"</label></div><div class='col-2'>"+value.price+"-/KD</div>";
+		$types = "<div class='col-10 pb-1'><input type='radio' id='pictureType' value='"+value.id+"'> <label>"+value.title+"</label></div><div class='col-2 p-0'>"+value.price+" -/KD</div>";
 		$(".typesBLK").append($types);
 	});
 
@@ -273,7 +285,7 @@ if( $vendor["type"] == "3" ){
 	$(".themesBLK").empty();
 	$.each(filteredThemes, function(key, value) {
 		var image = value.image;
-		var themes = "<div class='col-4 pb-1'><img src='logos/"+image+"' style='width:100px; height:100px'></div>";
+		var themes = "<div class='col-4 pb-1'><a class='themeInput' id='"+image+"'><img src='logos/"+image+"' style='width:100px; height:100px'></a></div>";
 		$(".themesBLK").append(themes);
 	});
 	});

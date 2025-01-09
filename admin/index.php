@@ -34,6 +34,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 				$themes = ( is_null($themeGroup[0]["themes"]) ) ? array() : json_decode($themeGroup[0]["themes"],true);
 				array_push($themes, $_POST["theme"]);
 				$_POST["themes"] = json_encode($themes);
+				var_dump($_POST["themes"]);
 			}
 		}
 		

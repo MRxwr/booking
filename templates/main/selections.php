@@ -289,7 +289,6 @@ $.each(filteredThemes, function(key, value) {
 
   var label = $("<label>").append(
     $("<img>").attr("src", "logos/"+value.image),
-    $("<span>").text(value.name)
   );
 
   var radioDiv = $("<div>").addClass("radio").append(radioInput, label);

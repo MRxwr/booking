@@ -255,7 +255,7 @@ if( $vendor["type"] == "3" ){
 	});
 
 	// Fill typesBlk with radio inputs based on filtered pictureTypes
-	$(".typesBlk").empty();
+	$(".types-container").empty();
 	console.log(filteredPictureTypes);
 	$.each(filteredPictureTypes, function(key, value) {
 	var radioInput = $("<input>").attr({

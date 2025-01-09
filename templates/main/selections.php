@@ -70,9 +70,9 @@ if( $vendor["type"] == "3" ){
 				foreach( $extras as $extra ){
 					$extraTitle = direction($extra["enTitle"],$extra["arTitle"]);
 					?>
-				<div class="col d-flex align-items-center justify-content-center  mx-2 mb-2 p-3">
+				<div class="col-12 d-flex align-items-center justify-content-center  mx-2 mb-2 p-3">
 					<div class="form-check">
-						<input type="checkbox" class="form-check-input" id="extra<?php echo $extra["id"] ?>" name="extras[]" value="<?php echo $extra["id"] ?>">
+						<input type="checkbox" class="form-check-input" name="extras[]" value="<?php echo $extra["id"] ?>">
 						<label class="form-check-label" for="extra<?php echo $extra["id"] ?>"><?php echo $extraTitle ?></label>
 					</div>
 				</div>

@@ -69,20 +69,12 @@ if( $vendor["type"] == "3" ){
 				<?php
 				foreach( $extras as $extra ){
 					$extraTitle = direction($extra["enTitle"],$extra["arTitle"]);
-					$required = ( $extra["required"] == "1" ) ? "required" : "";
 					?>
 				<div class="col d-flex align-items-center justify-content-center  mx-2 mb-2 p-3">
-					<?php
-					if( $extra["type"] == "1" ){
-						?>
-						<input type='text' name='extra[<?php echo $extra["enTitle"] ?>]' class='form-control' placeholder='<?php echo $extraTitle ?>' <?php echo $required ?>>
-						<?php
-					}elseif( $extra["type"] == "0" ){
-						?>
-						<textarea name='extra[<?php echo $extra["enTitle"] ?>]' class='form-control' placeholder='<?php echo $extraTitle ?>' <?php echo $required ?>></textarea>
-						<?php
-					}
-					?>
+					<div class="form-check">
+						<input type="checkbox" class="form-check-input" id="extra<?php echo $extra["id"] ?>" name="extras[]" value="<?php echo $extra["id"] ?>">
+						<label class="form-check-label" for="extra<?php echo $extra["id"] ?>"><?php echo $extraTitle ?></label>
+					</div>
 				</div>
 				<?php
 				}

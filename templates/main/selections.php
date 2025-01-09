@@ -244,58 +244,46 @@ if( $vendor["type"] == "3" ){
 	$(".serviceBLk").removeClass("activeService");
 	$(this).addClass("activeService");
 	// Get the selected serviceId
-var serviceId = $("input[name='serviceId']").val();
+	var serviceId = $("input[name='serviceId']").val();
 
-// Filter pictureTypes based on serviceId
-var filteredPictureTypes = {};
-$.each(pictureTypes, function(key, value) {
-  if (value.serviceId === serviceId) {
-    filteredPictureTypes[key] = value;
-  }
-});
+	// Filter pictureTypes based on serviceId
+	var filteredPictureTypes = {};
+	$.each(pictureTypes, function(key, value) {
+	if (value.serviceId === serviceId) {
+		filteredPictureTypes[key] = value;
+	}
+	});
 
-// Fill typesBlk with radio inputs based on filtered pictureTypes
-$(".typesBlk").empty();
-$.each(filteredPictureTypes, function(key, value) {
-  var radioInput = $("<input>").attr({
-    type: "radio",
-    name: "pictureType",
-    value: key
-  }).prop("checked", value.default);
+	// Fill typesBlk with radio inputs based on filtered pictureTypes
+	$(".typesBlk").empty();
+	$.each(filteredPictureTypes, function(key, value) {
+	var radioInput = $("<input>").attr({
+		type: "radio",
+		name: "pictureType",
+		value: key
+	}).prop("checked", value.default);
 
-  var label = $("<label>").text(value.title);
+	var label = $("<label>").text(value.title);
 
-  var radioDiv = $("<div>").addClass("radio").append(radioInput, label);
+	var radioDiv = $("<div>").addClass("radio").append(radioInput, label);
 
-  $(".typesBlk").append(radioDiv);
-});
+	$(".typesBlk").append(radioDiv);
+	});
 
-// Filter themes based on serviceId
-var filteredThemes = {};
-$.each(themes, function(key, value) {
-  if (value.serviceId === serviceId) {
-    filteredThemes[key] = value;
-  }
-});
+	// Filter themes based on serviceId
+	var filteredThemes = {};
+	$.each(themes, function(key, value) {
+	if (value.serviceId === serviceId) {
+		filteredThemes[key] = value;
+	}
+	});
 
-// Fill themesBLK with radio inputs and images based on filtered themes
-$(".themesBLK").empty();
-$.each(filteredThemes, function(key, value) {
-  var radioInput = $("<input>").attr({
-    type: "radio",
-    name: "theme",
-    value: key
-  }).prop("checked", value.default);
-
-  var label = $("<label>").append(
-    $("<img>").attr("src", "logos/"+value.image),
-    $("<img>").attr("style", "width:100px;height:100px"),
-  );
-
-  var radioDiv = $("<div>").addClass("radio col-6").append(radioInput, label);
-
-  $(".themesBLK").append(radioDiv);
-});
+	// Fill themesBLK with radio inputs and images based on filtered themes
+	$(".themesBLK").empty();
+	$.each(filteredThemes, function(key, value) {
+		var themes = "<div class'col-2'><input type='radio' name='themeId' value='" + key + "'></div><div class='col-4'><img src='logos/'"+value.image+" style='width:150px; height:150px'></div>";
+		$(".themesBLK").append(themes);
+	});
   });
 
   // on selecting select name time update input name selectedTime

@@ -58,39 +58,40 @@ if( $vendor["type"] == "3" ){
 	</div>
 </div>
 <?php
-if( $extras = selectDB("extras","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC") ){
-	?>
-<div class="row m-0 w-100">
-	<div class="col-12">
-		<span><?php echo direction("Extras","الإضافات") ?></span>
-	</div>
-	<div class="col-12 p-3">
-		<div class="row m-0" id="themes-container">
-			<?php
-			foreach( $extras as $extra ){
-				$extraTitle = direction($extra["enTitle"],$extra["arTitle"]);
-				$required = ( $extra["required"] == "1" ) ? "required" : "";
-				?>
-			<div class="col d-flex align-items-center justify-content-center  mx-2 mb-2 p-3">
+	if( $extras = selectDB("extras","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC") ){
+		?>
+	<div class="row m-0 w-100">
+		<div class="col-12">
+			<span><?php echo direction("Extras","الإضافات") ?></span>
+		</div>
+		<div class="col-12 p-3">
+			<div class="row m-0" id="themes-container">
 				<?php
-				if( $extra["type"] == "1" ){
+				foreach( $extras as $extra ){
+					$extraTitle = direction($extra["enTitle"],$extra["arTitle"]);
+					$required = ( $extra["required"] == "1" ) ? "required" : "";
 					?>
-					<input type='text' name='extra[<?php echo $extra["enTitle"] ?>]' class='form-control' placeholder='<?php echo $extraTitle ?>' <?php echo $required ?>>
+				<div class="col d-flex align-items-center justify-content-center  mx-2 mb-2 p-3">
 					<?php
-				}elseif( $extra["type"] == "0" ){
+					if( $extra["type"] == "1" ){
+						?>
+						<input type='text' name='extra[<?php echo $extra["enTitle"] ?>]' class='form-control' placeholder='<?php echo $extraTitle ?>' <?php echo $required ?>>
+						<?php
+					}elseif( $extra["type"] == "0" ){
+						?>
+						<textarea name='extra[<?php echo $extra["enTitle"] ?>]' class='form-control' placeholder='<?php echo $extraTitle ?>' <?php echo $required ?>></textarea>
+						<?php
+					}
 					?>
-					<textarea name='extra[<?php echo $extra["enTitle"] ?>]' class='form-control' placeholder='<?php echo $extraTitle ?>' <?php echo $required ?>></textarea>
-					<?php
+				</div>
+				<?php
 				}
 				?>
 			</div>
-			<?php
-			}
-			?>
 		</div>
 	</div>
-</div>
-<?php
+	<?php
+	}
 }
 ?>
 <div class="row m-0 w-100">

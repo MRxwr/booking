@@ -22,7 +22,7 @@
 if( $extraInfo = selectDB("extrainfo","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC") ){
 	foreach( $extraInfo as $info ){
 		$title = direction($info["enTitle"],$info["arTitle"]);
-		$required = ($info["required"] == "1") ? "required" : "";
+		$required = ($info["isRequired"] == "1") ? "required" : "";
 		if( $info["type"] == "0" ){
 		?>
 		<div class="col-6">

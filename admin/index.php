@@ -29,6 +29,8 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 		}
 
 		if( isset($_FILES['theme']) && is_uploaded_file($_FILES['theme']['tmp_name']) ){
+			//loop through all files
+			var_dump($_FILES["theme"]);die();
 			if ( $themeGroup = selectDB("themes","`id` = '{$id}'") ){
 				$themes = ( is_null($themeGroup[0]["themes"]) ) ? array() : json_decode($themeGroup[0]["themes"],true);
 				for( $i = 0; $i < sizeof($_FILES['theme']['tmp_name']); $i++ ){

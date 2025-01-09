@@ -38,7 +38,7 @@ if( $vendor["type"] == "3" ){
 	</div>
 	<div class="col-12 p-3">
 		<div class="row m-0" id="types-container">
-			<div class="col d-flex align-items-center justify-content-center serviceBLk mx-2 mb-2 p-3">
+			<div class="col d-flex align-items-center justify-content-center typesBLK mx-2 mb-2 p-3">
 				<span><?php echo direction("Please select service first","الرجاء تحديد فرع"); ?></span>
 			</div>
 		</div>
@@ -51,7 +51,7 @@ if( $vendor["type"] == "3" ){
 	</div>
 	<div class="col-12 p-3">
 		<div class="row m-0" id="themes-container">
-			<div class="col d-flex align-items-center justify-content-center serviceBLk mx-2 mb-2 p-3">
+			<div class="col d-flex align-items-center justify-content-center themesBLK mx-2 mb-2 p-3">
 				<span><?php echo direction("Please select service first","الرجاء تحديد فرع"); ?></span>
 			</div>
 		</div>
@@ -243,6 +243,59 @@ if( $vendor["type"] == "3" ){
 	// give it style active and remove the active from all other services 
 	$(".serviceBLk").removeClass("activeService");
 	$(this).addClass("activeService");
+	// Get the selected serviceId
+var serviceId = $("input[name='serviceId']").val();
+
+// Filter pictureTypes based on serviceId
+var filteredPictureTypes = {};
+$.each(pictureTypes, function(key, value) {
+  if (value.serviceId === serviceId) {
+    filteredPictureTypes[key] = value;
+  }
+});
+
+// Fill typesBlk with radio inputs based on filtered pictureTypes
+$(".typesBlk").empty();
+$.each(filteredPictureTypes, function(key, value) {
+  var radioInput = $("<input>").attr({
+    type: "radio",
+    name: "pictureType",
+    value: key
+  }).prop("checked", value.default);
+
+  var label = $("<label>").text(value.name);
+
+  var radioDiv = $("<div>").addClass("radio").append(radioInput, label);
+
+  $(".typesBlk").append(radioDiv);
+});
+
+// Filter themes based on serviceId
+var filteredThemes = {};
+$.each(themes, function(key, value) {
+  if (value.serviceId === serviceId) {
+    filteredThemes[key] = value;
+  }
+});
+
+// Fill themesBLK with radio inputs and images based on filtered themes
+$(".themesBLK").empty();
+$.each(filteredThemes, function(key, value) {
+  var radioInput = $("<input>").attr({
+    type: "radio",
+    name: "theme",
+    value: key
+  }).prop("checked", value.default);
+
+  var label = $("<label>").append(
+    $("<img>").attr("src", value.image),
+    $("<span>").text(value.name)
+  );
+
+  var radioDiv = $("<div>").addClass("radio").append(radioInput, label);
+
+  $(".themesBLK").append(radioDiv);
+});
   });
 
   // on selecting select name time update input name selectedTime

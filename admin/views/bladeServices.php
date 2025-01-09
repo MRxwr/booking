@@ -164,8 +164,7 @@
 												</a>";
 											}else{
 												$pictureType = "";
-											}	
-
+											}
 											if( $vendorData[0]["type"] == 3 ){
 												$themesIcon = "
 												<a class='mr-25 themesList' id='{$service[$i]["id"]}' data-toggle='tooltip' data-original-title='" . direction("Themes","تصاميم") . "'>

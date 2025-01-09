@@ -27,7 +27,7 @@ if( $extraInfo = selectDB("extrainfo","`status` = '0' AND `hidden` = '0' AND `ve
 		<div class="col-6">
 			<div class="form-group">
 				<label for="name"><?php echo $title ?></label>
-				<input type="text" class="form-control" name="extraInfo[]" placeholder="" <?php echo $required ?>>
+				<input type="text" class="form-control" name="extraInfo[<?php echo $info["id"] ?>]" placeholder="" <?php echo $required ?>>
 			</div>	
 		</div>
 		<?php

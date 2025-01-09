@@ -23,7 +23,6 @@ if( $extraInfo = selectDB("extrainfo","`status` = '0' AND `hidden` = '0' AND `ve
 	foreach( $extraInfo as $info ){
 		$title = direction($info["enTitle"],$info["arTitle"]);
 		$required = ($info["isRequired"] == "1") ? "required" : "";
-		if( $info["type"] == "0" ){
 		?>
 		<div class="col-6">
 			<div class="form-group">
@@ -32,16 +31,6 @@ if( $extraInfo = selectDB("extrainfo","`status` = '0' AND `hidden` = '0' AND `ve
 			</div>	
 		</div>
 		<?php
-		}elseif( $info["type"] == "1" ){
-		?>
-		<div class="col-6">
-			<div class="form-group">
-				<label for="name"><?php echo $title ?></label>
-				<teaxtarea name="extraInfo[]" class="form-control" <?php echo $required ?>></teaxtarea>
-			</div>	
-		</div>
-		<?php
-		}
 	}
 }
 ?>

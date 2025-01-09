@@ -289,9 +289,10 @@ $.each(filteredThemes, function(key, value) {
 
   var label = $("<label>").append(
     $("<img>").attr("src", "logos/"+value.image),
+    $("<img>").attr("style", "width:100px;height:100px"),
   );
 
-  var radioDiv = $("<div>").addClass("radio").append(radioInput, label);
+  var radioDiv = $("<div>").addClass("radio col-6").append(radioInput, label);
 
   $(".themesBLK").append(radioDiv);
 });

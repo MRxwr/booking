@@ -31,6 +31,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 		if( isset($_FILES['theme']) && is_uploaded_file($_FILES['theme']['tmp_name']) ){
 			$_POST["theme"] = uploadImage($_FILES["theme"]["tmp_name"]);
 			if ( $themeGroup = selectDB("themes","`id` = '{$id}'") ){
+				$themeGroup[0]["themes"] = ( is_null($themeGroup[0]["themes"]) ) ? array() : json_decode($themeGroup[0]["themes"],true);
 				$themes = json_decode($themeGroup[0]["themes"],true);
 				array_push($themes, $_POST["theme"]);
 				$_POST["themes"] = json_encode($themes);

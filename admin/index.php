@@ -28,7 +28,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 			$_POST["coverImg"] = uploadImage($_FILES["coverImg"]["tmp_name"]);
 		}
 
-		if( isset($_FILES['theme']) && is_uploaded_file($_FILES['theme']['tmp_name'][0]) ){
+		if( isset($_FILES['theme']) && is_uploaded_file($_FILES['theme']['tmp_name']) ){
 			//loop through all files
 			var_dump($_FILES["theme"]);die();
 			if ( $themeGroup = selectDB("themes","`id` = '{$id}'") ){

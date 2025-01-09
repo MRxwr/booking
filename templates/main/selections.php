@@ -37,8 +37,8 @@ if( $vendor["type"] == "3" ){
 		<span><?php echo direction("Types","النوع") ?></span>
 	</div>
 	<div class="col-12 p-3">
-		<div class="row m-0" id="types-container">
-			<div class="col d-flex align-items-center justify-content-center typesBLK mx-2 mb-2 p-3">
+		<div class="row m-0 typesBLK" id="types-container">
+			<div class="col d-flex align-items-center justify-content-center  mx-2 mb-2 p-3">
 				<span><?php echo direction("Please select service first","الرجاء تحديد فرع"); ?></span>
 			</div>
 		</div>

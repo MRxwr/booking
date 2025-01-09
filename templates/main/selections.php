@@ -288,7 +288,7 @@ $.each(filteredThemes, function(key, value) {
   }).prop("checked", value.default);
 
   var label = $("<label>").append(
-    $("<img>").attr("src", value.image),
+    $("<img>").attr("src", "logos/"+value.image),
     $("<span>").text(value.name)
   );
 

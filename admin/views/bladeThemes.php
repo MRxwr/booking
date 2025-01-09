@@ -125,6 +125,10 @@
 										<td ><?php echo $themes[$i]["enTitle"] ?></td>
 										<td ><?php echo $themes[$i]["arTitle"] ?></td>
 										<td class="text-nowrap">
+                                            <a id="<?php echo $themes[$i]["id"] ?>" class="mr-25 theme" data-toggle="tooltip" data-original-title="<?php echo direction("Themes","تصاميم") ?>">
+												<i class="fa fa-pencil text-inverse m-r-10"></i>
+											</a>
+
 											<a id="<?php echo $themes[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل") ?>">
 												<i class="fa fa-pencil text-inverse m-r-10"></i>
 											</a>
@@ -138,7 +142,26 @@
 												<label id="vendorId<?php echo $themes[$i]["id"]?>"><?php echo $themes[$i]["vendorId"] ?></label>
 												<label id="enTitle<?php echo $themes[$i]["id"]?>"><?php echo $themes[$i]["enTitle"] ?></label>
 												<label id="arTitle<?php echo $themes[$i]["id"]?>"><?php echo $themes[$i]["arTitle"] ?></label>
-											</div>
+                                                <label id="theme<?php echo $themes[$i]["id"]?>">
+                                                    <?php
+                                                    if ( !is_null(($themes[$i]["themes"])) ){
+                                                        $themes = json_decode($themes[$i]["themes"],true);
+                                                        if( count($themes) > 0 ){
+                                                            echo "<div class='row m-0'>";
+                                                            foreach( $themes as $theme ){
+                                                                // add the images ../logos/ to the div col and add a delete button foreach image
+                                                                echo "<div class='col-md-3'>";
+                                                                echo "<a onclick='deleteImage({$theme})' class='deleteImage'><img src='../logos/{$theme}' class='img-responsive' style='width:100%'></a>";
+                                                                echo "</div>";
+                                                            }
+                                                            echo "</div>";
+                                                        }
+                                                    }else{
+                                                        echo "";
+                                                    }
+                                                    ?>
+                                                </label>
+                                            </div>
 										</td>
 									</tr>
 									<?php
@@ -164,5 +187,21 @@
 		$("input[name=vendorId]").val($.trim($("#vendorId"+id).html().replace(/\n/g, "")));
 		$("select[name=vendorId]").val($.trim($("#vendorId"+id).html().replace(/\n/g, "")));
 	})
+    $(document).on("click",".theme", function(){
+		var id = $(this).attr("id");
+		$("input[name=update]").val(id);
+		var themes = $("#theme"+id).html();
+        $("#listOfThemes").html(themes);
+		$("input[name=vendorId]").val($.trim($("#vendorId"+id).html().replace(/\n/g, "")));
+		$("select[name=vendorId]").val($.trim($("#vendorId"+id).html().replace(/\n/g, "")));
+	})
+	$(document).on("click",".deleteImage", function(){
+		var id = $(this).attr("id");
+		$.get("<?php echo $link ?>?delImage="+id, function(data){
+			if(data == "success"){
+				$("#"+id).remove();
+			}
+		})
+    })
 </script>
   

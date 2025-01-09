@@ -83,7 +83,7 @@
 				$images = ( is_null($theme[0]["themes"]) ) ? [] : json_decode($theme[0]["themes"],true);
 				if( count($images) ){
 					for( $j = 0; $j < sizeof($images); $j++ ){
-						echo "{ id: '".$theme["id"]."', serviceId: '".$services[$i]["id"]."' ,image: '".$images[$j]."'},"; 
+						echo "{ id: '{$theme}', serviceId: '{$services[$i]["id"]}' ,image: '{$images[$j]}'},"; 
 					}
 				}
 			}

@@ -50,8 +50,8 @@ if( $vendor["type"] == "3" ){
 		<span><?php echo direction("Themes","التصاميم") ?></span>
 	</div>
 	<div class="col-12 p-3">
-		<div class="row m-0" id="themes-container">
-			<div class="col d-flex align-items-center justify-content-center themesBLK mx-2 mb-2 p-3">
+		<div class="row m-0 themesBLK" id="themes-container">
+			<div class="col d-flex align-items-center justify-content-center  mx-2 mb-2 p-3">
 				<span><?php echo direction("Please select service first","الرجاء تحديد فرع"); ?></span>
 			</div>
 		</div>
@@ -282,7 +282,7 @@ $.each(themes, function(key, value) {
 $(".themesBLK").empty();
 $.each(filteredThemes, function(key, value) {
   var image = value.image;
-  var themes = "<div class='col-2'><input type='radio' name='themeId' value='" + key + "'></div><div class='col-4'><img src='logos/"+image+"' style='width:150px; height:150px'></div>";
+  var themes = "<div class='col-1'><input type='radio' name='themeId' value='" + key + "'></div><div class='col-5'><img src='logos/"+image+"' style='width:150px; height:150px'></div>";
   $(".themesBLK").append(themes);
 });
   });

@@ -263,7 +263,7 @@ $.each(filteredPictureTypes, function(key, value) {
     value: key
   }).prop("checked", value.default);
 
-  var label = $("<label>").text(value.name);
+  var label = $("<label>").text(value.title);
 
   var radioDiv = $("<div>").addClass("radio").append(radioInput, label);
 

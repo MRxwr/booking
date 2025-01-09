@@ -146,10 +146,10 @@
                                                 <label id="theme<?php echo $themes[$i]["id"]?>">
                                                     <?php
                                                     if ( !is_null(($themes[$i]["themes"])) ){
-                                                        $themes = json_decode($themes[$i]["themes"],true);
-                                                        if( count($themes) > 0 ){
+                                                        $themesList = json_decode($themes[$i]["themes"],true);
+                                                        if( count($themesList) > 0 ){
                                                             echo "<div class='row m-0'>";
-                                                            foreach( $themes as $theme ){
+                                                            foreach( $themesList as $theme ){
                                                                 // add the images ../logos/ to the div col and add a delete button foreach image
                                                                 echo "<div class='col-md-3'>";
                                                                 echo "<a onclick='deleteImage({$theme})' class='deleteImage'><img src='../logos/{$theme}' class='img-responsive' style='width:100%'></a>";

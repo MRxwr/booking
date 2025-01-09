@@ -14,6 +14,9 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 		if( isset($_POST["listTypes"]) && !empty($_POST["listTypes"]) ){
 			$_POST["listTypes"] = json_encode($_POST["listTypes"]);
 		}
+		if( isset($_POST["themes"]) && !empty($_POST["themes"]) ){
+			$_POST["themes"] = json_encode($_POST["themes"]);
+		}
 		$id = $_POST["update"];
 		unset($_POST["update"]);
 		if ( isset($_POST["sm"]) && !empty($_POST["sm"]) ){

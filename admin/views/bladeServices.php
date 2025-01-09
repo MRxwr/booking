@@ -89,6 +89,34 @@
 		</div>
 	</div>
 
+	<div class="col-sm-12 mb-30" style="display: none;" id="themesDiv">
+		<div class="panel panel-default card-view">
+			<div class="panel-heading">
+				<div class="text-center">
+					<h6 class="panel-title txt-dark"><?php echo direction("Select Themes","حدد التصاميم") ?></h6>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-wrapper collapse in">
+				<div class="panel-body ">
+					<form class="mt-30 mb-30" method="POST" action="" enctype="multipart/form-data">
+						<div class="row m-0">
+
+							<div id="listOfThemes" class="col-md-12">
+
+							</div>
+
+							<div class="col-md-12" style="margin-top:10px">
+								<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
+								<input type="hidden" name="update" value="1">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="col-sm-12">
 		<div class="panel panel-default card-view">
 			<div class="panel-heading">
@@ -137,6 +165,15 @@
 											}else{
 												$pictureType = "";
 											}	
+
+											if( $vendorData[0]["type"] == 3 ){
+												$themesIcon = "
+												<a class='mr-25 themesList' id='{$service[$i]["id"]}' data-toggle='tooltip' data-original-title='" . direction("Themes","تصاميم") . "'>
+												<i class='fa fa-image-o text-inverse'></i>
+												</a>";
+											}else{
+												$themesIcon = "";
+											}
 									?>
 									<tr>
 										<td ><?php echo str_pad(($counter = $i + 1),4,"0",STR_PAD_LEFT) ?></td>
@@ -147,6 +184,7 @@
 										<td ><?php echo $service[$i]["period"] ?> min</td>
 										<td ><?php echo $service[$i]["price"] ?> -/KD</td>
 										<td class="text-nowrap">
+											<?php echo $themesIcon ?>
 											<?php echo $pictureType ?>
 											<a id="<?php echo $service[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل") ?>">
 												<i class="fa fa-pencil text-inverse m-r-10"></i>
@@ -173,6 +211,20 @@
 																$title = direction($allTypes[$j]["enTitle"],$allTypes[$j]["arTitle"]);
 																$checked = ( in_array($allTypes[$j]["id"],$listTypes) ) ? "checked" : "";
 																echo "<label><input type='checkbox' name='listTypes[]' value='{$allTypes[$j]["id"]}' $checked>$title</label> <br>";
+															}
+														}
+													}
+													?>
+												</span>
+												<span  id="themes<?php echo $service[$i]["id"]?>">
+													<?php
+													if( $vendorData[0]["type"] == 3 ){
+														$ThemesList = ( is_null($service[$i]["themes"]) ) ? [] : json_decode($service[$i]["themes"],true) ;
+														if( $allThemes = selectDB("themes","`vendorId` = '{$vendorData[0]["id"]}' AND `hidden` = '0' AND `status` = '0' ORDER BY `id` ASC") ){
+															for( $j = 0; $j < sizeof($allThemes); $j++ ){
+																$title = direction($allThemes[$j]["enTitle"],$allThemes[$j]["arTitle"]);
+																$checked = ( in_array($allThemes[$j]["id"],$ThemesList) ) ? "checked" : "";
+																echo "<label><input type='checkbox' name='themes[]' value='{$allThemes[$j]["id"]}' $checked>$title</label> <img src='../logos/{$allThemes[$j]["image"]}' width='100px' height='100px'><br>";
 															}
 														}
 													}
@@ -213,6 +265,13 @@
 		var listTypes = $("#listTypes"+id).html();
 		$("#pictureTypeDiv").attr("style","display: block");
 		$("#pictureType").html(listTypes).focus();
+	})
+	$(document).on("click",".themesList", function(){
+		var id = $(this).attr("id");
+		$("input[name=update]").val(id);
+		var themesList = $("#themes"+id).html();
+		$("#themesDiv").attr("style","display: block");
+		$("#listOfThemes").html(themesList).focus();
 	})
 </script>
   

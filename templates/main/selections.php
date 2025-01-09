@@ -66,7 +66,7 @@
 			$pictureTypes = ( is_null($services[$i]["listTypes"]) ) ? [] : json_decode($services[$i]["listTypes"],true);
 			foreach($pictureTypes as $type){
 				$types = selectDB("pictureType","`id` = '{$type}'");
-				echo "{ id: '{$themes[0]["id"]}', serviceId: '{$services[$i]["id"]}' , price: '{$types[0]["price"]}' ,title: '".direction($types[0]["enTitle"],$types[0]["arTitle"])."'},"; 
+				echo "{ id: '{$types[0]["id"]}', serviceId: '{$services[$i]["id"]}' , price: '{$types[0]["price"]}' ,title: '".direction($types[0]["enTitle"],$types[0]["arTitle"])."'},"; 
 			}
 		}
 	?>

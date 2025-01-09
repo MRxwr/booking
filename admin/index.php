@@ -27,6 +27,17 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 		if( isset($_FILES['coverImg']) && is_uploaded_file($_FILES['coverImg']['tmp_name']) ){
 			$_POST["coverImg"] = uploadImage($_FILES["coverImg"]["tmp_name"]);
 		}
+
+		if( isset($_FILES['theme']) && is_uploaded_file($_FILES['theme']['tmp_name']) ){
+			$_POST["theme"] = uploadImage($_FILES["theme"]["tmp_name"]);
+			if ( $themeGroup = selectDB("themes","`id` = '{$id}'") ){
+				$themes = json_decode($themeGroup[0]["themes"],true);
+				array_push($themes, $_POST["theme"]);
+				$_POST["themes"] = json_encode($themes);
+			}else{
+				$_POST["themes"] = json_encode(array($_POST["theme"]));
+			}
+		}
 		
 		if( isset($_POST["password"]) && !empty($_POST["password"]) ){
 			$_POST["password"] = sha1($_POST["password"]);

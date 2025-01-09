@@ -31,12 +31,12 @@
 								echo "<input type='hidden' name='vendorId' value='{$vendorId}'>";
 							}
 							?>
-							<div class="col-md-3">
+							<div class="col-md-6">
 								<label><?php echo direction("English Title","الإسم الإنجليزي") ?></label>
 								<input type="text" name="enTitle" class="form-control" required>
 							</div>
 
-							<div class="col-md-3">
+							<div class="col-md-6">
 								<label><?php echo direction("Arabic Title","الإسم العربي") ?></label>
 								<input type="text" name="arTitle" class="form-control" required>
 							</div>

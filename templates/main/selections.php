@@ -35,6 +35,7 @@
 		<input type="date" name="date" data-disable-mobile="true" class="form-control" required>
 		<input type="hidden" name="serviceId" value="0" required>
 		<input type="hidden" name="branchId" value="0" required>
+		<input type="hidden" name="pictureTypeId" value="0" required>
 		<input type="hidden" name="selectedDate" value="0" required>
 		<input type="hidden" name="selectedTime" value="0" required>
 		<input type="hidden" name="vendorId" value="<?php echo $vendor["id"] ?>" required>
@@ -54,6 +55,17 @@
 	$services = selectDB("services","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
 	foreach($services as $service){
 	  echo "{ id: '".$service["id"]."',price: '".$service["price"]."',period: '".$service["period"]."', title: '".direction($service["enTitle"],$service["arTitle"])."'},"; 
+	}
+	?>
+  ];
+
+  // Store pictureTypes data in a JavaScript object
+  var services = [
+	<?php
+	$pictureTypes = selectDB("picturetypes","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
+	foreach($pictureTypes as $pictureType){
+		$service = selectDB("services","`listTypes` = '%{$pictureType["serviceId"]}%' AND `status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
+	  echo "{ id: '".$pictureType["id"]."', serviceId: '".$service[0]["id"]."' ,price: '".$pictureType["price"]."', title: '".direction($pictureType["enTitle"],$pictureType["arTitle"])."'},"; 
 	}
 	?>
   ];

@@ -317,8 +317,8 @@ if( $vendor["type"] == "3" ){
 	var selectedExtra = $(this).attr("id");
 	var totalPrice = 0;
 	// Add price of selected service
-	var selectedServicePrice = $(".serviceBLK.activeService").find("#priceValue").text();
-	totalPrice += parseInt(selectedServicePrice);
+	var selectedServicePrice = $(".serviceBLK.activeService").find("#priceValue").text().replace(/[^0-9]/g, '');
+  	totalPrice += parseInt(selectedServicePrice);
 	// Add price of selected picture type
 	var selectedTypePrice = $(".pictureType:checked").attr("id");
 	totalPrice += parseInt(selectedTypePrice);

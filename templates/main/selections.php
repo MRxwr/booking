@@ -312,27 +312,31 @@ if( $vendor["type"] == "3" ){
 	$(".btnPrice").html(totalPrice + " -/KD");
   });
 
-  // get extras price
-  $(document).on("click",".checkboxPrice", function(){
-	var selectedExtra = $(this).attr("id");
-	var totalPrice = 0;
-	// Add price of selected service
-	var selectedServicePrice = $(".serviceBLK.activeService").find("#priceValue").text().replace(/[^0-9]/g, '');
-  	totalPrice += parseInt(selectedServicePrice);
-	// Add price of selected picture type
-	var selectedTypePrice = $(".pictureType:checked").attr("id");
-	totalPrice += parseInt(selectedTypePrice);
-	// Add prices of checked extras
-	$(".checkboxPrice:checked").each(function() {
-		var extraPrice = $(this).attr("id");
-		console.log(extraPrice);
-		totalPrice += parseInt(extraPrice);
+	// get extras price
+	$(document).on("click", ".checkboxPrice", function() {
+		var totalPrice = 0;
+
+		// Add price of selected service
+		var selectedServicePrice = $(".serviceBLK.activeService").find("#priceValue").text().replace(/[^0-9]/g, '');
+
+		// Add price of selected picture type
+		var selectedTypePrice = $(".pictureType:checked").attr("id");
+
+		// Add prices of checked extras
+		$(".checkboxPrice:checked").each(function() {
+			var extraPrice = $(this).attr("id");
+			var price = parseInt(extraPrice);
+			if (!isNaN(price)) {
+			totalPrice += price;
+			}
+		});
+
+		if (totalPrice > 0) {
+			$(".btnPrice").html(totalPrice + " -/KD");
+		} else {
+			$(".btnPrice").html("0 -/KD");
+		}
 	});
-	console.log(selectedServicePrice);
-	console.log(selectedTypePrice);
-	
-	$(".btnPrice").html(totalPrice + " -/KD");
-  });
 
   // on serviceBLk click update input name serviceId with attr id
   $(document).on("click",".serviceBLk", function(){

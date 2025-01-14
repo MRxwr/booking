@@ -103,6 +103,7 @@ if( $vendor["type"] == "3" ){
 			?>
 			<input type="hidden" name="pictureTypeId" value="0" required>
 			<input type="hidden" name="themeId" value="0" required>
+			<input type="hidden" name="extras" value="0" required>
 			<?php
 		}
 		?>
@@ -325,6 +326,21 @@ if( $vendor["type"] == "3" ){
 
   // checkbox click
   $(document).on("click","#checkExtras", function(){
+	var selectedExtra = $(this).attr("value");
+	var getSelectedExtras = $("input[name=extras]").val();
+	if( getSelectedExtras == 0 ){
+		var array = [selectedExtra];
+		$("input[name=themeId]").val(array);
+	}else{
+		var selectedExtras = getSelectedExtras.split(",");
+		if ( selectedExtras.includes(selectedExtra) ){
+			var index = selectedExtras.indexOf(selectedExtra);
+			selectedExtras.splice(index, 1);
+		}else{
+			selectedExtras.push(selectedExtra);
+		}
+		$("input[name=extras]").val(selectedExtras.join(","));
+	}
 	updatePrice();
 });
 

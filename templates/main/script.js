@@ -18,6 +18,14 @@ $(window).ready(function() {
 		var serviceId = $("input[name=serviceId]").val();
 		var date = $("input[name=selectedDate]").val();
 		var time = $("input[name=selectedTime]").val();
+		var extras = $("input[name=extras]").val();
+		var pictureTypeId = $("input[name=pictureTypeId]").val();
+		var themeId = $("input[name=themeId]").val();
+		var extraInfo = {};
+		$("input[name^='extraInfo']").each(function(){
+			var key = $(this).attr('name').replace('extraInfo[', '').replace(']', '');
+			extraInfo[key] = $(this).val();
+		});
 		var name = $("#name").val();
 		var mobile = $("#mobile").val();
 		var email = $("#email").val();
@@ -68,6 +76,10 @@ $(window).ready(function() {
 			  serviceId: serviceId,
 			  vendorId: vendorId,
 			  time: time,
+			  extras: extras,
+			  pictureTypeId: pictureTypeId,
+			  themeId: themeId,
+			  extraInfo: extraInfo,
 			  customer: {
 				name: name,
 			  	mobile: mobile,

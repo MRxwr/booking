@@ -261,6 +261,7 @@ if( $vendor["type"] == "3" ){
 	$(document).on("click",".themeInput", function(){
 		var selectedTheme = $(this).attr("id");
 		var getSelectedThemes = $("input[name=themeId]").val();
+		$("input[name=themeId]").val(0);
 		if( getSelectedThemes == 0 ){
 			var array = [selectedTheme];
 			$("input[name=themeId]").val(array);

@@ -351,7 +351,8 @@ if( $vendor["type"] == "3" ){
 	// Fill typesBlk with radio inputs based on filtered pictureTypes
 	$(".typesBLK").empty();
 	$.each(filteredPictureTypes, function(key, value) {
-		var price = value.price.float(3);
+		// make price like this 30.000 instead of 30 only 
+		value.price = value.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 		$types = "<div class='col-10 pb-1'><input type='radio' id='pictureType' name='pictureTypeRadio' value='"+value.id+"' data-price='"+value.price+"'> <label>"+value.title+"</label></div><div class='col-2 p-0' style='font-size: 10px;align-content: center;'>"+value.price+" -/KD</div>";
 		$(".typesBLK").append($types);
 	});

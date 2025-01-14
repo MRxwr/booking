@@ -265,7 +265,9 @@ $(document).on("click",".themeInput", function(){
 	if ($(this).attr('style') && $(this).attr('style').indexOf('border') !== -1) {
 		$(this).css({
 			"width": "100px",
-			"height": "100px"
+			"height": "100px",
+			"border": "",
+			"opacity": "1"
 		});
 	} else {
 		$(this).css({

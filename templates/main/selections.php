@@ -293,50 +293,11 @@ if( $vendor["type"] == "3" ){
 	});
 
   // get picture type id
-  $(document).on("click",".pictureType", function(){
+  $(document).on("click","#pictureType", function(){
 	var selectedType = $(this).attr("value");
-	var selectedTypePrice = $(this).attr("id");
 	$("input[name=pictureTypeId]").val(selectedType);
-	var totalPrice = 0;
-	// Add price of selected service
-	var selectedServicePrice = $(".serviceBLK.activeService").find("#priceValue").text();
-	totalPrice += parseInt(selectedServicePrice);
-	// Add price of selected picture type
-	var selectedTypePrice = $(".pictureType:checked").attr("id");
-	totalPrice += parseInt(selectedTypePrice);
-	// Add prices of checked extras
-	$(".checkboxPrice:checked").each(function() {
-		var extraPrice = $(this).attr("id");
-		totalPrice += parseInt(extraPrice);
-	});
-	$(".btnPrice").html(totalPrice + " -/KD");
+	$(".btnPrice").html($(".typePrice"+selectedType).text());
   });
-
-	// get extras price
-	$(document).on("click", ".checkboxPrice", function() {
-		var totalPrice = 0;
-
-		// Add price of selected service
-		var selectedServicePrice = $(".serviceBLK.activeService").find("#priceValue").text().replace(/[^0-9]/g, '');
-
-		// Add price of selected picture type
-		var selectedTypePrice = $(".pictureType:checked").attr("id");
-
-		// Add prices of checked extras
-		$(".checkboxPrice:checked").each(function() {
-			var extraPrice = $(this).attr("id");
-			var price = parseInt(extraPrice);
-			if (!isNaN(price)) {
-			totalPrice += price;
-			}
-		});
-
-		if (totalPrice > 0) {
-			$(".btnPrice").html(totalPrice + " -/KD");
-		} else {
-			$(".btnPrice").html("0 -/KD");
-		}
-	});
 
   // on serviceBLk click update input name serviceId with attr id
   $(document).on("click",".serviceBLk", function(){
@@ -367,7 +328,7 @@ if( $vendor["type"] == "3" ){
 	// Fill typesBlk with radio inputs based on filtered pictureTypes
 	$(".typesBLK").empty();
 	$.each(filteredPictureTypes, function(key, value) {
-		$types = "<div class='col-9 pb-1'><input type='radio' class='pictureType' id='"+value.price+"' name='pictureTypeId' value='"+value.id+"'> <label>"+value.title+"</label></div><div class='col-3 p-0 typePrice' id='"+value.price+"'>"+value.price+"-/KD</div>";
+		$types = "<div class='col-9 pb-1'><input type='radio' id='pictureType' name='pictureTypeId' value='"+value.id+"'> <label>"+value.title+"</label></div><div class='col-3 p-0 typePrice"+value.id+"' id='"+value.price+"'>"+value.price+"-/KD</div>";
 		$(".typesBLK").append($types);
 	});
 

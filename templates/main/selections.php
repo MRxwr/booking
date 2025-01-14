@@ -292,13 +292,31 @@ if( $vendor["type"] == "3" ){
 		}
 	});
 
+// create a function that calulate the total price add service price and selected picture type price and selected extras price
+function calculateTotalPrice() {
+	// loop through all selected extras and get seelcted service price and picture type price and add them to total price and add a check if available or not make it 0
+	var totalPrice = 0;
+	var selectedExtras = $("input[name='extras[]']:checked").map(function() {
+		return $(this).attr("id");
+	}).get();
+
+	$.each(selectedExtras, function(index, value) {
+		var selectedServicePrice = services.find(function(service) {
+			return service.id == value;
+		});	
+		var selectedPictureTypePrice = pictureTypes.find(function(pictureType) {
+			return pictureType.id == value;
+		});
+		totalPrice += selectedServicePrice.price + selectedPictureTypePrice.price;
+	});
+}
+
   // get picture type id
   $(document).on("click","#pictureType", function(){
 	var selectedType = $(this).attr("value");
 	$("input[name=pictureTypeId]").val(selectedType);
 	$(".btnPrice").html($(".typePrice"+selectedType).attr("id"));
-	console.log(selectedType);
-	console.log($(".typePrice"+selectedType).attr("id"));
+	console.log(calculateTotalPrice());
   });
 
   // on serviceBLk click update input name serviceId with attr id

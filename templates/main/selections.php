@@ -57,7 +57,8 @@ if( $vendor["type"] == "3" ){
 			</div>
 		</div>
 	</div>
-<?php
+	<?php
+}
 	if( $extras = selectDB("extras","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC") ){
 		?>
 	<div class="row m-0 w-100">
@@ -87,7 +88,6 @@ if( $vendor["type"] == "3" ){
 	</div>
 	<?php
 	}
-}
 ?>
 <div class="row m-0 w-100">
 	<div class="col-md-6">
@@ -98,15 +98,9 @@ if( $vendor["type"] == "3" ){
 		<input type="hidden" name="selectedDate" value="0" required>
 		<input type="hidden" name="selectedTime" value="0" required>
 		<input type="hidden" name="vendorId" value="<?php echo $vendor["id"] ?>" required>
-		<?php
-		if( $vendor["type"] == "3" ){
-			?>
-			<input type="hidden" name="pictureTypeId" value="0" required>
-			<input type="hidden" name="themeId" value="0" required>
-			<input type="hidden" name="extras" value="0" required>
-			<?php
-		}
-		?>
+		<input type="hidden" name="pictureTypeId" value="0" required>
+		<input type="hidden" name="themeId" value="0" required>
+		<input type="hidden" name="extras" value="0" required>
 	</div> 
 	<div class="col-md-6">
 		<label><?php echo direction("Time","الوقت") ?></label>

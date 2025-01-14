@@ -294,11 +294,13 @@ if( $vendor["type"] == "3" ){
 
 	function updatePrice(){
 		var totalPrice = 0;
+		
 		var selectedService = $("input[name='serviceId']").val();
+		var servicePrice = 0;
 		var servicePrice = $("#priceValue"+selectedService).attr("data-price");
 		
-		var selectedPictureType = $("input[name=pictureTypeId]").val();
-		var pictureTypePrice = $(".typePrice"+selectedPictureType).attr("id");
+		var pictureTypePrice =  0;
+		var pictureTypePrice = $("input[name=pictureTypeId]").attr("data-price");
 
 		var extrasPrice = 0;
 		$.each($("input[type='checkbox']:checked"), function(){
@@ -349,7 +351,7 @@ if( $vendor["type"] == "3" ){
 	// Fill typesBlk with radio inputs based on filtered pictureTypes
 	$(".typesBLK").empty();
 	$.each(filteredPictureTypes, function(key, value) {
-		$types = "<div class='col-9 pb-1'><input type='radio' id='pictureType' name='pictureTypeRadio' value='"+value.id+"'> <label>"+value.title+"</label></div><div class='col-3 p-0 typePrice"+value.id+"' id='"+value.price+"'>"+value.price+"-/KD</div>";
+		$types = "<div class='col-9 pb-1'><input type='radio' id='pictureType' name='pictureTypeRadio' value='"+value.id+"' data-price='"+value.price+"'> <label>"+value.title+"</label></div><div class='col-3 p-0>"+value.price+"-/KD</div>";
 		$(".typesBLK").append($types);
 	});
 

@@ -309,6 +309,9 @@ if( $vendor["type"] == "3" ){
 		var extraPrice = $(this).attr("id");
 		totalPrice += parseInt(extraPrice);
 	});
+	console.log(selectedServicePrice);
+	console.log(selectedTypePrice);
+	console.log(extraPrice);
 	$(".btnPrice").html(totalPrice + " -/KD");
   });
 

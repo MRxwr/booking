@@ -308,7 +308,7 @@ if( $vendor["type"] == "3" ){
 		var servicePrice = $("#priceValue"+selectedService).attr("data-price");
 		
 		var pictureTypePrice =  0;
-		var pictureTypePrice = $("input[name=pictureTypeRadio]").attr("data-price");
+		var pictureTypePrice = $("input[name=pictureTypeRadio]:checked").attr("data-price");
 
 		var extrasPrice = 0;
 		$.each($("#checkExtras:checked"), function(){

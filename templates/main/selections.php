@@ -296,7 +296,7 @@ if( $vendor["type"] == "3" ){
   $(document).on("click",".pictureType", function(){
 	var selectedType = $(this).attr("value");
 	$("input[name=pictureTypeId]").val(selectedType);
-	$(".btnPrice").html($(this).attr("id").text());
+	$(".btnPrice").html($(this).attr("id"));
   });
 
   // on serviceBLk click update input name serviceId with attr id

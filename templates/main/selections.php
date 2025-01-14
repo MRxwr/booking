@@ -258,10 +258,24 @@ if( $vendor["type"] == "3" ){
 	$("#loading-screen").hide();
   });
   // get theme id
-  $(document).on("click",".themeInput", function(){
+$(document).on("click",".themeInput", function(){
 	var selectedTheme = $(this).attr("id");
 	$("input[name=themeId]").val(selectedTheme);
-  });
+	
+	if ($(this).attr('style') && $(this).attr('style').indexOf('border') !== -1) {
+		$(this).css({
+			"width": "100px",
+			"height": "100px"
+		});
+	} else {
+		$(this).css({
+			"border": "1px solid",
+			"opacity": "0.5",
+			"width": "100px",
+			"height": "100px"
+		});
+	}
+});
 
   // get picture type id
   $(document).on("click","#pictureType", function(){
@@ -298,7 +312,7 @@ if( $vendor["type"] == "3" ){
 	// Fill typesBlk with radio inputs based on filtered pictureTypes
 	$(".typesBLK").empty();
 	$.each(filteredPictureTypes, function(key, value) {
-		$types = "<div class='col-10 pb-1'><input type='radio' id='pictureType' name='pictureTypeId' value='"+value.id+"'> <label>"+value.title+"</label></div><div class='col-2 p-0'>"+value.price+"-/KD</div>";
+		$types = "<div class='col-9 pb-1'><input type='radio' id='pictureType' name='pictureTypeId' value='"+value.id+"'> <label>"+value.title+"</label></div><div class='col-3 p-0 typePrice' id='"+value.price+"'>"+value.price+"-/KD</div>";
 		$(".typesBLK").append($types);
 	});
 
@@ -314,7 +328,7 @@ if( $vendor["type"] == "3" ){
 	$(".themesBLK").empty();
 	$.each(filteredThemes, function(key, value) {
 		var image = value.image;
-		var themes = "<div class='col-4 pb-1'><a class='themeInput' id='"+image+"'><img src='logos/"+image+"' style='width:100px; height:100px'></a></div>";
+		var themes = "<div class='col-4 pb-1'><img src='logos/"+image+"' class='themeInput' id='"+value.id+"' style='width:100px; height:100px'></a></div>";
 		$(".themesBLK").append(themes);
 	});
 	});

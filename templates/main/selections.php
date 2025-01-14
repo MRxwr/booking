@@ -316,9 +316,9 @@ if( $vendor["type"] == "3" ){
   });
 
   // checkbox click
-  $(document).on("click",".checkbox", function(){
+  $(document).on("click","input[type='checkbox']", function(){
 	console.log(updatePrice());
-	});
+});
 
   // on serviceBLk click update input name serviceId with attr id
   $(document).on("click",".serviceBLk", function(){

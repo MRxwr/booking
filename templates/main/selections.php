@@ -71,7 +71,7 @@ if( $vendor["type"] == "3" ){
 				foreach( $extras as $extra ){
 					$extraTitle = direction($extra["enTitle"],$extra["arTitle"]);
 					?>
-				<div class="col-10 d-flex pb-1">
+				<div class="col-10 d-flex p-0 pb-1">
 					<div class="form-check">
 						<input type="checkbox" class="form-check-input" id="checkExtras" data-price="<?php echo $extra["price"] ?>" value="<?php echo $extra["id"] ?>">
 						 <label class="form-check-label" for="extra<?php echo $extra["id"] ?>"><?php echo $extraTitle ?></label>
@@ -367,7 +367,7 @@ if( $vendor["type"] == "3" ){
 	// Fill typesBlk with radio inputs based on filtered pictureTypes
 	$(".typesBLK").empty();
 	$.each(filteredPictureTypes, function(key, value) {
-		$types = "<div class='col-10 pb-1'><input type='radio' id='pictureType' name='pictureTypeRadio' value='"+value.id+"' data-price='"+value.price+"'> <label>"+value.title+"</label></div><div class='col-2 p-0' style='font-size: 10px;align-content: center;'>"+parseFloat(value.price).toFixed(3)+" -/KD</div>";
+		$types = "<div class='col-10 p-0 d-flex pb-1'><input type='radio' id='pictureType' name='pictureTypeRadio' value='"+value.id+"' data-price='"+value.price+"'> <label>"+value.title+"</label></div><div class='col-2 p-0' style='font-size: 10px;align-content: center;'>"+parseFloat(value.price).toFixed(3)+" -/KD</div>";
 		$(".typesBLK").append($types);
 	});
 

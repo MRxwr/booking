@@ -269,9 +269,11 @@ if( $vendor["type"] == "3" ){
 			if ( selectedThemes.includes(selectedTheme) ){
 				var index = selectedThemes.indexOf(selectedTheme);
 				selectedThemes.splice(index, 1);
+			}else{
+				selectedThemes.push(selectedTheme);
 			}
-			selectedThemes.push(selectedTheme);
 			$("input[name=themeId]").val(selectedThemes.join(","));
+			
 		}
 		//$("input[name=themeId]").val(selectedTheme);
 		if($(this).attr('style') && $(this).attr('style').indexOf('border') !== -1) {

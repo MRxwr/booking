@@ -305,14 +305,20 @@ if( $vendor["type"] == "3" ){
 			extrasPrice += parseInt($(this).attr("data-price"));
 		});
 		totalPrice = parseInt(servicePrice) + parseInt(pictureTypePrice) + extrasPrice;
+		$(".btnPrice").html(totalPrice+" -/KD");
 	}
 
   // get picture type id
   $(document).on("click","#pictureType", function(){
 	var selectedType = $(this).attr("value");
 	$("input[name=pictureTypeId]").val(selectedType);
-	$(".btnPrice").html($(".typePrice"+selectedType).attr("id"));
+	console.log(updatePrice());
   });
+
+  // checkbox click
+  $(document).on("click",".checkbox", function(){
+	console.log(updatePrice());
+	});
 
   // on serviceBLk click update input name serviceId with attr id
   $(document).on("click",".serviceBLk", function(){

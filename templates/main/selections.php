@@ -266,6 +266,10 @@ if( $vendor["type"] == "3" ){
 			$("input[name=themeId]").val(array);
 		}else{
 			var selectedThemes = getSelectedThemes.split(",");
+			if ( selectedThemes.includes(selectedTheme) ){
+				var index = selectedThemes.indexOf(selectedTheme);
+				selectedThemes.splice(index, 1);
+			}
 			selectedThemes.push(selectedTheme);
 			$("input[name=themeId]").val(selectedThemes.join(","));
 		}

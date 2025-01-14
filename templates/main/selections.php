@@ -72,7 +72,7 @@ if( $vendor["type"] == "3" ){
 					?>
 				<div class="col-10 d-flex pb-1">
 					<div class="form-check">
-						<input type="checkbox" class="form-check-input" data-price="<?php echo $extra["price"] ?>" name="extras[]" value="<?php echo $extra["id"] ?>">
+						<input type="checkbox" class="form-check-input" id="checkExtras" data-price="<?php echo $extra["price"] ?>" name="extras[]" value="<?php echo $extra["id"] ?>">
 						 <label class="form-check-label" for="extra<?php echo $extra["id"] ?>"><?php echo $extraTitle ?></label>
 					</div>
 				</div>
@@ -95,11 +95,17 @@ if( $vendor["type"] == "3" ){
 		<input type="date" name="date" data-disable-mobile="true" class="form-control" required>
 		<input type="hidden" name="serviceId" value="0" required>
 		<input type="hidden" name="branchId" value="0" required>
-		<input type="hidden" name="pictureTypeId" value="0" required>
-		<input type="hidden" name="themeId" value="0" required>
 		<input type="hidden" name="selectedDate" value="0" required>
 		<input type="hidden" name="selectedTime" value="0" required>
 		<input type="hidden" name="vendorId" value="<?php echo $vendor["id"] ?>" required>
+		<?php
+		if( $vendor["type"] == "3" ){
+			?>
+			<input type="hidden" name="pictureTypeId" value="0" required>
+			<input type="hidden" name="themeId" value="0" required>
+			<?php
+		}
+		?>
 	</div> 
 	<div class="col-md-6">
 		<label><?php echo direction("Time","الوقت") ?></label>
@@ -303,7 +309,7 @@ if( $vendor["type"] == "3" ){
 		var pictureTypePrice = $("input[name=pictureTypeRadio]").attr("data-price");
 
 		var extrasPrice = 0;
-		$.each($("input[type='checkbox']:checked"), function(){
+		$.each($("#checkExtras:checked"), function(){
 			extrasPrice += parseInt($(this).attr("data-price"));
 		});
 		totalPrice = parseInt(servicePrice) + parseInt(pictureTypePrice) + extrasPrice;

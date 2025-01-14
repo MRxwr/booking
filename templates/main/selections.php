@@ -320,12 +320,10 @@ if( $vendor["type"] == "3" ){
   $(document).on("click","#pictureType", function(){
 	var selectedType = $(this).attr("value");
 	$("input[name=pictureTypeId]").val(selectedType);
-	console.log(updatePrice());
   });
 
   // checkbox click
   $(document).on("click","input[type='checkbox']", function(){
-	console.log(updatePrice());
 });
 
   // on serviceBLk click update input name serviceId with attr id

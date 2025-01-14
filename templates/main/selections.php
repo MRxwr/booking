@@ -258,25 +258,34 @@ if( $vendor["type"] == "3" ){
 	$("#loading-screen").hide();
   });
   // get theme id
-$(document).on("click",".themeInput", function(){
-	var selectedTheme = $(this).attr("id");
-	$("input[name=themeId]").val(selectedTheme);
-	if($(this).attr('style') && $(this).attr('style').indexOf('border') !== -1) {
-		$(this).css({
-			"width": "100px",
-			"height": "100px",
-			"border": "",
-			"opacity": "1"
-		});
-	}else{
-		$(this).css({
-			"border": "1px solid",
-			"opacity": "0.5",
-			"width": "100px",
-			"height": "100px"
-		});
-	}
-});
+	$(document).on("click",".themeInput", function(){
+		var selectedTheme = $(this).attr("id");
+		var getSelectedThemes = $("input[name=themeId]").val();
+		if( getSelectedThemes == 0 ){
+			var array = [selectedTheme];
+			$("input[name=themeId]").val(array);
+		}else{
+			var selectedThemes = getSelectedThemes.split(",");
+			selectedThemes.push(selectedTheme);
+			$("input[name=themeId]").val(selectedThemes.join(","));
+		}
+		$("input[name=themeId]").val(selectedTheme);
+		if($(this).attr('style') && $(this).attr('style').indexOf('border') !== -1) {
+			$(this).css({
+				"width": "100px",
+				"height": "100px",
+				"border": "",
+				"opacity": "1"
+			});
+		}else{
+			$(this).css({
+				"border": "1px solid",
+				"opacity": "0.5",
+				"width": "100px",
+				"height": "100px"
+			});
+		}
+	});
 
   // get picture type id
   $(document).on("click","#pictureType", function(){

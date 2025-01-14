@@ -295,8 +295,19 @@ if( $vendor["type"] == "3" ){
   // get picture type id
   $(document).on("click",".pictureType", function(){
 	var selectedType = $(this).attr("value");
+	var selectedTypePrice = $(this).attr("id");
 	$("input[name=pictureTypeId]").val(selectedType);
-	$(".btnPrice").html($(this).attr("id"));
+	var totalPrice = $(".btnPrice").html().split(" -/KD")[0];
+	totalPrice = parseInt(totalPrice) + parseInt(selectedTypePrice);
+	$(".btnPrice").html(totalPrice + " -/KD");
+  });
+
+  // get extras price
+  $(document).on("click",".checkboxPrice", function(){
+	var selectedExtra = $(this).attr("id");
+	var totalPrice = $(".btnPrice").html().split(" -/KD")[0];
+	totalPrice = parseInt(totalPrice) + parseInt(selectedExtra);
+	$(".btnPrice").html(totalPrice + " -/KD");
   });
 
   // on serviceBLk click update input name serviceId with attr id

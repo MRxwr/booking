@@ -325,11 +325,12 @@ if( $vendor["type"] == "3" ){
 	// Add prices of checked extras
 	$(".checkboxPrice:checked").each(function() {
 		var extraPrice = $(this).attr("id");
+		console.log(extraPrice);
 		totalPrice += parseInt(extraPrice);
 	});
 	console.log(selectedServicePrice);
 	console.log(selectedTypePrice);
-	console.log(extraPrice);
+	
 	$(".btnPrice").html(totalPrice + " -/KD");
   });
 

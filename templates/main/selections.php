@@ -259,7 +259,9 @@ if( $vendor["type"] == "3" ){
 	});
 	updateDatePicker(selectedBranchId);
 	$("input[name='date']").val("Please select a date");
-	$("#checkExtras").prop("checked", false);
+	$.each($("#checkExtras:checked"), function(){
+		$(this).prop("checked", false);
+	});
 	updatePrice();
 	$("#loading-screen").hide();
   });
@@ -352,7 +354,9 @@ if( $vendor["type"] == "3" ){
 	$("input[name='pictureTypeId']").val(0);
 	$("input[name='extras']").val(0);
 	$("input[name='themeId']").val(0);
-	$("#checkExtras").prop("checked", false);
+	$.each($("#checkExtras:checked"), function(){
+		$(this).prop("checked", false);
+	});
 	updatePrice();
 	$(".btnPrice").html($(this).find("#priceValue"+serviceId).text());
 	//reset and remove all option from select name time

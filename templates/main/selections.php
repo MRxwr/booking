@@ -269,7 +269,7 @@ if( $vendor["type"] == "3" ){
 			selectedThemes.push(selectedTheme);
 			$("input[name=themeId]").val(selectedThemes.join(","));
 		}
-		$("input[name=themeId]").val(selectedTheme);
+		//$("input[name=themeId]").val(selectedTheme);
 		if($(this).attr('style') && $(this).attr('style').indexOf('border') !== -1) {
 			$(this).css({
 				"width": "100px",
@@ -338,7 +338,7 @@ if( $vendor["type"] == "3" ){
 	$(".themesBLK").empty();
 	$.each(filteredThemes, function(key, value) {
 		var image = value.image;
-		var themes = "<div class='col-4 pb-1'><img src='logos/"+image+"' class='themeInput' id='"+value.id+"' style='width:100px; height:100px'></a></div>";
+		var themes = "<div class='col-4 pb-1'><img src='logos/"+image+"' class='themeInput' id='"+image+"' style='width:100px; height:100px'></a></div>";
 		$(".themesBLK").append(themes);
 	});
 	});

@@ -294,13 +294,13 @@ if( $vendor["type"] == "3" ){
 
 	function updatePrice(){
 		var totalPrice = 0;
-		
+
 		var selectedService = $("input[name='serviceId']").val();
 		var servicePrice = 0;
 		var servicePrice = $("#priceValue"+selectedService).attr("data-price");
 		
 		var pictureTypePrice =  0;
-		var pictureTypePrice = $("input[name=pictureTypeId]").attr("data-price");
+		var pictureTypePrice = $("input[name=pictureTypeRadio]").attr("data-price");
 
 		var extrasPrice = 0;
 		$.each($("input[type='checkbox']:checked"), function(){

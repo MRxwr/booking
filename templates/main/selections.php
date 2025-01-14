@@ -261,15 +261,14 @@ if( $vendor["type"] == "3" ){
 $(document).on("click",".themeInput", function(){
 	var selectedTheme = $(this).attr("id");
 	$("input[name=themeId]").val(selectedTheme);
-	
-	if ($(this).attr('style') && $(this).attr('style').indexOf('border') !== -1) {
+	if($(this).attr('style') && $(this).attr('style').indexOf('border') !== -1) {
 		$(this).css({
 			"width": "100px",
 			"height": "100px",
 			"border": "",
 			"opacity": "1"
 		});
-	} else {
+	}else{
 		$(this).css({
 			"border": "1px solid",
 			"opacity": "0.5",

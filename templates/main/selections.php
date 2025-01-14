@@ -72,7 +72,7 @@ if( $vendor["type"] == "3" ){
 					?>
 				<div class="col-10 d-flex pb-1">
 					<div class="form-check">
-						<input type="checkbox" class="form-check-input" id="checkExtras" data-price="<?php echo $extra["price"] ?>" name="extras[]" value="<?php echo $extra["id"] ?>">
+						<input type="checkbox" class="form-check-input" id="checkExtras" data-price="<?php echo $extra["price"] ?>" value="<?php echo $extra["id"] ?>">
 						 <label class="form-check-label" for="extra<?php echo $extra["id"] ?>"><?php echo $extraTitle ?></label>
 					</div>
 				</div>
@@ -330,7 +330,7 @@ if( $vendor["type"] == "3" ){
 	var getSelectedExtras = $("input[name=extras]").val();
 	if( getSelectedExtras == 0 ){
 		var array = [selectedExtra];
-		$("input[name=themeId]").val(array);
+		$("input[name=extras]").val(array);
 	}else{
 		var selectedExtras = getSelectedExtras.split(",");
 		if ( selectedExtras.includes(selectedExtra) ){

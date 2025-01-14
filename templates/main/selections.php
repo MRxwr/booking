@@ -72,7 +72,7 @@ if( $vendor["type"] == "3" ){
 					?>
 				<div class="col-10 d-flex pb-1">
 					<div class="form-check">
-						<input type="checkbox" class="form-check-input checkboxPrice" id='<?php echo $extra["price"] ?>' name="extras[]" value="<?php echo $extra["id"] ?>">
+						<input type="checkbox" class="form-check-input" data-price="<?php echo $extra["price"] ?>" name="extras[]" value="<?php echo $extra["id"] ?>">
 						 <label class="form-check-label" for="extra<?php echo $extra["id"] ?>"><?php echo $extraTitle ?></label>
 					</div>
 				</div>
@@ -249,7 +249,7 @@ if( $vendor["type"] == "3" ){
 			var durationText = "Duration";
 		}
 	  var serviceHTML = '<div class="col-6 d-flex align-items-center justify-content-center p-2">';
-	  serviceHTML += '<div class="w-100 p-3 text-center serviceBLk" id="'+service.id+'"><span>'+service.title+' </span><label style="font-size: 8px;"> <div id="priceValue">'+service.price+' -/KD</div></label><hr class="m-0"><label style="font-size: 8px;">'+durationText+': '+service.period+' '+mins+' </label></div>';
+	  serviceHTML += '<div class="w-100 p-3 text-center serviceBLk" id="'+service.id+'"><span>'+service.title+' </span><label style="font-size: 8px;"> <div id="priceValue'+value.id+'" data-price="'+service.price+'">'+service.price+' -/KD</div></label><hr class="m-0"><label style="font-size: 8px;">'+durationText+': '+service.period+' '+mins+' </label></div>';
 	  serviceHTML += '</div>';
 	  servicesContainer.innerHTML += serviceHTML;
 	});
@@ -292,31 +292,26 @@ if( $vendor["type"] == "3" ){
 		}
 	});
 
-// create a function that calulate the total price add service price and selected picture type price and selected extras price
-function calculateTotalPrice() {
-	// loop through all selected extras and get seelcted service price and picture type price and add them to total price and add a check if available or not make it 0
-	var totalPrice = 0;
-	var selectedExtras = $("input[name='extras[]']:checked").map(function() {
-		return $(this).attr("id");
-	}).get();
+	function updatePrice(){
+		var totalPrice = 0;
+		var selectedService = $("input[name='serviceId']").val();
+		var servicePrice = $("#priceValue"+selectedService).attr("data-price");
+		
+		var selectedPictureType = $("input[name=pictureTypeId]").val();
+		var pictureTypePrice = $(".typePrice"+selectedPictureType).attr("id");
 
-	$.each(selectedExtras, function(index, value) {
-		var selectedServicePrice = services.find(function(service) {
-			return service.id == value;
-		});	
-		var selectedPictureTypePrice = pictureTypes.find(function(pictureType) {
-			return pictureType.id == value;
+		var extrasPrice = 0;
+		$.each($("input[type='checkbox']:checked"), function(){
+			extrasPrice += parseInt($(this).attr("data-price"));
 		});
-		totalPrice += selectedServicePrice.price + selectedPictureTypePrice.price;
-	});
-}
+		totalPrice = parseInt(servicePrice) + parseInt(pictureTypePrice) + extrasPrice;
+	}
 
   // get picture type id
   $(document).on("click","#pictureType", function(){
 	var selectedType = $(this).attr("value");
 	$("input[name=pictureTypeId]").val(selectedType);
 	$(".btnPrice").html($(".typePrice"+selectedType).attr("id"));
-	console.log(calculateTotalPrice());
   });
 
   // on serviceBLk click update input name serviceId with attr id
@@ -325,7 +320,7 @@ function calculateTotalPrice() {
 	$("input[name='serviceId']").val(serviceId);
 	$("input[name='selectedTime']").val(0);
 	$("input[name='selectedDate']").val(0);
-	$(".btnPrice").html($(this).find("#priceValue").text());
+	$(".btnPrice").html($(this).find("#priceValue"+serviceId).text());
 	//reset and remove all option from select name time
 	timeSelect.innerHTML = '';
 	timeSelect.innerHTML = '<option value="0">Please select a time</option>';

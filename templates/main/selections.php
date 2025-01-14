@@ -72,7 +72,7 @@ if( $vendor["type"] == "3" ){
 					?>
 				<div class="col-10 d-flex pb-1">
 					<div class="form-check">
-						<input type="checkbox" class="form-check-input" name="extras[]" value="<?php echo $extra["id"] ?>">
+						<input type="checkbox" class="form-check-input checkboxPrice" id='<?php echo $extra["price"] ?>' name="extras[]" value="<?php echo $extra["id"] ?>">
 						 <label class="form-check-label" for="extra<?php echo $extra["id"] ?>"><?php echo $extraTitle ?></label>
 					</div>
 				</div>
@@ -261,7 +261,6 @@ if( $vendor["type"] == "3" ){
 	$(document).on("click",".themeInput", function(){
 		var selectedTheme = $(this).attr("id");
 		var getSelectedThemes = $("input[name=themeId]").val();
-		$("input[name=themeId]").val(0);
 		if( getSelectedThemes == 0 ){
 			var array = [selectedTheme];
 			$("input[name=themeId]").val(array);
@@ -294,9 +293,10 @@ if( $vendor["type"] == "3" ){
 	});
 
   // get picture type id
-  $(document).on("click","#pictureType", function(){
+  $(document).on("click",".pictureType", function(){
 	var selectedType = $(this).attr("value");
 	$("input[name=pictureTypeId]").val(selectedType);
+	$(".btnPrice").html($(this).attr("id").text());
   });
 
   // on serviceBLk click update input name serviceId with attr id

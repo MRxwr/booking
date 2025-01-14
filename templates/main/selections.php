@@ -77,7 +77,7 @@ if( $vendor["type"] == "3" ){
 					</div>
 				</div>
 				<div class="col-2" style='font-size: 10px;align-content: center;'>
-					<span class="price">+<?php echo $extra["price"] ?>-/KD</span>
+					<span class="price">+<?php echo $extra["price"] ?> -/KD</span>
 				</div>
 				<?php
 				}

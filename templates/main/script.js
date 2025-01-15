@@ -1,7 +1,3 @@
-// on load show loading screen
-$(window).load(function() {
-	$("#loading-screen").show();
-});
 // on ready
 $(window).ready(function() {
 	var width = $(window).width();

@@ -29,7 +29,7 @@ if( !isset($_POST["vendorId"]) || empty($_POST["vendorId"]) ){
         if( $vendor[0]["type"] == 3 ){
             if( $pictureType = selectDBNew("picturetype",[$pictureType,$vendorId],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
             }else{
-                echo outputError(array("msg"=>direction("Picture type not exists for the current vendor","نوع الصورة غير موجود للمتجر الحالي")));die();
+                echo outputError(array("msg"=> "{$pictureType},{$vendorId} " . direction("Picture type not exists for the current vendor","نوع الصورة غير موجود للمتجر الحالي")));die();
             }
         }
         if( $extrasCheck = selectDBNew("extras",[$vendorId,$extras],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND FIND_IN_SET(`id`,?)","") ){

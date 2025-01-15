@@ -19,11 +19,25 @@ if( !isset($_POST["vendorId"]) || empty($_POST["vendorId"]) ){
     $vendorId = $_POST["vendorId"];
     $branchId = $_POST["branchId"];
     $serviceId = $_POST["serviceId"];
+    $pictureType = $_POST["pictureTypeId"];
+    $extras = $_POST["extras"];
+    $themes = $_POST["themeId"];
+    $extraInfo = $_POST["extraInfo"];
     $date = $_POST["date"];
     $time = $_POST["time"];
     if( $vendor = selectDBNew("vendors",[$vendorId],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
-        if( $branch = selectDBNew("branches",[$branchId],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
-            if( $service = selectDBNew("services",[$serviceId],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
+        if( $vendor[0]["type"] == 3 ){
+            if( $pictureType = selectDBNew("picturetype",[$pictureType,$vendorId],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
+            }else{
+                echo outputError(array("msg"=>direction("Picture type not exists for the current vendor","نوع الصورة غير موجود للمتجر الحالي")));die();
+            }
+        }
+        if( $extras = selectDBNew("extras",[$vendorId,$extras],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND id IN (".$extras.")","") ){
+        }else{
+            echo outputError(array("msg"=>direction("Extras not exists for the current vendor","الاضافات غير موجودة للمتجر الحالي")));die();
+        }
+        if( $branch = selectDBNew("branches",[$branchId,$vendorId],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
+            if( $service = selectDBNew("services",[$serviceId,$vendorId],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
                 if( $calendars = selectDBNew("calendar",[$vendorId,$branchId,$date,$date],"`status` = '0' AND `hidden` = '0' AND `vendorId` = ? AND `branchId` = ? AND `startDate` <= ? AND `endDate` >= ? ORDER BY `id` ASC","") && $date >= date("Y-m-d") ){
                     if( $blockedPeriodsBranches = selectDBNew("blockdate",[$vendorId,$branchId,$date],"`status` = '0' AND `hidden` = '0' AND `vendorId` = ? AND `branchId` = ? AND ? NOT IN BETWEEN `startDate` AND `endDate` ORDER BY `id` ASC","") ){
                         echo outputError(array("msg"=>direction("Date is blocked please select another date","تم حظر التاريخ يرجى تحديد تاريخ اخر")));die();
@@ -69,6 +83,10 @@ if( !isset($_POST["vendorId"]) || empty($_POST["vendorId"]) ){
                                     'serviceId' => "{$serviceId}",
                                     'date' => "{$date}",
                                     'time' => "{$time}",
+                                    'extras' => "{$extras}",
+                                    'pictureTypeId' => "{$pictureType}",
+                                    'themes' => "{$themes}",
+                                    'extraInfo' => "{$extraInfo}",
                                     'customer[name]' => "{$_POST["customer"]["name"]}",
                                     'customer[mobile]' => "{$_POST["customer"]["mobile"]}",
                                     'customer[email]' => "{$_POST["customer"]["email"]}",

@@ -275,15 +275,16 @@ if( $vendor["type"] == "3" ){
 			var array = [selectedTheme];
 			$("input[name=themeId]").val(array);
 		}else{
-			var selectedThemes = getSelectedThemes.split(",");
-			if ( selectedThemes.includes(selectedTheme) ){
-				var index = selectedThemes.indexOf(selectedTheme);
-				selectedThemes.splice(index, 1);
+			var array = getSelectedThemes.split(",");
+			if ( array.includes(selectedTheme) ){
+				var index = array.indexOf(selectedTheme);
+				array.splice(index, 1);
 			}else{
-				selectedThemes.push(selectedTheme);
+				array.push(selectedTheme);
 			}
-			if ( themesTotal >= selectedThemes.length ){
-				$("input[name=themeId]").val(selectedThemes.join(","));
+		}
+			if ( themesTotal >= array.length ){
+				$("input[name=themeId]").val(array.join(","));
 				if($(this).attr('style') && $(this).attr('style').indexOf('border') !== -1) {
 					$(this).css({
 						"width": "100px",

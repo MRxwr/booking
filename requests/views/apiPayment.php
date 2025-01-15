@@ -99,6 +99,6 @@ if ( $response["status"] == false ) {
     if( $vendor[0]["chargeType"] == 3 ){
         $response["data"]["link"] = "https://booking.createkuwait.com/{$vendor[0]["url"]}?result=CAPTURED&requested_order_id={$orderId}";
     }
-    echo outputData($_POST);die();
+    echo outputData($response);die();
 }
 ?>

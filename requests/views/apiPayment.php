@@ -4,7 +4,7 @@ if( isset($_POST["vendorId"]) && !empty($_POST["vendorId"]) && $vendor = selectD
         if( isset($_POST["pictureTypeId"]) && !empty($_POST["pictureTypeId"]) ){
             if( $pictureType = selectDBNew("picturetype",[$_POST["pictureTypeId"],$vendor[0]["id"]],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
             }else{
-                echo outputError("{$_POST["pictureTypeId"]},{$vendor[0]["id"]}" . direction("Picture type not exists for the current vendor","نوع الصورة غير موجود للمتجر الحالي"));die();
+                echo outputError(direction("Picture type not exists for the current vendor","نوع الصورة غير موجود للمتجر الحالي"));die();
             }
         }else{
             echo outputError(direction("Missing picture type","نوع الصورة مطلوب"));die();

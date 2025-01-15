@@ -162,8 +162,8 @@
 			</div>
 			<?php
 			if( !empty($order[0]["extraInfo"]) ){
-				var_dump($order[0]["extraInfo"]);
-				foreach ($order[0]["extraInfo"] as $key => $value) {
+				$order[0]["extraInfo"] = json_decode($order[0]["extraInfo"],true);
+				foreach($order[0]["extraInfo"] as $key => $value) {
 					$extraInfo = selectDB("extrainfo","`id` = '{$key}'");
 					?>
 					<div class="col-md-12 p-2">

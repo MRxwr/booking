@@ -26,6 +26,8 @@ $(window).ready(function() {
 			var key = $(this).attr('name').replace('extraInfo[', '').replace(']', '');
 			extraInfo[key] = $(this).val();
 		});
+		console.log(extraInfo);
+		console.log(branchId, vendorId, serviceId, date, time, extras, pictureTypeId, themeId);
 		var name = $("#name").val();
 		var mobile = $("#mobile").val();
 		var email = $("#email").val();

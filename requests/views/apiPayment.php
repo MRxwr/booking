@@ -40,6 +40,16 @@ if( $vendor[0]["chargeType"] == 1 ){
     $price = $vendor[0]["chargeTypeAmount"];
 }else{
     $price = $service[0]["price"];
+    if( $vendor[0]["type"] == 3 ){
+        if( $pictureType = selectDBNew("picturetype",[$pictureType,$vendor[0]["id"]],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
+            $price += $pictureType[0]["price"];
+        }
+    }
+    if( $extrasCheck = selectDBNew("extras",[$vendor[0]["id"],$extras],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND `id` IN (".$extras.")","") ){
+        foreach( $extrasCheck as $extra ){
+            $price += $extra["price"];
+        }
+    }
 }
 $orderId = date("Ymd").rand(0000,9999).time();
 $paymentArray = array(

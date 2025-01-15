@@ -92,7 +92,7 @@
 								<label><?php echo direction("Theme","الثيم") ?></label>
 							</div>
 							<div class="col-8" style="overflow-wrap: anywhere;">
-								<img src="logos/<?php echo $value ?>" width="100%">
+								<img src="logos/<?php echo $value ?>" style="75px;height:75px;">
 							</div>
 						</div>
 					</div>

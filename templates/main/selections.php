@@ -276,13 +276,13 @@ if( $vendor["type"] == "3" ){
 			$("input[name=themeId]").val(array);
 		}else{
 			var selectedThemes = getSelectedThemes.split(",");
+			if ( selectedThemes.includes(selectedTheme) ){
+				var index = selectedThemes.indexOf(selectedTheme);
+				selectedThemes.splice(index, 1);
+			}else{
+				selectedThemes.push(selectedTheme);
+			}
 			if ( themesTotal > selectedThemes.length ){
-				if ( selectedThemes.includes(selectedTheme) ){
-					var index = selectedThemes.indexOf(selectedTheme);
-					selectedThemes.splice(index, 1);
-				}else{
-					selectedThemes.push(selectedTheme);
-				}
 				$("input[name=themeId]").val(selectedThemes.join(","));
 			}else{
 				if (getCookie("createLang") == "ar") {

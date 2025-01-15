@@ -32,9 +32,12 @@ if( !isset($_POST["vendorId"]) || empty($_POST["vendorId"]) ){
                 echo outputError(array("msg"=>direction("Picture type not exists for the current vendor","نوع الصورة غير موجود للمتجر الحالي")));die();
             }
         }
-        if( !empty($extras) && $extrasCheck = selectDBNew("extras",[$vendorId,$extras],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND FIND_IN_SET(`id`,?)","") ){
-        }else{
-            echo outputError(array("msg"=>direction("{$extras} - Extras not exists for the current vendor","الاضافات غير موجودة للمتجر الحالي")));die();
+        if( !empty($extras) ){
+            if( $extrasCheck = selectDBNew("extras",[$vendorId,$extras],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND FIND_IN_SET(`id`,?)","") ){
+
+            }else{
+                echo outputError(array("msg"=>direction("Extras not exists for the current vendor","الاضافات غير موجودة للمتجر الحالي")));die();
+            }
         }
         if( $branch = selectDBNew("branches",[$branchId,$vendorId],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
             if( $service = selectDBNew("services",[$serviceId,$vendorId],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){

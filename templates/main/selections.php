@@ -393,7 +393,7 @@ if( $vendor["type"] == "3" ){
 	// Fill typesBlk with radio inputs based on filtered pictureTypes
 	$(".typesBLK").empty();
 	$.each(filteredPictureTypes, function(key, value) {
-		$types = "<div class='col-10 p-0 pb-1'><input type='radio' id='pictureType' name='pictureTypeRadio' value='"+value.id+"' data-themes='"+value.themes+"' data-price='"+value.price+"'> <label>"+value.title+"</label></div><div class='col-2 p-0' style='font-size: 10px;align-content: center;'>"+parseFloat(value.price).toFixed(3)+" -/KD</div>";
+		$types = "<div class='col-10 p-0 pb-1'><input type='radio' id='pictureType' name='pictureTypeRadio' value='"+value.id+"' data-themes='"+value.themesTotal+"' data-price='"+value.price+"'> <label>"+value.title+"</label></div><div class='col-2 p-0' style='font-size: 10px;align-content: center;'>"+parseFloat(value.price).toFixed(3)+" -/KD</div>";
 		$(".typesBLK").append($types);
 	});
 

@@ -83,6 +83,7 @@ $paymentArray = array(
     'extraMerchantData[0][ibanNumber]' => "{$vendor[0]["iban"]}"
     */
     );
+echo json_encode($paymentArray);die();
 $curl = curl_init();
 curl_setopt_array($curl, array(
     CURLOPT_URL => 'https://sandboxapi.upayments.com/api/v1/charge',

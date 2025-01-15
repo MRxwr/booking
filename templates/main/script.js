@@ -87,7 +87,7 @@ $(window).ready(function() {
 			  }
 			}
 		  }).done(function(result){
-			console.log(result);
+			console.log("result is " + result);
 			  if( result.ok === true ){
 				window.location.href = result.data.data.data.link;
 			  }else{

@@ -284,6 +284,21 @@ if( $vendor["type"] == "3" ){
 			}
 			if ( themesTotal >= selectedThemes.length ){
 				$("input[name=themeId]").val(selectedThemes.join(","));
+				if($(this).attr('style') && $(this).attr('style').indexOf('border') !== -1) {
+					$(this).css({
+						"width": "100px",
+						"height": "100px",
+						"border": "",
+						"opacity": "1"
+					});
+				}else{
+					$(this).css({
+						"border": "1px solid",
+						"opacity": "0.5",
+						"width": "100px",
+						"height": "100px"
+					});
+				}
 			}else{
 				if (getCookie("createLang") == "ar") {
 					alert("لا يمكنك تحديد اكثر من "+themesTotal+" ثيمات");
@@ -291,22 +306,6 @@ if( $vendor["type"] == "3" ){
 					alert("You can select only "+themesTotal+" themes");
 				}
 			}
-		}
-		//$("input[name=themeId]").val(selectedTheme);
-		if($(this).attr('style') && $(this).attr('style').indexOf('border') !== -1) {
-			$(this).css({
-				"width": "100px",
-				"height": "100px",
-				"border": "",
-				"opacity": "1"
-			});
-		}else{
-			$(this).css({
-				"border": "1px solid",
-				"opacity": "0.5",
-				"width": "100px",
-				"height": "100px"
-			});
 		}
 	});
 

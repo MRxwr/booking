@@ -95,9 +95,8 @@ $(window).ready(function() {
 				$("#loading-screen").hide();
 				return false;
 			  }
-		  }).fail(function(xhr, status, error) {
-			var response = JSON.parse(xhr.responseText);
-			console.log("Error message: ", response.data.msg);
+		  }).fail(function(){
+			// show error message
 			alert(serverError);
 			$("#loading-screen").hide();
 			return false;

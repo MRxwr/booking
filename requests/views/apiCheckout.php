@@ -25,6 +25,7 @@ if( !isset($_POST["vendorId"]) || empty($_POST["vendorId"]) ){
     $extraInfo = $_POST["extraInfo"];
     $date = $_POST["date"];
     $time = $_POST["time"];
+    var_dump($_POST);die();
     if( $vendor = selectDBNew("vendors",[$vendorId],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
         if( $vendor[0]["type"] == 3 ){
             if( $pictureType = selectDBNew("picturetype",[$pictureType,$vendorId],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){

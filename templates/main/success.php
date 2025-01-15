@@ -162,6 +162,7 @@
 			</div>
 			<?php
 			if( !empty($order[0]["extraInfo"]) ){
+				var_dump($order[0]["extraInfo"]);
 				foreach ($order[0]["extraInfo"] as $key => $value) {
 					$extraInfo = selectDB("extrainfo","`id` = '{$key}'");
 					?>

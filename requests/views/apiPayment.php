@@ -46,13 +46,14 @@ if( $vendor[0]["chargeType"] == 1 ){
         }
     }
     if( $extrasCheck = selectDBNew("extras",[$vendor[0]["id"],$_POST["extras"]],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND `id` IN (?)","") ){
+        echo json_encode($extrasCheck);die();
         foreach( $extrasCheck as $extra ){
             $price = $price + $extra["price"];
         }
     }
 }
 
-echo json_encode($extrasCheck);die();
+
 $orderId = date("Ymd").rand(0000,9999).time();
 $paymentArray = array(
     'language' => 'en',

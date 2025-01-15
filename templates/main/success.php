@@ -65,6 +65,7 @@
 				</div>
 			</div>
 			<?php 
+			echo $order[0]["extras"];
 			if( !empty($order[0]["extras"]) ){
 				$extras = selectDB("extras","FIND_IN_SET(`id`,{$order[0]["extras"]})");
 				foreach ($extras as $key => $value) {

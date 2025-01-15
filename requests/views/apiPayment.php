@@ -28,12 +28,12 @@ if( $vendor[0]["chargeType"] == 1 ){
     $price = $service[0]["price"];
     if( $vendor[0]["type"] == 3 ){
         if( $pictureType = selectDBNew("picturetype",[$pictureType,$vendor[0]["id"]],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
-            $price += $pictureType[0]["price"];
+            $price = $price + $pictureType[0]["price"];
         }
     }
     if( $extrasCheck = selectDBNew("extras",[$vendor[0]["id"],$extras],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND `id` IN (".$extras.")","") ){
         foreach( $extrasCheck as $extra ){
-            $price += $extra["price"];
+            $price = $price + $extra["price"];
         }
     }
 }elseif( $vendor[0]["chargeType"] == 2 ){
@@ -41,16 +41,18 @@ if( $vendor[0]["chargeType"] == 1 ){
 }else{
     $price = $service[0]["price"];
     if( $vendor[0]["type"] == 3 ){
-        if( $pictureType = selectDBNew("picturetype",[$pictureType,$vendor[0]["id"]],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
-            $price += $pictureType[0]["price"];
+        if( $pictureType = selectDBNew("picturetype",[$_POST["pictureTypeId"],$vendor[0]["id"]],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
+            $price = $price + $pictureType[0]["price"];
         }
     }
-    if( $extrasCheck = selectDBNew("extras",[$vendor[0]["id"],$extras],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND `id` IN (".$extras.")","") ){
+    if( $extrasCheck = selectDBNew("extras",[$vendor[0]["id"],$_POST["extras"]],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND `id` IN (?)","") ){
         foreach( $extrasCheck as $extra ){
-            $price += $extra["price"];
+            $price = $price + $extra["price"];
         }
     }
 }
+
+echo $price;die();
 $orderId = date("Ymd").rand(0000,9999).time();
 $paymentArray = array(
     'language' => 'en',
@@ -90,7 +92,6 @@ curl_setopt_array($curl, array(
 $response = curl_exec($curl);
 $response = json_decode($response, true);
 curl_close($curl);
-echo json_encode($paymentArray);die();
 if ( is_null($response) || $response["status"] == false ) {
     $response = outputError($response);die();
 }else{

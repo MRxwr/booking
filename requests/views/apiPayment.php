@@ -1,5 +1,15 @@
 <?php
 if( isset($_POST["vendorId"]) && !empty($_POST["vendorId"]) && $vendor = selectDBNew("vendors",[$_POST["vendorId"]],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
+    if( $vendor[0]["type"] == 3 ){
+        if( isset($_POST["pictureTypeId"]) && !empty($_POST["pictureTypeId"]) ){
+            if( $pictureType = selectDBNew("picturetype",[$_POST["pictureTypeId"],$vendor[0]["id"]],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
+            }else{
+                echo outputError(direction("Picture type not exists for the current vendor","نوع الصورة غير موجود للمتجر الحالي"));die();
+            }
+        }else{
+            echo outputError(direction("Missing picture type","نوع الصورة مطلوب"));die();
+        }
+    }
 }else{
     echo outputError(direction("Missing vendor","المتجر مطلوب"));die();
 }
@@ -45,8 +55,7 @@ if( $vendor[0]["chargeType"] == 1 ){
             $price = $price + $pictureType[0]["price"];
         }
     }
-    if( $extrasCheck = selectDBNew("extras",[$vendor[0]["id"],str_replace("'","",$_POST["extras"])],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND `id` IN (?)","") ){
-        echo str_replace("'","",$_POST["extras"]);die();
+    if( $extrasCheck = selectDBNew("extras",[$vendor[0]["id"],$_POST["extras"]],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND `id` IN (?)","") ){
         foreach( $extrasCheck as $extra ){
             $price = $price + $extra["price"];
         }

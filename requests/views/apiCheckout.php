@@ -20,7 +20,7 @@ if( !isset($_POST["vendorId"]) || empty($_POST["vendorId"]) ){
     $branchId = $_POST["branchId"];
     $serviceId = $_POST["serviceId"];
     $pictureType = $_POST["pictureTypeId"];
-    $extras = $_POST["extras"];
+    $extras = str_replace("'","",$_POST["extras"]);
     $themes = $_POST["themeId"];
     $extraInfo = $_POST["extraInfo"];
     $date = $_POST["date"];
@@ -32,12 +32,10 @@ if( !isset($_POST["vendorId"]) || empty($_POST["vendorId"]) ){
                 echo outputError(array("msg"=>direction("Picture type not exists for the current vendor","نوع الصورة غير موجود للمتجر الحالي")));die();
             }
         }
-        /*
-        if( $extrasCheck = selectDBNew("extras",[$vendorId,$extras],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND `id` IN (".$extras.")","") ){
+        if( $extrasCheck = selectDBNew("extras",[$vendorId,$extras],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND `id` IN (?)","") ){
         }else{
             echo outputError(array("msg"=>direction("Extras not exists for the current vendor","الاضافات غير موجودة للمتجر الحالي")));die();
         }
-            */
         if( $branch = selectDBNew("branches",[$branchId,$vendorId],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
             if( $service = selectDBNew("services",[$serviceId,$vendorId],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
                 if( $calendars = selectDBNew("calendar",[$vendorId,$branchId,$date,$date],"`status` = '0' AND `hidden` = '0' AND `vendorId` = ? AND `branchId` = ? AND `startDate` <= ? AND `endDate` >= ? ORDER BY `id` ASC","") && $date >= date("Y-m-d") ){
@@ -88,7 +86,7 @@ if( !isset($_POST["vendorId"]) || empty($_POST["vendorId"]) ){
                                     'extras' => "{$extras}",
                                     'pictureTypeId' => "{$pictureType}",
                                     'themes' => "{$themes}",
-                                    'extraInfo' => "{$extraInfo}",
+                                    'extraInfo' => json_encode($extraInfo),
                                     'customer[name]' => "{$_POST["customer"]["name"]}",
                                     'customer[mobile]' => "{$_POST["customer"]["mobile"]}",
                                     'customer[email]' => "{$_POST["customer"]["email"]}",
@@ -96,7 +94,6 @@ if( !isset($_POST["vendorId"]) || empty($_POST["vendorId"]) ){
                                 ));
                                 $response = curl_exec($curl);
                                 curl_close($curl);
-                                echo $response;die();
                                 echo outputData(json_decode($response, true));die();
                             }else{
                                 echo outputError(array("msg"=>direction("Time is fully booked please select another time","الوقت مكتمل يرجى تحديد وقت اخر")));die();

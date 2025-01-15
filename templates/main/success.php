@@ -6,7 +6,7 @@
 			</div>
 			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
-					<div class="col-4">
+					<div class="col-4" style="white-space: nowrap;">
 						<label><?php echo direction("Status","الحالة") ?></label>
 					</div>
 					<div class="col-8" style="overflow-wrap: anywhere;">
@@ -16,7 +16,7 @@
 			</div>
 			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
-					<div class="col-4">
+					<div class="col-4" style="white-space: nowrap;">
 						<label><?php echo direction("Booking#","رقم الحجز") ?></label>
 					</div>
 					<div class="col-8" style="overflow-wrap: anywhere;">
@@ -26,7 +26,7 @@
 			</div>
 			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
-					<div class="col-4">
+					<div class="col-4" style="white-space: nowrap;">
 						<label><?php echo direction("Date","التاريخ") ?></label>
 					</div>
 					<div class="col-8" style="overflow-wrap: anywhere;">
@@ -36,7 +36,7 @@
 			</div>
 			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
-					<div class="col-4">
+					<div class="col-4" style="white-space: nowrap;">
 						<label><?php echo direction("Branch","الفرع") ?></label>
 					</div>
 					<div class="col-8" style="overflow-wrap: anywhere;">
@@ -46,7 +46,7 @@
 			</div>
 			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
-					<div class="col-4">
+					<div class="col-4" style="white-space: nowrap;">
 						<label><?php echo direction("Time","الوقت") ?></label>
 					</div>
 					<div class="col-8" style="overflow-wrap: anywhere;">
@@ -56,7 +56,7 @@
 			</div>
 			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
-					<div class="col-4">
+					<div class="col-4" style="white-space: nowrap;">
 						<label><?php echo direction("Service","الخدمة") ?></label>
 					</div>
 					<div class="col-8" style="overflow-wrap: anywhere;">
@@ -71,7 +71,7 @@
 					?>
 					<div class="col-md-12 p-2">
 						<div class="row m-0 p-2 successInfoSection">
-							<div class="col-4">
+							<div class="col-4" style="white-space: nowrap;">
 								<label><?php echo direction("Type","النوع") ?></label>
 							</div>
 							<div class="col-8" style="overflow-wrap: anywhere;">
@@ -88,7 +88,7 @@
 					?>
 					<div class="col-md-12 p-2">
 						<div class="row m-0 p-2 successInfoSection">
-							<div class="col-4">
+							<div class="col-4" style="white-space: nowrap;">
 								<label><?php echo direction("Theme","الثيم") ?></label>
 							</div>
 							<div class="col-8" style="overflow-wrap: anywhere;">
@@ -105,7 +105,7 @@
 					?>
 					<div class="col-md-12 p-2">
 						<div class="row m-0 p-2 successInfoSection">
-							<div class="col-4">
+							<div class="col-4" style="white-space: nowrap;">
 								<label><?php echo direction("Extra","الاضافي") ?></label>
 							</div>
 							<div class="col-8" style="overflow-wrap: anywhere;">
@@ -119,7 +119,7 @@
 			?>
 			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
-					<div class="col-4">
+					<div class="col-4" style="white-space: nowrap;">
 						<label><?php echo direction("Total","الاجمالي") ?></label>
 					</div>
 					<div class="col-8" style="overflow-wrap: anywhere;">
@@ -132,7 +132,7 @@
 			</div>
 			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
-					<div class="col-4">
+					<div class="col-4" style="white-space: nowrap;">
 						<label><?php echo direction("Customer","العميل") ?></label>
 					</div>
 					<div class="col-8" style="overflow-wrap: anywhere;">
@@ -142,7 +142,7 @@
 			</div>
 			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
-					<div class="col-4">
+					<div class="col-4" style="white-space: nowrap;">
 						<label><?php echo direction("Mobile","الجوال") ?></label>
 					</div>
 					<div class="col-8" style="overflow-wrap: anywhere;">
@@ -152,7 +152,7 @@
 			</div>
 			<div class="col-md-12 p-2">
 				<div class="row m-0 p-2 successInfoSection">
-					<div class="col-4">
+					<div class="col-4" style="white-space: nowrap;">
 						<label><?php echo direction("Email","البريد الالكتروني") ?></label>
 					</div>
 					<div class="col-8" style="overflow-wrap: anywhere;">
@@ -168,7 +168,7 @@
 					?>
 					<div class="col-md-12 p-2">
 						<div class="row m-0 p-2 successInfoSection">
-							<div class="col-4">
+							<div class="col-4" style="white-space: nowrap;">
 								<label><?php echo direction($extraInfo[0]["enTitle"],$extraInfo[0]["arTitle"]) ?></label>
 							</div>
 							<div class="col-8" style="overflow-wrap: anywhere;">

@@ -31,19 +31,24 @@
 								echo "<input type='hidden' name='vendorId' value='{$vendorId}'>";
 							}
 							?>
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<label><?php echo direction("English Title","الإسم الإنجليزي") ?></label>
 								<input type="text" name="enTitle" class="form-control" required>
 							</div>
 
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<label><?php echo direction("Arabic Title","الإسم العربي") ?></label>
 								<input type="text" name="arTitle" class="form-control" required>
 							</div>
 
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<label><?php echo direction("Price","القيمة") ?></label>
 								<input type="float" name="price" class="form-control" required>
+							</div>
+
+							<div class="col-md-3">
+								<label><?php echo direction("No. of themes","عدد الثيمات") ?></label>
+								<input type="number" step="any" min="1" name="themes" class="form-control" required>
 							</div>
 
 							<div class="col-md-12" style="margin-top:10px">
@@ -98,6 +103,7 @@
 										<td ><?php echo $pictureType[$i]["enTitle"] ?></td>
 										<td ><?php echo $pictureType[$i]["arTitle"] ?></td>
 										<td ><?php echo $pictureType[$i]["price"] ?> -/KD</td>
+										<td ><?php echo $pictureType[$i]["themes"] ?></td>
 										<td class="text-nowrap">
 											<a id="<?php echo $pictureType[$i]["id"] ?>" class="mr-25 edit" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل") ?>">
 												<i class="fa fa-pencil text-inverse m-r-10"></i>
@@ -113,6 +119,7 @@
 												<label id="price<?php echo $pictureType[$i]["id"]?>"><?php echo $pictureType[$i]["price"] ?></label>
 												<label id="enTitle<?php echo $pictureType[$i]["id"]?>"><?php echo $pictureType[$i]["enTitle"] ?></label>
 												<label id="arTitle<?php echo $pictureType[$i]["id"]?>"><?php echo $pictureType[$i]["arTitle"] ?></label>
+												<label id="themes<?php echo $pictureType[$i]["id"]?>"><?php echo $pictureType[$i]["themes"] ?></label>
 											</div>
 										</td>
 									</tr>
@@ -137,6 +144,7 @@
 		$("input[name=arTitle]").val($.trim($("#arTitle"+id).html().replace(/\n/g, "")));
 		$("input[name=enTitle]").val($.trim($("#enTitle"+id).html().replace(/\n/g, ""))).focus();;
 		$("input[name=price]").val($.trim($("#price"+id).html().replace(/\n/g, "")));
+		$("input[name=themes]").val($.trim($("#themes"+id).html().replace(/\n/g, "")));
 		$("input[name=vendorId]").val($.trim($("#vendorId"+id).html().replace(/\n/g, "")));
 	})
 </script>

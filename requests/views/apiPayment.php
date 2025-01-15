@@ -45,8 +45,7 @@ if( $vendor[0]["chargeType"] == 1 ){
             $price = $price + $pictureType[0]["price"];
         }
     }
-    if( $extrasCheck = selectDBNew("extras",[$vendor[0]["id"],$_POST["extras"]],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND `id` IN (?)","") ){
-        echo ($_POST["extras"]);die();
+    if( $extrasCheck = selectDBNew("extras",[$vendor[0]["id"],str_replace("'","",$_POST["extras"])],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND `id` IN (?)","") ){
         foreach( $extrasCheck as $extra ){
             $price = $price + $extra["price"];
         }

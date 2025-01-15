@@ -65,9 +65,25 @@
 				</div>
 			</div>
 			<?php 
+			if( !empty($order[0]["pictureTypeId"]) ){
+				$addons = selectDB("picturetypes","`id` = '{$order[0]["pictureTypeId"]}'");
+				foreach ($addons as $key => $value) {
+					?>
+					<div class="col-md-12 p-2">
+						<div class="row m-0 p-2 successInfoSection">
+							<div class="col-4">
+								<label><?php echo direction("Addon","الاضافي") ?></label>
+							</div>
+							<div class="col-8">
+								<label><?php echo direction($value["enTitle"],$value["arTitle"]) ?></label>
+							</div>
+						</div>
+					</div>
+					<?php
+				}
+			}
 			if( !empty($order[0]["extras"]) ){
 				$extras = selectDB("extras","FIND_IN_SET(`id`,'{$order[0]["extras"]}')");
-				var_dump($extras);
 				foreach ($extras as $key => $value) {
 					?>
 					<div class="col-md-12 p-2">

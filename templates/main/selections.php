@@ -282,7 +282,7 @@ if( $vendor["type"] == "3" ){
 			}else{
 				selectedThemes.push(selectedTheme);
 			}
-			if ( themesTotal > selectedThemes.length ){
+			if ( themesTotal >= selectedThemes.length ){
 				$("input[name=themeId]").val(selectedThemes.join(","));
 			}else{
 				if (getCookie("createLang") == "ar") {

@@ -84,7 +84,7 @@
 			}
 			if( !empty($order[0]["themes"]) ){
 				$themes = explode(",",$order[0]["themes"]);
-				foreach ($themes as $key => $value) {
+				foreach ($themes as $value) {
 					?>
 					<div class="col-md-12 p-2">
 						<div class="row m-0 p-2 successInfoSection">
@@ -92,7 +92,7 @@
 								<label><?php echo direction("Theme","الثيم") ?></label>
 							</div>
 							<div class="col-8" style="overflow-wrap: anywhere;">
-								<img src="logos/<?php echo $value["key"] ?>" width="100%">
+								<img src="logos/<?php echo $value ?>" width="100%">
 							</div>
 						</div>
 					</div>

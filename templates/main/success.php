@@ -82,6 +82,23 @@
 					<?php
 				}
 			}
+			if( !empty($order[0]["themes"]) ){
+				$themes = explode(",",$order[0]["themes"]);
+				foreach ($themes as $key => $value) {
+					?>
+					<div class="col-md-12 p-2">
+						<div class="row m-0 p-2 successInfoSection">
+							<div class="col-4">
+								<label><?php echo direction("Theme","الثيم") ?></label>
+							</div>
+							<div class="col-8" style="overflow-wrap: anywhere;">
+								<img src="logos/<?php echo $value["key"] ?>" width="100%">
+							</div>
+						</div>
+					</div>
+					<?php
+				}
+			}
 			if( !empty($order[0]["extras"]) ){
 				$extras = selectDB("extras","FIND_IN_SET(`id`,'{$order[0]["extras"]}')");
 				foreach ($extras as $key => $value) {

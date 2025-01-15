@@ -56,7 +56,7 @@ if( $vendor[0]["chargeType"] == 1 ){
         }
     }
     if( $extrasCheck = selectDBNew("extras",[$vendor[0]["id"],$_POST["extras"]],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND `id` IN (?)","") ){
-        $extras = explode(",",$_POST["extras"],$extras);
+        $extras = explode(",",$_POST["extras"]);
         //$extras = implode(",",$extras);
         echo json_encode($extras);die();
         foreach( $extrasCheck as $extra ){

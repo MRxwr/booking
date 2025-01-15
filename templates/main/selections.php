@@ -332,7 +332,7 @@ if( $vendor["type"] == "3" ){
   $(document).on("click","#pictureType", function(){
 	var selectedType = $(this).attr("value");
 	$("input[name=pictureTypeId]").val(selectedType);
-	themesTotal = $("#pictureType").attr("data-themes");
+	themesTotal = $(this).attr("data-themes");
 	console.log(themesTotal);
 	updatePrice();
   });

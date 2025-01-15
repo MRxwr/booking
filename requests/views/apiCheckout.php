@@ -25,7 +25,6 @@ if( !isset($_POST["vendorId"]) || empty($_POST["vendorId"]) ){
     $extraInfo = $_POST["extraInfo"];
     $date = $_POST["date"];
     $time = $_POST["time"];
-    var_dump($_POST);die();
     if( $vendor = selectDBNew("vendors",[$vendorId],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
         if( $vendor[0]["type"] == 3 ){
             if( $pictureType = selectDBNew("picturetype",[$pictureType,$vendorId],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
@@ -33,10 +32,12 @@ if( !isset($_POST["vendorId"]) || empty($_POST["vendorId"]) ){
                 echo outputError(array("msg"=>direction("Picture type not exists for the current vendor","نوع الصورة غير موجود للمتجر الحالي")));die();
             }
         }
-        if( $extras = selectDBNew("extras",[$vendorId,$extras],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND id IN (".$extras.")","") ){
+        /*
+        if( $extrasCheck = selectDBNew("extras",[$vendorId,$extras],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND `id` IN (".$extras.")","") ){
         }else{
             echo outputError(array("msg"=>direction("Extras not exists for the current vendor","الاضافات غير موجودة للمتجر الحالي")));die();
         }
+            */
         if( $branch = selectDBNew("branches",[$branchId,$vendorId],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
             if( $service = selectDBNew("services",[$serviceId,$vendorId],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
                 if( $calendars = selectDBNew("calendar",[$vendorId,$branchId,$date,$date],"`status` = '0' AND `hidden` = '0' AND `vendorId` = ? AND `branchId` = ? AND `startDate` <= ? AND `endDate` >= ? ORDER BY `id` ASC","") && $date >= date("Y-m-d") ){

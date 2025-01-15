@@ -1,5 +1,6 @@
 // on ready
 $(window).ready(function() {
+	$("#loading-screen").hide();
 	var width = $(window).width();
 	if (width < 768) {
 	  $("#leftSide").removeClass("col-4").addClass("col-12");

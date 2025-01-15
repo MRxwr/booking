@@ -52,7 +52,7 @@ if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor =
 	<body>
 		<div class="container-fluid p-0">
 			<div class="row w-100 m-0">
-			<div id="loading-screen" style="display: none;">
+			<div id="loading-screen" style="display: block;">
 				<img src="img/loading.png" alt="Loading...">
 			</div>
 			<?php require_once("templates/main/leftSide.php") ?>

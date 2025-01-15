@@ -160,6 +160,25 @@
 					</div>
 				</div>
 			</div>
+			<?php
+			if( !empty($order[0]["extraInfo"]) ){
+				foreach ($order[0]["extraInfo"] as $key => $value) {
+					$extraInfo = selectDB("extrainfo","`id` = '{$key}'");
+					?>
+					<div class="col-md-12 p-2">
+						<div class="row m-0 p-2 successInfoSection">
+							<div class="col-4">
+								<label><?php echo direction($extraInfo[0]["enTitle"],$extraInfo[0]["arTitle"]) ?></label>
+							</div>
+							<div class="col-8" style="overflow-wrap: anywhere;">
+								<label><?php echo $value ?></label>
+							</div>
+						</div>
+					</div>
+					<?php
+				}
+			}
+			?>
 			<div class="col-md-12 p-2 pt-4 text-center">
 				<img src="https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=<?php echo urlencode("https://{$_SERVER["HTTP_HOST"]}{$_SERVER["REQUEST_URI"]}") ?>" style="width:200px; height:200px">
 			</div>

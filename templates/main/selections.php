@@ -73,10 +73,14 @@ if( $vendor["type"] == "3" ){
 					?>
 				<div class="col-10 d-flex p-0 pb-1">
 					<div class="form-check">
-						<div class="row">
-							<div class="col-1"><input type="checkbox" class="form-check-input" id="checkExtras" data-price="<?php echo $extra["price"] ?>" value="<?php echo $extra["id"] ?>"></div>
-							<div class="col-11"><label class="form-check-label" for="extra<?php echo $extra["id"] ?>"><?php echo $extraTitle ?></label></div>
-						</div>
+						<table class="table table-borderless">
+							<tr>
+								<td><input type="checkbox" class="form-check-input" id="checkExtras" data-price="<?php echo $extra["price"] ?>" value="<?php echo $extra["id"] ?>">
+								</td>
+								<td><label class="form-check-label" for="extra<?php echo $extra["id"] ?>"><?php echo $extraTitle ?></label>
+								</td>
+							</tr>
+						</table>
 					</div>
 				</div>
 				<div class="col-2 p-0" style='font-size: 10px;align-content: center;white-space: nowrap;'>

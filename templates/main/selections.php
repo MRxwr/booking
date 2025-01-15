@@ -111,7 +111,8 @@ if( $vendor["type"] == "3" ){
 </div>
 
 <script>
-
+  // total themes
+  var totalThemes = 0;
   // Store services data in a JavaScript object
   var services = [
 	<?php
@@ -129,7 +130,7 @@ if( $vendor["type"] == "3" ){
 			$pictureTypes = ( is_null($services[$i]["listTypes"]) ) ? [] : json_decode($services[$i]["listTypes"],true);
 			foreach($pictureTypes as $type){
 				$types = selectDB("picturetype","`id` = '{$type}'");
-				echo "{ id: '{$types[0]["id"]}', serviceId: '{$services[$i]["id"]}' , price: '{$types[0]["price"]}' ,title: '".direction($types[0]["enTitle"],$types[0]["arTitle"])."'},"; 
+				echo "{ id: '{$types[0]["id"]}', serviceId: '{$services[$i]["id"]}' , price: '{$types[0]["price"]}' , themesTotal: '{$types[0]["themes"]}' ,title: '".direction($types[0]["enTitle"],$types[0]["arTitle"])."'},"; 
 			}
 		}
 	?>
@@ -215,6 +216,7 @@ if( $vendor["type"] == "3" ){
 
   // Add an event listener to the branch select element
   branchSelect.addEventListener("change", function(){
+	themesTotal = 0;
 	$("#loading-screen").show();
 	// on change update input name branchId with value
 	$("input[name=branchId]").val(this.value);
@@ -274,13 +276,21 @@ if( $vendor["type"] == "3" ){
 			$("input[name=themeId]").val(array);
 		}else{
 			var selectedThemes = getSelectedThemes.split(",");
-			if ( selectedThemes.includes(selectedTheme) ){
-				var index = selectedThemes.indexOf(selectedTheme);
-				selectedThemes.splice(index, 1);
+			if ( themesTotal > selectedThemes.length ){
+				if ( selectedThemes.includes(selectedTheme) ){
+					var index = selectedThemes.indexOf(selectedTheme);
+					selectedThemes.splice(index, 1);
+				}else{
+					selectedThemes.push(selectedTheme);
+				}
+				$("input[name=themeId]").val(selectedThemes.join(","));
 			}else{
-				selectedThemes.push(selectedTheme);
+				if (getCookie("createLang") == "ar") {
+					alert("لا يمكنك تحديد اكثر من "+themesTotal+" ثيمات");
+				}else{
+					alert("You can select only "+themesTotal+" themes");
+				}
 			}
-			$("input[name=themeId]").val(selectedThemes.join(","));
 		}
 		//$("input[name=themeId]").val(selectedTheme);
 		if($(this).attr('style') && $(this).attr('style').indexOf('border') !== -1) {
@@ -322,6 +332,7 @@ if( $vendor["type"] == "3" ){
   $(document).on("click","#pictureType", function(){
 	var selectedType = $(this).attr("value");
 	$("input[name=pictureTypeId]").val(selectedType);
+	themesTotal = $("#pictureType").attr("data-themes");
 	updatePrice();
   });
 
@@ -347,6 +358,7 @@ if( $vendor["type"] == "3" ){
 
   // on serviceBLk click update input name serviceId with attr id
   $(document).on("click",".serviceBLk", function(){
+	themesTotal = 0;
 	var serviceId = $(this).attr("id");
 	$("input[name='serviceId']").val(serviceId);
 	$("input[name='selectedTime']").val(0);
@@ -381,7 +393,7 @@ if( $vendor["type"] == "3" ){
 	// Fill typesBlk with radio inputs based on filtered pictureTypes
 	$(".typesBLK").empty();
 	$.each(filteredPictureTypes, function(key, value) {
-		$types = "<div class='col-10 p-0 pb-1'><input type='radio' id='pictureType' name='pictureTypeRadio' value='"+value.id+"' data-price='"+value.price+"'> <label>"+value.title+"</label></div><div class='col-2 p-0' style='font-size: 10px;align-content: center;'>"+parseFloat(value.price).toFixed(3)+" -/KD</div>";
+		$types = "<div class='col-10 p-0 pb-1'><input type='radio' id='pictureType' name='pictureTypeRadio' value='"+value.id+"' data-themes='"+value.themes+"' data-price='"+value.price+"'> <label>"+value.title+"</label></div><div class='col-2 p-0' style='font-size: 10px;align-content: center;'>"+parseFloat(value.price).toFixed(3)+" -/KD</div>";
 		$(".typesBLK").append($types);
 	});
 

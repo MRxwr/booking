@@ -26,8 +26,6 @@ $(window).ready(function() {
 			var key = $(this).attr('name').replace('extraInfo[', '').replace(']', '');
 			extraInfo[key] = $(this).val();
 		});
-		console.log(extraInfo);
-		console.log(branchId, vendorId, serviceId, date, time, extras, pictureTypeId, themeId);
 		var name = $("#name").val();
 		var mobile = $("#mobile").val();
 		var email = $("#email").val();
@@ -97,8 +95,8 @@ $(window).ready(function() {
 				$("#loading-screen").hide();
 				return false;
 			  }
-		  }).fail(function(){
-			// show error message
+		  }).fail(function(xhr, status, error) {
+			console.log(xhr.responseText);
 			alert(serverError);
 			$("#loading-screen").hide();
 			return false;

@@ -52,7 +52,7 @@ if( $vendor[0]["chargeType"] == 1 ){
     }
 }
 
-echo $_POST["extras"];die();
+echo json_encode($extrasCheck);die();
 $orderId = date("Ymd").rand(0000,9999).time();
 $paymentArray = array(
     'language' => 'en',

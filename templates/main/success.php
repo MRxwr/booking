@@ -72,7 +72,7 @@
 					<div class="col-md-12 p-2">
 						<div class="row m-0 p-2 successInfoSection">
 							<div class="col-4">
-								<label><?php echo direction("Addon","الاضافي") ?></label>
+								<label><?php echo direction("Type","النوع") ?></label>
 							</div>
 							<div class="col-8">
 								<label><?php echo direction($value["enTitle"],$value["arTitle"]) ?></label>

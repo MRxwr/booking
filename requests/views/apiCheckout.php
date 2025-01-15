@@ -96,6 +96,7 @@ if( !isset($_POST["vendorId"]) || empty($_POST["vendorId"]) ){
                                 ));
                                 $response = curl_exec($curl);
                                 curl_close($curl);
+                                echo outputData($response);die();
                                 echo outputData(json_decode($response, true));die();
                             }else{
                                 echo outputError(array("msg"=>direction("Time is fully booked please select another time","الوقت مكتمل يرجى تحديد وقت اخر")));die();

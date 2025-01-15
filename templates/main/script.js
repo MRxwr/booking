@@ -22,6 +22,7 @@ $(window).ready(function() {
 		var pictureTypeId = $("input[name=pictureTypeId]").val();
 		var themeId = $("input[name=themeId]").val();
 		var extraInfo = {};
+		console.log(pictureTypeId);
 		$("input[name^='extraInfo']").each(function(){
 			var key = $(this).attr('name').replace('extraInfo[', '').replace(']', '');
 			extraInfo[key] = $(this).val();

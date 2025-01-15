@@ -77,7 +77,7 @@ if( $vendor["type"] == "3" ){
 						 <label class="form-check-label" for="extra<?php echo $extra["id"] ?>"><?php echo $extraTitle ?></label>
 					</div>
 				</div>
-				<div class="col-2 p-0" style='font-size: 10px;align-content: center;'>
+				<div class="col-2 p-0" style='font-size: 10px;align-content: center;white-space: nowrap;'>
 					<span class="price">+<?php echo numTo3Float($extra["price"]) ?> -/KD</span>
 				</div>
 				<?php

@@ -66,7 +66,7 @@
 			</div>
 			<?php 
 			if( !empty($order[0]["pictureTypeId"]) ){
-				$addons = selectDB("picturetypes","`id` = '{$order[0]["pictureTypeId"]}'");
+				$addons = selectDB("picturetype","`id` = '{$order[0]["pictureTypeId"]}'");
 				foreach ($addons as $key => $value) {
 					?>
 					<div class="col-md-12 p-2">

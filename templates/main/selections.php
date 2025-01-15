@@ -73,7 +73,7 @@ if( $vendor["type"] == "3" ){
 					?>
 				<div class="col-10 d-flex p-0 pb-1">
 					<input type="checkbox" class="" id="checkExtras" data-price="<?php echo $extra["price"] ?>" value="<?php echo $extra["id"] ?>">
-					<label class="form-check-label" for="extra<?php echo $extra["id"] ?>"><?php echo $extraTitle ?></label>
+					<label class="form-check-label p-1" for="extra<?php echo $extra["id"] ?>"><?php echo $extraTitle ?></label>
 				</div>
 				<div class="col-2 p-0" style='font-size: 10px;align-content: center;white-space: nowrap;'>
 					<span class="price">+<?php echo numTo3Float($extra["price"]) ?> -/KD</span>

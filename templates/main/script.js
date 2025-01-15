@@ -82,21 +82,33 @@ $(window).ready(function() {
 			  extraInfo: extraInfo,
 			  customer: {
 				name: name,
-			  	mobile: mobile,
-			  	email: email
+				mobile: mobile,
+				email: email
 			  }
+			},
+			beforeSend: function() {
+			  console.log("Sending request with data: ", {
+				date: date,
+				branchId: branchId,
+				serviceId: serviceId,
+				vendorId: vendorId,
+				time: time,
+				extras: extras,
+				pictureTypeId: pictureTypeId,
+				themeId: themeId,
+				extraInfo: extraInfo,
+				customer: {
+				  name: name,
+				  mobile: mobile,
+				  email: email
+				}
+			  });
 			}
 		  }).done(function(result){
-			  if( result.ok === true ){
-				window.location.href = result.data.data.data.link;
-			  }else{
-				// show error message
-				alert(paymentError);
-				$("#loading-screen").hide();
-				return false;
-			  }
+			// handle success response
 		  }).fail(function(xhr, status, error) {
-			console.log(xhr.responseText);
+			console.log("Request failed with status: ", status);
+			console.log("Response text: ", xhr.responseText);
 			alert(serverError);
 			$("#loading-screen").hide();
 			return false;

@@ -151,7 +151,7 @@ if( isset($_POST["time"]) ){
 											$vendor = direction($vendor[0]["enTitle"],$vendor[0]["arTitle"]);
 											$branch = selectDB("branches","`id` = '{$periods[$i]["branchId"]}'");
 											$branch = direction($branch[0]["enTitle"],$branch[0]["arTitle"]);
-											$service = selectDB("services","`id` = '{$periods[$i]["serviceId"]}'");
+											$service = ($periods[$i]["serviceId"] == 0) ? array("enTitle" => "All Services", "arTitle" => "جميع الخدمات") : selectDB("services","`id` = '{$periods[$i]["serviceId"]}'");
 											$service = direction($service[0]["enTitle"],$service[0]["arTitle"]);
 									?>
 									<tr>

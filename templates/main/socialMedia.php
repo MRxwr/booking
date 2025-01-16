@@ -1,8 +1,8 @@
 <div class="row py-3 m-0">
-	<div class="col-4" style="align-self: center;">Services</div>
-	<div class="col-4" style="align-self: center;">Clients</div>
-	<div class="col-4" style="align-self: center;">anything</div>
-	<div class="col-md-12 d-flex justify-content-center align-items-center">
+	<div class="col-4 justify-content-center align-items-center">Services</div>
+	<div class="col-4 justify-content-center align-items-center">Clients</div>
+	<div class="col-4 justify-content-center align-items-center">anything</div>
+	<div class="col-md-12 mt-3 d-flex justify-content-center align-items-center">
 		<div class="row p-3 socialMediaBar">
 		<?php
 		if( !empty($vendor["socialMedia"]) ){

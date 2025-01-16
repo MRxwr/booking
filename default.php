@@ -10,38 +10,79 @@
   <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
   <!-- FullCalendar CSS -->
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+  <!-- Font Awesome for Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <style>
-    .module { display: none; }
-    .module.active { display: block; }
+    body {
+      background-color: #f8f9fa;
+    }
+    .sidebar {
+      height: 100vh;
+      background-color: #343a40;
+      color: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      padding: 20px;
+    }
+    .sidebar .nav-link {
+      color: #fff;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .sidebar .nav-link:hover {
+      background-color: #495057;
+    }
+    .sidebar .nav-link.active {
+      background-color: #0d6efd;
+    }
+    .main-content {
+      margin-left: 250px;
+      padding: 20px;
+    }
+    .card {
+      border: none;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
   </style>
 </head>
 <body>
-  <div class="container-fluid">
-    <div class="row">
-      <!-- Sidebar -->
-      <div class="col-md-3 bg-light p-3">
-        <h3>Vendor Panel</h3>
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" href="#branches" data-module="branches">Branches</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#services" data-module="services">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#bookings" data-module="bookings">Bookings</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#profile" data-module="profile">Profile</a>
-          </li>
-        </ul>
-      </div>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h3 class="text-center mb-4">Vendor Panel</h3>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" href="#branches" data-module="branches">
+          <i class="fas fa-code-branch me-2"></i>Branches
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#services" data-module="services">
+          <i class="fas fa-cogs me-2"></i>Services
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#bookings" data-module="bookings">
+          <i class="fas fa-calendar-alt me-2"></i>Bookings
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#profile" data-module="profile">
+          <i class="fas fa-user me-2"></i>Profile
+        </a>
+      </li>
+    </ul>
+  </div>
 
-      <!-- Main Content -->
-      <div class="col-md-9 p-3">
-        <!-- Branches Module -->
-        <div id="branches" class="module active">
-          <h2>Branches</h2>
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Branches Module -->
+    <div id="branches" class="module active">
+      <h2 class="mb-4"><i class="fas fa-code-branch me-2"></i>Branches</h2>
+      <div class="card">
+        <div class="card-body">
           <table id="branchesTable" class="table table-striped">
             <thead>
               <tr>
@@ -55,12 +96,18 @@
               <!-- Data will be loaded here -->
             </tbody>
           </table>
-          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBranchModal">Add Branch</button>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBranchModal">
+            <i class="fas fa-plus me-2"></i>Add Branch
+          </button>
         </div>
+      </div>
+    </div>
 
-        <!-- Services Module -->
-        <div id="services" class="module">
-          <h2>Services</h2>
+    <!-- Services Module -->
+    <div id="services" class="module" style="display: none;">
+      <h2 class="mb-4"><i class="fas fa-cogs me-2"></i>Services</h2>
+      <div class="card">
+        <div class="card-body">
           <table id="servicesTable" class="table table-striped">
             <thead>
               <tr>
@@ -74,18 +121,28 @@
               <!-- Data will be loaded here -->
             </tbody>
           </table>
-          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addServiceModal">Add Service</button>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addServiceModal">
+            <i class="fas fa-plus me-2"></i>Add Service
+          </button>
         </div>
+      </div>
+    </div>
 
-        <!-- Bookings Module -->
-        <div id="bookings" class="module">
-          <h2>Bookings</h2>
+    <!-- Bookings Module -->
+    <div id="bookings" class="module" style="display: none;">
+      <h2 class="mb-4"><i class="fas fa-calendar-alt me-2"></i>Bookings</h2>
+      <div class="card">
+        <div class="card-body">
           <div id="calendar"></div>
         </div>
+      </div>
+    </div>
 
-        <!-- Profile Module -->
-        <div id="profile" class="module">
-          <h2>Profile</h2>
+    <!-- Profile Module -->
+    <div id="profile" class="module" style="display: none;">
+      <h2 class="mb-4"><i class="fas fa-user me-2"></i>Profile</h2>
+      <div class="card">
+        <div class="card-body">
           <form id="profileForm">
             <div class="mb-3">
               <label for="vendorName" class="form-label">Vendor Name</label>
@@ -95,7 +152,9 @@
               <label for="vendorEmail" class="form-label">Email</label>
               <input type="email" class="form-control" id="vendorEmail" required>
             </div>
-            <button type="submit" class="btn btn-primary">Save Profile</button>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-save me-2"></i>Save Profile
+            </button>
           </form>
         </div>
       </div>
@@ -176,8 +235,8 @@
             data: null,
             render: function (data) {
               return `
-                <button class="btn btn-sm btn-warning">Edit</button>
-                <button class="btn btn-sm btn-danger">Delete</button>
+                <button class="btn btn-sm btn-warning me-2"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
               `;
             }
           }
@@ -194,8 +253,8 @@
             data: null,
             render: function (data) {
               return `
-                <button class="btn btn-sm btn-warning">Edit</button>
-                <button class="btn btn-sm btn-danger">Delete</button>
+                <button class="btn btn-sm btn-warning me-2"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
               `;
             }
           }
@@ -214,10 +273,10 @@
       document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function (e) {
           e.preventDefault();
-          document.querySelectorAll('.module').forEach(module => {
-            module.classList.remove('active');
-          });
-          document.querySelector(this.getAttribute('href')).classList.add('active');
+          document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+          this.classList.add('active');
+          document.querySelectorAll('.module').forEach(module => module.style.display = 'none');
+          document.querySelector(this.getAttribute('href')).style.display = 'block';
         });
       });
     });

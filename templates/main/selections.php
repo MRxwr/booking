@@ -340,7 +340,6 @@ if( $vendor["type"] == "3" ){
 		});
 	})
 	themesTotal = $(this).attr("data-themes");
-	console.log(themesTotal);
 	updatePrice();
   });
 

@@ -65,14 +65,14 @@ body {
 .heroLogo {
     display: block;
     margin: 0 auto;
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
 }
 
 .heroLogoBg {
     background-color: #FFFFFF;
-    width: 150px;
-    height: 150px;
+    width: 125px;
+    height: 125px;
     position: relative;
     bottom: 20px;
     left: 50%;
@@ -178,12 +178,12 @@ button {
 
 .heroBg {
     -webkit-box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
-    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.25);
     background-image: url("logos/<?php echo $vendor["coverImg"] ?>");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    height: 250px;
+    height: 200px;
 }
 #loading-screen {
     position: fixed;

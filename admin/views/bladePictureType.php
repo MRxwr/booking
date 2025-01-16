@@ -81,6 +81,7 @@
 									<th><?php echo direction("English Title","الإسم الإنجليزي") ?></th>
 									<th><?php echo direction("Arabic Title"," الإسم العربي") ?></th>
 									<th><?php echo direction("Price","القيمة") ?></th>
+									<th><?php echo direction("# Themes","عدد الثيمات") ?></th>
 									<th class="text-nowrap"><?php echo direction("Actions","الخيارات") ?></th>
 									</tr>
 								</thead>

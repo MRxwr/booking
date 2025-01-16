@@ -35,17 +35,17 @@
 								<input type="text" name="arTitle" class="form-control" required>
 							</div>
 
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<label><?php echo direction("Seats / Hour","المقاعد / ساعة") ?></label>
 								<input type="number" step="any" min="1" name="seats" class="form-control" required>
 							</div>
 
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<label><?php echo direction("Duration in Mins","المدة بالدقيقة") ?></label>
 								<input type="number" step="any" min="0"name="period" class="form-control" required>
 							</div>
 
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<label><?php echo direction("Price","القيمة") ?></label>
 								<input type="float" name="price" class="form-control" required>
 							</div>

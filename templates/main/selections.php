@@ -329,7 +329,7 @@ if( $vendor["type"] == "3" ){
   $(document).on("click","#pictureType", function(){
 	var selectedType = $(this).attr("value");
 	$("input[name=pictureTypeId]").val(selectedType);
-	$("input[name=themeId").val('');
+	$("input[name=themeId").val();
 	// do each on all .themeInput and make style opacity 1 and border none
 	$(".themeInput").each(function(){
 		$(this).css({

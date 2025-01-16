@@ -15,31 +15,58 @@
   <style>
     body {
       background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
     }
-    .sidebar {
-      height: 100vh;
-      background-color: #343a40;
-      color: #fff;
+    .header {
       position: fixed;
       top: 0;
       left: 0;
+      right: 0;
+      height: 60px;
+      background-color: #343a40;
+      color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 1000;
+    }
+    .header h3 {
+      margin: 0;
+    }
+    .sidebar {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      bottom: 0;
       width: 250px;
+      background-color: #2c3e50;
+      color: #fff;
       padding: 20px;
+      overflow-y: auto;
+      z-index: 999;
     }
     .sidebar .nav-link {
       color: #fff;
       margin: 10px 0;
       padding: 10px;
       border-radius: 5px;
+      display: flex;
+      align-items: center;
     }
     .sidebar .nav-link:hover {
-      background-color: #495057;
+      background-color: #34495e;
     }
     .sidebar .nav-link.active {
       background-color: #0d6efd;
     }
+    .sidebar .nav-link i {
+      margin-right: 10px;
+    }
     .main-content {
       margin-left: 250px;
+      margin-top: 60px;
       padding: 20px;
     }
     .card {
@@ -49,28 +76,38 @@
   </style>
 </head>
 <body>
+  <!-- Fixed Header -->
+  <div class="header">
+    <h3>Vendor Control Panel</h3>
+    <div>
+      <span class="me-3">Welcome, Vendor Name</span>
+      <button class="btn btn-sm btn-light">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </div>
+  </div>
+
   <!-- Sidebar -->
   <div class="sidebar">
-    <h3 class="text-center mb-4">Vendor Panel</h3>
     <ul class="nav flex-column">
       <li class="nav-item">
         <a class="nav-link active" href="#branches" data-module="branches">
-          <i class="fas fa-code-branch me-2"></i>Branches
+          <i class="fas fa-code-branch"></i>Branches
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#services" data-module="services">
-          <i class="fas fa-cogs me-2"></i>Services
+          <i class="fas fa-cogs"></i>Services
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#bookings" data-module="bookings">
-          <i class="fas fa-calendar-alt me-2"></i>Bookings
+          <i class="fas fa-calendar-alt"></i>Bookings
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#profile" data-module="profile">
-          <i class="fas fa-user me-2"></i>Profile
+          <i class="fas fa-user"></i>Profile
         </a>
       </li>
     </ul>

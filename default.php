@@ -35,6 +35,13 @@
     .header h3 {
       margin: 0;
     }
+    .header .burger-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
     .sidebar {
       position: fixed;
       top: 60px;
@@ -46,6 +53,11 @@
       padding: 20px;
       overflow-y: auto;
       z-index: 999;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    .sidebar.open {
+      transform: translateX(0);
     }
     .sidebar .nav-link {
       color: #fff;
@@ -65,9 +77,13 @@
       margin-right: 10px;
     }
     .main-content {
-      margin-left: 250px;
+      margin-left: 0;
       margin-top: 60px;
       padding: 20px;
+      transition: margin-left 0.3s ease;
+    }
+    .main-content.shifted {
+      margin-left: 250px;
     }
     .card {
       border: none;
@@ -78,6 +94,9 @@
 <body>
   <!-- Fixed Header -->
   <div class="header">
+    <button class="burger-btn" onclick="toggleSidebar()">
+      <i class="fas fa-bars"></i>
+    </button>
     <h3>Vendor Control Panel</h3>
     <div>
       <span class="me-3">Welcome, Vendor Name</span>
@@ -87,8 +106,8 @@
     </div>
   </div>
 
-  <!-- Sidebar -->
-  <div class="sidebar">
+  <!-- Sliding Sidebar -->
+  <div class="sidebar" id="sidebar">
     <ul class="nav flex-column">
       <li class="nav-item">
         <a class="nav-link active" href="#branches" data-module="branches">
@@ -114,7 +133,7 @@
   </div>
 
   <!-- Main Content -->
-  <div class="main-content">
+  <div class="main-content" id="mainContent">
     <!-- Branches Module -->
     <div id="branches" class="module active">
       <h2 class="mb-4"><i class="fas fa-code-branch me-2"></i>Branches</h2>
@@ -260,8 +279,16 @@
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
   <!-- Custom JS -->
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Initialize DataTables
+    // Toggle sidebar
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const mainContent = document.getElementById('mainContent');
+      sidebar.classList.toggle('open');
+      mainContent.classList.toggle('shifted');
+    }
+
+    // Initialize DataTables
+    $(document).ready(function () {
       $('#branchesTable').DataTable({
         ajax: 'api/branches.json', // Replace with your API endpoint
         columns: [

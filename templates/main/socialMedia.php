@@ -1,4 +1,7 @@
 <div class="row py-3 m-0">
+	<div class="col-4">Services</div>
+	<div class="col-4">Clients</div>
+	<div class="col-4">anything</div>
 	<div class="col-md-12 d-flex justify-content-center align-items-center">
 		<div class="row p-3 socialMediaBar">
 		<?php

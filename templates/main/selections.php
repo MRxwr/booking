@@ -329,6 +329,16 @@ if( $vendor["type"] == "3" ){
   $(document).on("click","#pictureType", function(){
 	var selectedType = $(this).attr("value");
 	$("input[name=pictureTypeId]").val(selectedType);
+	$("input[name=themeId").val('');
+	// do each on all .themeInput and make style opacity 1 and border none
+	$(".themeInput").each(function(){
+		$(this).css({
+			"width": "100px",
+			"height": "100px",
+			"border": "",
+			"opacity": "1"
+		});
+	})
 	themesTotal = $(this).attr("data-themes");
 	console.log(themesTotal);
 	updatePrice();

@@ -53,7 +53,7 @@
                                 <label><?php echo direction("Type","نوع") ?></label>
                                 <select name="type" class="form-control" required>
                                     <option value='0'><?php echo direction("Text Box","صندوق نص") ?></option>
-                                    <option value='1'><?php echo direction("Taxt Area","مساحه كتابيه") ?></option>
+                                    <!--<option value='1'><?php echo direction("Taxt Area","مساحه كتابيه") ?></option>-->
                                 </select>
                             </div>
 

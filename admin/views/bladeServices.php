@@ -160,7 +160,7 @@
 											if( $vendorData[0]["type"] == 3 ){
 												$pictureType = "
 												<a class='mr-25 listTypes' id='{$service[$i]["id"]}' data-toggle='tooltip' data-original-title='" . direction("Picture Types","نوع الصور") . "'>
-												<i class='fa fa-image text-inverse'></i>
+												<i class='fa fa-file-image-o text-inverse'></i>
 												</a>";
 											}else{
 												$pictureType = "";

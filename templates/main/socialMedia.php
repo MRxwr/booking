@@ -1,5 +1,5 @@
 <div class="row py-3 m-0">
-	<div class="col-4" style="text-align: -webkit-center;">Services</div>
+	<div class="col-4" style="text-align: -webkit-center;">12 <div>Services</div></div>
 	<div class="col-4" style="text-align: -webkit-center;">Clients</div>
 	<div class="col-4" style="text-align: -webkit-center;">anything</div>
 	<div class="col-md-12 mt-3 d-flex justify-content-center align-items-center">

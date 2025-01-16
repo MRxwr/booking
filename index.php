@@ -6,7 +6,7 @@ setLanguageFront();
 
 if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor = selectDBNew("vendors",[$_REQUEST["vendorURL"]],"`url` LIKE ? AND `hidden` = '0' AND `status` = '0'","") ){
 	$vendor = $vendor[0];
-	$serviceList = selectDB("services","`id` = '{$vendor["serviceId"]}' AND `status` = '0' AND `hidden` = '0'");
+	$serviceList = selectDB("services","`vendorId` = '{$vendor["id"]}' AND `status` = '0' AND `hidden` = '0'");
 	$bookingsList = selectDB("bookings","`vendorId` = '{$vendor["id"]}' AND `status` = '1'");
 	$clientsList = selectDB("bookings","`vendorId` = '{$vendor["id"]}' AND `status` = '1' GRPUP BY `customerDetails`");
 	if( isset($_GET["result"]) && !empty($_GET["result"]) && $_GET["result"] == "CAPTURED"){

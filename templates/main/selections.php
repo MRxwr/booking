@@ -50,7 +50,7 @@ if( $vendor["type"] == "3" ){
 			<span><?php echo direction("Themes","التصاميم") ?></span>
 		</div>
 		<div class="col-12 p-3">
-			<div class="row m-0 themesBLK" id="themes-container">
+			<div class="row m-0 themesBLK" id="themes-container" style="overflow-y: scroll;max-height: 250px;">
 				<div class="col d-flex align-items-center justify-content-center  mx-2 mb-2 p-3">
 					<span><?php echo direction("Please select service first","الرجاء تحديد فرع"); ?></span>
 				</div>

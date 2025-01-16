@@ -168,7 +168,7 @@
 											if( $vendorData[0]["type"] == 3 ){
 												$themesIcon = "
 												<a class='mr-25 themesList' id='{$service[$i]["id"]}' data-toggle='tooltip' data-original-title='" . direction("Themes","تصاميم") . "'>
-												<i class='fa fa-image-o text-inverse'></i>
+												<i class='fa fa-picture-o text-inverse'></i>
 												</a>";
 											}else{
 												$themesIcon = "";

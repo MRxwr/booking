@@ -3058,15 +3058,15 @@ a#toggle_mobile_nav {
   background: #fff;
   margin-bottom: 20px;
   border: none;
-  border-radius: 10px;
-  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  border-radius: 0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
   padding: 15px 15px 0;
   margin-left: -5px;
   margin-right: -5px; }
   .card-view.panel > .panel-heading {
     border: none;
     color: inherit;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 0;
     margin: -15px -15px 0;
     padding: 20px 15px; }
     .card-view.panel > .panel-heading.small-panel-heading {

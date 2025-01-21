@@ -130,22 +130,22 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
 				<div class="panel-body ">
 					<form class="mt-30 mb-30" method="POST" action="" enctype="multipart/form-data">
 						<div class="row m-0">
-							<div class="col-md-12">
+							<div class="col-md-6">
                                 <label><?php echo direction("Branch","الفرع") ?></label>
                                 <input type="text" name="branch" class="form-control" disabled value="<?php echo direction($branch["enTitle"],$branch["arTitle"]) ?>">
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label><?php echo direction("Service","الخدمة") ?></label>
                                 <input type="text" name="service" class="form-control" disabled value="<?php echo direction($service["enTitle"],$service["arTitle"]) ?>">
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label><?php echo direction("Booked Date","تاريخ الحجز") ?></label>
                                 <input type="text" name="bookedDate" class="form-control" disabled value="<?php echo $order["bookedDate"] ?>">
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label><?php echo direction("Booked Time","وقت الحجز") ?></label>
                                 <input type="text" name="bookedTime" class="form-control" disabled value="<?php echo $order["bookedTime"] ?>">
                             </div>
@@ -196,27 +196,27 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
                             }
                             ?>
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label><?php echo direction("Status","الحالة") ?></label>
                                 <input type="text" name="status" class="form-control" disabled value="<?php echo $status ?>">
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label><?php echo direction("Charge Type","نوع الدفع") ?></label>
                                 <input type="text" name="chargeType" class="form-control" disabled value="<?php echo $chargeType ?>">
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-4">
                                 <label><?php echo direction("Total Paid","الاجمالي") ?></label>
                                 <input type="text" name="totalPrice" class="form-control" disabled value="<?php echo numTo3Float($gatewayBody["order[amount]"]) ?> -/KD">
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-4">
                                 <label><?php echo direction("Total Price","المدفوع") ?></label>
                                 <input type="text" name="totalPrice" class="form-control" disabled value="<?php echo numTo3Float($order["totalPrice"]) ?> -/KD">
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-4">
                                 <label><?php echo direction("Remaining","المتبقي") ?></label>
                                 <input type="text" name="totalPrice" class="form-control" disabled value="<?php echo numTo3Float((FLOAT)$order["totalPrice"] - (FLOAT)$gatewayBody["order[amount]"]) ?> -/KD">
                             </div>

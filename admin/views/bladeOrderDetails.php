@@ -49,15 +49,9 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
         $themes = array();
     }
     if( !empty($order["extras"]) ){
-        $extras = explode(",",$order["extras"]);
-        $extrasDetails = array();
-        for( $i = 0; $i < sizeof($extras); $i++ ){
-            $extra = selectDB("extras","`id` = '{$extras[$i]}'");
-            $extrasDetails["title"][] = direction($extra[0]["enTitle"],$extra[0]["arTitle"]);
-            $extrasDetails["price"][] = $extra[0]["price"];
-        }
+        $extra = selectDB("extras","`id` IN '$extras'");
     }else{
-        $extrasDetails = array();
+        $extra = array();
     }
     $gatewayBody = json_decode($order["gatewayBody"],true);
     $orderStatus = array("Pending","Confirmed","Cancelled");
@@ -165,12 +159,11 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
                             ?>
 
                             <?php
-                            if( !empty($extrasDetails) ){
-
-                                for ( $i = 0; $i < sizeof($extrasDetails); $i++ ) {
+                            if( !empty($extra) ){
+                                for ( $i = 0; $i < sizeof($extra); $i++ ) {
                                     echo "<div class='col-md-12'>";
-                                    echo "<label>{$extrasDetails["title"][$i]}</label>";
-                                    echo "<input type='text' name='extras' class='form-control' disabled value='{$extrasDetails["price"][$i]}'>";
+                                    echo "<label>".direction($extra[$i]["enTitle"],$extra[$i]["arTitle"])."</label>";
+                                    echo "<input type='text' name='extras' class='form-control' disabled value='{$extra[$i]["price"]}'>";
                                     echo "</div>";
                                 }
                             }

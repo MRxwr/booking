@@ -1,3 +1,40 @@
+<?php
+if( isset($_GET["code"]) && !empty($_GET["code"]) ){
+    if( $booking = selectDBNew("bookings",[$_GET["code"]],"`code` = ?","") ){
+        if( isset($_GET["status"]) && !empty($_GET["status"]) ){
+            if( updateDB("bookings",["status" => $_GET["status"]],"`code` LIKE '{$_GET["code"]}'") ){
+                ?>
+                <script>
+                    alert("<?php echo direction("Booking status updated successfully","تم تحديث حالة الحجز بنجاح") ?>");
+                    window.location.href = "?v=Bookings";
+                </script>
+                <?php
+            }else{
+                ?>
+                <script>
+                    alert("<?php echo direction("Something went wrong","حدث خطأ ما") ?>");
+                    window.location.href = "?v=Bookings";
+                </script>
+                <?php
+            }
+        }else{
+            ?>
+            <script>
+                alert("<?php echo direction("Status is required","الحالة مطلوبة") ?>");
+                window.location.href = "?v=Bookings";
+            </script>
+            <?php
+        }
+    }else{
+        ?>
+        <script>
+            alert("<?php echo direction("Wrong code","كود خاطئ") ?>");>");
+            window.location.href = "?v=Bookings";
+        </script>
+        <?php
+    }
+}
+?>
 <div class="col-sm-12">
     <div class="panel panel-default card-view">
         <div class="panel-heading">
@@ -21,6 +58,7 @@
                                 <th><?php echo direction("Booked Date","تاريخ الحجز") ?></th>
                                 <th><?php echo direction("Time","الوقت") ?></th>
                                 <th><?php echo direction("Customer","العميل") ?></th>
+                                <th><?php echo direction("Status","الحالة") ?></th>
                                 <th class="text-nowrap"><?php echo direction("الخيارات","Actions") ?></th>
                                 </tr>
                             </thead>
@@ -53,6 +91,19 @@
                                     ?></td>
                                     <td class="text-nowrap">
                                         <a class="btn <?php echo $btnColor ?>"><?php echo $status ?></a>
+                                    </td>
+                                    <td class="text-nowrap">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <?php echo direction("Actions","الخيارات") ?> <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="?v=Bookings&status=0&id=<?php echo $bookings[$i]["code"] ?>"><?php echo direction("Pending","قيد الانتظار") ?></a></li>
+                                                <li><a href="?v=Bookings&status=1&id=<?php echo $bookings[$i]["code"] ?>"><?php echo direction("Confirmed","تم التأكيد") ?></a></li>
+                                                <li><a href="?v=Bookings&status=1&id=<?php echo $bookings[$i]["code"] ?>"><?php echo direction("Completed","تم الانتهاء") ?></a></li>
+                                                <li><a href="?v=Bookings&status=2&id=<?php echo $bookings[$i]["code"] ?>"><?php echo direction("Cancelled","تم الالغاء") ?></a></li>
+                                            </ul>
+                                        </div>
                                     </td>
                                 </tr>
                                 <?php

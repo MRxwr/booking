@@ -28,7 +28,7 @@ if( isset($_GET["code"]) && !empty($_GET["code"]) ){
     }else{
         ?>
         <script>
-            alert("<?php echo direction("Wrong code","كود خاطئ") ?>");>");
+            alert("<?php echo direction("Wrong code","كود خاطئ") ?>");
             window.location.href = "?v=Bookings";
         </script>
         <?php

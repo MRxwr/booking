@@ -49,7 +49,7 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
         $themes = array();
     }
     if( !empty($order["extras"]) ){
-        $extra = selectDB("extras","`id` IN '{$order["extras"]}'");
+        $extra = selectDB("extras","`id` IN ({$order["extras"]})");
     }else{
         $extra = array();
     }

@@ -58,7 +58,13 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
     }else{
         $extrasDetails = array();
     }
-
+    if( $order["gatewayBody"]){
+        $gatewayBody = json_decode($order["gatewayBody"],true);
+    }
+    $orderStatus = array("Pending","Confirmed","Cancelled");
+    $status = $orderStatus[$order["status"]];
+    $chargeType = array(direction("Full Payment","سداد كامل"),direction("Partial Payment","سداد جزئي"),direction("Free","مجاني"));
+    $chargeType = $chargeType[$order["chargeType"]];
 }
 ?>
 <!-- Row -->
@@ -87,7 +93,7 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
 
                             <div class="col-md-12">
                                 <label><?php echo direction("Vendor","البائع") ?></label>
-                                <input type="text" name="vendor" class="form-control" disabled value="<?php echo $vendor["enTitle"] ?>">
+                                <input type="text" name="vendor" class="form-control" disabled value="<?php echo direction($vendor["enTitle"],$vendor["arTitle"]) ?>">
                             </div>
 
                             <div class="col-md-12">
@@ -128,10 +134,82 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
 				<div class="panel-body ">
 					<form class="mt-30 mb-30" method="POST" action="" enctype="multipart/form-data">
 						<div class="row m-0">
-							<div class="col-md-3">
-								<label><?php echo direction("English Title","الإسم الإنجليزي") ?></label>
-								<input type="text" name="enTitle" class="form-control" disabled value="<?php echo $order["enTitle"] ?>">
-							</div>
+							<div class="col-md-12">
+                                <label><?php echo direction("Branch","الفرع") ?></label>
+                                <input type="text" name="branch" class="form-control" disabled value="<?php echo direction($branch["enTitle"],$branch["arTitle"]) ?>">
+                            </div>
+
+                            <div class="col-md-12">
+                                <label><?php echo direction("Service","الخدمة") ?></label>
+                                <input type="text" name="service" class="form-control" disabled value="<?php echo direction($service["enTitle"],$service["arTitle"]) ?>">
+                            </div>
+
+                            <div class="col-md-12">
+                                <label><?php echo direction("Booked Date","تاريخ الحجز") ?></label>
+                                <input type="text" name="bookedDate" class="form-control" disabled value="<?php echo $order["bookedDate"] ?>">
+                            </div>
+
+                            <div class="col-md-12">
+                                <label><?php echo direction("Booked Time","وقت الحجز") ?></label>
+                                <input type="text" name="bookedTime" class="form-control" disabled value="<?php echo $order["bookedTime"] ?>">
+                            </div>
+
+                            <?php 
+                            if( !empty($extraInfoDetails) ){
+                                for( $i = 0; $i < sizeof($extraInfoDetails["title"]); $i++ ){
+                                    echo "<div class='col-md-12'>";
+                                    echo "<label>{$extraInfoDetails["title"][$i]}</label>";
+                                    echo "<input type='text' name='extraInfo[]' class='form-control' disabled value='{$extraInfoDetails["value"][$i]}'>";
+                                    echo "</div>";
+                                }
+                            }
+                            ?>
+
+                            <?php
+                            if( !empty($extrasDetails) ){
+                                for ( $i = 0; $i < sizeof($extrasDetails); $i++ ) {
+                                    echo "<div class='col-md-12'>";
+                                    echo "<label>{$extrasDetails[$i]["title"]}</label>";
+                                    echo "<input type='text' name='extras' class='form-control' disabled value='{$extrasDetails[$i]["price"]}'>";
+                                    echo "</div>";
+                                }
+                            }
+                            ?>
+
+                            <?php
+                            if( $pictureType ){
+                                echo "<div class='col-md-12'>";
+                                echo "<label>".direction("Picture Type","نوع الصورة")."</label>";
+                                echo "<input type='text' name='pictureType' class='form-control' disabled value='".direction($pictureType["enTitle"],$pictureType["arTitle"])."'>";
+                                echo "</div>";
+                            }
+                            ?>
+
+                            <?php 
+                            if( !empty($themes) ){
+                                for( $i = 0; $i < sizeof($themes); $i++ ){
+                                    echo "<div class='col-md-6'>";
+                                    echo "<label>".direction("Theme","الثيم")."</label>";
+                                    echo "<img src='../logos/{$themes[$i]}' class='img-responsive'>";
+                                    echo "</div>";
+                                }
+                            }
+                            ?>
+
+                            <div class="col-md-12">
+                                <label><?php echo direction("Status","الحالة") ?></label>
+                                <input type="text" name="status" class="form-control" disabled value="<?php echo $status ?>">
+                            </div>
+
+                            <div class="col-md-12">
+                                <label><?php echo direction("Charge Type","نوع الدفع") ?></label>
+                                <input type="text" name="chargeType" class="form-control" disabled value="<?php echo $chargeType ?>">
+                            </div>
+
+                            <div class="col-md-12">
+                                <label><?php echo direction("Total Price","الاجمالي") ?></label>
+                                <input type="text" name="totalPrice" class="form-control" disabled value="<?php echo $gatewayBody["order"]["amount"] ?>">
+                            </div>
 							
 							<div class="col-md-12" style="margin-top:10px">
 								<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">

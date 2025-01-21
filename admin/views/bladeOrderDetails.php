@@ -162,9 +162,10 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
                             <?php
                             if( !empty($extra) ){
                                 for ( $i = 0; $i < sizeof($extra); $i++ ) {
+                                    $counter = $i+1;
                                     echo "<div class='col-md-12'>";
-                                    echo "<label>".direction($extra[$i]["enTitle"],$extra[$i]["arTitle"])."</label>";
-                                    echo "<input type='text' name='extras' class='form-control' disabled value='{$extra[$i]["price"]}'>";
+                                    echo "<label>".direction("Extra","اضافة")." {$counter}</label>";
+                                    echo "<input type='text' name='extras' class='form-control' disabled value='".direction($extra[$i]["enTitle"],$extra[$i]["arTitle"])." {$extra[$i]["price"]} -/KD'>";
                                     echo "</div>";
                                 }
                             }

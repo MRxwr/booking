@@ -102,7 +102,7 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
 
                             <div class="col-md-12">
                                 <label><?php echo direction("Phone","الهاتف") ?></label>
-                                <input type="text" name="phone" class="form-control" disabled value="<?php echo $customer["phone"] ?>">
+                                <input type="text" name="mobile" class="form-control" disabled value="<?php echo $customer["mobile"] ?>">
                             </div>
 							
 							<div class="col-md-12" style="margin-top:10px">

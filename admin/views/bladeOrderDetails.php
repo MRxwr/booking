@@ -62,7 +62,7 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
     $orderStatus = array("Pending","Confirmed","Cancelled");
     $status = $orderStatus[$order["status"]];
     $chargeTypeText = array(direction("Full Payment","سداد كامل"),direction("Partial Payment","سداد جزئي"),direction("Free","مجاني"));
-    $chargeType = $chargeTypeText[$order["chargeType"]];
+    $chargeType = $chargeTypeText[$order["chargeType"]-1];
 }
 ?>
 <!-- Row -->

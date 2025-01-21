@@ -53,7 +53,6 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
     }else{
         $extra = array();
     }
-    var_dump($extra);
     $gatewayBody = json_decode($order["gatewayBody"],true);
     $orderStatus = array("Pending","Confirmed","Cancelled");
     $status = $orderStatus[$order["status"]];
@@ -163,9 +162,10 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
                             if( !empty($extra) ){
                                 for ( $i = 0; $i < sizeof($extra); $i++ ) {
                                     $counter = $i+1;
+                                    $extraPrice = numTo3Float($extra[$i]["price"]);
                                     echo "<div class='col-md-12'>";
                                     echo "<label>".direction("Extra","اضافة")." {$counter}</label>";
-                                    echo "<input type='text' name='extras' class='form-control' disabled value='".direction($extra[$i]["enTitle"],$extra[$i]["arTitle"])." {$extra[$i]["price"]} -/KD'>";
+                                    echo "<input type='text' name='extras' class='form-control' disabled value='".direction($extra[$i]["enTitle"],$extra[$i]["arTitle"])." {$extraPrice} -/KD'>";
                                     echo "</div>";
                                 }
                             }
@@ -183,8 +183,9 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
                             <?php 
                             if( !empty($themes) ){
                                 for( $i = 0; $i < sizeof($themes); $i++ ){
+                                    $counter = $i+1;
                                     echo "<div class='col-md-12'>";
-                                    echo "<label>".direction("Theme","الثيم")."</label>";
+                                    echo "<label>".direction("Theme","الثيم")." {$counter}</label>";
                                     echo "<img src='../logos/{$themes[$i]}' class='img-responsive' style='width:200px;height:200px'>";
                                     echo "</div>";
                                 }

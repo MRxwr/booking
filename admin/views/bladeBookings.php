@@ -1,8 +1,8 @@
 <?php
-if( isset($_GET["code"]) && !empty($_GET["code"]) ){
-    if( $booking = selectDBNew("bookings",[$_GET["code"]],"`code` = ?","") ){
+if( isset($_GET["id"]) && !empty($_GET["id"]) ){
+    if( $booking = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
         if( isset($_GET["status"]) && !empty($_GET["status"]) ){
-            if( updateDB("bookings",["status" => $_GET["status"]],"`code` LIKE '{$_GET["code"]}'") ){
+            if( updateDB("bookings",["status" => $_GET["status"]],"`code` LIKE '{$_GET["id"]}'") ){
                 ?>
                 <script>
                     alert("<?php echo direction("Booking status updated successfully","تم تحديث حالة الحجز بنجاح") ?>");

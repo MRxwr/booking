@@ -71,8 +71,13 @@ if( isset($_GET["id"]) && !empty($_GET["id"]) ){
                                 );
                                 if( $bookings = selectJoinDB("{$table}",$joinedTables,"t.id != '0' $vendorBookingTable ORDER BY t.id DESC") ){
                                     for( $i = 0; $i < sizeof($bookings); $i++ ){
-                                        $status = ($bookings[$i]["status"] == 0) ? direction("Pending","قيد الانتظار") : (($bookings[$i]["status"] == 1) ? direction("Confirmed","تم التأكيد") : direction("Cancelled","تم الالغاء"));
-                                        $btnColor = ($bookings[$i]["status"] == 0) ? "btn-primary" : (($bookings[$i]["status"] == 1) ? "btn-success" : "btn-danger");
+                                        $status =
+                                        ($bookings[$i]["status"] == 0) ? direction("Pending","قيد الانتظار") :
+                                        (($bookings[$i]["status"] == 1) ? direction("Confirmed","تم التأكيد") :
+                                        (($bookings[$i]["status"] == 4) ? direction("Completed","تم الانتهاء") :
+                                        direction("Cancelled","تم الالغاء")));
+                                        $btnColor = ($bookings[$i]["status"] == 0)
+                                        ? "btn-primary" : (($bookings[$i]["status"] == 1) ? "btn-success" : "btn-danger");
                                         $customer = json_decode($bookings[$i]["customerDetails"],true);
                                 ?>
                                 <tr>

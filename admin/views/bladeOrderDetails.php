@@ -61,6 +61,7 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
     if( $order["chargeType"] == 3 && $order["status"] == 1 ){
         $gatewayBody["order[amount]"] = 0;
     }
+}
 ?>
 <!-- Row -->
 <div class="row m-0">

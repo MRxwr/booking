@@ -141,16 +141,6 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
                             </div>
 
                             <div class="col-md-12">
-                                <label><?php echo direction("Status","الحالة") ?></label>
-                                <input type="text" name="status" class="form-control" disabled value="<?php echo $status ?>">
-                            </div>
-
-                            <div class="col-md-12">
-                                <label><?php echo direction("Charge Type","نوع الدفع") ?></label>
-                                <input type="text" name="chargeType" class="form-control" disabled value="<?php echo $chargeType ?>">
-                            </div>
-
-                            <div class="col-md-12">
                                 <label><?php echo direction("Booked Date","تاريخ الحجز") ?></label>
                                 <input type="text" name="bookedDate" class="form-control" disabled value="<?php echo $order["bookedDate"] ?>">
                             </div>
@@ -158,6 +148,16 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
                             <div class="col-md-12">
                                 <label><?php echo direction("Booked Time","وقت الحجز") ?></label>
                                 <input type="text" name="bookedTime" class="form-control" disabled value="<?php echo $order["bookedTime"] ?>">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label><?php echo direction("Status","الحالة") ?></label>
+                                <input type="text" name="status" class="form-control" disabled value="<?php echo $status ?>">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label><?php echo direction("Charge Type","نوع الدفع") ?></label>
+                                <input type="text" name="chargeType" class="form-control" disabled value="<?php echo $chargeType ?>">
                             </div>
 
                             <div class="col-md-4">

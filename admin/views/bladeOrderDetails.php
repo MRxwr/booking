@@ -186,9 +186,9 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
                             <?php 
                             if( !empty($themes) ){
                                 for( $i = 0; $i < sizeof($themes); $i++ ){
-                                    echo "<div class='col-md-6'>";
+                                    echo "<div class='col-md-12'>";
                                     echo "<label>".direction("Theme","الثيم")."</label>";
-                                    echo "<img src='../logos/{$themes[$i]}' class='img-responsive'>";
+                                    echo "<img src='../logos/{$themes[$i]}' class='img-responsive' style='width:200px;height:200px'>";
                                     echo "</div>";
                                 }
                             }

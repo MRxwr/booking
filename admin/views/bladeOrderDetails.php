@@ -37,7 +37,7 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
         $extraInfoDetails = array();
         for( $i = 0; $i < sizeof($keys); $i++ ){
             $extraInfo = selectDB("extrainfo","`id` = '{$keys[$i]}'");
-            $extraInfoDetails["title"][] = direction($extraInfo["enTitle"],$extraInfo["arTitle"]);
+            $extraInfoDetails["title"][] = direction($extraInfo[0]["enTitle"],$extraInfo[0]["arTitle"]);
             $extraInfoDetails["value"][] = $extraInfoOrder[$keys[$i]];
         }
     }else{
@@ -52,7 +52,7 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
         $extras = explode(",",$order["extras"]);
         for( $i = 0; $i < sizeof($extras); $i++ ){
             $extra = selectDB("extras","`id` = '{$extras[$i]}'");
-            $extrasDetails["title"] = direction($extra["enTitle"],$extra["arTitle"]);
+            $extrasDetails["title"] = direction($extra[0]["enTitle"],$extra[0]["arTitle"]);
             $extrasDetails["price"] = $extra["price"];
         }
     }else{

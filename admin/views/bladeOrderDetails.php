@@ -59,7 +59,7 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
     $chargeTypeText = array(direction("Full Payment","سداد كامل"),direction("Partial Payment","سداد جزئي"),direction("Free","مجاني"));
     $chargeType = $chargeTypeText[$order["chargeType"]-1];
     if( $order["chargeType"] == 3 && $order["status"] == 3 ){
-        $gatewayBody["order[amount]"] = 0;
+        $gatewayBody["order[amount]"] = $order["totalPrice"];
     }
 }
 ?>

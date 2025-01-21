@@ -118,7 +118,7 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
 		</div>
 	</div>
 
-    <div class="col-sm-4 mb-30">
+    <div class="col-sm-8 mb-30">
 		<div class="panel panel-default card-view">
 			<div class="panel-heading">
 				<div class="text-center">
@@ -184,7 +184,7 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
 <?php
 if( !empty($extraInfoDetails) || !empty($extra) || !empty($pictureType) || !empty($themes) ){
 ?>
-    <div class="col-sm-4 mb-30">
+    <div class="col-sm-12 mb-30">
 		<div class="panel panel-default card-view">
 			<div class="panel-heading">
 				<div class="text-center">

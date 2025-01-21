@@ -1,11 +1,3 @@
-<?php
-/*
-<div class="calendar-wrap mt-40">
-<div id="calendar"></div>
-</div>
-*/
-?>
-
 <div class="col-sm-12">
     <div class="panel panel-default card-view">
         <div class="panel-heading">
@@ -47,7 +39,7 @@
                                 ?>
                                 <tr>
                                     <td ><?php echo substr($bookings[$i]["date"],0,10) ?></td>
-                                    <td ><?php echo $bookings[$i]["code"] ?></td>
+                                    <td ><a href="?v=OrderDetails&id=<?php echo $bookings[$i]["code"] ?>"><?php echo $bookings[$i]["code"] ?></a></td>
                                     <td ><?php echo $bookings[$i]["vendorTitle"] ?></td>
                                     <td ><?php echo $bookings[$i]["branchTitle"] ?></td>
                                     <td ><?php echo $bookings[$i]["serviceTitle"] ?></td>

@@ -31,8 +31,7 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
     if( $order["customerDetails"] ){
         $customer = json_decode($order["customerDetails"],true);
     }
-    var_dump($order["extraInfo"]);
-    if( !is_null($order["extraInfo"]) ){
+    if( $order["extraInfo"] != null ){
         $extraInfoOrder = json_decode($order["extraInfo"],true);
         $keys = array_keys($extraInfoOrder);
         $extraInfoDetails = array();

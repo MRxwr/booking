@@ -63,8 +63,6 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
     }else{
         if( $order["chargeType"] == 3 ){
             $gatewayBody["order[amount]"] = 0;
-        }else{
-            $gatewayBody["order[amount]"] = $order["totalPrice"];
         }
     }
 }

@@ -100,7 +100,7 @@ if( isset($_GET["code"]) && !empty($_GET["code"]) ){
                                             <ul class="dropdown-menu">
                                                 <li><a href="?v=Bookings&status=0&id=<?php echo $bookings[$i]["code"] ?>"><?php echo direction("Pending","قيد الانتظار") ?></a></li>
                                                 <li><a href="?v=Bookings&status=1&id=<?php echo $bookings[$i]["code"] ?>"><?php echo direction("Confirmed","تم التأكيد") ?></a></li>
-                                                <li><a href="?v=Bookings&status=1&id=<?php echo $bookings[$i]["code"] ?>"><?php echo direction("Completed","تم الانتهاء") ?></a></li>
+                                                <li><a href="?v=Bookings&status=4&id=<?php echo $bookings[$i]["code"] ?>"><?php echo direction("Completed","تم الانتهاء") ?></a></li>
                                                 <li><a href="?v=Bookings&status=2&id=<?php echo $bookings[$i]["code"] ?>"><?php echo direction("Cancelled","تم الالغاء") ?></a></li>
                                             </ul>
                                         </div>

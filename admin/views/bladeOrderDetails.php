@@ -173,9 +173,10 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
 
                             <?php
                             if( $pictureType ){
+                                $pictureTypePrice = numTo3Float($pictureType["price"]);
                                 echo "<div class='col-md-12'>";
                                 echo "<label>".direction("Picture Type","نوع الصورة")."</label>";
-                                echo "<input type='text' name='pictureType' class='form-control' disabled value='".direction($pictureType["enTitle"],$pictureType["arTitle"])."'>";
+                                echo "<input type='text' name='pictureType' class='form-control' disabled value='".direction($pictureType["enTitle"],$pictureType["arTitle"])." {$pictureTypePrice} -/KD'>";
                                 echo "</div>";
                             }
                             ?>
@@ -204,7 +205,7 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
 
                             <div class="col-md-12">
                                 <label><?php echo direction("Total Price","الاجمالي") ?></label>
-                                <input type="text" name="totalPrice" class="form-control" disabled value="<?php echo $gatewayBody["order[amount]"] ?>">
+                                <input type="text" name="totalPrice" class="form-control" disabled value="<?php echo numTo3Float($gatewayBody["order[amount]"]) ?>">
                             </div>
 							
 							<div class="col-md-12" style="margin-top:10px">

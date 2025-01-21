@@ -75,32 +75,32 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
 				<div class="panel-body ">
 					<form class="mt-30 mb-30" method="POST" action="" enctype="multipart/form-data">
 						<div class="row m-0">
-							<div class="col-md-3">
+							<div class="col-md-12">
 								<label><?php echo direction("Date / Time","التاريخ / الوقت") ?></label>
 								<input type="text" name="date" class="form-control" disabled value="<?php echo $order["date"] ?>">
 							</div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-12">
                                 <label><?php echo direction("Code","الكود") ?></label>
                                 <input type="text" name="code" class="form-control" disabled value="<?php echo $order["code"] ?>">
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-12">
                                 <label><?php echo direction("Vendor","البائع") ?></label>
                                 <input type="text" name="vendor" class="form-control" disabled value="<?php echo $vendor["enTitle"] ?>">
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-12">
                                 <label><?php echo direction("Name","الاسم") ?></label>
                                 <input type="text" name="name" class="form-control" disabled value="<?php echo $customer["name"] ?>">
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-12">
                                 <label><?php echo direction("Email","البريد الالكتروني") ?></label>
                                 <input type="text" name="email" class="form-control" disabled value="<?php echo $customer["email"] ?>">
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-12">
                                 <label><?php echo direction("Phone","الهاتف") ?></label>
                                 <input type="text" name="phone" class="form-control" disabled value="<?php echo $customer["phone"] ?>">
                             </div>

@@ -1,7 +1,7 @@
 <?php
 if( isset($_GET["id"]) && !empty($_GET["id"]) ){
     if( $booking = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
-        if( isset($_GET["status"]) && !empty($_GET["status"]) ){
+        if( isset($_GET["status"]) ){
             if( updateDB("bookings",["status" => $_GET["status"]],"`code` LIKE '{$_GET["id"]}'") ){
                 ?>
                 <script>

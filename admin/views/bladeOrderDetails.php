@@ -53,6 +53,7 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
     }else{
         $extra = array();
     }
+    var_dump($extra);
     $gatewayBody = json_decode($order["gatewayBody"],true);
     $orderStatus = array("Pending","Confirmed","Cancelled");
     $status = $orderStatus[$order["status"]];

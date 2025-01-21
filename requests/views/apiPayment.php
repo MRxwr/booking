@@ -34,32 +34,24 @@ if( isset($_POST["time"]) && !empty($_POST["time"]) ){
 }else{
     echo outputError(direction("Missing time","الوقت مطلوب"));die();
 }
+// get total Price
+$totalPrice = $service[0]["price"];
+if( $vendor[0]["type"] == 3 ){
+    if( $pictureType = selectDBNew("picturetype",[$_POST["pictureTypeId"],$vendor[0]["id"]],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
+        $totalPrice = $totalPrice + $pictureType[0]["price"];
+    }
+}
+if( $extrasCheck = selectDBNew("extras",[$vendor[0]["id"],$_POST["extras"]],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND `id` IN (?)","") ){
+    foreach( $extrasCheck as $extra ){
+        $totalPrice = $totalPrice + $extra["price"];
+    }
+}
 if( $vendor[0]["chargeType"] == 1 ){
-    $price = $service[0]["price"];
-    if( $vendor[0]["type"] == 3 ){
-        if( $pictureType = selectDBNew("picturetype",[$_POST["pictureTypeId"],$vendor[0]["id"]],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
-            $price = $price + $pictureType[0]["price"];
-        }
-    }
-    if( $extrasCheck = selectDBNew("extras",[$vendor[0]["id"],$_POST["extras"]],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND `id` IN (?)","") ){
-        foreach( $extrasCheck as $extra ){
-            $price = $price + $extra["price"];
-        }
-    }
+    $price = $totalPrice;
 }elseif( $vendor[0]["chargeType"] == 2 ){
     $price = $vendor[0]["chargeTypeAmount"];
 }else{
-    $price = $service[0]["price"];
-    if( $vendor[0]["type"] == 3 ){
-        if( $pictureType = selectDBNew("picturetype",[$_POST["pictureTypeId"],$vendor[0]["id"]],"`id` = ? AND `vendorId` = ? AND `status` = '0' AND `hidden` = '0'","") ){
-            $price = $price + $pictureType[0]["price"];
-        }
-    }
-    if( $extrasCheck = selectDBNew("extras",[$vendor[0]["id"],$_POST["extras"]],"`vendorId` = ? AND `status` = '0' AND `hidden` = '0' AND FIND_IN_SET(`id`,?)","") ){
-        foreach( $extrasCheck as $extra ){
-            $price = $price + $extra["price"];
-        }
-    }
+    $price = $totalPrice;
 }
 
 
@@ -111,6 +103,7 @@ if ( is_null($response) || $response["status"] == false ) {
     $_POST["gatewayURL"] = $response["data"]["link"];
     $_POST["chargeType"] = $vendor[0]["chargeType"];
     $_POST["customerDetails"] = json_encode($_POST["customer"]);
+    $_POST["totalPrice"] = $totalPrice;
     unset($_POST["customer"]);
     unset($_POST["time"]);
     unset($_POST["date"]);

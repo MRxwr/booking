@@ -63,7 +63,7 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
 ?>
 <!-- Row -->
 <div class="row m-0">
-	<div class="col-sm-6 mb-30">
+	<div class="col-sm-4 mb-30">
 		<div class="panel panel-default card-view">
 			<div class="panel-heading">
 				<div class="text-center">
@@ -116,7 +116,7 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
 		</div>
 	</div>
 
-    <div class="col-sm-6 mb-30">
+    <div class="col-sm-8 mb-30">
 		<div class="panel panel-default card-view">
 			<div class="panel-heading">
 				<div class="text-center">

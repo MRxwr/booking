@@ -76,8 +76,11 @@ if( isset($_GET["id"]) && !empty($_GET["id"]) ){
                                         (($bookings[$i]["status"] == 1) ? direction("Confirmed","تم التأكيد") :
                                         (($bookings[$i]["status"] == 4) ? direction("Completed","تم الانتهاء") :
                                         direction("Cancelled","تم الالغاء")));
-                                        $btnColor = ($bookings[$i]["status"] == 0)
-                                        ? "btn-primary" : (($bookings[$i]["status"] == 1) ? "btn-success" : "btn-danger");
+                                        $btnColor =
+                                        ($bookings[$i]["status"] == 0) ? "btn-primary" :
+                                        (($bookings[$i]["status"] == 1) ? "btn-success" : 
+                                        (($bookings[$i]["status"] == 4) ? "btn-info" :
+                                        "btn-danger"));
                                         $customer = json_decode($bookings[$i]["customerDetails"],true);
                                 ?>
                                 <tr>

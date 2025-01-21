@@ -166,10 +166,11 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
 
                             <?php
                             if( !empty($extrasDetails) ){
+
                                 for ( $i = 0; $i < sizeof($extrasDetails); $i++ ) {
                                     echo "<div class='col-md-12'>";
-                                    echo "<label>{$extrasDetails[$i]["title"]}</label>";
-                                    echo "<input type='text' name='extras' class='form-control' disabled value='{$extrasDetails[$i]["price"]}'>";
+                                    echo "<label>{$extrasDetails["title"][$i]}</label>";
+                                    echo "<input type='text' name='extras' class='form-control' disabled value='{$extrasDetails["price"][$i]}'>";
                                     echo "</div>";
                                 }
                             }

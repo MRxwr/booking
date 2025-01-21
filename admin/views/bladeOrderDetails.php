@@ -204,8 +204,18 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
                             </div>
 
                             <div class="col-md-12">
-                                <label><?php echo direction("Total Price","الاجمالي") ?></label>
+                                <label><?php echo direction("Total Paid","الاجمالي") ?></label>
                                 <input type="text" name="totalPrice" class="form-control" disabled value="<?php echo numTo3Float($gatewayBody["order[amount]"]) ?> -/KD">
+                            </div>
+
+                            <div class="col-md-12">
+                                <label><?php echo direction("Total Price","المدفوع") ?></label>
+                                <input type="text" name="totalPrice" class="form-control" disabled value="<?php echo numTo3Float($order["totalPrice"]) ?> -/KD">
+                            </div>
+
+                            <div class="col-md-12">
+                                <label><?php echo direction("Remaining","المتبقي") ?></label>
+                                <input type="text" name="totalPrice" class="form-control" disabled value="<?php echo numTo3Float((FLOAT)$order["totalPrice"] - (FLOAT)$gatewayBody["order[amount]"]) ?> -/KD">
                             </div>
 							
 							<div class="col-md-12" style="margin-top:10px">

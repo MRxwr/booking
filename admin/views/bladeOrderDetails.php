@@ -130,7 +130,7 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
 				<div class="panel-body ">
 					<form class="mt-30 mb-30" method="POST" action="" enctype="multipart/form-data">
 						<div class="row m-0">
-							<div class="col-md-6">
+							<div class="col-md-12">
                                 <label><?php echo direction("Branch","الفرع") ?></label>
                                 <input type="text" name="branch" class="form-control" disabled value="<?php echo direction($branch["enTitle"],$branch["arTitle"]) ?>">
                             </div>

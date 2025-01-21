@@ -107,10 +107,6 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
                                 <input type="text" name="mobile" class="form-control" disabled value="<?php echo $customer["mobile"] ?>">
                             </div>
 							
-							<div class="col-md-12" style="margin-top:10px">
-								<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
-								<input type="hidden" name="update" value="0">
-							</div>
 						</div>
 					</form>
 				</div>
@@ -221,10 +217,6 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
                                 <input type="text" name="totalPrice" class="form-control" disabled value="<?php echo numTo3Float((FLOAT)$order["totalPrice"] - (FLOAT)$gatewayBody["order[amount]"]) ?> -/KD">
                             </div>
 							
-							<div class="col-md-12" style="margin-top:10px">
-								<input type="submit" class="btn btn-primary" value="<?php echo direction("Submit","أرسل") ?>">
-								<input type="hidden" name="update" value="0">
-							</div>
 						</div>
 					</form>
 				</div>

@@ -13,7 +13,7 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
     if ( $vendor = selectDBNew("vendors",[$order["vendorId"]],"`id` = ?","") ){
         $vendor = $vendor[0];
         if( $vendor["type"] == 3 ){
-            if( $pictureType = selectDB("picturetype","`id` = '{$order["pictureType"]}'") ){
+            if( $pictureType = selectDB("picturetype","`id` = '{$order["pictureTypeId"]}'") ){
                 $pictureType = $pictureType[0];
             }else{
                 $pictureType = array();

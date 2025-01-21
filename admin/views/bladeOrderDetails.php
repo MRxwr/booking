@@ -118,7 +118,7 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
 		</div>
 	</div>
 
-    <div class="col-sm-8 mb-30">
+    <div class="col-sm-4 mb-30">
 		<div class="panel panel-default card-view">
 			<div class="panel-heading">
 				<div class="text-center">
@@ -174,8 +174,29 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
                                 <label><?php echo direction("Remaining","المتبقي") ?></label>
                                 <input type="text" name="totalPrice" class="form-control" disabled value="<?php echo numTo3Float((FLOAT)$order["totalPrice"] - (FLOAT)$gatewayBody["order[amount]"]) ?> -/KD">
                             </div>
-
-
+							
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+if( !empty($extraInfoDetails) || !empty($extra) || !empty($pictureType) || !empty($themes) ){
+?>
+    <div class="col-sm-4 mb-30">
+		<div class="panel panel-default card-view">
+			<div class="panel-heading">
+				<div class="text-center">
+					<h6 class="panel-title txt-dark"><?php echo direction("More Information","مزيد من التفاصيل") ?></h6>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-wrapper collapse in">
+				<div class="panel-body ">
+					<form class="mt-30 mb-30" method="POST" action="" enctype="multipart/form-data">
+						<div class="row m-0">
+							
                             <?php 
                             if( !empty($extraInfoDetails) ){
                                 for( $i = 0; $i < sizeof($extraInfoDetails["title"]); $i++ ){
@@ -228,5 +249,7 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
 			</div>
 		</div>
 	</div>
-    
+    <?php
+}
+?>
 </div>

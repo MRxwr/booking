@@ -2,7 +2,11 @@
 if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
     $order = $order[0];
     if( $vendorId != $order["vendorId"] || $vendorId != 0 ){
-        header("Location: ?v=Home");die();
+        ?>
+        <script>
+            window.location.href = "?v=Home";
+        </script>
+        <?php
     }
     if ( $vendor = selectDBNew("vendors",[$order["vendorId"]],"`id` = ?","") ){
         $vendor = $vendor[0];

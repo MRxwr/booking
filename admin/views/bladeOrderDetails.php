@@ -31,7 +31,7 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
     if( $order["customerDetails"] ){
         $customer = json_decode($order["customerDetails"],true);
     }
-    if( $order["extraInfo"] ){
+    if( !empty($order["extraInfo"]) ){
         $extraInfoOrder = json_decode($order["extraInfo"],true);
         $keys = array_keys($extraInfoOrder);
         $extraInfoDetails = array();
@@ -43,12 +43,12 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
     }else{
         $extraInfoDetails = array();
     }
-    if( $order["themes"] ){
+    if( !empty($order["themes"]) ){
         $themes = explode(",",$order["themes"]);
     }else{
         $themes = array();
     }
-    if( $order["extras"] ){
+    if( !empty($order["extras"]) ){
         $extras = explode(",",$order["extras"]);
         for( $i = 0; $i < sizeof($extras); $i++ ){
             $extra = selectDB("extras","`id` = '{$extras[$i]}'");

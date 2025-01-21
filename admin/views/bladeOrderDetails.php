@@ -59,7 +59,6 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
         $extrasDetails = array();
     }
     $gatewayBody = json_decode($order["gatewayBody"],true);
-    var_dump($gatewayBody); 
     $orderStatus = array("Pending","Confirmed","Cancelled");
     $status = $orderStatus[$order["status"]];
     $chargeTypeText = array(direction("Full Payment","سداد كامل"),direction("Partial Payment","سداد جزئي"),direction("Free","مجاني"));

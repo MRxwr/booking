@@ -50,10 +50,11 @@ if( $order = selectDBNew("bookings",[$_GET["id"]],"`code` = ?","") ){
     }
     if( !empty($order["extras"]) ){
         $extras = explode(",",$order["extras"]);
+        $extrasDetails = array();
         for( $i = 0; $i < sizeof($extras); $i++ ){
             $extra = selectDB("extras","`id` = '{$extras[$i]}'");
-            $extrasDetails["title"] = direction($extra[0]["enTitle"],$extra[0]["arTitle"]);
-            $extrasDetails["price"] = $extra["price"];
+            $extrasDetails["title"][] = direction($extra[0]["enTitle"],$extra[0]["arTitle"]);
+            $extrasDetails["price"][] = $extra[0]["price"];
         }
     }else{
         $extrasDetails = array();

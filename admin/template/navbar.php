@@ -21,7 +21,8 @@
 							</li>
 						<?php
 							$languagesText = direction("العربية","ENGLISH");
-							$languagesLink = getSign() . direction("lang=ar","lang=en");
+							$languagesLink = ( isset($_GET["v"]) && !empty($_GET["v"]) ) ? "?v={$_GET["v"]}" : "";
+							$languagesLink .= getSign() . direction("lang=ar","lang=en");
 							echo "<li><a href='{$languagesLink}'><i class='fa fa-language'></i><span>{$languagesText}</span></a></li>" ;
 						?>
 							<li>

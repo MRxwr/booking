@@ -253,7 +253,7 @@ if( $vendor["type"] == "3" ){
 			var durationText = "Duration";
 		}
 	  var serviceHTML = '<div class="col-md-4 col-sm-6 col-12 d-flex align-items-center justify-content-center p-2">';
-	  serviceHTML += '<div class="w-100 p-3 text-center serviceBLk" id="'+service.id+'"><span><img src="logos/'+service.logo+'" alt="'+service.title+'" style="width: 100%;"></span><hr class="m-0"><div>'+service.title+' </div><div style="font-size: 8px;" id="priceValue'+service.id+'" data-price="'+service.price+'">'+service.details+'</div></div>';
+	  serviceHTML += '<div class="w-100 p-3 text-center serviceBLk" id="'+service.id+'"><span><img src="logos/'+service.logo+'" alt="'+service.title+'" style="width: 100%;border-radius: 100%;"></span><hr class="m-0"><div>'+service.title+' </div><div style="font-size: 10px;" id="priceValue'+service.id+'" data-price="'+service.price+'">'+service.details+'</div></div>';
 	  serviceHTML += '</div>';
 	  servicesContainer.innerHTML += serviceHTML;
 	});

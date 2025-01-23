@@ -24,7 +24,7 @@
 						{
 						?>
 							<li>
-								<a href="?lang=AR"><i class="fa fa-language"></i><span>العربية</span></a>
+								<a href="?lang=ar"><i class="fa fa-language"></i><span>العربية</span></a>
 							</li>
 						<?php
 						}
@@ -32,7 +32,7 @@
 						{
 						?>
 							<li>
-								<a href="?lang=ENG"><i class="fa fa-language"></i><span>ENGLISH</span></a>
+								<a href="?lang=en"><i class="fa fa-language"></i><span>ENGLISH</span></a>
 							</li>
 						<?php
 						}

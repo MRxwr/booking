@@ -43,6 +43,17 @@ function setLanguage(){
 	}
 }
 
+function getSign(){
+	GLOBAL $_SERVER;
+	// check url if it contains ? or not
+	if ( strpos($_SERVER['REQUEST_URI'], '?') !== false ) {
+		$sign = "&";
+	}else{
+		$sign = "?";
+	}
+	return $sign;
+}
+
 function setLanguageFront(){ 
 	GLOBAL $_GET;
 	if ( isset($_GET["lang"]) && $_GET["lang"] == "ar" ){

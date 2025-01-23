@@ -20,22 +20,9 @@
 								<a><i class="fa fa-user"></i><span><?php echo $username ?></span><hr></a>
 							</li>
 						<?php
-						if ( !isset($_COOKIE["CREATEkwLANG"]) OR $_COOKIE["CREATEkwLANG"] == "ENG" )
-						{
-						?>
-							<li>
-								<a href="?lang=ar"><i class="fa fa-language"></i><span>العربية</span></a>
-							</li>
-						<?php
-						}
-						else
-						{
-						?>
-							<li>
-								<a href="?lang=en"><i class="fa fa-language"></i><span>ENGLISH</span></a>
-							</li>
-						<?php
-						}
+							$languagesText = direction("العربية","ENGLISH");
+							$languagesLink = getSign() . direction("lang=ar","lang=en");
+							echo "<li><a href='{$languagesLink}'><i class='fa fa-language'></i><span>{$languagesText}</span></a></li>" ;
 						?>
 							<li>
 								<a href="logout.php"><i class="zmdi zmdi-power"></i><span>Log Out</span></a>

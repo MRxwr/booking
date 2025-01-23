@@ -252,7 +252,7 @@ if( $vendor["type"] == "3" ){
 			var priceText = "Price";
 			var durationText = "Duration";
 		}
-	  var serviceHTML = '<div class="col-6 d-flex align-items-center justify-content-center p-2">';
+	  var serviceHTML = '<div class="col-6 d-flex align-items-center justify-content-center p-2 dataEntryBorder">';
 	  serviceHTML += '<div class="w-100 p-3 text-center serviceBLk" id="'+service.id+'"><span>'+service.title+' </span><label style="font-size: 8px;"></label><hr class="m-0"><label style="font-size: 8px;">'+durationText+': '+service.period+' '+mins+' </label><div style="font-size: 8px;" id="priceValue'+service.id+'" data-price="'+service.price+'">'+service.price+' -/KD</div></div>';
 	  serviceHTML += '</div>';
 	  servicesContainer.innerHTML += serviceHTML;
@@ -428,7 +428,7 @@ if( $vendor["type"] == "3" ){
 	}
 	$.each(filteredThemes, function(key, value) {
 		var image = value.image;
-		var themes = "<div class='col-4 pb-1'><img src='logos/"+image+"' class='themeInput' id='"+image+"' style='width:100px; height:100px'></a></div>";
+		var themes = "<div class='col-4 pb-1'><img src='logos/"+image+"' class='themeInput dataEntryBorder' id='"+image+"' style='width:100px; height:100px'></a></div>";
 		$(".themesBLK").append(themes);
 	});
 	});

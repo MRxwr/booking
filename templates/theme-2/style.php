@@ -115,7 +115,7 @@ button {
 
 .serviceBLk {
     border: 1px solid <?php echo $vendor["websiteColor"] ?>;
-    border-radius: 0px !important;
+    border-radius: 10px !important;
 }
 
 .serviceBLk:hover {

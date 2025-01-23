@@ -41,7 +41,7 @@ if( $extraInfo = selectDB("extrainfo","`status` = '0' AND `hidden` = '0' AND `ve
 		</div>
 	</div>
 	<div class="col-12 mt-3 mb-3">
-		<div type="submit" class="btn btn-primary w-100" style="border-radius: 0px;">
+		<div type="submit" class="btn btn-primary w-100" style="border-radius: 10px;">
 		<div class="row m-0" id="submitBtn">
 			<div class="col-9 text-center">
 			<?php echo direction("Book Now","حجز الان") ?>

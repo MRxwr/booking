@@ -89,7 +89,6 @@ body {
 
 .socialMediaBar {
     box-sizing: border-box;
-    box-shadow: 0px 0px 10px #d2cece;
 }
 
 input {

@@ -4,7 +4,7 @@
 					<div class="logo-wrap">
 						<a href="index.php">
 							<img class="brand-img" src="../img/logo.png" alt="brand"/>
-							<span class="brand-text">Create Booking System</span>
+							<span class="brand-text">C-Booking</span>
 						</a>
 					</div>
 				</div>	

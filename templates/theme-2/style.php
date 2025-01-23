@@ -71,11 +71,7 @@ body {
     border-radius: 10px;
 }
 
-input {
-    border-radius: 10px !important;
-}
-
-select {
+.dataEntryBorder {
     border-radius: 10px !important;
 }
 

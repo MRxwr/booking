@@ -2,7 +2,7 @@
 <div class="row m-0 w-100">
 	<div class="col-md-12">
 		<label><?php echo direction("Branch","الفرع") ?></label>
-		<select name="branch" class="form-control" required id="branch-select">
+		<select name="branch" class="form-control dataEntryBorder" required id="branch-select">
 			<option selected disabled value="0"><?php echo direction("Please select a Branch","الرجاء تحديد فرع") ?></option>
 			<?php
 			$orderBy = direction("enTitle","arTitle");
@@ -72,7 +72,7 @@ if( $vendor["type"] == "3" ){
 					$extraTitle = direction($extra["enTitle"],$extra["arTitle"]);
 					?>
 				<div class="col-10 d-flex p-0 pb-1">
-					<input type="checkbox" class="" id="checkExtras" data-price="<?php echo $extra["price"] ?>" value="<?php echo $extra["id"] ?>">
+					<input type="checkbox" class="dataEntryBorder" id="checkExtras" data-price="<?php echo $extra["price"] ?>" value="<?php echo $extra["id"] ?>">
 					<label class="form-check-label p-1" for="extra<?php echo $extra["id"] ?>"><?php echo $extraTitle ?></label>
 				</div>
 				<div class="col-2 p-0" style='font-size: 10px;align-content: center;white-space: nowrap;'>

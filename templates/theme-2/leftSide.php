@@ -1,4 +1,4 @@
-<div class="col-5 p-0" id="leftSide">
+<div class="col-12" id="leftSide">
 	<!-- header -->
 	<?php require_once("templates/main/header.php") ?>
 	<!-- end of header -->

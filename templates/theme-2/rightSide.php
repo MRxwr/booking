@@ -1,3 +1,5 @@
+<?php
+/*
 <div class="col-7 p-0 d-none d-md-block" id="rightSide">
 	<div class="rightBg"></div>
 	<div class="bgOver"></div>
@@ -6,3 +8,5 @@
 	</div>
 	<img src="https://i.imgur.com/BW29zDw.jpg" class="poweredByRight" data-toggle="modal" data-target="#terms">
 </div>
+*/
+?>

@@ -428,7 +428,7 @@ if( $vendor["type"] == "3" ){
 	}
 	$.each(filteredThemes, function(key, value) {
 		var image = value.image;
-		var themes = "<div class='col-4 pb-1'><img src='logos/"+image+"' class='themeInput' id='"+image+"' style='width:100px; height:100px'></a></div>";
+		var themes = "<div class='col-sm-2 col-4 pb-1'><img src='logos/"+image+"' class='themeInput' id='"+image+"' style='width:100px; height:100px'></a></div>";
 		$(".themesBLK").append(themes);
 	});
 	});

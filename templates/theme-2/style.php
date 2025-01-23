@@ -71,6 +71,14 @@ body {
     border-radius: 10px;
 }
 
+input {
+    border-radius: 10px !important;
+}
+
+select {
+    border-radius: 10px !important;
+}
+
 .heroLogoBg {
     background-color: #FFFFFF;
     width: 125px;

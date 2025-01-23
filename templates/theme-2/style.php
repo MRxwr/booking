@@ -95,17 +95,17 @@ body {
 input {
     margin-top: 10px;
     margin-bottom: 10px;
-    border-radius: 0px !important;
+    border-radius: 10px !important;
 }
 
 select {
     margin-top: 10px;
     margin-bottom: 10px;
-    border-radius: 0px !important;
+    border-radius: 10px !important;
 }
 
 button {
-    border-radius: 0px !important;
+    border-radius: 10px !important;
 }
 
 .btnPrice {

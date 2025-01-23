@@ -16,8 +16,8 @@ body {
 }
 
 #leftSide {
-    height: 100vh;
-    overflow-y: scroll;
+    /*height: 100vh;
+    overflow-y: scroll;*/
 }
 
 #rightSide {

@@ -5,6 +5,7 @@ $(window).ready(function() {
 	if (width < 768) {
 	  $("#leftSide").attr("style", "");
 	  $("#mainRow").removeClass("p-5").addClass("p-0");
+	  $(".heroLogo").attr("style", "width: 85px; height: 85px;");
 	} else {
 	  $("#leftSide").removeClass("col-12").addClass("col-12");
 	}

@@ -1,9 +1,9 @@
 <div class="container-fluid p-0">
-	<div class="row w-100 m-0 p-5">
+	<div class="row w-100 m-0 p-5" id="mainRow">
 	<div id="loading-screen" style="display: block;">
 		<img src="img/loading.png" alt="Loading...">
 	</div>
-	<div class="col-12 p-0" id="leftSide" style="border:2px solid;border-radius: 10px;">
+	<div class="col-12 p-0" id="leftSide" style="border:2px solid;border-radius: 10px;box-shadow: 0px 0px 20px 10px lightgray;">
 		<!-- header -->
 		<?php require_once("templates/{$vendorTheme}/header.php") ?>
 		<!-- end of header -->

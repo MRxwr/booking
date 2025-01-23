@@ -1,9 +1,9 @@
 <div class="row py-3 m-0">
 	<div class="col-6" style="text-align: -webkit-center;"><img src="<?php echo "logos/{$vendor["logo"]}" ?>" class="heroLogo"></div></div>
 	<div class="col-6" style="text-align: -webkit-center;"><?php echo direction($vendor["enDetails"],$vendor["arDetails"]) ?></div></div>
-	<div class="col-3" style="text-align: -webkit-center;"><?php echo count($serviceList) ?> <div><?php echo direction("Services","خدمة") ?></div></div>
-	<div class="col-3" style="text-align: -webkit-center;border-right: 1px solid; border-left: 1px solid"><?php echo count($clientsList) ?> <div><?php echo direction("Clients","عميل") ?></div></div>
-	<div class="col-3 mb-3" style="text-align: -webkit-center;"><?php echo count($bookingsList) ?> <div><?php echo direction("Bookings","حجز") ?></div></div>
+	<div class="col-4" style="text-align: -webkit-center;"><?php echo count($serviceList) ?> <div><?php echo direction("Services","خدمة") ?></div></div>
+	<div class="col-4" style="text-align: -webkit-center;border-right: 1px solid; border-left: 1px solid"><?php echo count($clientsList) ?> <div><?php echo direction("Clients","عميل") ?></div></div>
+	<div class="col-4 mb-3" style="text-align: -webkit-center;"><?php echo count($bookingsList) ?> <div><?php echo direction("Bookings","حجز") ?></div></div>
 		<?php
 		if( !empty($vendor["socialMedia"]) ){
 			$socialMedia = json_decode($vendor["socialMedia"],true);

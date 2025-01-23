@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 require_once("includes/config.php");
 require_once("includes/functions.php");
 require_once("includes/checksouthead.php");
-setLanguageFront();
+setLanguage();
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -116,7 +116,7 @@ if( $vendor["type"] == "3" ){
 	<?php
 	$services = selectDB("services","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
 	foreach($services as $service){
-	  echo "{ id: '".$service["id"]."',price: '".$service["price"]."',period: '".$service["period"]."',logo: '".$service["logo"]."', title: '".direction($service["enTitle"],$service["arTitle"])."'},"; 
+	  echo "{ id: '".$service["id"]."',price: '".$service["price"]."',period: '".$service["period"]."',logo: '".$service["logo"]."',details: '".direction($service["enDetails"],$service["arDetails"])."', title: '".direction($service["enTitle"],$service["arTitle"])."'},"; 
 	}
 	?>
   ];
@@ -247,13 +247,14 @@ if( $vendor["type"] == "3" ){
 			var mins = "دقيقه";
 			var priceText = "السعر";
 			var durationText = "المدة";
+			var details = 
 		}else{
 			var mins = "mins";
 			var priceText = "Price";
 			var durationText = "Duration";
 		}
 	  var serviceHTML = '<div class="col-md-4 col-sm-6 col-12 d-flex align-items-center justify-content-center p-2">';
-	  serviceHTML += '<div class="w-100 p-3 text-center serviceBLk" id="'+service.id+'"><span><img src="logos/'+service.logo+'" alt="'+service.title+'" style="width: 100%;"></span><hr class="m-0"><div>'+service.title+' </div><label style="font-size: 8px;">'+durationText+': '+service.period+' '+mins+' </label><div style="font-size: 8px;" id="priceValue'+service.id+'" data-price="'+service.price+'">'+service.price+' -/KD</div></div>';
+	  serviceHTML += '<div class="w-100 p-3 text-center serviceBLk" id="'+service.id+'"><span><img src="logos/'+service.logo+'" alt="'+service.title+'" style="width: 100%;"></span><hr class="m-0"><div>'+service.title+' </div><div style="font-size: 8px;" id="priceValue'+service.id+'" data-price="'+service.price+'">'+service.details+'</div></div>';
 	  serviceHTML += '</div>';
 	  servicesContainer.innerHTML += serviceHTML;
 	});

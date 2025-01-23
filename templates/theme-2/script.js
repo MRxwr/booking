@@ -3,7 +3,8 @@ $(window).ready(function() {
 	$("#loading-screen").hide();
 	var width = $(window).width();
 	if (width < 768) {
-	  $("#leftSide").removeClass("col-12").addClass("col-12");
+	  $("#leftSide").attr("style", "");
+	  $("#mainRow").removeClass("p-5").addClass("p-0");
 	} else {
 	  $("#leftSide").removeClass("col-12").addClass("col-12");
 	}

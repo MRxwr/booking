@@ -32,7 +32,7 @@
 <?php 
 if( $vendor["type"] == "3" ){
 ?>
-	<div class="row m-0 w-100">
+	<div class="row m-0 w-100" id="pictureTypes-container-wrapper" style="display:none;">
 		<div class="col-12">
 			<span><?php echo direction("Types","النوع") ?></span>
 		</div>
@@ -45,7 +45,7 @@ if( $vendor["type"] == "3" ){
 		</div>
 	</div>
 
-	<div class="row m-0 w-100" id="themes-container-wrapper">
+	<div class="row m-0 w-100" id="themes-container-wrapper" style="display:none;">
 		<div class="col-12">
 			<span><?php echo direction("Themes","التصاميم") ?></span>
 		</div>
@@ -399,6 +399,12 @@ if( $vendor["type"] == "3" ){
 
 	// Fill typesBlk with radio inputs based on filtered pictureTypes
 	$(".typesBLK").empty();
+	// check if filteredThemes emty then hide #theme-container-wrapper
+	if( Object.keys(filteredPictureTypes).length == 0 ){
+		$("#pictureTypes-container-wrapper").hide();
+	}else{
+		$("#pictureTypes-container-wrapper").show();
+	}
 	$.each(filteredPictureTypes, function(key, value) {
 		$types = "<div class='col-10 p-0 pb-1'><input type='radio' id='pictureType' name='pictureTypeRadio' value='"+value.id+"' data-themes='"+value.themesTotal+"' data-price='"+value.price+"'> <label>"+value.title+"</label></div><div class='col-2 p-0' style='font-size: 10px;align-content: center;white-space: nowrap;'>"+parseFloat(value.price).toFixed(3)+" -/KD</div>";
 		$(".typesBLK").append($types);

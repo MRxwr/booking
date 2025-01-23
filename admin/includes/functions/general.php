@@ -33,15 +33,13 @@ function searchFile($path, $fileName) {
 // set main language \\
 function setLanguage(){ 
 	GLOBAL $_GET;
-	if ( isset($_GET["lang"]) && $_GET["lang"] == "ar" ){
-		setcookie("createLang","ar",time() + (86400*30),"/");
-	}else{
-		setcookie("createLang","en",time() + (86400*30),"/");
-	}
-	if( isset($_GET["v"]) && !empty($_GET["v"]) ){
-		header("LOCATION: ?v={$_GET["v"]}");
-	}else{
-		header("LOCATION: ?v=Home");
+	if( isset($_GET["lang"]) ){
+		setcookie("createLang",$_GET["lang"],time() + (86400*30),"/");
+		if( !isset($_GET["v"]) || empty($_GET["v"]) ){
+			header("LOCATION: ?v=Home");
+		}else{
+			header("LOCATION: ?v={$_GET["v"]}");
+		}
 	}
 }
 

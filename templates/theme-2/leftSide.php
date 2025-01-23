@@ -1,4 +1,4 @@
-<div class="container-fluid p-0" style="height: 100vh;">
+<div class="container-fluid p-0">
 	<div class="row w-100 m-0 p-5">
 	<div id="loading-screen" style="display: block;">
 		<img src="img/loading.png" alt="Loading...">

@@ -38,10 +38,10 @@ function setLanguage(){
 	}else{
 		setcookie("createLang","en",time() + (86400*30),"/");
 	}
-	if( isset($_GET["page"]) && !empty($_GET["page"]) ){
-		header("LOCATION: ?page={$_GET["page"]}");
+	if( isset($_GET["v"]) && !empty($_GET["v"]) ){
+		header("LOCATION: ?v={$_GET["v"]}");
 	}else{
-		header("LOCATION: ?page=home");
+		header("LOCATION: ?v=home");
 	}
 }
 

@@ -22,7 +22,7 @@
 	}else{
 		//call selections
 		require_once("templates/{$theme}/selections.php");
-		
+		var_dump($theme);
 		//call info
 		require_once("templates/{$theme}/info.php");
 	}

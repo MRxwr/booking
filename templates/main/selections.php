@@ -45,7 +45,7 @@ if( $vendor["type"] == "3" ){
 		</div>
 	</div>
 
-	<div class="row m-0 w-100">
+	<div class="row m-0 w-100" id="themes-container-wrapper">
 		<div class="col-12">
 			<span><?php echo direction("Themes","التصاميم") ?></span>
 		</div>
@@ -414,6 +414,12 @@ if( $vendor["type"] == "3" ){
 
 	// Fill themesBLK with radio inputs and images based on filtered themes
 	$(".themesBLK").empty();
+	// check if filteredThemes emty then hide #theme-container-wrapper
+	if( Object.keys(filteredThemes).length == 0 ){
+		$("#themes-container-wrapper").hide();
+	}else{
+		$("#themes-container-wrapper").show();
+	}
 	$.each(filteredThemes, function(key, value) {
 		var image = value.image;
 		var themes = "<div class='col-4 pb-1'><img src='logos/"+image+"' class='themeInput' id='"+image+"' style='width:100px; height:100px'></a></div>";

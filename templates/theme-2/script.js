@@ -4,7 +4,7 @@ $(window).ready(function() {
 	var width = $(window).width();
 	if (width < 768) {
 	  $("#leftSide").attr("style", "");
-	  $("#mainRow").removeClass("p-5").addClass("p-0");
+	  $("#mainRow").attr("style", "");
 	  $(".heroLogo").attr("style", "width: 85px; height: 85px;");
 	} else {
 	  $("#leftSide").removeClass("col-12").addClass("col-12");

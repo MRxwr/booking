@@ -65,8 +65,10 @@ body {
 .heroLogo {
     display: block;
     margin: 0 auto;
-    width: 70px;
-    height: 70px;
+    width: 150px;
+    height: 150px;
+    border: 1px solid;
+    border-radius: 10px;
 }
 
 .heroLogoBg {

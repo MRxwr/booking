@@ -6,7 +6,7 @@
 			$socialMedia = json_decode($vendor["socialMedia"],true);
 			$socialMediaKeys = array_keys($socialMedia);
 			if( sizeof($socialMediaKeys) > 0 ){
-				echo '<div class="col-md-12 mt-3 d-flex justify-content-center align-items-center"><div class="row p-3 socialMediaBar">';
+				echo '<div class="col-md-12 d-flex justify-content-center align-items-center"><div class="row p-3 socialMediaBar">';
 			for( $i = 0; $i < sizeof($socialMedia) ; $i++){
 				if( !empty($socialMedia[$socialMediaKeys[$i]]) ){
 					$socialMediaLink = selectDB("socialmedia","`enTitle` = '{$socialMediaKeys[$i]}'");

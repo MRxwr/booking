@@ -71,10 +71,6 @@ body {
     border-radius: 10px;
 }
 
-.dataEntryBorder {
-    border-radius: 10px !important;
-}
-
 .heroLogoBg {
     background-color: #FFFFFF;
     width: 125px;

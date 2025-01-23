@@ -3,19 +3,19 @@
 	<div class="col-12">
 		<div class="form-group">
 			<label for="name"><?php echo direction("Name","الإسم") ?></label>
-			<input type="text" class="form-control dataEntryBorder" id="name" placeholder="Enter your name" required>
+			<input type="text" class="form-control" id="name" placeholder="Enter your name" required>
 		</div>
 	</div>
 	<div class="col-6">
 		<div class="form-group">
 			<label for="mobile"><?php echo direction("Mobile","الجوال") ?></label>
-			<input type="number" step="any" maxlength="11" class="form-control dataEntryBorder" id="mobile" placeholder="96512345678" required>
+			<input type="number" step="any" maxlength="11" class="form-control" id="mobile" placeholder="96512345678" required>
 		</div>
 	</div>
 	<div class="col-6">
 		<div class="form-group">
 			<label for="email"><?php echo direction("Email","البريد الالكتروني") ?></label>
-			<input type="email" class="form-control dataEntryBorder" id="email" placeholder="Enter your email" required>
+			<input type="email" class="form-control" id="email" placeholder="Enter your email" required>
 		</div>
 	</div>
 <?php
@@ -27,7 +27,7 @@ if( $extraInfo = selectDB("extrainfo","`status` = '0' AND `hidden` = '0' AND `ve
 		<div class="col-6">
 			<div class="form-group">
 				<label for="name"><?php echo $title ?></label>
-				<input type="text" class="form-control dataEntryBorder" name="extraInfo[<?php echo $info["id"] ?>]" placeholder="" <?php echo $required ?>>
+				<input type="text" class="form-control" name="extraInfo[<?php echo $info["id"] ?>]" placeholder="" <?php echo $required ?>>
 			</div>	
 		</div>
 		<?php
@@ -36,12 +36,12 @@ if( $extraInfo = selectDB("extrainfo","`status` = '0' AND `hidden` = '0' AND `ve
 ?>
 	<div class="col-12 mt-3">
 		<div class="form-group form-check">
-			<input type="checkbox" class="form-check-input dataEntryBorder" id="exampleCheck1" required>
+			<input type="checkbox" class="form-check-input" id="exampleCheck1" required>
 			<label class="form-check-label" for="exampleCheck1" ><abbr title="<?php echo direction($vendor["enTerms"],$vendor["arTerms"]) ?>"><?php echo direction("I agree to terms and conditions","اوافق على الشروط والاحكام") ?></abbr></label>
 		</div>
 	</div>
 	<div class="col-12 mt-3 mb-3">
-		<div type="submit" class="btn btn-primary w-100 dataEntryBorder">
+		<div type="submit" class="btn btn-primary w-100" style="border-radius: 0px;">
 		<div class="row m-0" id="submitBtn">
 			<div class="col-9 text-center">
 			<?php echo direction("Book Now","حجز الان") ?>

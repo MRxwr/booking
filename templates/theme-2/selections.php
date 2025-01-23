@@ -2,7 +2,7 @@
 <div class="row m-0 w-100">
 	<div class="col-md-12">
 		<label><?php echo direction("Branch","الفرع") ?></label>
-		<select name="branch" class="form-control dataEntryBorder" required id="branch-select">
+		<select name="branch" class="form-control" required id="branch-select">
 			<option selected disabled value="0"><?php echo direction("Please select a Branch","الرجاء تحديد فرع") ?></option>
 			<?php
 			$orderBy = direction("enTitle","arTitle");
@@ -72,7 +72,7 @@ if( $vendor["type"] == "3" ){
 					$extraTitle = direction($extra["enTitle"],$extra["arTitle"]);
 					?>
 				<div class="col-10 d-flex p-0 pb-1">
-					<input type="checkbox" class="dataEntryBorder" id="checkExtras" data-price="<?php echo $extra["price"] ?>" value="<?php echo $extra["id"] ?>">
+					<input type="checkbox" class="" id="checkExtras" data-price="<?php echo $extra["price"] ?>" value="<?php echo $extra["id"] ?>">
 					<label class="form-check-label p-1" for="extra<?php echo $extra["id"] ?>"><?php echo $extraTitle ?></label>
 				</div>
 				<div class="col-2 p-0" style='font-size: 10px;align-content: center;white-space: nowrap;'>
@@ -90,7 +90,7 @@ if( $vendor["type"] == "3" ){
 <div class="row m-0 w-100">
 	<div class="col-md-6">
 		<label><?php echo direction("Date","التاريخ") ?></label>
-		<input type="date" name="date" data-disable-mobile="true" class="form-control dataEntryBorder" required>
+		<input type="date" name="date" data-disable-mobile="true" class="form-control" required>
 		<input type="hidden" name="serviceId" value="0" required>
 		<input type="hidden" name="branchId" value="0" required>
 		<input type="hidden" name="selectedDate" value="0" required>
@@ -102,7 +102,7 @@ if( $vendor["type"] == "3" ){
 	</div> 
 	<div class="col-md-6">
 		<label><?php echo direction("Time","الوقت") ?></label>
-		<select name="time" class="form-control dataEntryBorder" id="time-select" required>
+		<select name="time" class="form-control" id="time-select" required>
 			<option selected disabled value="0"><?php echo direction("Please select a Time","الرجاء تحديد الوقت") ?></option>
 		</select>
 	</div>
@@ -252,7 +252,7 @@ if( $vendor["type"] == "3" ){
 			var priceText = "Price";
 			var durationText = "Duration";
 		}
-	  var serviceHTML = '<div class="col-6 d-flex align-items-center justify-content-center p-2 dataEntryBorder">';
+	  var serviceHTML = '<div class="col-6 d-flex align-items-center justify-content-center p-2">';
 	  serviceHTML += '<div class="w-100 p-3 text-center serviceBLk" id="'+service.id+'"><span>'+service.title+' </span><label style="font-size: 8px;"></label><hr class="m-0"><label style="font-size: 8px;">'+durationText+': '+service.period+' '+mins+' </label><div style="font-size: 8px;" id="priceValue'+service.id+'" data-price="'+service.price+'">'+service.price+' -/KD</div></div>';
 	  serviceHTML += '</div>';
 	  servicesContainer.innerHTML += serviceHTML;
@@ -428,7 +428,7 @@ if( $vendor["type"] == "3" ){
 	}
 	$.each(filteredThemes, function(key, value) {
 		var image = value.image;
-		var themes = "<div class='col-4 pb-1'><img src='logos/"+image+"' class='themeInput dataEntryBorder' id='"+image+"' style='width:100px; height:100px'></a></div>";
+		var themes = "<div class='col-4 pb-1'><img src='logos/"+image+"' class='themeInput' id='"+image+"' style='width:100px; height:100px'></a></div>";
 		$(".themesBLK").append(themes);
 	});
 	});

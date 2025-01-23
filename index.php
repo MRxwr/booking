@@ -6,7 +6,7 @@ setLanguageFront();
 
 if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor = selectDBNew("vendors",[$_REQUEST["vendorURL"]],"`url` LIKE ? AND `hidden` = '0' AND `status` = '0'","") ){
 	$vendor = $vendor[0];
-	$theme = $vendor["theme"];
+	$vendorTheme = $vendor["theme"];
 	$serviceList = selectDB("services","`vendorId` = '{$vendor["id"]}' AND `status` = '0' AND `hidden` = '0'");
 	$bookingsList = selectDB("bookings","`vendorId` = '{$vendor["id"]}' AND `status` = '1'");
 	$clientsList = selectDB("bookings","`vendorId` = '{$vendor["id"]}' AND `status` = '1' GRPUP BY `customerDetails`");
@@ -51,7 +51,7 @@ if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor =
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 		<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-		<?php require_once("templates/{$theme}/style.php") ?>
+		<?php require_once("templates/{$vendorTheme}/style.php") ?>
 	</head>
 	<body>
 		<div class="container-fluid p-0">
@@ -59,12 +59,12 @@ if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor =
 			<div id="loading-screen" style="display: block;">
 				<img src="img/loading.png" alt="Loading...">
 			</div>
-			<?php require_once("templates/{$theme}/leftSide.php") ?>
-			<?php require_once("templates/{$theme}/rightSide.php") ?>
+			<?php require_once("templates/{$vendorTheme}/leftSide.php") ?>
+			<?php require_once("templates/{$vendorTheme}/rightSide.php") ?>
 			</div>
 		</div>
 		<script>
-			<?php require_once("templates/{$theme}/script.js") ?>
+			<?php require_once("templates/{$vendorTheme}/script.js") ?>
 		</script>
 	</body> 
 </html>

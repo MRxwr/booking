@@ -247,7 +247,6 @@ if( $vendor["type"] == "3" ){
 			var mins = "دقيقه";
 			var priceText = "السعر";
 			var durationText = "المدة";
-			var details = 
 		}else{
 			var mins = "mins";
 			var priceText = "Price";

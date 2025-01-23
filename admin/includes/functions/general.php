@@ -41,7 +41,7 @@ function setLanguage(){
 	if( isset($_GET["v"]) && !empty($_GET["v"]) ){
 		header("LOCATION: ?v={$_GET["v"]}");
 	}else{
-		header("LOCATION: ?v=home");
+		header("LOCATION: ?v=Home");
 	}
 }
 

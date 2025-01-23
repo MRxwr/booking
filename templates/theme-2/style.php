@@ -183,7 +183,7 @@ button {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    height: 200px;
+    height: 350px;
 }
 #loading-screen {
     position: fixed;

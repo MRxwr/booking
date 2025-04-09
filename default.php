@@ -355,7 +355,7 @@
             <div class="footer-bottom">
                 <p class="mb-0">&copy; 2023 Reservaa. All rights reserved.</p>
             </div>
-        </div>
+        </div> 
     </footer>
 
     <!-- Back To Top Button -->

@@ -840,7 +840,7 @@
     <section id="contact" class="contact">
         <div class="container">
             <div class="section-header text-center mb-5">
-                <h2 class="section-title mb-3">Get In Touch</h2>
+                <h2 class="section-title mb-3">Get In Touch</h2> 
                 <p class="section-subtitle">Have questions? We're here to help!</p>
             </div>
             <div class="row">

@@ -279,7 +279,7 @@ function insertLogDB($table,$data){
 }
 
 function LogsHistory($array){
-    insertLogDB("logs",$array);
+    //insertLogDB("logs",$array);
 }
 
 function queryDB($sql){

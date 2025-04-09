@@ -113,7 +113,7 @@
 											</a>
 										</td>
 										<div style="display: none">
-											<label id="vendorId<?php echo $branch[$i]["id"]?>"><?php echo $branch[$i]["vendorId"] ?></label>
+											<label id="vendorId<?php //echo $blockedDays[$i]["branchId"] ?>"><?php //echo $blockedDays[$i]["vendorId"] ?></label>
 										</div>
 									</tr>
 									<?php

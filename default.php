@@ -6,8 +6,8 @@
     <title>Reservaa - Modern Reservation System</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!-- Header -->
@@ -355,7 +355,7 @@
             <div class="footer-bottom">
                 <p class="mb-0">&copy; 2023 Reservaa. All rights reserved.</p>
             </div>
-        </div> 
+        </div>
     </footer>
 
     <!-- Back To Top Button -->
@@ -366,6 +366,49 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="js/script.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Navbar scroll effect
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('.navbar').addClass('scrolled');
+                    $('#backToTop').addClass('active');
+                } else {
+                    $('.navbar').removeClass('scrolled');
+                    $('#backToTop').removeClass('active');
+                }
+            });
+            
+            // Smooth scrolling for nav links
+            $('.nav-link, .footer-links a').on('click', function (e) {
+                if (this.hash !== '') {
+                    e.preventDefault();
+                    const hash = this.hash;
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top - 100
+                    }, 800);
+                }
+            });
+            
+            // Back to top button
+            $('#backToTop').on('click', function () {
+                $('html, body').animate({ scrollTop: 0 }, 800);
+            });
+            
+            // Animation on scroll
+            $(window).scroll(function() {
+                $('.fade-in').each(function() {
+                    const elementTop = $(this).offset().top;
+                    const elementBottom = elementTop + $(this).outerHeight();
+                    const viewportTop = $(window).scrollTop();
+                    const viewportBottom = viewportTop + $(window).height();
+                    
+                    if (elementBottom > viewportTop && elementTop < viewportBottom) {
+                        $(this).addClass('visible');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

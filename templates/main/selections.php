@@ -1,66 +1,3 @@
-<?php
-$encryptionKey = "your-secret-key"; // Use a secure key and store it safely
-
-// Encrypt branches data
-$branches = selectDB("branches", "`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
-$encryptedBranches = encryptData(json_encode($branches), $encryptionKey);
-
-// Encrypt services data
-$services = selectDB("services", "`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
-$encryptedServices = encryptData(json_encode($services), $encryptionKey);
-
-// Encrypt extras data
-$extras = selectDB("extras", "`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
-$encryptedExtras = encryptData(json_encode($extras), $encryptionKey);
-
-// Encrypt pictureTypes data
-$pictureTypes = [];
-foreach ($services as $service) {
-    $listTypes = is_null($service["listTypes"]) ? [] : json_decode($service["listTypes"], true);
-    foreach ($listTypes as $type) {
-        $types = selectDB("picturetype", "`id` = '{$type}'");
-        $pictureTypes[] = [
-            "id" => $types[0]["id"],
-            "serviceId" => $service["id"],
-            "price" => $types[0]["price"],
-            "themesTotal" => $types[0]["themes"],
-            "title" => direction($types[0]["enTitle"], $types[0]["arTitle"])
-        ];
-    }
-}
-$encryptedPictureTypes = encryptData(json_encode($pictureTypes), $encryptionKey);
-
-// Encrypt allowedBookingPeriod data
-$allowedBookingPeriod = selectDB("calendar", "`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
-$encryptedAllowedBookingPeriod = encryptData(json_encode($allowedBookingPeriod), $encryptionKey);
-
-// Encrypt themes data
-$themes = [];
-foreach ($services as $service) {
-    $themesList = is_null($service["themes"]) ? [] : json_decode($service["themes"], true);
-    foreach ($themesList as $theme) {
-        $themeData = selectDB("themes", "`id` = '{$theme}'");
-        $images = is_null($themeData[0]["themes"]) ? [] : json_decode($themeData[0]["themes"], true);
-        foreach ($images as $image) {
-            $themes[] = [
-                "id" => $themeData[0]["id"],
-                "serviceId" => $service["id"],
-                "image" => $image
-            ];
-        }
-    }
-}
-$encryptedThemes = encryptData(json_encode($themes), $encryptionKey);
-
-// Encrypt blockedDays data
-$blockedDays = selectDB("blockday", "`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
-$encryptedBlockedDays = encryptData(json_encode($blockedDays), $encryptionKey);
-
-// Encrypt blockedPeriods data
-$blockedPeriods = selectDB("blockdate", "`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
-$encryptedBlockedPeriods = encryptData(json_encode($blockedPeriods), $encryptionKey);
-?>
-
 <form method="post" action="">
 <div class="row m-0 w-100">
 	<div class="col-md-12">
@@ -172,39 +109,94 @@ if( $vendor["type"] == "3" ){
 </div>
 
 <script>
-    // Pass encrypted data to JavaScript
-    const encryptedBranches = "<?php echo $encryptedBranches; ?>";
-    const encryptedServices = "<?php echo $encryptedServices; ?>";
-    const encryptedExtras = "<?php echo $encryptedExtras; ?>";
-    const encryptedPictureTypes = "<?php echo $encryptedPictureTypes; ?>";
-    const encryptedAllowedBookingPeriod = "<?php echo $encryptedAllowedBookingPeriod; ?>";
-    const encryptedThemes = "<?php echo $encryptedThemes; ?>";
-    const encryptedBlockedDays = "<?php echo $encryptedBlockedDays; ?>";
-    const encryptedBlockedPeriods = "<?php echo $encryptedBlockedPeriods; ?>";
-
   // total themes
   var totalThemes = 0;
   // Store services data in a JavaScript object
-  var services = JSON.parse(decryptData(encryptedServices, "your-secret-key"));
+  var services = [
+	<?php
+	$services = selectDB("services","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
+	foreach($services as $service){
+	  echo "{ id: '".$service["id"]."',price: '".$service["price"]."',period: '".$service["period"]."', title: '".direction($service["enTitle"],$service["arTitle"])."'},"; 
+	}
+	?>
+  ];
 
   // Store picturetypes data in a JavaScript object
-  var pictureTypes = JSON.parse(decryptData(encryptedPictureTypes, "your-secret-key"));
+  var pictureTypes = [
+	<?php
+		for ( $i = 0; $i < sizeof($services); $i++ ) {
+			$pictureTypes = ( is_null($services[$i]["listTypes"]) ) ? [] : json_decode($services[$i]["listTypes"],true);
+			foreach($pictureTypes as $type){
+				$types = selectDB("picturetype","`id` = '{$type}'");
+				echo "{ id: '{$types[0]["id"]}', serviceId: '{$services[$i]["id"]}' , price: '{$types[0]["price"]}' , themesTotal: '{$types[0]["themes"]}' ,title: '".direction($types[0]["enTitle"],$types[0]["arTitle"])."'},"; 
+			}
+		}
+	?>
+  ];
 
     // Store themes data in a JavaScript object
-	var themes = JSON.parse(decryptData(encryptedThemes, "your-secret-key"));
+	var themes = [
+	<?php
+		for ( $i = 0; $i < sizeof($services); $i++ ) {
+			$themesList = ( is_null($services[$i]["themes"]) ) ? [] : json_decode($services[$i]["themes"],true);
+			foreach($themesList as $theme){
+				$themes = selectDB("themes","`id` = '{$theme}'");
+				$images = ( is_null($themes[0]["themes"]) ) ? [] : json_decode($themes[0]["themes"],true);
+				if( count($images) ){
+					for( $j = 0; $j < sizeof($images); $j++ ){
+						echo "{ id: '{$themes[0]["id"]}', serviceId: '{$services[$i]["id"]}' ,image: '{$images[$j]}'},"; 
+					}
+				}
+			}
+		}
+	?>
+  ];
+
+
 
   // Store branches data in a JavaScript object
-  var branches = JSON.parse(decryptData(encryptedBranches, "your-secret-key"));
+  var branches = [
+	<?php
+	$branches = selectDB("branches","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
+	foreach( $branches as $branch ){
+	  $branchServices = json_decode($branch["services"]);
+	  echo "{ id: '".$branch["id"]."', services: ".json_encode($branchServices)."},";
+	}
+	?>
+  ];
+
 
   //calendar allowed booking period
-  var allowedBookingPeriod = JSON.parse(decryptData(encryptedAllowedBookingPeriod, "your-secret-key"));
+  var allowedBookingPeriod = [
+	<?php
+	$calendars = selectDB("calendar","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
+	foreach( $calendars as $calendar ){
+	  echo "{ id: '".$calendar["id"]."', branchId: '".$calendar["branchId"]."', startDate: '".$calendar["startDate"]."', endDate: '".$calendar["endDate"]."'},";
+	}
+	?>
+  ];
+
 
   //blocked days in calendar
-  var blockedDays = JSON.parse(decryptData(encryptedBlockedDays, "your-secret-key"));
+  var blockedDays = [
+	<?php
+	$blockedDaysBranches = selectDB("blockday","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
+	foreach( $blockedDaysBranches as $blockedDaysBranche ){
+	  echo "{ id: '".$blockedDaysBranche["id"]."', branchId: '".$blockedDaysBranche["branchId"]."', day: '".$blockedDaysBranche["day"]."'},";
+	}
+	?>
+  ];
+
 
   //blocked date periods in calendar
-  var blockedPeriods = JSON.parse(decryptData(encryptedBlockedPeriods, "your-secret-key"));
-
+  var blockedPeriods = [
+	<?php
+	$blockedPeriodsBranches = selectDB("blockdate","`status` = '0' AND `hidden` = '0' AND `vendorId` = '{$vendor["id"]}' ORDER BY `id` ASC");
+	foreach( $blockedPeriodsBranches as $blockedPeriodsBranche ){
+	  echo "{ id: '".$blockedPeriodsBranche["id"]."', branchId: '".$blockedPeriodsBranche["branchId"]."', startDate: '".$blockedPeriodsBranche["startDate"]."', endDate: '".$blockedPeriodsBranche["endDate"]."'},";
+	}
+	?>
+  ];
   // intialze flatpicker
   var dateInput = document.querySelector("input[name='date']");
   var flatpickrInstance = flatpickr(dateInput, {

@@ -1,3 +1,15 @@
+// Include CryptoJS library (add this script tag in your HTML head if not already included)
+// <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+// Decrypt function
+function decryptData(encryptedData, key) {
+    const rawData = atob(encryptedData);
+    const iv = CryptoJS.enc.Base64.parse(rawData.slice(0, 16));
+    const encrypted = CryptoJS.enc.Base64.parse(rawData.slice(16));
+    const decrypted = CryptoJS.AES.decrypt({ ciphertext: encrypted }, CryptoJS.enc.Utf8.parse(key), { iv: iv });
+    return JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
+}
+
 // on ready
 $(window).ready(function() {
 	$("#loading-screen").hide();
@@ -105,18 +117,6 @@ $(window).ready(function() {
 		  });
 	});
 }); 
-
-// Include CryptoJS library (add this script tag in your HTML head if not already included)
-// <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-
-// Decrypt function
-function decryptData(encryptedData, key) {
-    const rawData = atob(encryptedData);
-    const iv = CryptoJS.enc.Base64.parse(rawData.slice(0, 16));
-    const encrypted = CryptoJS.enc.Base64.parse(rawData.slice(16));
-    const decrypted = CryptoJS.AES.decrypt({ ciphertext: encrypted }, CryptoJS.enc.Utf8.parse(key), { iv: iv });
-    return JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
-}
 
 // Decrypt the data
 const decryptionKey = "your-secret-key"; // Use the same key as in PHP

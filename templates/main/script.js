@@ -108,16 +108,54 @@ $(window).ready(function() {
 
 // Decrypt the data
 const decryptionKey = "your-secret-key"; // Use the same key as in PHP
-const branches = decryptData(encryptedBranches, decryptionKey);
-const services = decryptData(encryptedServices, decryptionKey);
-const extras = decryptData(encryptedExtras, decryptionKey);
+if (typeof branches === "undefined") {
+	var branches = decryptData(encryptedBranches, decryptionKey);
+} else {
+	branches = decryptData(encryptedBranches, decryptionKey);
+}
+
+if (typeof services === "undefined") {
+	var services = decryptData(encryptedServices, decryptionKey);
+} else {
+	services = decryptData(encryptedServices, decryptionKey);
+}
+
+if (typeof extras === "undefined") {
+	var extras = decryptData(encryptedExtras, decryptionKey);
+} else {
+	extras = decryptData(encryptedExtras, decryptionKey);
+}
 
 // Decrypt the additional data
-const pictureTypes = decryptData(encryptedPictureTypes, decryptionKey);
-const allowedBookingPeriod = decryptData(encryptedAllowedBookingPeriod, decryptionKey);
-const themes = decryptData(encryptedThemes, decryptionKey);
-const blockedDays = decryptData(encryptedBlockedDays, decryptionKey);
-const blockedPeriods = decryptData(encryptedBlockedPeriods, decryptionKey);
+if (typeof pictureTypes === "undefined") {
+	var pictureTypes = decryptData(encryptedPictureTypes, decryptionKey);
+} else {
+	pictureTypes = decryptData(encryptedPictureTypes, decryptionKey);
+}
+
+if (typeof allowedBookingPeriod === "undefined") {
+	var allowedBookingPeriod = decryptData(encryptedAllowedBookingPeriod, decryptionKey);
+} else {
+	allowedBookingPeriod = decryptData(encryptedAllowedBookingPeriod, decryptionKey);
+}
+
+if (typeof themes === "undefined") {
+	var themes = decryptData(encryptedThemes, decryptionKey);
+} else {
+	themes = decryptData(encryptedThemes, decryptionKey);
+}
+
+if (typeof blockedDays === "undefined") {
+	var blockedDays = decryptData(encryptedBlockedDays, decryptionKey);
+} else {
+	blockedDays = decryptData(encryptedBlockedDays, decryptionKey);
+}
+
+if (typeof blockedPeriods === "undefined") {
+	var blockedPeriods = decryptData(encryptedBlockedPeriods, decryptionKey);
+} else {
+	blockedPeriods = decryptData(encryptedBlockedPeriods, decryptionKey);
+}
 
 // Use decrypted data in your JavaScript logic
 console.log(branches, services, extras, pictureTypes, allowedBookingPeriod, themes, blockedDays, blockedPeriods);

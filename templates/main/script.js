@@ -1,6 +1,3 @@
-// Include CryptoJS library (add this script tag in your HTML head if not already included)
-// <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-
 // Decrypt function
 function decryptData(encryptedData, key) {
     const rawData = atob(encryptedData);

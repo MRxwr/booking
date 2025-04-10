@@ -106,6 +106,34 @@ $(window).ready(function() {
 	});
 }); 
 
+// Include CryptoJS library (add this script tag in your HTML head if not already included)
+// <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+// Decrypt function
+function decryptData(encryptedData, key) {
+    const rawData = atob(encryptedData);
+    const iv = CryptoJS.enc.Base64.parse(rawData.slice(0, 16));
+    const encrypted = CryptoJS.enc.Base64.parse(rawData.slice(16));
+    const decrypted = CryptoJS.AES.decrypt({ ciphertext: encrypted }, CryptoJS.enc.Utf8.parse(key), { iv: iv });
+    return JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
+}
+
+// Decrypt the data
+const decryptionKey = "your-secret-key"; // Use the same key as in PHP
+const branches = decryptData(encryptedBranches, decryptionKey);
+const services = decryptData(encryptedServices, decryptionKey);
+const extras = decryptData(encryptedExtras, decryptionKey);
+
+// Decrypt the additional data
+const pictureTypes = decryptData(encryptedPictureTypes, decryptionKey);
+const allowedBookingPeriod = decryptData(encryptedAllowedBookingPeriod, decryptionKey);
+const themes = decryptData(encryptedThemes, decryptionKey);
+const blockedDays = decryptData(encryptedBlockedDays, decryptionKey);
+const blockedPeriods = decryptData(encryptedBlockedPeriods, decryptionKey);
+
+// Use decrypted data in your JavaScript logic
+console.log(branches, services, extras, pictureTypes, allowedBookingPeriod, themes, blockedDays, blockedPeriods);
+
 // on resize
 $(window).resize(function() {
 	var width = $(window).width();

@@ -62,9 +62,12 @@ $paymentArray = array(
     'order[currency]' => 'KWD',
     'order[amount]' => "{$price}",
     'reference[id]' => "{$orderId}",
-    'returnUrl' => "https://booking.createkuwait.com/{$vendor[0]["url"]}",
-    'cancelUrl' => "https://booking.createkuwait.com/{$vendor[0]["url"]}",
-    'notificationUrl' => "https://booking.createkuwait.com/{$vendor[0]["url"]}",
+    'customer[name]' => "{$_POST["customer"]["name"]}",
+	'customer[email]' => "{$_POST["customer"]["email"]}",
+	'customer[mobile]' => "{$_POST["customer"]["mobile"]}",
+    'returnUrl' => "https://reservaa.com/{$vendor[0]["url"]}",
+    'cancelUrl' => "https://reservaa.com/{$vendor[0]["url"]}",
+    'notificationUrl' => "https://reservaa.com/{$vendor[0]["url"]}",
     'paymentGateway[src]' => 'knet',
     /*
     'extraMerchantData[0][amount]' => "{$price}",
@@ -77,7 +80,7 @@ $paymentArray = array(
     );
 $curl = curl_init();
 curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://sandboxapi.upayments.com/api/v1/charge',
+    CURLOPT_URL => 'https://uapi.upayments.com/api/v1/charge',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
@@ -87,7 +90,7 @@ curl_setopt_array($curl, array(
     CURLOPT_CUSTOMREQUEST => 'POST',
     CURLOPT_POSTFIELDS => $paymentArray,
     CURLOPT_HTTPHEADER => array(
-        'Authorization: Bearer e66a94d579cf75fba327ff716ad68c53aae11528'
+        'Authorization: Bearer afmceR6nHQaIehhpOel036LBhC8hihuB8iNh9ACF'
     ),
     )
 );
@@ -112,7 +115,7 @@ if ( is_null($response) || $response["status"] == false ) {
         $response = outputError(direction("Failed to add booking","فشل في اضافة الحجز"));die();
     }
     if( $vendor[0]["chargeType"] == 3 ){
-        $response["data"]["link"] = "https://booking.createkuwait.com/{$vendor[0]["url"]}?result=CAPTURED&requested_order_id={$orderId}";
+        $response["data"]["link"] = "https://reservaa.com/{$vendor[0]["url"]}?result=CAPTURED&requested_order_id={$orderId}";
     }
     echo outputData($response);die();
 }

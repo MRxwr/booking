@@ -25,7 +25,6 @@ function searchFile($path, $fileName) {
 				closedir($handle);
 				return $entry;
 			}
-		}
 		closedir($handle);
 	}
 	return false;
@@ -205,6 +204,13 @@ function str_lreplace($search, $replace, $subject){
         $subject = substr_replace($subject, $replace, $pos, strlen($search));
     }
     return $subject;
+}
+
+// encrypt data using OpenSSL
+function encryptData($data, $key) {
+    $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc'));
+    $encrypted = openssl_encrypt($data, 'aes-256-cbc', $key, 0, $iv);
+    return base64_encode($iv . $encrypted);
 }
 
 ?>

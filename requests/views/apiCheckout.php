@@ -51,7 +51,7 @@ if( !isset($_POST["vendorId"]) || empty($_POST["vendorId"]) ){
                         }else{
                             $curl = curl_init();
                             curl_setopt_array($curl, array(
-                                CURLOPT_URL => 'https://booking.createkuwait.com/requests/index.php?a=GetTimeSlots',
+                                CURLOPT_URL => 'https://reservaa.com/requests/index.php?a=GetTimeSlots',
                                 CURLOPT_RETURNTRANSFER => true,
                                 CURLOPT_ENCODING => '',
                                 CURLOPT_MAXREDIRS => 10,
@@ -72,7 +72,7 @@ if( !isset($_POST["vendorId"]) || empty($_POST["vendorId"]) ){
                             if( $response["ok"] == true && in_array($time, $response["data"]["timeSlots"]) ){
                                 $curl = curl_init();
                                 curl_setopt_array($curl, array(
-                                CURLOPT_URL => 'https://booking.createkuwait.com/requests/index.php?a=Payment',
+                                CURLOPT_URL => 'https://reservaa.com/requests/index.php?a=Payment',
                                 CURLOPT_RETURNTRANSFER => true,
                                 CURLOPT_ENCODING => '',
                                 CURLOPT_MAXREDIRS => 10,

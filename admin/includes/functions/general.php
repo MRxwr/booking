@@ -25,6 +25,7 @@ function searchFile($path, $fileName) {
 				closedir($handle);
 				return $entry;
 			}
+		}
 		closedir($handle);
 	}
 	return false;

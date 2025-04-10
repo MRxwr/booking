@@ -53,6 +53,16 @@ if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor =
 		<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 		<?php require_once("templates/{$vendorTheme}/style.php") ?>
+		<script>
+			// Decrypt function
+			function decryptData(encryptedData, key) {
+				const rawData = atob(encryptedData);
+				const iv = CryptoJS.enc.Base64.parse(rawData.slice(0, 16));
+				const encrypted = CryptoJS.enc.Base64.parse(rawData.slice(16));
+				const decrypted = CryptoJS.AES.decrypt({ ciphertext: encrypted }, CryptoJS.enc.Utf8.parse(key), { iv: iv });
+				return JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
+			}
+		</script>
 	</head>
 	<body>
 		<?php require_once("templates/{$vendorTheme}/leftSide.php") ?>

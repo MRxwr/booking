@@ -1,12 +1,3 @@
-// Decrypt function
-function decryptData(encryptedData, key) {
-    const rawData = atob(encryptedData);
-    const iv = CryptoJS.enc.Base64.parse(rawData.slice(0, 16));
-    const encrypted = CryptoJS.enc.Base64.parse(rawData.slice(16));
-    const decrypted = CryptoJS.AES.decrypt({ ciphertext: encrypted }, CryptoJS.enc.Utf8.parse(key), { iv: iv });
-    return JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
-}
-
 // on ready
 $(window).ready(function() {
 	$("#loading-screen").hide();

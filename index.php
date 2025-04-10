@@ -58,7 +58,7 @@ if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor =
 		<?php require_once("templates/{$vendorTheme}/leftSide.php") ?>
 		<?php require_once("templates/{$vendorTheme}/rightSide.php") ?>
 		<script>
-			//<?php require_once("templates/{$vendorTheme}/script.js") ?>
+			<?php //require_once("templates/{$vendorTheme}/script.js") ?>
 		</script>
 		<script src="templates/<?php echo $vendorTheme ?>/script.js"></script>
 	</body> 

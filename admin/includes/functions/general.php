@@ -85,6 +85,16 @@ function direction($valEn,$valAr){
 	return $response;
 }
 
+function checkAPILanguege($valEn,$valAr){
+	GLOBAL $_GET;
+	if( isset($_GET["lang"]) && !empty($_GET["lang"]) && $_GET["lang"] == "ar" ){
+		$response = $valAr;
+	}else{
+		$response = $valEn;
+	}
+	return $response;
+}
+
 // get header active link \\
 function headerActiveClass($data){
 	GLOBAL $_GET;

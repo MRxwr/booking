@@ -180,8 +180,7 @@
 		$("input[name=email]").val(email);
 		$("input[name=phone]").val(mobile);
 		$("input[name=update]").val(id);
-		$("input[name=fullName]").val(name);
-		$("input[name=fullName]").focus();
+		$("input[name=name]").val(name).focus();
 		$("select[name=empType]").val(type);
 		$("select[name=vendorId]").val($.trim($("#vendorId"+id).html().replace(/\n/g, "")));
 	})

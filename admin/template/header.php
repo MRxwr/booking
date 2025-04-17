@@ -54,11 +54,6 @@ setLanguage();
 	<link href="css/system.css" rel="stylesheet" type="text/css">
 	<link rel='stylesheet' href='../css/Roboto.css'>
 	<link rel="stylesheet" href="../css/font-awesome.min.css">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<!-- Add select2 JS just before closing </head> -->
-	<script src="../vendors/bower_components/select2/dist/js/select2.full.min.js"></script>
-	<!-- Optionally include CDN for latest select2 if you want -->
-	<!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
 </head>
 
 <body>

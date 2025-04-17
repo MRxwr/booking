@@ -18,6 +18,9 @@
 	
     <!-- jQuery -->
     <script src="../vendors/bower_components/jquery/dist/jquery.min.js"></script>
+    
+    <!-- Select2 JavaScript -->
+    <script src="../vendors/bower_components/select2/dist/js/select2.full.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

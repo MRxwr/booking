@@ -149,7 +149,7 @@
 				<div style="display:none">
 					<label id="type<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["empType"] ?></label>
 					<label id="vendorId<?php echo $employees[$i]["id"]?>"><?php echo htmlspecialchars($employees[$i]["vendorId"]) ?></label>
-					</div>
+				</div>
 				</td>
 				</tr>
 				<?php
@@ -191,17 +191,21 @@
 
 					// Auto-fill vendorId select2
 					var vendorIdRaw = jQuery("#vendorId"+id).text();
+					console.log("Raw vendor ID:", vendorIdRaw); // Add debug logging
 					var vendorIds = [];
 					try {
 						vendorIds = JSON.parse(vendorIdRaw);
+						console.log("Parsed vendor IDs:", vendorIds);
 						if (!Array.isArray(vendorIds)) {
 							vendorIds = [vendorIds];
 						}
 					} catch(e) {
+						console.error("Error parsing vendor ID:", e);
 						if (vendorIdRaw) {
 							vendorIds = [vendorIdRaw];
 						}
 					}
+					console.log("Final vendor IDs for select:", vendorIds);
 					jQuery('#vendorSelect').val(vendorIds).trigger('change');
 				});
 			}

@@ -48,13 +48,20 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 
 		// Encode vendorId as JSON if it's an array or not already JSON
 		if (isset($_POST["vendorId"])) {
+			// For debugging
+			error_log("Original vendorId: " . print_r($_POST["vendorId"], true));
+			
 			if (is_array($_POST["vendorId"])) {
 				$_POST["vendorId"] = json_encode($_POST["vendorId"]);
+				error_log("Encoded from array: " . $_POST["vendorId"]);
 			} else {
 				// Try to decode, if fails, encode as JSON
 				json_decode($_POST["vendorId"]);
 				if (json_last_error() !== JSON_ERROR_NONE) {
 					$_POST["vendorId"] = json_encode([$_POST["vendorId"]]);
+					error_log("Encoded single value: " . $_POST["vendorId"]);
+				} else {
+					error_log("Already valid JSON: " . $_POST["vendorId"]);
 				}
 			}
 		}

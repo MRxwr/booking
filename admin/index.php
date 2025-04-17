@@ -47,7 +47,7 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 		}
 
 		// Encode vendorId as JSON if it's an array or not already JSON
-		if (isset($_POST["vendorId"]) && isset($_GET["v"]) && $_GET["v"] == "employees"){
+		if (isset($_POST["vendorId"]) && isset($_GET["v"]) && $_GET["v"] == "Employees"){
 			$_POST["vendorId"] = json_encode($_POST["vendorId"]);
 		}
 

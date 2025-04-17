@@ -24,7 +24,7 @@
 
 			<div class="col-md-6">
 			<label><?php echo direction("Name","الإسم") ?></label>
-			<input type="text" name="fullName" class="form-control" required>
+			<input type="text" name="name" class="form-control" required>
 			</div>
 			
 			<div class="col-md-6">

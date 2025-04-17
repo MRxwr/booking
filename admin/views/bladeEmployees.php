@@ -12,7 +12,7 @@
 		<div class="row m-0">
 			<div class="col-md-12">
 				<label><?php echo direction("Vendor","البائع") ?></label>
-				<select name="vendorId" class="form-control" required>
+				<select name="vendorId" class="form-control" required multiple>
 					<?php 
 					$vendors = selectDB("vendors","`status` = '0' $vendorDb AND `hidden` = '0' ORDER BY `enTitle` ASC");
 					foreach( $vendors as $vendor ){
@@ -166,9 +166,6 @@
 </div>
 </div>
 <script>
-	$(document).ready(function(){
-		$('#academyList').select2();
-	})
 	$(document).on("click",".edit", function(){
 		var id = $(this).attr("id");
 		var email = $("#email"+id).html();
@@ -182,7 +179,21 @@
 		$("input[name=update]").val(id);
 		$("input[name=name]").val(name).focus();
 		$("select[name=empType]").val(type);
-		$("select[name=vendorId]").val($.trim($("#vendorId"+id).html().replace(/\n/g, "")));
+
+		// Auto-fill vendorId select
+		var vendorIdRaw = $("#vendorId"+id).html();
+		try {
+			var vendorIds = JSON.parse(vendorIdRaw);
+			if (Array.isArray(vendorIds)) {
+				$("select[name=vendorId]").val(vendorIds);
+			} else {
+				$("select[name=vendorId]").val([vendorIds]);
+			}
+		} catch(e) {
+			// fallback for non-JSON or single value
+			$("select[name=vendorId]").val([$.trim(vendorIdRaw)]);
+		}
+		$("select[name=vendorId]").trigger('change');
 	})
 </script>
 

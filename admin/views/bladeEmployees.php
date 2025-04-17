@@ -165,38 +165,46 @@
 </div>
 </div>
 </div>
-<script>
-	$(document).ready(function(){
-		$('#vendorSelect').select2();
+<script type="text/javascript">
+	// Wait for document to be fully loaded including jQuery from footer
+	document.addEventListener('DOMContentLoaded', function() {
+		// Make sure jQuery is loaded
+		setTimeout(function() {
+			if (typeof jQuery !== 'undefined') {
+				// Initialize Select2
+				jQuery('#vendorSelect').select2();
+				
+				// Set up edit handler
+				jQuery(document).on("click", ".edit", function() {
+					var id = jQuery(this).attr("id");
+					var email = jQuery("#email"+id).html();
+					var name = jQuery("#name"+id).html();
+					var mobile = jQuery("#mobile"+id).html();
+					var type = jQuery("#type"+id).html();
+					var logo = jQuery("#logo"+id).html();
+					jQuery("input[name=password]").prop("required", false);
+					jQuery("input[name=email]").val(email);
+					jQuery("input[name=phone]").val(mobile);
+					jQuery("input[name=update]").val(id);
+					jQuery("input[name=name]").val(name).focus();
+					jQuery("select[name=empType]").val(type);
+
+					// Auto-fill vendorId select2
+					var vendorIdRaw = jQuery("#vendorId"+id).text();
+					var vendorIds = [];
+					try {
+						vendorIds = JSON.parse(vendorIdRaw);
+						if (!Array.isArray(vendorIds)) {
+							vendorIds = [vendorIds];
+						}
+					} catch(e) {
+						if (vendorIdRaw) {
+							vendorIds = [vendorIdRaw];
+						}
+					}
+					jQuery('#vendorSelect').val(vendorIds).trigger('change');
+				});
+			}
+		}, 500); // Give a little time for scripts to load
 	});
-
-	$(document).on("click",".edit", function(){
-		var id = $(this).attr("id");
-		var email = $("#email"+id).html();
-		var name = $("#name"+id).html();
-		var mobile = $("#mobile"+id).html();
-		var type = $("#type"+id).html();
-		var logo = $("#logo"+id).html();
-		$("input[name=password]").prop("required",false);
-		$("input[name=email]").val(email);
-		$("input[name=phone]").val(mobile);
-		$("input[name=update]").val(id);
-		$("input[name=name]").val(name).focus();
-		$("select[name=empType]").val(type);
-
-		// Auto-fill vendorId select2
-		var vendorIdRaw = $("#vendorId"+id).text();
-		var vendorIds = [];
-		try {
-			vendorIds = JSON.parse(vendorIdRaw);
-			if (!Array.isArray(vendorIds)) {
-				vendorIds = [vendorIds];
-			}
-		} catch(e) {
-			if (vendorIdRaw) {
-				vendorIds = [vendorIdRaw];
-			}
-		}
-		$('#vendorSelect').val(vendorIds).trigger('change');
-	})
 </script>

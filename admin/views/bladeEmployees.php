@@ -135,11 +135,10 @@
 				<tr>
 				<td ><?php echo str_pad(($counter = $i + 1),4,"0",STR_PAD_LEFT) ?></td>
 				<td ><?php echo $vendor ?></td>
-				<td id="name<?php echo $employees[$i]["id"]?>" ><?php echo $employees[$i]["fullName"] ?></td>
+				<td id="name<?php echo $employees[$i]["id"]?>" ><?php echo $employees[$i]["name"] ?></td>
 				<td id="email<?php echo $employees[$i]["id"]?>" ><?php echo $employees[$i]["email"] ?></td>
 				<td id="mobile<?php echo $employees[$i]["id"]?>" ><?php echo $employees[$i]["phone"] ?></td>
 				<td><?php echo $type ?></td>
-				<td><?php echo $academy ?></td>
 				<td class="text-nowrap">
 				
 				<a id="<?php echo $employees[$i]["id"] ?>" class="edit btn btn-warning" data-toggle="tooltip" data-original-title="<?php echo direction("Edit","تعديل")  ?>"> <i class="fa fa-pencil text-inverse m-r-10"></i>

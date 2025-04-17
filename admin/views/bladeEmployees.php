@@ -12,7 +12,7 @@
 		<div class="row m-0">
 			<div class="col-md-12">
 				<label><?php echo direction("Vendor","البائع") ?></label>
-				<select name="vendorId" id="vendorSelect" class="form-control" required multiple>
+				<select name="vendorId" id="vendorSelect" class="form-control select2" required multiple>
 					<?php 
 					$vendors = selectDB("vendors","`status` = '0' $vendorDb AND `hidden` = '0' ORDER BY `enTitle` ASC");
 					foreach( $vendors as $vendor ){

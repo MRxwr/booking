@@ -87,7 +87,6 @@
 		<th><?php echo direction("Email","الإيميل") ?></th>
 		<th><?php echo direction("Mobile","الهاتف") ?></th>
 		<th><?php echo direction("Type","النوع") ?></th>
-		<th><?php echo direction("Academy","الأكادمية") ?></th>
 		<th class="text-nowrap"><?php echo direction("Actions","الخيارات") ?></th>
 		</tr>
 		</thead>
@@ -150,6 +149,7 @@
 				<div style="display:none">
 					<label id="type<?php echo $employees[$i]["id"]?>"><?php echo $employees[$i]["empType"] ?></label>
 					<label id="vendorId<?php echo $branch[$i]["id"]?>"><?php echo $branch[$i]["vendorId"] ?></label>
+					</div>
 				</td>
 				</tr>
 				<?php

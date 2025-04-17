@@ -200,4 +200,3 @@
 		$('#vendorSelect').val(vendorIds).trigger('change');
 	})
 </script>
-

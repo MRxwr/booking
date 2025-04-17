@@ -20,6 +20,8 @@ setLanguage();
 	<link href="../vendors/bower_components/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet" type="text/css"/>
 	<!-- select2 CSS -->
 	<link href="../vendors/bower_components/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css"/>
+	<!-- Optionally include CDN for latest select2 if you want -->
+	<!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
 	<!-- switchery CSS -->
 	<link href="../vendors/bower_components/switchery/dist/switchery.min.css" rel="stylesheet" type="text/css"/>
 	<!-- bootstrap-select CSS -->
@@ -53,6 +55,10 @@ setLanguage();
 	<link rel='stylesheet' href='../css/Roboto.css'>
 	<link rel="stylesheet" href="../css/font-awesome.min.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!-- Add select2 JS just before closing </head> -->
+	<script src="../vendors/bower_components/select2/dist/js/select2.full.min.js"></script>
+	<!-- Optionally include CDN for latest select2 if you want -->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
 </head>
 
 <body>

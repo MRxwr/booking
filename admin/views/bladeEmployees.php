@@ -94,10 +94,26 @@
 		
 		<tbody>
 		<?php 
+		// Fetch all vendors once and map by id
+		$allVendors = selectDB("vendors","`status` = '0' $vendorDb AND `hidden` = '0'");
+		$vendorMap = [];
+		foreach ($allVendors as $v) {
+			$vendorMap[$v["id"]] = direction($v["enTitle"], $v["arTitle"]);
+		}
 		if( $employees = selectDB("{$table}","`status` = '0' $vendorIdDb AND `hidden` != '2'") ){
 			for( $i = 0; $i < sizeof($employees); $i++ ){
-				$vendor = selectDB("vendors","`id` = '{$employees[$i]["vendorId"]}'");
-				$vendor = direction($vendor[0]["enTitle"],$vendor[0]["arTitle"]);
+				// Decode vendorId JSON
+				$vendorIds = json_decode($employees[$i]["vendorId"], true);
+				if (!is_array($vendorIds)) {
+					$vendorIds = [$employees[$i]["vendorId"]];
+				}
+				$vendorNames = [];
+				foreach ($vendorIds as $vid) {
+					if (isset($vendorMap[$vid])) {
+						$vendorNames[] = $vendorMap[$vid];
+					}
+				}
+				$vendor = implode(', ', $vendorNames);
 				$counter = $i + 1;
 				if ( $employees[$i]["hidden"] == 1 ){
 					$icon = "fa fa-unlock";

@@ -46,6 +46,19 @@ if ( isset($_GET["hide"]) || isset($_GET["show"]) || isset($_GET["delId"]) || is
 			$_POST["password"] = sha1($_POST["password"]);
 		}
 
+		// Encode vendorId as JSON if it's an array or not already JSON
+		if (isset($_POST["vendorId"])) {
+			if (is_array($_POST["vendorId"])) {
+				$_POST["vendorId"] = json_encode($_POST["vendorId"]);
+			} else {
+				// Try to decode, if fails, encode as JSON
+				json_decode($_POST["vendorId"]);
+				if (json_last_error() !== JSON_ERROR_NONE) {
+					$_POST["vendorId"] = json_encode([$_POST["vendorId"]]);
+				}
+			}
+		}
+
 		if ( $id == 0 ){
 			if( insertDB("{$table}", $_POST) ){
 			}else{

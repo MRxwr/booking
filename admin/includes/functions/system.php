@@ -20,7 +20,7 @@ function forgetPass($data){
 	$domainName = substr($domainName, strpos($domainName, '//') + 2);
 	$curl = curl_init();
 	curl_setopt_array($curl, array(
-		CURLOPT_URL => 'myid.createkwservers.com/api/v1/send/notify',
+		CURLOPT_URL => 'https://createapi.link/api/v1/send/notify',
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,

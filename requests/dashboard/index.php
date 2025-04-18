@@ -16,6 +16,8 @@ if( isset($_SERVER["HTTP_AUTHORIZATION"]) && !empty($_SERVER["HTTP_AUTHORIZATION
 	$token = "";
 }
 
+$titleDB = checkAPILanguege("enTitle","arTitle");
+
 // get viewed page from pages folder \\
 if( isset($_GET["endpoint"]) && searchFile("views","api{$_GET["endpoint"]}.php") ){
 	require_once("views/".searchFile("views","api{$_GET["endpoint"]}.php"));

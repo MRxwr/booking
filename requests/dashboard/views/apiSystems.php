@@ -76,14 +76,6 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Arabic title is required.", "العنوان باللغة العربية مطلوب."));
             echo outputError($response);die();
         }
-        if( !isset($_FILES["logo"]) || empty($_FILES["logo"]) ){
-            $response = array("msg" => checkAPILanguege("Logo is required.", "الشعار مطلوب."));
-            echo outputError($response);die();
-        }
-        if( !isset($_FILES["coverImg"]) || empty($_FILES["coverImg"]) ){
-            $response = array("msg" => checkAPILanguege("Cover image is required.", "صورة الغلاف مطلوبة."));
-            echo outputError($response);die();
-        }
         if( !isset($data["type"]) || empty($data["type"]) ){
             $response = array("msg" => checkAPILanguege("Type is required.", "النوع مطلوب."));
             echo outputError($response);die();
@@ -95,8 +87,17 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("URL already exists. Please choose another one.", "الرابط موجود مسبقاً. يرجى اختيار رابط اخر."));
             echo outputError($response);die();
         }
-        $data["logo"] = uploadImageAPI($_FILES["logo"]["tmp_name"]);
-        $data["coverImg"] = uploadImageAPI($_FILES["coverImg"]["tmp_name"]);
+        // check is any image uploaded or not if not unset it from data array
+        if( isset($_FILES["logo"]) && !empty($_FILES["logo"]) ){
+            $data["logo"] = uploadImageAPI($_FILES["logo"]["tmp_name"]);
+        }else{
+            unset($data["logo"]);
+        }
+        if( isset($_FILES["coverImg"]) && !empty($_FILES["coverImg"]) ){
+            $data["coverImg"] = uploadImageAPI($_FILES["coverImg"]["tmp_name"]);
+        }else{
+            unset($data["coverImg"]);
+        }
         if( updateDB("vendors",$data,"`id` = {$data["id"]}") ){
             $response = array("msg" => checkAPILanguege("Booking System has been updated successfully.", "تم تحديث نظام الحجز بنجاح."));
             echo outputData($response);die();

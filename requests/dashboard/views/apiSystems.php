@@ -133,6 +133,28 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Invalid ID.", "المعرف غير صالح."));
             echo outputError($response);die();
         }
+    }elseif( $action == "socialMedia" ){
+        if ( !$token ){
+            $response = array("msg" => checkAPILanguege("Token is required.", "التوكن مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["id"]) || empty($data["id"]) ){
+            $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
+            echo outputError($response);die();
+        }elseif( $id = selectDBNew("vendors",[$data["id"]],"`id` = ? AND `status` = 0","") ){
+            unset($data["id"]);
+            $data["socialMedia"] = json_encode($data);
+            if( updateDB("vendors",$data,"`id` = {$id[0]["id"]}") ){
+                $response = array("msg" => checkAPILanguege("Social media has been updated successfully.", "تم تحديث وسائل التواصل الاجتماعي بنجاح."));
+                echo outputData($response);die();
+            }else{
+                $response = array("msg" => checkAPILanguege("Failed to update social media.", "فشل تحديث وسائل التواصل الاجتماعي."));
+                echo outputError($response);die();
+            }
+        }else{
+            $response = array("msg" => checkAPILanguege("Invalid ID.", "المعرف غير صالح."));
+            echo outputError($response);die();
+        }
     }
 }else{
     $error = array("msg"=>"Wrong Action Request 404");

@@ -199,7 +199,7 @@ function uploadImageAPI($imageLocation){
 			// Write the contents back to a new file
 			file_put_contents($new, $data);
 		}
-		return $fileTitle; 
+		return "vendors/{$fileTitle}"; 
 	}else{
 		return "";
 	}

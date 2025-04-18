@@ -19,6 +19,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Phone number is required.", "رقم الهاتف مطلوب."));
             echo outputError($response);die();
         }
+        $data["empType"] = 2;
         if( insertDB("employees", $data) ){
             $response = array("msg" => checkAPILanguege("User registered successfully.", "تم تسجيل المستخدم بنجاح."));
             echo outputData($response);die();

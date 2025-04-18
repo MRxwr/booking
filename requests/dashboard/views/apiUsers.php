@@ -82,28 +82,27 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             }
         }
     }elseif( $action == "update" ){
-        if ( $token ){
-            if( !isset($data["email"]) || empty($data["email"]) ){
-                $response = array("msg" => checkAPILanguege("Email is required.", "البريد الالكتروني مطلوب."));
-                echo outputError($response);die();
-            }
-            if( !isset($data["phone"]) || empty($data["phone"]) ){
-                $response = array("msg" => checkAPILanguege("Phone number is required.", "رقم الهاتف مطلوب."));
-                echo outputError($response);die();
-            }
-            if( !isset($data["name"]) || empty($data["name"]) ){
-                $response = array("msg" => checkAPILanguege("Name is required.", "الاسم مطلوب."));
-                echo outputError($response);die();
-            }
-            if( updateDB("employees", $data, "`id` = '{$data["id"]}'") ){
-                $response = array("msg" => checkAPILanguege("User updated successfully.", "تم تحديث المستخدم بنجاح."));
-                echo outputData($response);die();
-            }else{
-                $response = array("msg" => checkAPILanguege("User update failed.", "فشل تحديث المستخدم."));
-                echo outputError($response);die();
-            }
-        }else{
+        if ( !$token ){
             $response = array("msg" => checkAPILanguege("Invalid token.", "التوكن غير صالح."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["email"]) || empty($data["email"]) ){
+            $response = array("msg" => checkAPILanguege("Email is required.", "البريد الالكتروني مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["phone"]) || empty($data["phone"]) ){
+            $response = array("msg" => checkAPILanguege("Phone number is required.", "رقم الهاتف مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["name"]) || empty($data["name"]) ){
+            $response = array("msg" => checkAPILanguege("Name is required.", "الاسم مطلوب."));
+            echo outputError($response);die();
+        }
+        if( updateDB("employees", $data, "`id` = '{$data["id"]}'") ){
+            $response = array("msg" => checkAPILanguege("User updated successfully.", "تم تحديث المستخدم بنجاح."));
+            echo outputData($response);die();
+        }else{
+            $response = array("msg" => checkAPILanguege("User update failed.", "فشل تحديث المستخدم."));
             echo outputError($response);die();
         }
     }elseif( $action == "delete" ){

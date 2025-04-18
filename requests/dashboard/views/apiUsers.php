@@ -158,6 +158,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             if( updateDB("employees", array("password" => sha1($newPassword)), "`id` = '{$user[0]["id"]}'") ){
                 // send email with new password
                 forgetPass(array("email" => $user[0]["email"], "password" => $newPassword));
+                forgetPassWhatsapp(array("password" => $newPassword, "name" => $user[0]["name"], "phone" => $user[0]["phone"]));
                 $response = array("msg" => checkAPILanguege("New password sent to your email.", "تم ارسال كلمة المرور الجديدة الى بريدك الالكتروني."));
                 echo outputData($response);die();
             }else{

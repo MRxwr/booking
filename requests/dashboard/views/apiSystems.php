@@ -142,8 +142,9 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
             echo outputError($response);die();
         }elseif( $system = selectDBNew("vendors",[$data["id"]],"`id` = ? AND `status` = 0","") ){
+            unset($data["id"]);
             $updatedData["socialMedia"] = json_encode($data);
-            if( updateDB("vendors",$updatedData,"`id` = {$data["id"]}") ){
+            if( updateDB("vendors",$updatedData,"`id` = {$system[0]["id"]}") ){
                 $response = array("msg" => checkAPILanguege("Social media has been updated successfully.", "تم تحديث وسائل التواصل الاجتماعي بنجاح."));
                 echo outputData($response);die();
             }else{

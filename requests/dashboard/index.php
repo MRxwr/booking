@@ -3,7 +3,7 @@ SESSION_START();
 header("Content-Type: application/json");
 require_once("../../admin/includes/config.php");
 require_once("../../admin/includes/functions.php");
-var_dump($_SERVER);
+
 // get user token from auth bearer
 if( isset($_SERVER["HTTP_AUTHORIZATION"]) && !empty($_SERVER["HTTP_AUTHORIZATION"]) ){
 	$token = explode(" ", $_SERVER["HTTP_AUTHORIZATION"]);

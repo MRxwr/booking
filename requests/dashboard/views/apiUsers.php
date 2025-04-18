@@ -68,12 +68,16 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Token is required.", "التوكن مطلوب."));
             echo outputError($response);die();
         }else{
-            echo $token;
-            if( updateDB("employees", array("keepMeAlive" => ""), "`keepMeAlive` = '{$token}'") ){
-                $response = array("msg" => checkAPILanguege("User logged out successfully.", "تم تسجيل الخروج بنجاح."));
-                echo outputData($response);die();
+            if ( $user = selectDBNew("employees",[$token],"`keepMeAlive` LIKE ?","") ){
+                if( updateDB("employees", array("keepMeAlive" => ""), "`keepMeAlive` = '{$token}'") ){
+                    $response = array("msg" => checkAPILanguege("User logged out successfully.", "تم تسجيل الخروج بنجاح."));
+                    echo outputData($response);die();
+                }else{
+                    $response = array("msg" => checkAPILanguege("User logout failed.", "فشل تسجيل الخروج للمستخدم."));
+                    echo outputError($response);die();
+                }
             }else{
-                $response = array("msg" => checkAPILanguege("User logout failed.", "فشل تسجيل الخروج للمستخدم."));
+                $response = array("msg" => checkAPILanguege("Invalid token.", "التوكن غير صالح."));
                 echo outputError($response);die();
             }
         }

@@ -98,7 +98,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Name is required.", "الاسم مطلوب."));
             echo outputError($response);die();
         }
-        if( updateDB("employees", $data, "`id` = '{$data["id"]}'") ){
+        if( updateDB("employees", $data, "`keepMeAlive` = '{$token}''") ){
             $response = array("msg" => checkAPILanguege("User updated successfully.", "تم تحديث المستخدم بنجاح."));
             echo outputData($response);die();
         }else{

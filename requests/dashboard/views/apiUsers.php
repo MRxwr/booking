@@ -86,10 +86,6 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Invalid token.", "التوكن غير صالح."));
             echo outputError($response);die();
         }
-        if( !isset($data["email"]) || empty($data["email"]) ){
-            $response = array("msg" => checkAPILanguege("Email is required.", "البريد الالكتروني مطلوب."));
-            echo outputError($response);die();
-        }
         if( !isset($data["phone"]) || empty($data["phone"]) ){
             $response = array("msg" => checkAPILanguege("Phone number is required.", "رقم الهاتف مطلوب."));
             echo outputError($response);die();

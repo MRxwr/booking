@@ -1,7 +1,7 @@
 <?php
 if( isset($_GET["action"]) && !empty($_GET["action"]) ){
     $action = $_GET["action"];
-    $data = (isset($_POST["data"]) && !empty($_POST["data"])) ? $_POST["data"] : array();
+    $data = (isset($_POST) && !empty($_POST)) ? $_POST : array();
     if( $action == "list" ){
         if ( !$token ){
             $response = array("msg" => checkAPILanguege("Token is required.", "التوكن مطلوب."));

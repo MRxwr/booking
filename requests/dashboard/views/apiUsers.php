@@ -107,7 +107,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             echo outputError($response);die();
         }
         if( $user = selectDBNew("employees",[$token],"`keepMeAlive` LIKE ? AND `status` = 0","") ){
-            if( updateDB("employees", array("status" => 2), "`id` = '{$user[0]["id"]}'") ){
+            if( updateDB("employees", array("status" => 2, "keepMeAlive" => ""), "`id` = '{$user[0]["id"]}'") ){
                 $response = array("msg" => checkAPILanguege("User deleted successfully.", "تم حذف المستخدم بنجاح."));
                 echo outputData($response);die();
             }else{

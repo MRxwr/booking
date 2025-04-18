@@ -102,17 +102,16 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             echo outputError($response);die();
         }
     }elseif( $action == "delete" ){
-        if ( $token ){
-            if( $user = selectDBNew("employees",[$token],"`keepMeAlive` LIKE ? AND `status` = 0","") ){
-                if( updateDB("employees", array("status" => 2), "`id` = '{$user[0]["id"]}'") ){
-                    $response = array("msg" => checkAPILanguege("User deleted successfully.", "تم حذف المستخدم بنجاح."));
-                    echo outputData($response);die();
-                }else{
-                    $response = array("msg" => checkAPILanguege("User deletion failed.", "فشل حذف المستخدم."));
-                    echo outputError($response);die();
-                }
+        if ( !$token ){
+            $response = array("msg" => checkAPILanguege("Invalid token.", "التوكن غير صالح."));
+            echo outputError($response);die();
+        }
+        if( $user = selectDBNew("employees",[$token],"`keepMeAlive` LIKE ? AND `status` = 0","") ){
+            if( updateDB("employees", array("status" => 2), "`id` = '{$user[0]["id"]}'") ){
+                $response = array("msg" => checkAPILanguege("User deleted successfully.", "تم حذف المستخدم بنجاح."));
+                echo outputData($response);die();
             }else{
-                $response = array("msg" => checkAPILanguege("Invalid token.", "التوكن غير صالح."));
+                $response = array("msg" => checkAPILanguege("User deletion failed.", "فشل حذف المستخدم."));
                 echo outputError($response);die();
             }
         }else{

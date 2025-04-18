@@ -22,7 +22,7 @@ $titleDB = checkAPILanguege("enTitle","arTitle");
 if( isset($_GET["endpoint"]) && searchFile("views","api{$_GET["endpoint"]}.php") ){
 	require_once("views/".searchFile("views","api{$_GET["endpoint"]}.php"));
 }else{
-	$error = array("msg"=>"Wrong Action Request 404");
+	$error = array("msg"=>"Wrong Endpoint Request 404");
 	echo outputError($error);die();
 }
 ?>

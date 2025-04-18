@@ -115,7 +115,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
                 echo outputError($response);die();
             }
         }else{
-            $response = array("msg" => checkAPILanguege("Invalid token.", "التوكن غير صالح."));
+            $response = array("msg" => checkAPILanguege("Error deleting user.", "خطأ في حذف المستخدم."));
             echo outputError($response);die();
         }
     }elseif( $action == "changePassword" ){

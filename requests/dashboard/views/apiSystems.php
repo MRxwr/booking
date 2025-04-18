@@ -52,7 +52,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             echo outputError($response);die();
         }
         $data["logo"] = uploadImageAPI($_FILES["logo"]["tmp_name"]);
-        $date["coverImg"] = uploadImageAPI($_FILES["coverImg"]["tmp_name"]);
+        $data["coverImg"] = uploadImageAPI($_FILES["coverImg"]["tmp_name"]);
         if( insertDB("vendors",$data) ){
             $response = array("msg" => checkAPILanguege("Booking System has been added successfully.", "تم إضافة نظام الحجز بنجاح."));
             echo outputData($response);die();

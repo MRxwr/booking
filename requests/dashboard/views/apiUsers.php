@@ -156,10 +156,10 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         if( $user = selectDBNew("employees",[$data["email"]],"`email` = ? AND `status` = 0","") ){
             $newPassword = rand(00000000,99999999);
             if( updateDB("employees", array("password" => sha1($newPassword)), "`id` = '{$user[0]["id"]}'") ){
-                // send email with new password
-                forgetPass(array("email" => $user[0]["email"], "password" => $newPassword));
+                //send email with new password
+                //forgetPass(array("email" => $user[0]["email"], "password" => $newPassword));
                 forgetPassWhatsapp(array("password" => $newPassword, "name" => $user[0]["name"], "phone" => $user[0]["phone"]));
-                $response = array("msg" => checkAPILanguege("New password sent to your email.", "تم ارسال كلمة المرور الجديدة الى بريدك الالكتروني."));
+                $response = array("msg" => checkAPILanguege("New password sent to your whatsapp number.", "تم ارسال كلمة المرور الجديدة الى رقم الواتس اب الخاص بك."));
                 echo outputData($response);die();
             }else{
                 $response = array("msg" => checkAPILanguege("Password reset failed.", "فشل اعادة تعيين كلمة المرور."));

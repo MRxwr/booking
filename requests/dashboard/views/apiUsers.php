@@ -19,6 +19,11 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Phone number is required.", "رقم الهاتف مطلوب."));
             echo outputError($response);die();
         }
+        //user selectDBNew to check the email exists or not
+        if( $user = selectDBNew("employees",[$data["email"]],"`email` = ? AND `status` = 0 AND `hidden` = 0","") ){
+            $response = array("msg" => checkAPILanguege("Email already exists.", "البريد الالكتروني موجود مسبقاً."));
+            echo outputError($response);die();
+        }
         $data["empType"] = 2;
         if( insertDB("employees", $data) ){
             $response = array("msg" => checkAPILanguege("User registered successfully.", "تم تسجيل المستخدم بنجاح."));

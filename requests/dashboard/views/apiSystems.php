@@ -144,6 +144,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         }elseif( $id = selectDBNew("vendors",[$data["id"]],"`id` = ? AND `status` = 0","") ){
             unset($data["id"]);
             $data["socialMedia"] = json_encode($data);
+            echo $data;die();
             if( updateDB("vendors",$data,"`id` = {$id[0]["id"]}") ){
                 $response = array("msg" => checkAPILanguege("Social media has been updated successfully.", "تم تحديث وسائل التواصل الاجتماعي بنجاح."));
                 echo outputData($response);die();

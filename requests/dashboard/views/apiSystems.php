@@ -105,7 +105,35 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Failed to update booking system.", "فشل تحديث نظام الحجز."));
             echo outputError($response);die();
         }
-    }      
+    }elseif( $action == "theme" ){   
+        if ( !$token ){
+            $response = array("msg" => checkAPILanguege("Token is required.", "التوكن مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["theme"]) || empty($data["theme"]) ){
+            $response = array("msg" => checkAPILanguege("Theme is required.", "النظام مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["websiteColor"]) || empty($data["websiteColor"]) ){
+            $response = array("msg" => checkAPILanguege("Website color is required.", "لون الموقع مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["id"]) || empty($data["id"]) ){
+            $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
+            echo outputError($response);die();
+        }elseif( $id = selectDBNew("vendors",[$data["id"]],"`id` = ? AND `status` = 0","") ){
+            if( updateDB("vendors",$data,"`id` = {$data["id"]}") ){
+                $response = array("msg" => checkAPILanguege("Theme has been updated successfully.", "تم تحديث النظام بنجاح."));
+                echo outputData($response);die();
+            }else{
+                $response = array("msg" => checkAPILanguege("Failed to update theme.", "فشل تحديث النظام."));
+                echo outputError($response);die();
+            }
+        }else{
+            $response = array("msg" => checkAPILanguege("Invalid ID.", "المعرف غير صالح."));
+            echo outputError($response);die();
+        }
+    }
 }else{
     $error = array("msg"=>"Wrong Action Request 404");
     echo outputError($error);die();

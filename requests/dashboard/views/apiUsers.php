@@ -27,15 +27,15 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             echo outputError($response);die();
         }
     }elseif( $action == "login" ){
-        if( !isset($data["username"]) || empty($data["username"]) ){
-            $response = array("msg" => checkAPILanguege("Username is required.", "اسم المستخدم مطلوب."));
+        if( !isset($data["email"]) || empty($data["email"]) ){
+            $response = array("msg" => checkAPILanguege("Email is required.", "اسم المستخدم مطلوب."));
             echo outputError($response);die();
         }
         if( !isset($data["password"]) || empty($data["password"]) ){
             $response = array("msg" => checkAPILanguege("Password is required.", "كلمة المرور مطلوبة."));
             echo outputError($response);die();
         }
-        if( $user = selectDBNew("employees",[$data["username"],$data["password"]],"`username` = ? AND `password` = ?","") ){
+        if( $user = selectDBNew("employees",[$data["email"],$data["password"]],"`email` = ? AND `password` = ?","") ){
             if( $user[0]["status"] == 1 ){
                 $response = array("msg" => checkAPILanguege("User is blocked.", "المستخدم محظور."));
                 echo outputError($response);die();

@@ -53,7 +53,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             }
             $token = sha1(uniqid(rand(), true));
             if( updateDB("employees", array("keepMeAlive" => $token), "`id` = '{$user[0]["id"]}'") ){
-                $response = array("msg" => checkAPILanguege("User logged in successfully.", "تم تسجيل الدخول بنجاح."), "token" => $user[0]["keepMeAlive"]);
+                $response = array("msg" => checkAPILanguege("User logged in successfully.", "تم تسجيل الدخول بنجاح."), "token" => $token);
                 echo outputData($response);die();
             }else{
                 $response = array("msg" => checkAPILanguege("User login failed.", "فشل تسجيل الدخول للمستخدم."));

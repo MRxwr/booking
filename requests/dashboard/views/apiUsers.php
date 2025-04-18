@@ -25,6 +25,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             echo outputError($response);die();
         }
         $data["empType"] = 2;
+        $data["password"] = sha1($data["password"]);
         if( insertDB("employees", $data) ){
             $response = array("msg" => checkAPILanguege("User registered successfully.", "تم تسجيل المستخدم بنجاح."));
             echo outputData($response);die();

@@ -35,7 +35,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Password is required.", "كلمة المرور مطلوبة."));
             echo outputError($response);die();
         }
-        if( $user = selectDBNew("employees",[$data["email"],$data["password"]],"`email` = ? AND `password` = ?","") ){
+        if( $user = selectDBNew("employees",[$data["email"],sha1($data["password"])],"`email` = ? AND `password` = ?","") ){
             if( $user[0]["status"] == 1 ){
                 $response = array("msg" => checkAPILanguege("User is blocked.", "المستخدم محظور."));
                 echo outputError($response);die();

@@ -23,6 +23,10 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         if ( !$token ){
             $response = array("msg" => checkAPILanguege("Token is required.", "التوكن مطلوب."));
             echo outputError($response);die();
+        }elseif( $user = selectDBNew("employees",[$token],"`keepMeAlive` LIKE ? AND `status` = 0","") ){
+            $data["clientId"] = $user[0]["id"];
+        }else{
+            $response = array("msg" => checkAPILanguege("Invalid token.", "التوكن غير صالح."));
         }
         if( !isset($data["enTitle"]) || empty($data["enTitle"]) ){
             $response = array("msg" => checkAPILanguege("English title is required.", "العنوان باللغة الإنجليزية مطلوب."));

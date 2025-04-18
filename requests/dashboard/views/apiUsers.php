@@ -64,7 +64,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             echo outputError($response);die();
         }
     }elseif( $action == "logout" ){
-        if( !isset($data["token"]) || empty($data["token"]) ){
+        if( !$token ){
             $response = array("msg" => checkAPILanguege("Token is required.", "التوكن مطلوب."));
             echo outputError($response);die();
         }else{

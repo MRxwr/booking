@@ -1,7 +1,7 @@
 <?php
 if( isset($_GET["action"]) && !empty($_GET["action"]) ){
     $action = $_GET["action"];
-    $data = (isset($_POST["data"]) && !empty($_POST["data"])) ? $_POST["data"] : array();
+    $data = (isset($_POST) && !empty($_POST)) ? $_POST : array();
     if( $action == "register" ){
         if( !isset($data["name"]) || empty($data["name"]) ){
             $response = array("msg" => checkAPILanguege("Name is required.", "الاسم مطلوب."));

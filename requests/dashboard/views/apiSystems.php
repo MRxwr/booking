@@ -159,7 +159,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Token is required.", "التوكن مطلوب."));
             echo outputError($response);die();
         }
-        if( !isset($data["chargeTypeAmount"]) || empty($data["chargeTypeAmount"]) ){
+        if( !isset($data["chargeTypeAmount"]) ){
             $response = array("msg" => checkAPILanguege("Charge type amount is required.", "مبلغ نوع الشحن مطلوب."));
             echo outputError($response);die();
         }

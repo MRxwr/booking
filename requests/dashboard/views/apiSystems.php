@@ -167,6 +167,10 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Charge type is required.", "نوع الشحن مطلوب."));
             echo outputError($response);die();
         }
+        if( !isset($data["iban"]) || empty($data["iban"]) ){
+            $response = array("msg" => checkAPILanguege("IBAN is required.", "رقم الحساب الدولي IBAN مطلوب."));
+            echo outputError($response);die();
+        }
         if( !isset($data["id"]) || empty($data["id"]) ){
             $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
             echo outputError($response);die();
@@ -176,6 +180,27 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
                 echo outputData($response);die();
             }else{
                 $response = array("msg" => checkAPILanguege("Failed to update payment options.", "فشل تحديث خيارات الدفع."));
+                echo outputError($response);die();
+            }
+        }else{
+            $response = array("msg" => checkAPILanguege("Invalid ID.", "المعرف غير صالح."));
+            echo outputError($response);die();
+        }
+    }elseif( $action == "delete" ){
+        if ( !$token ){
+            $response = array("msg" => checkAPILanguege("Token is required.", "التوكن مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["id"]) || empty($data["id"]) ){
+            $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
+            echo outputError($response);die();
+        }elseif( $system = selectDBNew("vendors",[$data["id"]],"`id` = ? AND `status` = 0","") ){
+            $data = array("status" => 2);
+            if( updateDB("vendors",$data,"`id` = {$system[0]["id"]}") ){
+                $response = array("msg" => checkAPILanguege("Booking System has been deleted successfully.", "تم حذف نظام الحجز بنجاح."));
+                echo outputData($response);die();
+            }else{
+                $response = array("msg" => checkAPILanguege("Failed to delete booking system.", "فشل حذف نظام الحجز."));
                 echo outputError($response);die();
             }
         }else{

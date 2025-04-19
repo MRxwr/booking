@@ -186,6 +186,43 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Invalid ID.", "المعرف غير صالح."));
             echo outputError($response);die();
         }
+    }elseif( $action == "moreDetails" ){
+        //check enDetails, arDetails, enTerms, arTerms
+        if ( !$token ){
+            $response = array("msg" => checkAPILanguege("Token is required.", "التوكن مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["enDetails"]) || empty($data["enDetails"]) ){
+            $response = array("msg" => checkAPILanguege("English details are required.", "التفاصيل باللغة الإنجليزية مطلوبة."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["arDetails"]) || empty($data["arDetails"]) ){
+            $response = array("msg" => checkAPILanguege("Arabic details are required.", "التفاصيل باللغة العربية مطلوبة."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["enTerms"]) || empty($data["enTerms"]) ){
+            $response = array("msg" => checkAPILanguege("English terms are required.", "الشروط باللغة الإنجليزية مطلوبة."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["arTerms"]) || empty($data["arTerms"]) ){
+            $response = array("msg" => checkAPILanguege("Arabic terms are required.", "الشروط باللغة العربية مطلوبة."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["id"]) || empty($data["id"]) ){
+            $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
+            echo outputError($response);die();
+        }elseif( $system = selectDBNew("vendors",[$data["id"]],"`id` = ? AND `status` = 0","") ){
+            if( updateDB("vendors",$data,"`id` = {$system[0]["id"]}") ){
+                $response = array("msg" => checkAPILanguege("More details have been updated successfully.", "تم تحديث المزيد من التفاصيل بنجاح."));
+                echo outputData($response);die();
+            }else{
+                $response = array("msg" => checkAPILanguege("Failed to update more details.", "فشل تحديث المزيد من التفاصيل."));
+                echo outputError($response);die();
+            }
+        }else{
+            $response = array("msg" => checkAPILanguege("Invalid ID.", "المعرف غير صالح."));
+            echo outputError($response);die();
+        }
     }elseif( $action == "delete" ){
         if ( !$token ){
             $response = array("msg" => checkAPILanguege("Token is required.", "التوكن مطلوب."));

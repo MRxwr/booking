@@ -87,7 +87,6 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("URL already exists. Please choose another one.", "الرابط موجود مسبقاً. يرجى اختيار رابط اخر."));
             echo outputError($response);die();
         }
-        // check is any image uploaded or not if not unset it from data array
         if( isset($_FILES["logo"]) && !empty($_FILES["logo"]) ){
             $data["logo"] = uploadImageAPI($_FILES["logo"]["tmp_name"]);
         }else{
@@ -149,6 +148,34 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
                 echo outputData($response);die();
             }else{
                 $response = array("msg" => checkAPILanguege("Failed to update social media.", "فشل تحديث وسائل التواصل الاجتماعي."));
+                echo outputError($response);die();
+            }
+        }else{
+            $response = array("msg" => checkAPILanguege("Invalid ID.", "المعرف غير صالح."));
+            echo outputError($response);die();
+        }
+    }elseif( $action == "paymentOptions" ){
+        if ( !$token ){
+            $response = array("msg" => checkAPILanguege("Token is required.", "التوكن مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["chargeTypeAmount"]) || empty($data["chargeTypeAmount"]) ){
+            $response = array("msg" => checkAPILanguege("Charge type amount is required.", "مبلغ نوع الشحن مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["chargeType"]) || empty($data["chargeType"]) ){
+            $response = array("msg" => checkAPILanguege("Charge type is required.", "نوع الشحن مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["id"]) || empty($data["id"]) ){
+            $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
+            echo outputError($response);die();
+        }elseif( $system = selectDBNew("vendors",[$data["id"]],"`id` = ? AND `status` = 0","") ){
+            if( updateDB("vendors",$data,"`id` = {$system[0]["id"]}") ){
+                $response = array("msg" => checkAPILanguege("Payment options have been updated successfully.", "تم تحديث خيارات الدفع بنجاح."));
+                echo outputData($response);die();
+            }else{
+                $response = array("msg" => checkAPILanguege("Failed to update payment options.", "فشل تحديث خيارات الدفع."));
                 echo outputError($response);die();
             }
         }else{

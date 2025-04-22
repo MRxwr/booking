@@ -40,6 +40,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Hidden is required.", "المخفي مطلوب."));
             echo outputError($response);die();
         }
+        var_dump($data);die();
         if( insertDB("services", $data) ){
             $response = array("msg" => checkAPILanguege("Service Added Successfully", "تمت إضافة الخدمة بنجاح"));
             echo outputData($response);die();

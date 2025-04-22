@@ -113,7 +113,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
                     $list = json_decode($servicesList, true);
                     if (!empty($list)) {
                         $list = implode(',', $list);
-                        $list = selectDB2New("`id`, $titleDB as title, `price`, `period`, `seats`, `hidden`", "services", [$list], "`status` = 0 AND `id` IN (?)", "");
+                        $list = selectDB2New("`id`, $titleDB as title, FORMAT(price, 3) AS `price`, `period`, `seats`, `hidden`", "services", [$list], "`status` = 0 AND `id` IN (?)", "");
                     } else {
                         $list = [];
                     }

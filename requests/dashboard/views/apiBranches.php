@@ -104,18 +104,17 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
                     $servicesList = array();
                 }
                 if( in_array($data["serviceId"], $servicesList) ){
-                    $response = array("msg" => checkAPILanguege("Service Already Added", "تمت إضافة الخدمة بالفعل"));
-                    echo outputError($response);die();
+                    unset($servicesList[array_search($data["serviceId"], $servicesList)]);
                 }else{
                     $servicesList[] = $data["serviceId"];
-                    $servicesList = json_encode($servicesList);
-                    if( updateDB("branches", array("services" => $servicesList), "`id` = '{$data["id"]}'") ){
-                        $response = array("msg" => checkAPILanguege("Service Added Successfully to Branch", "تمت إضافة الخدمة بنجاح إلى الفرع"));
-                        echo outputData($response);die();
-                    }else{
-                        $response = array("msg" => checkAPILanguege("Failed to Add Service", "فشل في إضافة الخدمة"));
-                        echo outputError($response);die();
-                    }
+                }
+                $servicesList = json_encode($servicesList);
+                if( updateDB("branches", array("services" => $servicesList), "`id` = '{$data["id"]}'") ){
+                    $response = array("msg" => checkAPILanguege("Services Updated Successfully to Branch", "تمت تحديث الخدمة بنجاح إلى الفرع"));
+                    echo outputData($response);die();
+                }else{
+                    $response = array("msg" => checkAPILanguege("Failed to Update Service", "فشل في تحديث الخدمة"));
+                    echo outputError($response);die();
                 }
             }else{
                 $response = array("msg" => checkAPILanguege("Service Not Found", "الخدمة غير موجودة"));

@@ -99,13 +99,13 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
        if( $branch = selectDB("branches","`id` = '{$data["id"]}'") ){
             if( $services = selectDB("services","`id` = '{$data["serviceId"]}'") ){
                 $servicesList = json_decode($branch[0]["services"], true);
+                var_dump($servicesList);die();
                 if( in_array($data["serviceId"], $servicesList) ){
                     $response = array("msg" => checkAPILanguege("Service Already Added", "تمت إضافة الخدمة بالفعل"));
                     echo outputError($response);die();
                 }else{
                     $servicesList[] = $data["serviceId"];
                     $servicesList = json_encode($servicesList);
-                    var_dump($servicesList);die();
                     if( updateDB("branches", array("services" => $servicesList), "`id` = '{$data["id"]}'") ){
                         $response = array("msg" => checkAPILanguege("Service Added Successfully to Branch", "تمت إضافة الخدمة بنجاح إلى الفرع"));
                         echo outputData($response);die();

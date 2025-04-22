@@ -105,13 +105,13 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
                 }else{
                     $servicesList[] = $data["serviceId"];
                     $servicesList = json_encode($servicesList);
-                }
-                if( updateDB("branches", array("services" => $servicesList), "`id` = '{$data["id"]}'") ){
-                    $response = array("msg" => checkAPILanguege("Service Added Successfully to Branch", "تمت إضافة الخدمة بنجاح إلى الفرع"));
-                    echo outputData($response);die();
-                }else{
-                    $response = array("msg" => checkAPILanguege("Failed to Add Service", "فشل في إضافة الخدمة"));
-                    echo outputError($response);die();
+                    if( updateDB("branches", array("services" => $servicesList), "`id` = '{$data["id"]}'") ){
+                        $response = array("msg" => checkAPILanguege("Service Added Successfully to Branch", "تمت إضافة الخدمة بنجاح إلى الفرع"));
+                        echo outputData($response);die();
+                    }else{
+                        $response = array("msg" => checkAPILanguege("Failed to Add Service", "فشل في إضافة الخدمة"));
+                        echo outputError($response);die();
+                    }
                 }
             }else{
                 $response = array("msg" => checkAPILanguege("Service Not Found", "الخدمة غير موجودة"));

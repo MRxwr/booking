@@ -112,8 +112,8 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
                 if( updateDB("branches", array("services" => $servicesList), "`id` = '{$data["id"]}'") ){
                     $list = json_decode($servicesList, true);
                     if (!empty($list)) {
-                        $list = implode(',', $list);
-                        $list = selectDB2New("`id`, $titleDB as title, FORMAT(price, 3) AS `price`, `period`, `seats`, `hidden`", "services", [$list], "`status` = 0 AND `id` IN (?)", "");
+                        $placeholders = implode(',', array_fill(0, count($list), '?'));
+                        $list = selectDB2New("`id`, $titleDB as title, FORMAT(price, 3) AS `price`, `period`, `seats`, `hidden`", "services", $list, "`status` = 0 AND `id` IN ($placeholders)", "");
                     } else {
                         $list = [];
                     }

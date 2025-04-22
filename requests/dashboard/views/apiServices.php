@@ -12,6 +12,9 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         if( $services = selectDB2New("`id`, $titleDB as title, `price`, `period`, `seats`","services",[$data["vendroId"]],"`status` = 0 AND `hidden` = 0 AND `vendorId` = ?","") ){
             echo outputData($services);die();
         }
+    }else{
+        $response = array("msg" => checkAPILanguege("Wrong Endpoint Request 404", "خطأ في طلب نقطة النهاية 404"));
+        echo outputError($response);die();
     }
 }
 

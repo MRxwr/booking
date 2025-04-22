@@ -83,6 +83,18 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Failed to Update Service", "فشل في تحديث الخدمة"));
             echo outputError($response);die();
         }
+    }elseif( $action == "delete" ){
+        if( !isset($data["id"]) || empty($data["id"]) ){
+            $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
+            echo outputError($response);die();
+        }
+        if( updateDB("services", array("status" => 1),"`id` = {$data["id"]}") ){
+            $response = array("msg" => checkAPILanguege("Service Deleted Successfully", "تم حذف الخدمة بنجاح"));
+            echo outputData($response);die();
+        }else{
+            $response = array("msg" => checkAPILanguege("Failed to Delete Service", "فشل حذف الخدمة"));
+            echo outputError($response);die();
+        }
     }else{
         $response = array("msg" => checkAPILanguege("Wrong Endpoint Request 404", "خطأ في طلب نقطة النهاية 404"));
         echo outputError($response);die();

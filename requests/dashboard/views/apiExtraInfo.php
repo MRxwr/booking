@@ -9,7 +9,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         $data["vendorId"] = $user[0]["id"];
     }
     if( $action == "list" ){
-        if( $Addons = selectDB2New("`id`, $titleDB as title, FORMAT(price, 3) AS `price`, `hidden`","extrainfo",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
+        if( $Addons = selectDB2New("`id`, $titleDB as title, `isRequired`, `type`, `hidden`","extrainfo",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
             echo outputData($Addons);die();
         }else{
             $response = array("msg" => checkAPILanguege("No Extra info Found", "لا توجد معلومات إضافيه متاحة"));
@@ -24,8 +24,12 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Arabic Title is required.", "العنوان باللغة العربية مطلوب."));
             echo outputError($response);die();
         }
-        if( !isset($data["price"]) || empty($data["price"]) ){
-            $response = array("msg" => checkAPILanguege("Price is required.", "السعر مطلوب."));
+        if( !isset($data["isRequired"]) || empty($data["isRequired"]) ){
+            $response = array("msg" => checkAPILanguege("Required status is required.", " حالة الإلزام مطلوبه."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["type"]) || empty($data["type"]) ){
+            $response = array("msg" => checkAPILanguege("Type is required.", "النوع مطلوب."));
             echo outputError($response);die();
         }
         if( !isset($data["hidden"]) ){
@@ -52,8 +56,12 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Arabic Title is required.", "العنوان باللغة العربية مطلوب."));
             echo outputError($response);die();
         }
-        if( !isset($data["price"]) || empty($data["price"]) ){
-            $response = array("msg" => checkAPILanguege("Price is required.", "السعر مطلوب."));
+        if( !isset($data["isRequired"]) || empty($data["isRequired"]) ){
+            $response = array("msg" => checkAPILanguege("Required status is required.", " حالة الإلزام مطلوبه."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["type"]) || empty($data["type"]) ){
+            $response = array("msg" => checkAPILanguege("Type is required.", "النوع مطلوب."));
             echo outputError($response);die();
         }
         if( !isset($data["hidden"]) ){

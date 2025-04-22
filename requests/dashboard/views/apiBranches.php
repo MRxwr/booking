@@ -87,6 +87,40 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Failed to Delete Branch", "فشل حذف الفرع"));
             echo outputError($response);die();
         }
+    }elseif( $action == "addService" ){
+        if( !isset($data["id"]) || empty($data["id"]) ){
+            $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["serviceId"]) || empty($data["serviceId"]) ){
+            $response = array("msg" => checkAPILanguege("Service ID is required.", "معرف الخدمة مطلوب."));
+            echo outputError($response);die();
+        }
+       if( $branch = selectDB("branches","`id` = '{$data["id"]}'") ){
+            if( $services = selectDB("services","`id` = '{$data["serviceId"]}'") ){
+                $servicesList = json_decode($branch[0]["services"], true);
+                if( in_array($data["serviceId"], $servicesList) ){
+                    $response = array("msg" => checkAPILanguege("Service Already Added", "تمت إضافة الخدمة بالفعل"));
+                    echo outputError($response);die();
+                }else{
+                    $servicesList[] = $data["serviceId"];
+                    $servicesList = json_encode($servicesList);
+                }
+                if( updateDB("branches", array("services" => $servicesList), "`id` = '{$data["id"]}'") ){
+                    $response = array("msg" => checkAPILanguege("Service Added Successfully to Branch", "تمت إضافة الخدمة بنجاح إلى الفرع"));
+                    echo outputData($response);die();
+                }else{
+                    $response = array("msg" => checkAPILanguege("Failed to Add Service", "فشل في إضافة الخدمة"));
+                    echo outputError($response);die();
+                }
+            }else{
+                $response = array("msg" => checkAPILanguege("Service Not Found", "الخدمة غير موجودة"));
+                echo outputError($response);die();
+            }
+        }else{
+            $response = array("msg" => checkAPILanguege("Branch Not Found", "الفرع غير موجود"));
+            echo outputError($response);die();
+        }
     }else{
         $response = array("msg" => checkAPILanguege("Wrong Endpoint Request 404", "خطأ في طلب نقطة النهاية 404"));
         echo outputError($response);die();

@@ -9,7 +9,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         $data["vendorId"] = $user[0]["id"];
     }
     if( $action == "list" ){
-        if( $Addons = selectDB2New("`id`, $titleDB as title, FORMAT(price, 3) AS `price`, `period`, `seats`, `hidden`","extras",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
+        if( $Addons = selectDB2New("`id`, $titleDB as title, FORMAT(price, 3) AS `price`, `hidden`","extras",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
             echo outputData($Addons);die();
         }else{
             $response = array("msg" => checkAPILanguege("No Add-ons Found", "لا توجد إضافات متاحة"));

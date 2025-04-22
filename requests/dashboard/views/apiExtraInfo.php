@@ -24,11 +24,11 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Arabic Title is required.", "العنوان باللغة العربية مطلوب."));
             echo outputError($response);die();
         }
-        if( !isset($data["isRequired"]) || empty($data["isRequired"]) ){
+        if( !isset($data["isRequired"]) ){
             $response = array("msg" => checkAPILanguege("Required status is required.", " حالة الإلزام مطلوبه."));
             echo outputError($response);die();
         }
-        if( !isset($data["type"]) || empty($data["type"]) ){
+        if( !isset($data["type"]) ){
             $response = array("msg" => checkAPILanguege("Type is required.", "النوع مطلوب."));
             echo outputError($response);die();
         }
@@ -56,11 +56,11 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Arabic Title is required.", "العنوان باللغة العربية مطلوب."));
             echo outputError($response);die();
         }
-        if( !isset($data["isRequired"]) || empty($data["isRequired"]) ){
+        if( !isset($data["isRequired"]) ){
             $response = array("msg" => checkAPILanguege("Required status is required.", " حالة الإلزام مطلوبه."));
             echo outputError($response);die();
         }
-        if( !isset($data["type"]) || empty($data["type"]) ){
+        if( !isset($data["type"]) ){
             $response = array("msg" => checkAPILanguege("Type is required.", "النوع مطلوب."));
             echo outputError($response);die();
         }

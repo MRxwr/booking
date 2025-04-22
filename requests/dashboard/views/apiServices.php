@@ -9,7 +9,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         $data["vendroId"] = $user[0]["id"];
     }
     if( $action == "list" ){
-        if( $services = selectDB2New("`id`, $titleDB as title, `price`, `period`, `seats`","services",[$data["vendroId"]],"`status` = 0 AND `hidden` = 0 AND `vendorId` = ?","") ){
+        if( $services = selectDB2New("`id`, $titleDB as title, `price`, `period`, `seats`, `hidden`","services",[$data["vendroId"]],"`status` = 0 AND `vendorId` = ?","") ){
             echo outputData($services);die();
         }else{
             $response = array("msg" => checkAPILanguege("No Services Found", "لا توجد خدمات متاحة"));

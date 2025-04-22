@@ -36,7 +36,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Seats is required.", "المقاعد مطلوبة."));
             echo outputError($response);die();
         }
-        if( !isset($data["hidden"]) || empty($data["hidden"]) ){
+        if( !isset($data["hidden"]) ){
             $response = array("msg" => checkAPILanguege("Hidden is required.", "المخفي مطلوب."));
             echo outputError($response);die();
         }

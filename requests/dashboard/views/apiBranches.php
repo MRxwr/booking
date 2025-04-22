@@ -111,7 +111,12 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
                 $servicesList = json_encode($servicesList);
                 if( updateDB("branches", array("services" => $servicesList), "`id` = '{$data["id"]}'") ){
                     $list = json_decode($servicesList, true);
-                    $list = selectDB2New("`id`, $titleDB as title, `price`, `period`, `seats`, `hidden`","services",[$list],"`status` = 0 AND `id` IN (?)","");
+                    if (!empty($list)) {
+                        $list = implode(',', $list);
+                        $list = selectDB2New("`id`, $titleDB as title, `price`, `period`, `seats`, `hidden`", "services", [$list], "`status` = 0 AND `id` IN (?)", "");
+                    } else {
+                        $list = [];
+                    }
                     $response = array("msg" => checkAPILanguege("Services Updated Successfully to Branch", "تمت تحديث الخدمة بنجاح إلى الفرع"), "services" => $list);
                     echo outputData($response);die();
                 }else{

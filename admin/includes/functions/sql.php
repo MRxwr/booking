@@ -76,7 +76,7 @@ function selectDB2New($select,$table, $placeHolders, $where, $order){
     $where = str_replace($check, "", $where);
     $sql = "SELECT {$select} FROM `{$dbPrefix}{$table}`";
     if(!empty($where)) {
-        echo $sql .= " WHERE {$where}";
+        $sql .= " WHERE {$where}";
     }
     if(!empty($order)) {
         $sql .= " ORDER BY {$order}";

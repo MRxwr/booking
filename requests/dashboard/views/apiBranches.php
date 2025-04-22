@@ -98,13 +98,15 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         }
        if( $branch = selectDB("branches","`id` = '{$data["id"]}'") ){
             if( $services = selectDB("services","`id` = '{$data["serviceId"]}'") ){
-                var_dump($branch[0]["services"]);die();
-                $servicesList = json_decode($branch[0]["services"], true);
+                if( $servicesList = json_decode($branch[0]["services"], true)){
+                    $servicesList = json_decode($branch[0]["services"], true);
+                }else{
+                    $servicesList = array();
+                }
                 if( in_array($data["serviceId"], $servicesList) ){
                     $response = array("msg" => checkAPILanguege("Service Already Added", "تمت إضافة الخدمة بالفعل"));
                     echo outputError($response);die();
                 }else{
-                    var_dump($servicesList);die();
                     $servicesList[] = $data["serviceId"];
                     $servicesList = json_encode($servicesList);
                     if( updateDB("branches", array("services" => $servicesList), "`id` = '{$data["id"]}'") ){

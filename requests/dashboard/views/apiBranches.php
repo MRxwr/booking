@@ -103,8 +103,9 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
                     $response = array("msg" => checkAPILanguege("Service Already Added", "تمت إضافة الخدمة بالفعل"));
                     echo outputError($response);die();
                 }else{
-                    $servicesList[] = $data["serviceId"];
                     var_dump($servicesList);die();
+                    $servicesList[] = $data["serviceId"];
+                    
                     $servicesList = json_encode($servicesList);
                     if( updateDB("branches", array("services" => $servicesList), "`id` = '{$data["id"]}'") ){
                         $response = array("msg" => checkAPILanguege("Service Added Successfully to Branch", "تمت إضافة الخدمة بنجاح إلى الفرع"));

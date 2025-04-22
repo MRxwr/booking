@@ -47,6 +47,42 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Failed to Add Service", "فشل في إضافة الخدمة"));
             echo outputError($response);die();
         }
+    }elseif( $action == "update"){
+        if( !isset($data["id"]) || empty($data["id"]) ){
+            $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["enTitle"]) || empty($data["enTitle"]) ){
+            $response = array("msg" => checkAPILanguege("English Title is required.", "العنوان باللغة الإنجليزية مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["arTitle"]) || empty($data["arTitle"]) ){
+            $response = array("msg" => checkAPILanguege("Arabic Title is required.", "العنوان باللغة العربية مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["price"]) || empty($data["price"]) ){
+            $response = array("msg" => checkAPILanguege("Price is required.", "السعر مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["period"]) || empty($data["period"]) ){
+            $response = array("msg" => checkAPILanguege("Period is required.", "المدة مطلوبة."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["seats"]) || empty($data["seats"]) ){
+            $response = array("msg" => checkAPILanguege("Seats is required.", "المقاعد مطلوبة."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["hidden"]) ){
+            $response = array("msg" => checkAPILanguege("Hidden is required.", "المخفي مطلوب."));
+            echo outputError($response);die();
+        }
+        if( updateDB("services", $data, "`id` = {$data["id"]}") ){
+            $response = array("msg" => checkAPILanguege("Service Updated Successfully", "تم تحديث الخدمة بنجاح"));
+            echo outputData($response);die();
+        }else{
+            $response = array("msg" => checkAPILanguege("Failed to Update Service", "فشل في تحديث الخدمة"));
+            echo outputError($response);die();
+        }
     }else{
         $response = array("msg" => checkAPILanguege("Wrong Endpoint Request 404", "خطأ في طلب نقطة النهاية 404"));
         echo outputError($response);die();

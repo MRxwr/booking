@@ -104,9 +104,9 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("List Types is required.", "قائمة الأنواع مطلوبة."));
             echo outputError($response);die();
         }
-        if( $service = selectDBNew("services",[$data["id"]],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
+        if( $service = selectDBNew("services",[$data["id"]],"`id` = ?","") ){
             $listTypes = json_decode($service[0]["listTypes"],true);
-            // check if $data["listTypes"] is in $listTypes
+            var_dump($listTypes);die();
             if( in_array($data["listTypes"],$listTypes) ){
                 $response = array("msg" => checkAPILanguege("List Types Already Exist", "قائمة الأنواع موجودة بالفعل"));
                 echo outputError($response);die();

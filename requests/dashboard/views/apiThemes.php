@@ -94,7 +94,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
                 echo outputError($response);die();
             }
         }
-        if( $preUploadedThemes = selectDB2New("`id`, `enTitle`, `arTitle`, `themes`, `hidden`","themes",[$data["id"]],"`status` = 0 AND `vendorId` = ?","") ){
+        if( $preUploadedThemes = selectDB2New("`id`, `enTitle`, `arTitle`, `themes`, `hidden`","themes",[$data["id"]],"`status` = 0 AND `id` = ?","") ){
             $preUploadedThemes = json_decode($preUploadedThemes[0]["themes"],true);
             if( sizeof($preUploadedThemes) > 0 ){
                 for( $i = 0; $i < sizeof($preUploadedThemes); $i++ ){

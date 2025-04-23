@@ -110,7 +110,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Failed to Add Themes", "فشل في إضافة التصميم"));
             echo outputError($response);die();
         }
-    }elseif( $action == "daleteTheme" ){
+    }elseif( $action == "deleteTheme" ){
         if( !isset($data["id"]) || empty($data["id"]) ){
             $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
             echo outputError($response);die();

@@ -11,8 +11,10 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
     if( $action == "list" ){
         if( $Themes = selectDB2New("`id`, `enTitle`, `arTitle`, `themes`, `hidden`","themes",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
             // themes is a json string, so we need to decode it
-            var_dump(json_decode($Themes[0]["themes"],true));die();
-            $response["data"]["themes"] = json_decode($Themes[0]["themes"],true);
+            $themesList = json_decode($Themes[0]["themes"],true);
+            for( $i = 0 ; $i < sizeof($themesList); $i++ ){
+                $Themes["data"]["themes"][$i] = $themesList[$i];
+            }
             echo outputData($Themes);die();
         }else{
             $response = array("msg" => checkAPILanguege("No Themes Found", "لا توجد التصاميم متاحة"));

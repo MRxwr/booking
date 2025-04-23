@@ -9,7 +9,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         $data["vendorId"] = $user[0]["id"];
     }
     if( $action == "list" ){
-        if( $PictureTypes = selectDB2New("`id`, `enTitle`, `arTitle`, `price`, `themes`, `hidden`","picturetype",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
+        if( $PictureTypes = selectDB2New("`id`, `enTitle`, `arTitle`, FORMAT(price, 3) AS `price`, `themes`, `hidden`","picturetype",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
             echo outputData($PictureTypes);die();
         }else{
             $response = array("msg" => checkAPILanguege("No Picture Types Found", "لا توجد انواع صور متاحة"));

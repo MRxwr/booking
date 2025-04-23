@@ -106,8 +106,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         }
         if( $service = selectDBNew("services",[$data["id"]],"`id` = ?","") ){
             $listTypes = json_decode($service[0]["listTypes"],true);
-            var_dump($listTypes);die();
-            if( in_array($data["listTypes"],$listTypes) ){
+            if( !is_null($listTypes) && in_array($data["listTypes"],$listTypes) ){
                 $response = array("msg" => checkAPILanguege("List Types Already Exist", "قائمة الأنواع موجودة بالفعل"));
                 echo outputError($response);die();
             }else{

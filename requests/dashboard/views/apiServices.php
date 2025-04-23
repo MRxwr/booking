@@ -135,6 +135,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         }
         if( $service = selectDBNew("services",[$data["id"]],"`id` = ?","") ){
             $listTypes = json_decode($service[0]["listTypes"],true);
+            var_dump($listTypes);die();
             if( !is_null($listTypes) && isset($listTypes[$data["index"]]) ){
                 unset($listTypes[$data["index"]]);
                 $listTypes = array_values($listTypes);

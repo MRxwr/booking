@@ -121,7 +121,6 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         }
         if( $preUploadedThemes = selectDBNew("themes",[$data["id"]],"`status` = 0 AND `id` = ?","") ){
             $preUploadedThemes = json_decode($preUploadedThemes[0]["themes"],true);
-            var_dump(sizeof($preUploadedThemes));die();
             if( sizeof($preUploadedThemes) > 0 ){
                 $themes = array();
                 for( $i = 0; $i < sizeof($preUploadedThemes); $i++ ){
@@ -130,6 +129,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
                     }
                 }
                 $data["themes"] = json_encode($themes);
+                die();
                 if( updateDB("themes", $data, "`id` = {$data["id"]}") ){
                     $response = array("msg" => checkAPILanguege("Theme Deleted Successfully", "تم حذف التصميم بنجاح"));
                     echo outputData($response);die();

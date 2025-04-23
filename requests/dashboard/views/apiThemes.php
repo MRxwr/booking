@@ -12,8 +12,9 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         if( $Themes = selectDB2New("`id`, `enTitle`, `arTitle`, `themes`, `hidden`","themes",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
             // themes is a json string, so we need to decode it
             $themesList = json_decode($Themes[0]["themes"],true);
+            unset($Themes[0]["themes"]);
             for( $i = 0 ; $i < sizeof($themesList); $i++ ){
-                $Themes[0]["themes"][$i] = $themesList[$i];
+                $Themes[0]["themes"][] = $themesList[$i];
             }
             echo outputData($Themes);die();
         }else{

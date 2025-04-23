@@ -13,7 +13,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             // themes is a json string, so we need to decode it
             $themesList = json_decode($Themes[0]["themes"],true);
             for( $i = 0 ; $i < sizeof($themesList); $i++ ){
-                $Themes["data"]["themes"][$i] = $themesList[$i];
+                $Themes[0]["themes"][$i] = $themesList[$i];
             }
             echo outputData($Themes);die();
         }else{

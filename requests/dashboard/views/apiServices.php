@@ -95,6 +95,67 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Failed to Delete Service", "فشل حذف الخدمة"));
             echo outputError($response);die();
         }
+    }elseif( $action == "addPictureTypes" ){
+        if( !isset($data["id"]) || empty($data["id"]) ){
+            $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["listTypes"]) || empty($data["listTypes"]) ){
+            $response = array("msg" => checkAPILanguege("List Types is required.", "قائمة الأنواع مطلوبة."));
+            echo outputError($response);die();
+        }
+        if( $service = selectDBNew("services",[$data["id"]],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
+            $listTypes = json_decode($service[0]["listTypes"],true);
+            // check if $data["listTypes"] is in $listTypes
+            if( in_array($data["listTypes"],$listTypes) ){
+                $response = array("msg" => checkAPILanguege("List Types Already Exist", "قائمة الأنواع موجودة بالفعل"));
+                echo outputError($response);die();
+            }else{
+                $listTypes[] = $data["listTypes"];
+                $data["listTypes"] = json_encode($listTypes);
+            }
+            if( updateDB("services", $data, "`id` = {$data["id"]}") ){
+                $response = array("msg" => checkAPILanguege("List Types Added Successfully", "تمت إضافة قائمة الأنواع بنجاح"));
+                echo outputData($response);die();
+            }else{
+                $response = array("msg" => checkAPILanguege("Failed to Add List Types", "فشل في إضافة قائمة الأنواع"));
+                echo outputError($response);die();
+            }
+        }else{
+            $response = array("msg" => checkAPILanguege("Service Not Found", "الخدمة غير موجودة"));
+            echo outputError($response);die();
+        }
+    }elseif( $action == "deletePictureTypes" ){
+        if( !isset($data["id"]) || empty($data["id"]) ){
+            $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["listTypes"]) || empty($data["listTypes"]) ){
+            $response = array("msg" => checkAPILanguege("List Types is required.", "قائمة الأنواع مطلوبة."));
+            echo outputError($response);die();
+        }
+        if( $service = selectDBNew("services",[$data["id"]],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
+            $listTypes = json_decode($service[0]["listTypes"],true);
+            if( in_array($data["listTypes"],$listTypes) ){
+                $listTypes = array_diff($listTypes,[$data["listTypes"]]);
+                $data["listTypes"] = json_encode($listTypes);
+                if( updateDB("services", $data, "`id` = {$data["id"]}") ){
+                    $response = array("msg" => checkAPILanguege("List Types Deleted Successfully", "تم حذف قائمة الأنواع بنجاح"));
+                    echo outputData($response);die();
+                }else{
+                    $response = array("msg" => checkAPILanguege("Failed to Delete List Types", "فشل في حذف قائمة الأنواع"));
+                    echo outputError($response);die();
+                }
+            }else{
+                $response = array("msg" => checkAPILanguege("List Types Not Found", "قائمة الأنواع غير موجودة"));
+                echo outputError($response);die();
+            }
+        }else{
+            $response = array("msg" => checkAPILanguege("Service Not Found", "الخدمة غير موجودة"));
+            echo outputError($response);die();
+        }
+    }elseif( $action == "addThemes" ){
+    }elseif( $action == "deleteThemes" ){
     }else{
         $response = array("msg" => checkAPILanguege("Wrong Endpoint Request 404", "خطأ في طلب نقطة النهاية 404"));
         echo outputError($response);die();

@@ -115,7 +115,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
             echo outputError($response);die();
         }
-        if( !isset($data["index"]) || empty($data["index"]) ){
+        if( !isset($data["index"]) ){
             $response = array("msg" => checkAPILanguege("Theme ID is required.", "معرف التصميم مطلوب."));
             echo outputError($response);die();
         }

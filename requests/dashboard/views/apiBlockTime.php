@@ -24,19 +24,19 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Service ID is required.", "معرف الخدمة مطلوب."));
             echo outputError($response);die();
         }
-        if( !isset($data["startDate"]) ){
+        if( !isset($data["startDate"]) || empty($data["startDate"]) ){
             $response = array("msg" => checkAPILanguege("Start Date is required.", "تاريخ البدء مطلوب."));
             echo outputError($response);die();
         }
-        if( !isset($data["endDate"]) ){
+        if( !isset($data["endDate"]) || empty($data["endDate"]) ){
             $response = array("msg" => checkAPILanguege("End Date is required.", "تاريخ الانتهاء مطلوب."));
             echo outputError($response);die();
         }
-        if( !isset($data["fromTime"]) ){
+        if( !isset($data["fromTime"]) || empty($data["fromTime"]) ){
             $response = array("msg" => checkAPILanguege("From Time is required.", " وقت البدء مطلوب."));
             echo outputError($response);die();
         }
-        if( !isset($data["toTime"]) ){
+        if( !isset($data["toTime"]) || empty($data["toTime"]) ){
             $response = array("msg" => checkAPILanguege("To Time is required.", " وقت الانتهاء مطلوب."));
             echo outputError($response);die();
         }
@@ -64,19 +64,19 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Service ID is required.", "معرف الخدمة مطلوب."));
             echo outputError($response);die();
         }
-        if( !isset($data["startDate"]) ){
+        if( !isset($data["startDate"]) || empty($data["startDate"]) ){
             $response = array("msg" => checkAPILanguege("Start Date is required.", "تاريخ البدء مطلوب."));
             echo outputError($response);die();
         }
-        if( !isset($data["endDate"]) ){
+        if( !isset($data["endDate"]) || empty($data["endDate"]) ){
             $response = array("msg" => checkAPILanguege("End Date is required.", "تاريخ الانتهاء مطلوب."));
             echo outputError($response);die();
         }
-        if( !isset($data["fromTime"]) ){
+        if( !isset($data["fromTime"]) || empty($data["fromTime"]) ){
             $response = array("msg" => checkAPILanguege("From Time is required.", " وقت البدء مطلوب."));
             echo outputError($response);die();
         }
-        if( !isset($data["toTime"]) ){
+        if( !isset($data["toTime"]) || empty($data["toTime"]) ){
             $response = array("msg" => checkAPILanguege("To Time is required.", " وقت الانتهاء مطلوب."));
             echo outputError($response);die();
         }

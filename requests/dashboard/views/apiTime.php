@@ -16,6 +16,10 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             echo outputError($response);die();
         }
     }elseif( $action == "add" ){
+        if( !isset($data["branchId"]) || empty($data["branchId"]) ){
+            $response = array("msg" => checkAPILanguege("Branch ID is required.", "معرف الفرع مطلوب."));
+            echo outputError($response);die();
+        }
         if( !isset($data["day"]) ){
             $response = array("msg" => checkAPILanguege("Arabic Title is required.", "العنوان باللغة العربية مطلوب."));
             echo outputError($response);die();
@@ -42,6 +46,10 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
     }elseif( $action == "update"){
         if( !isset($data["id"]) || empty($data["id"]) ){
             $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["branchId"]) || empty($data["branchId"]) ){
+            $response = array("msg" => checkAPILanguege("Branch ID is required.", "معرف الفرع مطلوب."));
             echo outputError($response);die();
         }
         if( !isset($data["day"]) ){

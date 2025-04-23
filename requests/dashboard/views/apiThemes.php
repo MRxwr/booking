@@ -120,8 +120,8 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             echo outputError($response);die();
         }
         if( $preUploadedThemes = selectDBNew("themes",[$data["id"]],"`status` = 0 AND `id` = ?","") ){
-            die();
             $preUploadedThemes = json_decode($preUploadedThemes[0]["themes"],true);
+            var_dump(sizeof($preUploadedThemes));die();
             if( sizeof($preUploadedThemes) > 0 ){
                 $themes = array();
                 for( $i = 0; $i < sizeof($preUploadedThemes); $i++ ){

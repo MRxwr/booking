@@ -165,7 +165,7 @@ function uploadImage($imageLocation){
 	}
 }
 
-function uploadImageAPI($imageLocation){
+function uploadImageAPI($imageLocation, $folder){
 	$curl = curl_init();
 	curl_setopt_array($curl, array(
 	  CURLOPT_URL => 'https://api.imgur.com/3/upload',
@@ -195,11 +195,11 @@ function uploadImageAPI($imageLocation){
 			// Open the file to get existing content
 			$data = file_get_contents($newFile);
 			// New file
-			$new = "../../logos/vendors/{$imageSizes[$i]}".$fileTitle;
+			$new = "../../logos/{$folder}/{$imageSizes[$i]}".$fileTitle;
 			// Write the contents back to a new file
 			file_put_contents($new, $data);
 		}
-		return "vendors/{$fileTitle}"; 
+		return "{$folder}/{$fileTitle}"; 
 	}else{
 		return "";
 	}

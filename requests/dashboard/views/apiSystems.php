@@ -54,8 +54,8 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("URL already exists. Please choose another one.", "الرابط موجود مسبقاً. يرجى اختيار رابط اخر."));
             echo outputError($response);die();
         }
-        $data["logo"] = uploadImageAPI($_FILES["logo"]["tmp_name"]);
-        $data["coverImg"] = uploadImageAPI($_FILES["coverImg"]["tmp_name"]);
+        $data["logo"] = uploadImageAPI($_FILES["logo"]["tmp_name"], "vendors");
+        $data["coverImg"] = uploadImageAPI($_FILES["coverImg"]["tmp_name"], "vendors");
         if( insertDB("vendors",$data) ){
             $response = array("msg" => checkAPILanguege("Booking System has been added successfully.", "تم إضافة نظام الحجز بنجاح."));
             echo outputData($response);die();
@@ -88,12 +88,12 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             echo outputError($response);die();
         }
         if( isset($_FILES["logo"]) && !empty($_FILES["logo"]) ){
-            $data["logo"] = uploadImageAPI($_FILES["logo"]["tmp_name"]);
+            $data["logo"] = uploadImageAPI($_FILES["logo"]["tmp_name"], "vendors");
         }else{
             unset($data["logo"]);
         }
         if( isset($_FILES["coverImg"]) && !empty($_FILES["coverImg"]) ){
-            $data["coverImg"] = uploadImageAPI($_FILES["coverImg"]["tmp_name"]);
+            $data["coverImg"] = uploadImageAPI($_FILES["coverImg"]["tmp_name"], "vendors");
         }else{
             unset($data["coverImg"]);
         }

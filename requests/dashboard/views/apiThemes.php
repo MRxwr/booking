@@ -77,9 +77,73 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             echo outputError($response);die();
         }
     }elseif( $action == "addTheme" ){
-
+        if( !isset($_FILES["themes"]) || empty($_FILES["themes"]) ){
+            $response = array("msg" => checkAPILanguege("Themes is required.", "التصميم مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["id"]) || empty($data["id"]) ){
+            $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
+            echo outputError($response);die();
+        }
+        $themes = array();
+        for( $i = 0; $i < sizeof($_FILES["themes"]["tmp_name"]); $i++ ){
+            if( $image = uploadImageAPI($_FILES["themes"]["tmp_name"][$i], "themes") ){
+                $themes[] = $image;
+            }else{
+                $response = array("msg" => checkAPILanguege("Failed to Upload Themes", "فشل في تحميل التصميم"));
+                echo outputError($response);die();
+            }
+        }
+        if( $preUploadedThemes = selectDB2New("`id`, `enTitle`, `arTitle`, `themes`, `hidden`","themes",[$data["id"]],"`status` = 0 AND `vendorId` = ?","") ){
+            $preUploadedThemes = json_decode($preUploadedThemes[0]["themes"],true);
+            if( sizeof($preUploadedThemes) > 0 ){
+                for( $i = 0; $i < sizeof($preUploadedThemes); $i++ ){
+                    $themes[] = $preUploadedThemes[$i];
+                }
+            }
+        }
+        $data["themes"] = json_encode($themes);
+        if( updateDB("themes", $data, "`id` = {$data["id"]}") ){
+            $response = array("msg" => checkAPILanguege("Themes Added Successfully", "تمت إضافة التصميم بنجاح"));
+            echo outputData($response);die();
+        }else{
+            $response = array("msg" => checkAPILanguege("Failed to Add Themes", "فشل في إضافة التصميم"));
+            echo outputError($response);die();
+        }
     }elseif( $action == "daleteTheme" ){
-
+        if( !isset($data["id"]) || empty($data["id"]) ){
+            $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["index"]) || empty($data["index"]) ){
+            $response = array("msg" => checkAPILanguege("Theme ID is required.", "معرف التصميم مطلوب."));
+            echo outputError($response);die();
+        }
+        if( $preUploadedThemes = selectDB2New("`id`, `enTitle`, `arTitle`, `themes`, `hidden`","themes",[$data["id"]],"`status` = 0 AND `vendorId` = ?","") ){
+            $preUploadedThemes = json_decode($preUploadedThemes[0]["themes"],true);
+            if( sizeof($preUploadedThemes) > 0 ){
+                $themes = array();
+                for( $i = 0; $i < sizeof($preUploadedThemes); $i++ ){
+                    if( $i != $data["index"] ){
+                        $themes[] = $preUploadedThemes[$i];
+                    }
+                }
+                $data["themes"] = json_encode($themes);
+                if( updateDB("themes", $data, "`id` = {$data["id"]}") ){
+                    $response = array("msg" => checkAPILanguege("Theme Deleted Successfully", "تم حذف التصميم بنجاح"));
+                    echo outputData($response);die();
+                }else{
+                    $response = array("msg" => checkAPILanguege("Failed to Delete Theme", "فشل حذف التصميم"));
+                    echo outputError($response);die();
+                }
+            }else{
+                $response = array("msg" => checkAPILanguege("No Themes Found", "لا توجد التصاميم متاحة"));
+                echo outputError($response);die();
+            }
+        }else{
+            $response = array("msg" => checkAPILanguege("No Themes Found", "لا توجد التصاميم متاحة"));
+            echo outputError($response);die();
+        }
     }else{
         $response = array("msg" => checkAPILanguege("Wrong Endpoint Request 404", "خطأ في طلب نقطة النهاية 404"));
         echo outputError($response);die();

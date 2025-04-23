@@ -129,20 +129,21 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
             echo outputError($response);die();
         }
-        if( !isset($data["listTypes"]) || empty($data["listTypes"]) ){
+        if( !isset($data["index"]) || empty($data["index"]) ){
             $response = array("msg" => checkAPILanguege("List Types is required.", "قائمة الأنواع مطلوبة."));
             echo outputError($response);die();
         }
-        if( $service = selectDBNew("services",[$data["id"]],"`id` = ? AND `status` = '0' AND `hidden` = '0'","") ){
+        if( $service = selectDBNew("services",[$data["id"]],"`id` = ?","") ){
             $listTypes = json_decode($service[0]["listTypes"],true);
-            if( in_array($data["listTypes"],$listTypes) ){
-                $listTypes = array_diff($listTypes,[$data["listTypes"]]);
+            if( !is_null($listTypes) && isset($listTypes[$data["index"]]) ){
+                unset($listTypes[$data["index"]]);
+                $listTypes = array_values($listTypes);
                 $data["listTypes"] = json_encode($listTypes);
                 if( updateDB("services", $data, "`id` = {$data["id"]}") ){
                     $response = array("msg" => checkAPILanguege("List Types Deleted Successfully", "تم حذف قائمة الأنواع بنجاح"));
                     echo outputData($response);die();
                 }else{
-                    $response = array("msg" => checkAPILanguege("Failed to Delete List Types", "فشل في حذف قائمة الأنواع"));
+                    $response = array("msg" => checkAPILanguege("Failed to Delete List Types", "فشل حذف قائمة الأنواع"));
                     echo outputError($response);die();
                 }
             }else{

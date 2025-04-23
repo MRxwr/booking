@@ -129,8 +129,8 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
             echo outputError($response);die();
         }
-        if( !isset($data["index"]) || empty($data["index"]) ){
-            $response = array("msg" => checkAPILanguege("List Types is required.", "قائمة الأنواع مطلوبة."));
+        if( !isset($data["index"]) ){
+            $response = array("msg" => checkAPILanguege("Index is required.", "الفهرس  مطلوبة."));
             echo outputError($response);die();
         }
         if( $service = selectDBNew("services",[$data["id"]],"`id` = ?","") ){

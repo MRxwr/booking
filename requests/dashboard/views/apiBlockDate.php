@@ -33,10 +33,10 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             echo outputError($response);die();
         }
         if( insertDB("blockdate", $data) ){
-            $response = array("msg" => checkAPILanguege("Block Date Added Successfully", "تمت إضافة الروزنامه بنجاح"));
+            $response = array("msg" => checkAPILanguege("Block Date Added Successfully", "تمت إضافة التاريخ المحضور بنجاح"));
             echo outputData($response);die();
         }else{
-            $response = array("msg" => checkAPILanguege("Failed to Add Block Date", "فشل في إضافة الروزنامه"));
+            $response = array("msg" => checkAPILanguege("Failed to Add Block Date", "فشل في إضافة التاريخ المحضور"));
             echo outputError($response);die();
         }
     }elseif( $action == "update"){
@@ -61,10 +61,10 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             echo outputError($response);die();
         }
         if( updateDB("blockdate", $data, "`id` = {$data["id"]}") ){
-            $response = array("msg" => checkAPILanguege("Block Date Updated Successfully", "تم تحديث الروزنامه بنجاح"));
+            $response = array("msg" => checkAPILanguege("Block Date Updated Successfully", "تم تحديث التاريخ المحضور بنجاح"));
             echo outputData($response);die();
         }else{
-            $response = array("msg" => checkAPILanguege("Failed to Update Block Date", "فشل في تحديث الروزنامه"));
+            $response = array("msg" => checkAPILanguege("Failed to Update Block Date", "فشل في تحديث التاريخ المحضور"));
             echo outputError($response);die();
         }
     }elseif( $action == "delete" ){
@@ -73,10 +73,10 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             echo outputError($response);die();
         }
         if( updateDB("blockdate", array("status" => 1),"`id` = {$data["id"]}") ){
-            $response = array("msg" => checkAPILanguege("Block Date Deleted Successfully", "تم حذف الروزنامه بنجاح"));
+            $response = array("msg" => checkAPILanguege("Block Date Deleted Successfully", "تم حذف التاريخ المحضور بنجاح"));
             echo outputData($response);die();
         }else{
-            $response = array("msg" => checkAPILanguege("Failed to Delete Block Date", "فشل حذف الروزنامه"));
+            $response = array("msg" => checkAPILanguege("Failed to Delete Block Date", "فشل حذف التاريخ المحضور"));
             echo outputError($response);die();
         }
     }else{

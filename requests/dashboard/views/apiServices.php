@@ -155,7 +155,64 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             echo outputError($response);die();
         }
     }elseif( $action == "addThemes" ){
+        if( !isset($data["id"]) || empty($data["id"]) ){
+            $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["themes"]) || empty($data["themes"]) ){
+            $response = array("msg" => checkAPILanguege("Themes is required.", "قائمة التصاميم  مطلوبة."));
+            echo outputError($response);die();
+        }
+        if( $service = selectDBNew("services",[$data["id"]],"`id` = ?","") ){
+            $themes = json_decode($service[0]["themes"],true);
+            if( !is_null($themes) && in_array($data["themes"],$themes) ){
+                $response = array("msg" => checkAPILanguege("Themes Already Exist", " قائمة التصاميم موجودة بالفعل"));
+                echo outputError($response);die();
+            }else{
+                $themes[] = $data["themes"];
+                $data["themes"] = json_encode($themes);
+            }
+            if( updateDB("services", $data, "`id` = {$data["id"]}") ){
+                $response = array("msg" => checkAPILanguege("Themes Added Successfully", "تمت إضافة  قائمة التصاميم بنجاح"));
+                echo outputData($response);die();
+            }else{
+                $response = array("msg" => checkAPILanguege("Failed to Add Themes", "فشل في إضافة قائمة التصاميم"));
+                echo outputError($response);die();
+            }
+        }else{
+            $response = array("msg" => checkAPILanguege("Service Not Found", "الخدمة غير موجودة"));
+            echo outputError($response);die();
+        }
     }elseif( $action == "deleteThemes" ){
+        if( !isset($data["id"]) || empty($data["id"]) ){
+            $response = array("msg" => checkAPILanguege("ID is required.", "المعرف مطلوب."));
+            echo outputError($response);die();
+        }
+        if( !isset($data["index"]) ){
+            $response = array("msg" => checkAPILanguege("Index is required.", "الفهرس  مطلوبة."));
+            echo outputError($response);die();
+        }
+        if( $service = selectDBNew("services",[$data["id"]],"`id` = ?","") ){
+            $themes = json_decode($service[0]["themes"],true);
+            if( !is_null($themes) && isset($themes[$data["index"]]) ){
+                unset($themes[$data["index"]]);
+                $themes = array_values($themes);
+                $updatedDate["themes"] = json_encode($themes);
+                if( updateDB("services", $updatedDate, "`id` = {$data["id"]}") ){
+                    $response = array("msg" => checkAPILanguege("Themes Deleted Successfully", "تم حذف قائمة التصاميم بنجاح"));
+                    echo outputData($response);die();
+                }else{
+                    $response = array("msg" => checkAPILanguege("Failed to Delete Themes", "فشل حذف قائمة التصاميم"));
+                    echo outputError($response);die();
+                }
+            }else{
+                $response = array("msg" => checkAPILanguege("Themes Not Found", "قائمة التصاميم غير موجودة"));
+                echo outputError($response);die();
+            }
+        }else{
+            $response = array("msg" => checkAPILanguege("Service Not Found", "الخدمة غير موجودة"));
+            echo outputError($response);die();
+        }
     }else{
         $response = array("msg" => checkAPILanguege("Wrong Endpoint Request 404", "خطأ في طلب نقطة النهاية 404"));
         echo outputError($response);die();

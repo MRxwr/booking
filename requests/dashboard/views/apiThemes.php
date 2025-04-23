@@ -11,6 +11,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
     if( $action == "list" ){
         if( $Themes = selectDB2New("`id`, `enTitle`, `arTitle`, `themes`, `hidden`","themes",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
             // themes is a json string, so we need to decode it
+            var_dump(json_decode($Themes[0]["themes"],true));die();
             $response["data"]["themes"] = json_decode($Themes[0]["themes"],true);
             echo outputData($Themes);die();
         }else{

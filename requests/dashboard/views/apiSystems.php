@@ -56,7 +56,6 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         }
         $data["logo"] = uploadImageAPI($_FILES["logo"]["tmp_name"], "vendors");
         $data["coverImg"] = uploadImageAPI($_FILES["coverImg"]["tmp_name"], "vendors");
-        var_dump($data);die();
         if( insertDB("vendors",$data) ){
             $response = array("msg" => checkAPILanguege("Booking System has been added successfully.", "تم إضافة نظام الحجز بنجاح."));
             echo outputData($response);die();

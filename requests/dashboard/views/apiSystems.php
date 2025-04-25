@@ -8,7 +8,17 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             echo outputError($response);die();
         }
         if( $user = selectDBNew("employees",[$token],"`keepMeAlive` LIKE ? AND `status` = 0","") ){
-            if( $vendors = selectDB2New("`id`, `{$titleDB}` as title, `logo`","vendors",[$user[0]["id"]],"`clientId` = ? AND `status` = 0","") ){
+            if( $vendors = selectDB2New("*, `{$titleDB}` as title","vendors",[$user[0]["id"]],"`clientId` = ? AND `status` = 0","") ){
+                foreach ($vendors as $key => $value) {
+                    unset($vendors[$key]["hidden"]);
+                    unset($vendors[$key]["status"]);
+                    unset($vendors[$key]["clientId"]);
+                    unset($vendors[$key]["username"]);
+                    unset($vendors[$key]["email"]);
+                    unset($vendors[$key]["password"]);
+                    unset($vendors[$key]["mobile"]);
+                    unset($vendors[$key]["name"]);
+                }
                 echo outputData($vendors);die();
             }else{
                 $response = array("msg" => checkAPILanguege("No data found.", "لم يتم العثور على بيانات."));

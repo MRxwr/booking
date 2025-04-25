@@ -9,7 +9,11 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         $data["vendorId"] = $user[0]["id"];
     }
     if( $action == "list" ){
-        if( $branches = selectDB2New("`id`, $titleDB as title,`seats`, `location`, `hidden`","branches",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
+        if( $branches = selectDB2New("*, $titleDB as title","branches",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
+            foreach ($branches as $key => $branch) {
+                unset($branches[$key]["vendorId"]);
+                unset($branches[$key]["status"]);
+            }
             echo outputData($branches);die();
         }else{
             $response = array("msg" => checkAPILanguege("No Branches Found", "لا توجد فروع متاحة"));

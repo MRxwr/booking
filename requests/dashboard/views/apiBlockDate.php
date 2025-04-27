@@ -9,7 +9,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         $data["vendorId"] = $user[0]["id"];
     }
     if( $action == "list" ){
-        if( $BlockDates = selectDB2New("`id`, `startDate`, `endDate`, `hidden`","blockdate",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
+        if( $BlockDates = selectDB2New("*","blockdate",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
             echo outputData($BlockDates);die();
         }else{
             $response = array("msg" => checkAPILanguege("No Block Dates Found", "لا توجد تواريخ محظورة متاحة"));

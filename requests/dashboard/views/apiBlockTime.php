@@ -9,7 +9,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         $data["vendorId"] = $user[0]["id"];
     }
     if( $action == "list" ){
-        if( $BlockedTimes = selectDB2New("`id`, `startDate`, `endDate`, `fromTime`, `toTime`, `serviceId`, `hidden`","blocktime",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
+        if( $BlockedTimes = selectDB2New("*","blocktime",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
             echo outputData($BlockedTimes);die();
         }else{
             $response = array("msg" => checkAPILanguege("No Blocked Times Found", "لا توجد الأوقات المحضورة متاحة"));

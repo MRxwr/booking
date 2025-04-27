@@ -9,7 +9,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         $data["vendorId"] = $user[0]["id"];
     }
     if( $action == "list" ){
-        if( $Calendars = selectDB2New("`id`, `startDate`, `endDate`, `hidden`","calendar",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
+        if( $Calendars = selectDB2New("*","calendar",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
             echo outputData($Calendars);die();
         }else{
             $response = array("msg" => checkAPILanguege("No Calendars Found", "لا توجد روزنامات متاحة"));

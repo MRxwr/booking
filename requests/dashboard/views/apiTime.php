@@ -9,7 +9,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         $data["vendorId"] = $user[0]["id"];
     }
     if( $action == "list" ){
-        if( $times = selectDB2New("`id`, `day`, `startTime`, `closeTime`, `hidden`","times",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
+        if( $times = selectDB2New("*","times",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
             echo outputData($times);die();
         }else{
             $response = array("msg" => checkAPILanguege("No Times Found", "لا توجد أوقات متاحة"));

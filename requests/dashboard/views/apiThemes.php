@@ -90,7 +90,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             if( $image = uploadImageAPI($_FILES["themes"]["tmp_name"][$i], "themes") ){
                 $themes[] = $image;
             }else{
-                $response = array("msg" => checkAPILanguege("Failed to Upload Themes", "فشل في تحميل التصميم"));
+                $response = array("msg" => checkAPILanguege("Failed to Upload Themes", "فشل في تحميل التصميم"),"datas"=> $_REQUEST);
                 echo outputError($response);die();
             }
         }

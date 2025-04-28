@@ -123,29 +123,38 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             $response = array("msg" => checkAPILanguege("Theme ID is required.", "معرف التصميم مطلوب."));
             echo outputError($response);die();
         }
-        if( $preUploadedThemes = selectDBNew("themes",[$data["id"]],"`status` = 0 AND `id` = ?","") ){
-            if( is_null($preUploadedThemes[0]["themes"]) ){
-                $preUploadedThemes[0]["themes"] = array();
-            }else{
-                $preUploadedThemes[0]["themes"] = json_decode($preUploadedThemes[0]["themes"],true);
-            }
-            if( sizeof($preUploadedThemes) > 0 ){
-                $themes = array();
-                for( $i = 0; $i < sizeof($preUploadedThemes); $i++ ){
-                    if( $i != $data["index"] ){
-                        $themes[] = $preUploadedThemes[$i];
+        if( $theme = selectDBNew("themes",[$data["id"]],"`status` = 0 AND `id` = ?","") ){
+            $themeImages = [];
+            if( !is_null($theme[0]["themes"]) ){
+                $themeImages = json_decode($theme[0]["themes"], true);
+                
+                // Make sure it's an indexed array of strings (image paths)
+                if(is_array($themeImages)) {
+                    // Check if the specified index exists in the array
+                    if(isset($themeImages[$data["index"]])) {
+                        // Remove the image at the specified index
+                        unset($themeImages[$data["index"]]);
+                        // Re-index the array
+                        $themeImages = array_values($themeImages);
+                        
+                        $updatedData["themes"] = json_encode($themeImages);
+                        if( updateDB("themes", $updatedData, "`id` = {$data["id"]}") ){
+                            $response = array("msg" => checkAPILanguege("Theme Deleted Successfully", "تم حذف التصميم بنجاح"));
+                            echo outputData($response);die();
+                        }else{
+                            $response = array("msg" => checkAPILanguege("Failed to Delete Theme", "فشل حذف التصميم"));
+                            echo outputError($response);die();
+                        }
+                    } else {
+                        $response = array("msg" => checkAPILanguege("Invalid theme index", "فهرس التصميم غير صالح"));
+                        echo outputError($response);die();
                     }
-                }
-                $updatedData["themes"] = json_encode($themes);
-                if( updateDB("themes", $updatedData, "`id` = {$data["id"]}") ){
-                    $response = array("msg" => checkAPILanguege("Theme Deleted Successfully", "تم حذف التصميم بنجاح"));
-                    echo outputData($response);die();
-                }else{
-                    $response = array("msg" => checkAPILanguege("Failed to Delete Theme", "فشل حذف التصميم"));
+                } else {
+                    $response = array("msg" => checkAPILanguege("Invalid theme data format", "تنسيق بيانات التصميم غير صالح"));
                     echo outputError($response);die();
                 }
-            }else{
-                $response = array("msg" => checkAPILanguege("No Themes Found", "لا توجد التصاميم متاحة"));
+            } else {
+                $response = array("msg" => checkAPILanguege("No themes to delete", "لا توجد تصاميم للحذف"));
                 echo outputError($response);die();
             }
         }else{

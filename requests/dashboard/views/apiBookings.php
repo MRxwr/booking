@@ -9,7 +9,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         $data["vendorId"] = $user[0]["id"];
     }
     if( $action == "list" ){
-        if( $Bookings = selectDBNew("bookings",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
+        if( $Bookings = selectDBNew("bookings",[$data["vendorId"]],"`status` = 1 AND `vendorId` = ?","") ){
             echo outputData($Bookings);die();
         }else{
             $response = array("msg" => checkAPILanguege("No Bookings Found", "لا توجد حجوزات متاحة"));

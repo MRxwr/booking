@@ -10,14 +10,10 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
     }
     if( $action == "list" ){
         if( $Themes = selectDB2New("`id`, `enTitle`, `arTitle`, `themes`, `hidden`","themes",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
-            if( is_null($Themes[0]["themes"]) ){
-                $themesList = array();
-            }else{
-                $themesList = json_decode($Themes[0]["themes"],true);
-            }
-            unset($Themes[0]["themes"]);
-            for( $i = 0 ; $i < sizeof($themesList); $i++ ){
-                $Themes[0]["themes"][] = $themesList[$i];
+            for( $i = 0 ; $i < sizeof($Themes); $i++ ){
+                if( !is_null($Themes[$i]["themes"]) ){
+                    $Themes[$i]["themes"] = json_decode($Themes[$i]["themes"],true);
+                }
             }
             echo outputData($Themes);die();
         }else{

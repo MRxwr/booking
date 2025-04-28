@@ -11,22 +11,8 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
     if( $action == "list" ){
         if( $Themes = selectDB2New("`id`, `enTitle`, `arTitle`, `themes`, `hidden`","themes",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
             for( $i = 0 ; $i < sizeof($Themes); $i++ ){
-                if( !is_null($Themes[$i]["themes"]) && $Themes[$i]["themes"] !== '' ){
-                    $Themes[$i]["themes"] = json_decode($Themes[$i]["themes"], true);
-                    // Ensure themes is always a simple array, not nested objects
-                    if(is_array($Themes[$i]["themes"]) && !empty($Themes[$i]["themes"])) {
-                        // Check if the first element is an associative array (object)
-                        if(isset($Themes[$i]["themes"][0]) && is_array($Themes[$i]["themes"][0]) && isset($Themes[$i]["themes"][0]["id"])) {
-                            // Extract only image paths
-                            $cleanedThemes = [];
-                            foreach($Themes[$i]["themes"] as $theme) {
-                                if(is_string($theme)) {
-                                    $cleanedThemes[] = $theme;
-                                }
-                            }
-                            $Themes[$i]["themes"] = $cleanedThemes;
-                        }
-                    }
+                if( !is_null($Themes[$i]["themes"]) ){
+                    $Themes[$i]["themes"] = json_decode($Themes[$i]["themes"],true);
                 }
             }
             echo outputData($Themes);die();
@@ -109,16 +95,16 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             }
         }
         if( $preUploadedThemes = selectDB2New("`id`, `enTitle`, `arTitle`, `themes`, `hidden`","themes",[$data["id"]],"`status` = 0 AND `id` = ?","") ){
-            if( is_null($preUploadedThemes[0]["themes"]) ){
-                $preUploadedThemes[0]["themes"] = array();
-            }else{
-                $preUploadedThemes[0]["themes"] = json_decode($preUploadedThemes[0]["themes"],true);
+            $existingThemes = [];
+            if( !is_null($preUploadedThemes[0]["themes"]) ){
+                $existingThemes = json_decode($preUploadedThemes[0]["themes"], true);
+                // Make sure existingThemes contains only strings (image paths)
+                $existingThemes = array_filter($existingThemes, function($item) {
+                    return is_string($item);
+                });
             }
-            if( sizeof($preUploadedThemes) > 0 ){
-                for( $i = 0; $i < sizeof($preUploadedThemes); $i++ ){
-                    $themes[] = $preUploadedThemes[$i];
-                }
-            }
+            // Merge the new themes with existing ones
+            $themes = array_merge($existingThemes, $themes);
         }
         $data["themes"] = json_encode($themes);
         if( updateDB("themes", $data, "`id` = {$data["id"]}") ){

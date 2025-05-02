@@ -57,7 +57,7 @@
         --bg-alt-color: #2c2c2c;
         --text-color: #e9ecef;
         --text-muted-color: #adb5bd;
-        --border-color: #495057;
+        --border-color: #5a6167; /* Slightly lighter border for dark mode */
         --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         --card-hover-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     }
@@ -68,6 +68,32 @@
     }
     img:hover, video:hover {
         opacity: 1;
+    }
+
+    /* Dark mode specific social icon style */
+    .socialMediaSpan {
+        border-color: var(--secondary-color);
+        color: var(--text-color);
+    }
+    .socialMediaSpan:hover {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: #fff; /* Ensure icon is white on hover */
+    }
+
+    /* Ensure section titles use primary color in dark mode */
+    #leftSide > form > .row > .col-md-12 > label,
+    #leftSide > form > .row > .col-12 > span,
+    #leftSide > form > .row > .col-md-6 > label {
+        color: var(--primary-color);
+    }
+
+    /* Style stats section text in dark mode */
+    .stats-section > div[class^="col-"] {
+        color: var(--primary-color); /* Use primary color for stats numbers/text */
+    }
+    .stats-section > div[class^="col-"] > div {
+         color: var(--text-muted-color); /* Use muted color for labels like 'Services' */
     }
 }
 
@@ -444,12 +470,16 @@ textarea.form-control {
 }
 
 /* Selections Area (Branch, Date, Time, Extras) */
-.row.m-0.w-100 > .col-12 > span {
+/* Target the specific spans/labels used as titles - Increased Specificity */
+body #leftSide > form > .row > .col-md-12 > label,
+body #leftSide > form > .row > .col-12 > span,
+body #leftSide > form > .row > .col-md-6 > label {
     display: block;
     margin-bottom: var(--spacing-sm);
     font-weight: var(--font-weight-semibold);
     font-size: 1.1em;
     color: var(--primary-color);
+    margin-top: var(--spacing-md); /* Add some top margin */
 }
 
 /* Extras Checkbox */

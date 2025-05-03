@@ -51,13 +51,29 @@ if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor =
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 		<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+		<!-- AOS Animation Library -->
+		<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+		<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 		<?php require_once("templates/{$vendorTheme}/style.php") ?>
 	</head>
 	<body>
-		<?php require_once("templates/{$vendorTheme}/leftSide.php") ?>
-		<?php require_once("templates/{$vendorTheme}/rightSide.php") ?>
+		<div id="page-wrapper">
+			<?php require_once("templates/{$vendorTheme}/leftSide.php") ?>
+			<?php require_once("templates/{$vendorTheme}/rightSide.php") ?>
+		</div>
+		<!-- Include original script -->
 		<script>
 			<?php require_once("templates/{$vendorTheme}/script.js") ?>
+		</script>
+		<!-- Include enhanced UI script -->
+		<script src="templates/<?php echo $vendorTheme ?>/enhanced-ui.js"></script>
+		<script>
+			// Initialize AOS animation library
+			AOS.init({
+				duration: 800,
+				easing: 'ease-out',
+				once: true
+			});
 		</script>
 	</body> 
 </html>

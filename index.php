@@ -8,6 +8,7 @@ if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor =
 	$employee = selectDBNew("employees",[$vendor[0]["id"]],"`vendorId` = ?","`id` ASC LIMIT 1"); ;
 	$vendor = $vendor[0];
 	$vendor["id"] = $employee[0]["id"];
+	var_dump($vendor["id"]);
 	$vendorTheme = $vendor["theme"];
 	$serviceList = selectDB("services","`vendorId` = '{$vendor["id"]}' AND `status` = '0' AND `hidden` = '0'");
 	$bookingsList = selectDB("bookings","`vendorId` = '{$vendor["id"]}' AND `status` = '1'");

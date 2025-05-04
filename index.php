@@ -5,11 +5,8 @@ require_once("admin/includes/functions.php");
 setLanguageFront();
 
 if( isset($_REQUEST["vendorURL"]) && !empty($_REQUEST["vendorURL"]) && $vendor = selectDBNew("vendors",[$_REQUEST["vendorURL"]],"`url` LIKE ? AND `hidden` = '0' AND `status` = '0'","") ){
-	$employee = selectDBNew("employees",[$vendor[0]["id"]],"`vendorId` = ?","`id` ASC LIMIT 1");
-	var_dump($vendor);
 	$vendor = $vendor[0];
-	$vendor["id"] = $employee[0]["id"];
-	var_dump($vendor["id"]);
+	$vendor["id"] = $vendor["clientId"];
 	$vendorTheme = $vendor["theme"];
 	$serviceList = selectDB("services","`vendorId` = '{$vendor["id"]}' AND `status` = '0' AND `hidden` = '0'");
 	$bookingsList = selectDB("bookings","`vendorId` = '{$vendor["id"]}' AND `status` = '1'");

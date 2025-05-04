@@ -457,7 +457,7 @@ if( $vendor["type"] == "3" ){
 		date: $("input[name='selectedDate']").val(),
 		branchId: $("input[name='branchId']").val(),
 		serviceId: $("input[name='serviceId']").val(),
-		vendorId: <?php echo $vendor["id"] ?>,
+		vendorId: '<?php echo $vendor["id"] ?>',
 	  }
 	}).done(function(data){
 		$("#loading-screen").hide();

@@ -9,7 +9,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         $data["vendorId"] = $user[0]["id"];
     }
     if( $action == "list" ){
-        if( $Packages = selectDB2New("*","packages",[$data["vendorId"]],"`status` = 0 AND `hidden` = 0","") ){
+        if( $Packages = selectDB2New("*","packages",[],"`status` = 0 AND `hidden` = 0","") ){
             echo outputData($Packages);die();
         }else{
             $response = array("msg" => checkAPILanguege("No packages Found", "لا توجد باقات  متاحة"));

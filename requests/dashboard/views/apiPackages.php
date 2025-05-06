@@ -8,9 +8,8 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
     }elseif( $user = selectDBNew("employees",[$token],"`keepMeAlive` LIKE ? AND `status` = 0","") ){
         $data["vendorId"] = $user[0]["id"];
     }
-    die();
     if( $action == "list" ){
-        if( $Packages = selectDB2New("*","packages",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
+        if( $Packages = selectDB2New("*","packages",[$data["vendorId"]],"`status` = 0 AND `hidden` = 0","") ){
             echo outputData($Packages);die();
         }else{
             $response = array("msg" => checkAPILanguege("No packages Found", "لا توجد باقات  متاحة"));

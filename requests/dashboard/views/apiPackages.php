@@ -9,8 +9,8 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         $data["vendorId"] = $user[0]["id"];
     }
     if( $action == "list" ){
-        if( $BlockedDays = selectDB2New("*","packages",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
-            echo outputData($BlockedDays);die();
+        if( $Packages = selectDB2New("*","packages",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
+            echo outputData($Packages);die();
         }else{
             $response = array("msg" => checkAPILanguege("No packages Found", "لا توجد باقات  متاحة"));
             echo outputError($response);die();

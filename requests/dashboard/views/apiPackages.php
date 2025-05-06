@@ -1,5 +1,4 @@
 <?php
-die();
 if( isset($_GET["action"]) && !empty($_GET["action"]) ){
     $action = $_GET["action"];
     $data = (isset($_POST) && !empty($_POST)) ? $_POST : array();
@@ -9,6 +8,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
     }elseif( $user = selectDBNew("employees",[$token],"`keepMeAlive` LIKE ? AND `status` = 0","") ){
         $data["vendorId"] = $user[0]["id"];
     }
+    die();
     if( $action == "list" ){
         if( $Packages = selectDB2New("*","packages",[$data["vendorId"]],"`status` = 0 AND `vendorId` = ?","") ){
             echo outputData($Packages);die();

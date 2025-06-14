@@ -153,6 +153,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
                     $servicesList[] = $data["serviceId"];
                 }
                 $servicesList = json_encode($servicesList);
+                var_dump($servicesList);
                 $list = json_decode($servicesList, true);
                 if (!empty($list)) {
                     $placeholders = implode(',', array_fill(0, count($list), '?'));

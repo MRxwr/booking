@@ -141,7 +141,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             echo outputError($response);die();
         }
         if( $branch = selectDB("branches","`id` = '{$data["id"]}'") ){
-            if( $services = selectDB("services","`id` = '{$data["serviceId"]}'") ){
+            if( !empty($branch[0]["services"]) ){
                 if( $servicesList = json_decode($branch[0]["services"], true)){
                     $servicesList = json_decode($branch[0]["services"], true);
                 }else{
@@ -153,7 +153,6 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
                     $servicesList[] = $data["serviceId"];
                 }
                 $servicesList = json_encode($servicesList);
-                var_dump($servicesList);
                 $list = json_decode($servicesList, true);
                 if (!empty($list)) {
                     $placeholders = implode(',', array_fill(0, count($list), '?'));

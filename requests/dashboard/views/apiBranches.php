@@ -160,7 +160,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
                 } else {
                     $list = [];
                 }
-                $response = array("msg" => checkAPILanguege("Services Updated Successfully to Branch", "تمت تحديث الخدمة بنجاح إلى الفرع"), "services" => $list);
+                $response = array("services" => $list);
                 echo outputData($response);die();
             }else{
                 $response = array("msg" => checkAPILanguege("Service Not Found", "الخدمة غير موجودة"));

@@ -22,7 +22,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
                     echo outputError(array("msg" => checkAPILanguege($lang,"Payment gateway error","خطأ في بوابة الدفع") ));die();
                 }
             }else{
-                echo outputError(array("msg" => checkAPILanguege($lang,"Something went wrong...","حدث خطأ ما") ));die();
+                echo outputError(array("msg" => checkAPILanguege($lang,"Something went wrong","حدث خطأ ما") ));die();
             }
         }else{
             $response = array("msg" => checkAPILanguege("Package not found", "الباقة غير موجودة"));

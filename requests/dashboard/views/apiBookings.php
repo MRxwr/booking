@@ -10,7 +10,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
     }
     if( $action == "list" ){
         $joinObject = [
-            "select" => ["t.id", "t.branchId", "t.serviceId", "t.extras", "t.extraInfo", "t.bookedTime", "bookedDate"," JSON_UNQUOTE(JSON_EXTRACT(t.customerDetails, '$.name')) AS customerName", "JSON_UNQUOTE(JSON_EXTRACT(t.customerDetails, '$.mobile')) AS customerMobile", "JSON_UNQUOTE(JSON_EXTRACT(t.customerDetails, '$.email')) AS customerEmail", "t.chargeType","FORMAT(t.totalPrice, 3) AS totalPrice", "t.status","t1.{$titleDB} AS branchTitle"],
+            "select" => ["t.id", "t.branchId", "t.serviceId", "t.extras", "t.extraInfo", "t.bookedTime", "bookedDate","JSON_UNQUOTE(JSON_EXTRACT(t.customerDetails, '$.name')) AS customerName", "JSON_UNQUOTE(JSON_EXTRACT(t.customerDetails, '$.mobile')) AS customerMobile", "JSON_UNQUOTE(JSON_EXTRACT(t.customerDetails, '$.email')) AS customerEmail", "t.chargeType","FORMAT(t.totalPrice, 3) AS totalPrice", "t.status","t1.{$titleDB} AS branchTitle"],
             "join" => ["branches"],
             "on" => ["t.branchId = t1.id"],
         ];

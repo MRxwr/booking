@@ -9,7 +9,12 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         $data["vendorId"] = $user[0]["vendorId"];
     }
     if( $action == "list" ){
-        if( $Bookings = selectDB2New("`vendorId`, `branchId`, `serviceId`, `extras`, `extraInfo`, `bookedTime`, `bookedDate`, JSON_UNQUOTE(JSON_EXTRACT(customerDetails, '$.name')) AS customerName, JSON_UNQUOTE(JSON_EXTRACT(customerDetails, '$.mobile')) AS customerMobile, JSON_UNQUOTE(JSON_EXTRACT(customerDetails, '$.email')) AS customerEmail, `chargeType`,FORMAT(totalPrice, 3) AS `totalPrice`, `status`","bookings",[$data["vendorId"]],"`vendorId` = ?","") ){
+        $joinObject = [
+            "select" => ["t.id", "t.branchId", "t.serviceId", "t.extras", "t.extraInfo", "t.bookedTime", "bookedDate"," JSON_UNQUOTE(JSON_EXTRACT(t.customerDetails, '$.name')) AS customerName", "JSON_UNQUOTE(JSON_EXTRACT(t.customerDetails, '$.mobile')) AS customerMobile", "JSON_UNQUOTE(JSON_EXTRACT(t.customerDetails, '$.email')) AS customerEmail", "t.chargeType","FORMAT(t.totalPrice, 3) AS totalPrice", "t.status","t1.{$titleDB} AS branchTitle"],
+            "join" => ["branches"],
+            "on" => ["t.branchId = t1.id"],
+        ];
+        if( $Bookings = selectJoinDB("bookings",$joinObject,"`vendorId` = '{$data["vendorId"]}'","") ){
             echo outputData($Bookings);die();
         }else{
             $response = array("msg" => checkAPILanguege("No Bookings Found", "لا توجد حجوزات متاحة"));

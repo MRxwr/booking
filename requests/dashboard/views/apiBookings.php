@@ -14,7 +14,7 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
             "join" => ["branches"],
             "on" => ["t.branchId = t1.id"],
         ];
-        if( $Bookings = selectJoinDB("bookings",$joinObject,"`vendorId` = '{$data["vendorId"]}'","") ){
+        if( $Bookings = selectJoinDB("bookings",$joinObject,"t.vendorId = '{$data["vendorId"]}'","") ){
             echo outputData($Bookings);die();
         }else{
             $response = array("msg" => checkAPILanguege("No Bookings Found", "لا توجد حجوزات متاحة"));

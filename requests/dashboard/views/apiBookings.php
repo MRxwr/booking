@@ -6,10 +6,10 @@ if( isset($_GET["action"]) && !empty($_GET["action"]) ){
         $response = array("msg" => checkAPILanguege("Token is required.", "التوكن مطلوب."));
         echo outputError($response);die();
     }elseif( $user = selectDBNew("employees",[$token],"`keepMeAlive` LIKE ? AND `status` = 0","") ){
-        $data["vendorId"] = $user[0]["id"];
+        $data["vendorId"] = $user[0]["vendorId"];
     }
     if( $action == "list" ){
-        if( $Bookings = selectDBNew("bookings",[$data["vendorId"]],"`status` = 1 AND `vendorId` = ?","") ){
+        if( $Bookings = selectDBNew("bookings",[$data["vendorId"]],"`vendorId` = ?","") ){
             echo outputData($Bookings);die();
         }else{
             $response = array("msg" => checkAPILanguege("No Bookings Found", "لا توجد حجوزات متاحة"));

@@ -1,134 +1,408 @@
-# Dashboard API Endpoints Reference
+# Dashboard API Reference
 
-This document provides a summary of all API endpoints in the dashboard (`requests/dashboard/views/`). Each API file typically handles CRUD operations and related actions for a specific resource. All endpoints use an `action` parameter to determine the operation, require authentication via a `token`, and return JSON responses.
+This document describes all dashboard API endpoints found in `requests/dashboard/views/`. Each endpoint is accessed via a unified dispatcher:
 
----
+**Endpoint format:** `/requests/dashboard/?endpoint={EndpointName}&action={action}`
 
-## Common Patterns
-- **Authentication**: Most endpoints require a `token` (employee session) for all actions except registration/login.
-- **Action Routing**: The `action` parameter in the request determines which operation is performed.
-- **Validation**: Each action validates required fields and returns localized error messages.
-- **Soft Deletes**: Deletions usually set `status` to 1 or 2 instead of removing records.
-- **Responses**: Success and error responses are returned as JSON, using `outputData` and `outputError`.
+- `{EndpointName}` is the capitalized name (e.g., `Services`, `Bookings`, `Branches`, etc.)
+- `{action}` is the operation (e.g., `list`, `add`, `update`, `delete`)
+- **Method:** POST (with parameters in the body)
+- **Authentication:** Most endpoints require a valid `token` (employee session or API token)
 
 ---
 
-## API Files and Their Actions
+## Example Usage for Each Endpoint
 
-### 1. `apiBlockDate.php`
-- **list**: List all blocked dates for the vendor.
-- **add**: Add a new blocked date (requires `branchId`, `startDate`, `endDate`, `hidden`).
-- **update**: Update a blocked date (requires `id`, `branchId`, `startDate`, `endDate`, `hidden`).
-- **delete**: Soft-delete a blocked date (requires `id`).
+### Bookings
+- List:
+  ```http
+  POST /requests/dashboard/?endpoint=Bookings&action=list
+  Token: {employee_token}
+  ```
+- Add:
+  ```http
+  POST /requests/dashboard/?endpoint=Bookings&action=add
+  Token: {employee_token}
+  Body: { branchId: 1, startDate: "2025-12-01", endDate: "2025-12-01", hidden: 0 }
+  ```
+- Update:
+  ```http
+  POST /requests/dashboard/?endpoint=Bookings&action=update
+  Token: {employee_token}
+  Body: { id: 10, branchId: 1, startDate: "2025-12-01", endDate: "2025-12-01", hidden: 0 }
+  ```
+- Delete:
+  ```http
+  POST /requests/dashboard/?endpoint=Bookings&action=delete
+  Token: {employee_token}
+  Body: { id: 10 }
+  ```
 
-### 2. `apiBlockDay.php`
-- **list**: List all blocked days for the vendor.
-- **add**: Add a new blocked day (requires `branchId`, `serviceId`, `day`, `hidden`).
-- **update**: Update a blocked day (requires `id`, `branchId`, `serviceId`, `day`, `hidden`).
-- **delete**: Soft-delete a blocked day (requires `id`).
+### Branches
+- List:
+  ```http
+  POST /requests/dashboard/?endpoint=Branches&action=list
+  Token: {employee_token}
+  ```
+- Add:
+  ```http
+  POST /requests/dashboard/?endpoint=Branches&action=add
+  Token: {employee_token}
+  Body: { enTitle: "Main Branch", arTitle: "الفرع الرئيسي", location: "Kuwait City", seats: 10, hidden: 0 }
+  ```
+- Update:
+  ```http
+  POST /requests/dashboard/?endpoint=Branches&action=update
+  Token: {employee_token}
+  Body: { id: 5, enTitle: "Main Branch", arTitle: "الفرع الرئيسي", location: "Kuwait City", seats: 12, hidden: 0 }
+  ```
+- Delete:
+  ```http
+  POST /requests/dashboard/?endpoint=Branches&action=delete
+  Token: {employee_token}
+  Body: { id: 5 }
+  ```
+- Add Service:
+  ```http
+  POST /requests/dashboard/?endpoint=Branches&action=addService
+  Token: {employee_token}
+  Body: { id: 5, serviceId: 2 }
+  ```
+- List Services:
+  ```http
+  POST /requests/dashboard/?endpoint=Branches&action=listServices
+  Token: {employee_token}
+  Body: { id: 5 }
+  ```
 
-### 3. `apiBlockTime.php`
-- **list**: List all blocked times for the vendor.
-- **add**: Add a new blocked time (requires `branchId`, `serviceId`, `startDate`, `endDate`, `fromTime`, `toTime`, `hidden`).
-- **update**: Update a blocked time (requires `id`, `branchId`, `serviceId`, `startDate`, `endDate`, `fromTime`, `toTime`, `hidden`).
-- **delete**: Soft-delete a blocked time (requires `id`).
+### BlockDate
+- List:
+  ```http
+  POST /requests/dashboard/?endpoint=BlockDate&action=list
+  Token: {employee_token}
+  ```
+- Add:
+  ```http
+  POST /requests/dashboard/?endpoint=BlockDate&action=add
+  Token: {employee_token}
+  Body: { branchId: 1, startDate: "2025-12-10", endDate: "2025-12-12", hidden: 0 }
+  ```
+- Update:
+  ```http
+  POST /requests/dashboard/?endpoint=BlockDate&action=update
+  Token: {employee_token}
+  Body: { id: 3, branchId: 1, startDate: "2025-12-10", endDate: "2025-12-12", hidden: 0 }
+  ```
+- Delete:
+  ```http
+  POST /requests/dashboard/?endpoint=BlockDate&action=delete
+  Token: {employee_token}
+  Body: { id: 3 }
+  ```
 
-### 4. `apiBookings.php`
-- **list**: List all bookings for the vendor (with customer and branch/service info).
-- **add**: Add a new booking (requires `branchId`, `startDate`, `endDate`, `hidden`).
-- **update**: Update a booking (requires `id`, `branchId`, `startDate`, `endDate`, `hidden`).
-- **delete**: Soft-delete a booking (requires `id`).
+### BlockDay
+- List:
+  ```http
+  POST /requests/dashboard/?endpoint=BlockDay&action=list
+  Token: {employee_token}
+  ```
+- Add:
+  ```http
+  POST /requests/dashboard/?endpoint=BlockDay&action=add
+  Token: {employee_token}
+  Body: { branchId: 1, day: 6, hidden: 0 }
+  ```
+- Update:
+  ```http
+  POST /requests/dashboard/?endpoint=BlockDay&action=update
+  Token: {employee_token}
+  Body: { id: 2, branchId: 1, day: 6, hidden: 0 }
+  ```
+- Delete:
+  ```http
+  POST /requests/dashboard/?endpoint=BlockDay&action=delete
+  Token: {employee_token}
+  Body: { id: 2 }
+  ```
 
-### 5. `apiBranches.php`
-- **list**: List all branches for the vendor.
-- **add**: Add a new branch (requires `enTitle`, `arTitle`, `location`, `seats`, `hidden`).
-- **update**: Update a branch (requires `id`, `enTitle`, `arTitle`, `location`, `seats`, `hidden`).
-- **delete**: Soft-delete a branch (requires `id`).
-- **addService**: Add a service to a branch (requires `id`, `serviceId`).
-- **listServices**: List services for a branch (requires `id`).
+### BlockTime
+- List:
+  ```http
+  POST /requests/dashboard/?endpoint=BlockTime&action=list
+  Token: {employee_token}
+  ```
+- Add:
+  ```http
+  POST /requests/dashboard/?endpoint=BlockTime&action=add
+  Token: {employee_token}
+  Body: { branchId: 1, serviceId: 2, startDate: "2025-12-01", endDate: "2025-12-01", fromTime: "09:00", toTime: "12:00", hidden: 0 }
+  ```
+- Update:
+  ```http
+  POST /requests/dashboard/?endpoint=BlockTime&action=update
+  Token: {employee_token}
+  Body: { id: 4, branchId: 1, serviceId: 2, startDate: "2025-12-01", endDate: "2025-12-01", fromTime: "09:00", toTime: "12:00", hidden: 0 }
+  ```
+- Delete:
+  ```http
+  POST /requests/dashboard/?endpoint=BlockTime&action=delete
+  Token: {employee_token}
+  Body: { id: 4 }
+  ```
 
-### 6. `apiCalendar.php`
-- **list**: List all calendar entries for the vendor.
-- **add**: Add a new calendar entry (requires `branchId`, `startDate`, `endDate`, `hidden`).
-- **update**: Update a calendar entry (requires `id`, `branchId`, `startDate`, `endDate`, `hidden`).
-- **delete**: Soft-delete a calendar entry (requires `id`).
+### Calendar
+- List:
+  ```http
+  POST /requests/dashboard/?endpoint=Calendar&action=list
+  Token: {employee_token}
+  ```
+- Add:
+  ```http
+  POST /requests/dashboard/?endpoint=Calendar&action=add
+  Token: {employee_token}
+  Body: { branchId: 1, startDate: "2025-12-01", endDate: "2025-12-31", hidden: 0 }
+  ```
+- Update:
+  ```http
+  POST /requests/dashboard/?endpoint=Calendar&action=update
+  Token: {employee_token}
+  Body: { id: 7, branchId: 1, startDate: "2025-12-01", endDate: "2025-12-31", hidden: 0 }
+  ```
+- Delete:
+  ```http
+  POST /requests/dashboard/?endpoint=Calendar&action=delete
+  Token: {employee_token}
+  Body: { id: 7 }
+  ```
 
-### 7. `apiExtraInfo.php`
-- **list**: List all extra info fields for the vendor.
-- **add**: Add a new extra info field (requires `enTitle`, `arTitle`, `isRequired`, `type`, `hidden`).
-- **update**: Update an extra info field (requires `id`, `enTitle`, `arTitle`, `isRequired`, `type`, `hidden`).
-- **delete**: Soft-delete an extra info field (requires `id`).
+### ExtraInfo
+- List:
+  ```http
+  POST /requests/dashboard/?endpoint=ExtraInfo&action=list
+  Token: {employee_token}
+  ```
+- Add:
+  ```http
+  POST /requests/dashboard/?endpoint=ExtraInfo&action=add
+  Token: {employee_token}
+  Body: { enTitle: "Notes", arTitle: "ملاحظات", isRequired: 1, type: "text", hidden: 0 }
+  ```
+- Update:
+  ```http
+  POST /requests/dashboard/?endpoint=ExtraInfo&action=update
+  Token: {employee_token}
+  Body: { id: 2, enTitle: "Notes", arTitle: "ملاحظات", isRequired: 1, type: "text", hidden: 0 }
+  ```
+- Delete:
+  ```http
+  POST /requests/dashboard/?endpoint=ExtraInfo&action=delete
+  Token: {employee_token}
+  Body: { id: 2 }
+  ```
 
-### 8. `apiExtras.php`
-- **list**: List all add-ons for the vendor.
-- **add**: Add a new add-on (requires `enTitle`, `arTitle`, `price`, `hidden`).
-- **update**: Update an add-on (requires `id`, `enTitle`, `arTitle`, `price`, `hidden`).
-- **delete**: Soft-delete an add-on (requires `id`).
+### Extras
+- List:
+  ```http
+  POST /requests/dashboard/?endpoint=Extras&action=list
+  Token: {employee_token}
+  ```
+- Add:
+  ```http
+  POST /requests/dashboard/?endpoint=Extras&action=add
+  Token: {employee_token}
+  Body: { enTitle: "Coffee", arTitle: "قهوة", price: 2.5, hidden: 0 }
+  ```
+- Update:
+  ```http
+  POST /requests/dashboard/?endpoint=Extras&action=update
+  Token: {employee_token}
+  Body: { id: 3, enTitle: "Coffee", arTitle: "قهوة", price: 2.5, hidden: 0 }
+  ```
+- Delete:
+  ```http
+  POST /requests/dashboard/?endpoint=Extras&action=delete
+  Token: {employee_token}
+  Body: { id: 3 }
+  ```
 
-### 9. `apiPackages.php`
-- **list**: List all available packages.
+### Packages
+- List:
+  ```http
+  POST /requests/dashboard/?endpoint=Packages&action=list
+  Token: {employee_token}
+  ```
 
-### 10. `apiPayment.php`
-- **submit**: Submit a payment for a package (requires `packageId`).
+### Payment
+- Submit:
+  ```http
+  POST /requests/dashboard/?endpoint=Payment&action=submit
+  Token: {employee_token}
+  Body: { packageId: 1 }
+  ```
 
-### 11. `apiPictureTypes.php`
-- **list**: List all picture types for the vendor.
-- **add**: Add a new picture type (requires `enTitle`, `arTitle`, `price`, `themes`, `hidden`).
-- **update**: Update a picture type (requires `id`, `enTitle`, `arTitle`, `price`, `themes`, `hidden`).
-- **delete**: Soft-delete a picture type (requires `id`).
+### PictureTypes
+- List:
+  ```http
+  POST /requests/dashboard/?endpoint=PictureTypes&action=list
+  Token: {employee_token}
+  ```
+- Add:
+  ```http
+  POST /requests/dashboard/?endpoint=PictureTypes&action=add
+  Token: {employee_token}
+  Body: { enTitle: "Portrait", arTitle: "بورتريه", price: 10, themes: "[1,2]", hidden: 0 }
+  ```
+- Update:
+  ```http
+  POST /requests/dashboard/?endpoint=PictureTypes&action=update
+  Token: {employee_token}
+  Body: { id: 2, enTitle: "Portrait", arTitle: "بورتريه", price: 10, themes: "[1,2]", hidden: 0 }
+  ```
+- Delete:
+  ```http
+  POST /requests/dashboard/?endpoint=PictureTypes&action=delete
+  Token: {employee_token}
+  Body: { id: 2 }
+  ```
 
-### 12. `apiServices.php`
-- **list**: List all services for the vendor.
-- **add**: Add a new service (requires `enTitle`, `arTitle`, `price`, `period`, `seats`, `hidden`).
-- **update**: Update a service (requires `id`, `enTitle`, `arTitle`, `price`, `period`, `seats`, `hidden`).
-- **delete**: Soft-delete a service (requires `id`).
-- **addPictureTypes**: Add picture types to a service (requires `id`, `listTypes`).
-- **deletePictureTypes**: Remove a picture type from a service (requires `id`, `index`).
-- **addThemes**: Add themes to a service (requires `id`, `themes`).
-- **deleteThemes**: Remove a theme from a service (requires `id`, `index`).
+### Services
+- List:
+  ```http
+  POST /requests/dashboard/?endpoint=Services&action=list
+  Token: {employee_token}
+  ```
+- Add:
+  ```http
+  POST /requests/dashboard/?endpoint=Services&action=add
+  Token: {employee_token}
+  Body: { enTitle: "Haircut", arTitle: "حلاقة", price: 5, period: 30, seats: 1, hidden: 0 }
+  ```
+- Update:
+  ```http
+  POST /requests/dashboard/?endpoint=Services&action=update
+  Token: {employee_token}
+  Body: { id: 4, enTitle: "Haircut", arTitle: "حلاقة", price: 5, period: 30, seats: 1, hidden: 0 }
+  ```
+- Delete:
+  ```http
+  POST /requests/dashboard/?endpoint=Services&action=delete
+  Token: {employee_token}
+  Body: { id: 4 }
+  ```
 
-### 13. `apiSystems.php`
-- **list**: List all booking systems (vendors) for the user.
-- **add**: Add a new booking system (requires `enTitle`, `arTitle`, `type`, `url`, `logo`, `coverImg`).
-- **update**: Update a booking system (requires `id`, `enTitle`, `arTitle`, `type`, `url`).
-- **theme**: Update theme and color for a booking system (requires `id`, `theme`, `websiteColor`).
-- **socialMedia**: Update social media links (requires `id`, social fields).
-- **paymentOptions**: Update payment options (requires `id`, `chargeType`, `chargeTypeAmount`, `iban`).
-- **moreDetails**: Update details and terms (requires `id`, `enDetails`, `arDetails`, `enTerms`, `arTerms`).
-- **delete**: Soft-delete a booking system (requires `id`).
+### Systems
+- List:
+  ```http
+  POST /requests/dashboard/?endpoint=Systems&action=list
+  Token: {employee_token}
+  ```
+- Add:
+  ```http
+  POST /requests/dashboard/?endpoint=Systems&action=add
+  Token: {employee_token}
+  Body: { enTitle: "System Name", arTitle: "اسم النظام" }
+  ```
+- Update:
+  ```http
+  POST /requests/dashboard/?endpoint=Systems&action=update
+  Token: {employee_token}
+  Body: { id: 1, enTitle: "System Name", arTitle: "اسم النظام" }
+  ```
+- Delete:
+  ```http
+  POST /requests/dashboard/?endpoint=Systems&action=delete
+  Token: {employee_token}
+  Body: { id: 1 }
+  ```
 
-### 14. `apiThemes.php`
-- **list**: List all themes for the vendor.
-- **add**: Add a new theme (requires `enTitle`, `arTitle`, `hidden`).
-- **update**: Update a theme (requires `id`, `enTitle`, `arTitle`, `hidden`).
-- **delete**: Soft-delete a theme (requires `id`).
-- **addTheme**: Upload theme images (requires `id`, `themes` as files).
-- **deleteTheme**: Remove a theme image (requires `id`, `index`).
+### Themes
+- List:
+  ```http
+  POST /requests/dashboard/?endpoint=Themes&action=list
+  Token: {employee_token}
+  ```
+- Add:
+  ```http
+  POST /requests/dashboard/?endpoint=Themes&action=add
+  Token: {employee_token}
+  Body: { enTitle: "Modern", arTitle: "حديث", themes: "[1,2,3]", hidden: 0 }
+  ```
+- Update:
+  ```http
+  POST /requests/dashboard/?endpoint=Themes&action=update
+  Token: {employee_token}
+  Body: { id: 2, enTitle: "Modern", arTitle: "حديث", themes: "[1,2,3]", hidden: 0 }
+  ```
+- Delete:
+  ```http
+  POST /requests/dashboard/?endpoint=Themes&action=delete
+  Token: {employee_token}
+  Body: { id: 2 }
+  ```
 
-### 15. `apiTime.php`
-- **list**: List all time slots for the vendor.
-- **add**: Add a new time slot (requires `branchId`, `day`, `startTime`, `closeTime`, `hidden`).
-- **update**: Update a time slot (requires `id`, `branchId`, `day`, `startTime`, `closeTime`, `hidden`).
-- **delete**: Soft-delete a time slot (requires `id`).
+### Time
+- List:
+  ```http
+  POST /requests/dashboard/?endpoint=Time&action=list
+  Token: {employee_token}
+  ```
+- Add:
+  ```http
+  POST /requests/dashboard/?endpoint=Time&action=add
+  Token: {employee_token}
+  Body: { branchId: 1, day: 1, startTime: "09:00", closeTime: "18:00", hidden: 0 }
+  ```
+- Update:
+  ```http
+  POST /requests/dashboard/?endpoint=Time&action=update
+  Token: {employee_token}
+  Body: { id: 3, branchId: 1, day: 1, startTime: "09:00", closeTime: "18:00", hidden: 0 }
+  ```
+- Delete:
+  ```http
+  POST /requests/dashboard/?endpoint=Time&action=delete
+  Token: {employee_token}
+  Body: { id: 3 }
+  ```
 
-### 16. `apiUsers.php`
-- **register**: Register a new user (requires `name`, `email`, `password`, `phone`).
-- **login**: User login (requires `email`, `password`).
-- **logout**: User logout (requires `token`).
-- **update**: Update user profile (requires `token`, `name`, `phone`).
-- **delete**: Delete user (requires `token`).
-- **changePassword**: Change user password (requires `token`, `oldPassword`, `newPassword`).
-- **forgetPassword**: Request password reset (requires `email`).
+### Users
+- Register:
+  ```http
+  POST /requests/dashboard/?endpoint=Users&action=register
+  Body: { name: "John Doe", email: "john@example.com", password: "123456", phone: "12345678" }
+  ```
+- Login:
+  ```http
+  POST /requests/dashboard/?endpoint=Users&action=login
+  Body: { email: "john@example.com", password: "123456" }
+  ```
+- List:
+  ```http
+  POST /requests/dashboard/?endpoint=Users&action=list
+  Token: {employee_token}
+  ```
+- Add:
+  ```http
+  POST /requests/dashboard/?endpoint=Users&action=add
+  Token: {employee_token}
+  Body: { name: "Jane Doe", email: "jane@example.com", password: "abcdef", phone: "87654321" }
+  ```
+- Update:
+  ```http
+  POST /requests/dashboard/?endpoint=Users&action=update
+  Token: {employee_token}
+  Body: { id: 5, name: "Jane Doe", email: "jane@example.com", password: "abcdef", phone: "87654321" }
+  ```
+- Delete:
+  ```http
+  POST /requests/dashboard/?endpoint=Users&action=delete
+  Token: {employee_token}
+  Body: { id: 5 }
+  ```
 
 ---
 
-## Helper Functions Used
-- `selectDBNew`, `selectDB2New`, `selectDB`, `selectJoinDB`: Database queries
-- `insertDB`, `updateDB`: Insert/update records
-- `uploadImageAPI`: File uploads
-- `outputData`, `outputError`: JSON responses
-- `checkAPILanguege`: Localization
-
----
-
-This reference should help you quickly understand what each API file does and what actions are available. For details, see the code in each file under `requests/dashboard/views/`.
+## Notes
+- All dashboard endpoints return JSON responses with `ok`, `error`, `status`, and `data` fields.
+- Always include the `token` parameter for authentication.
+- Actions and required parameters may vary; check the source code for advanced usage.
